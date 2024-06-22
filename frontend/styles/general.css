@@ -9,3 +9,7 @@ body {
 .main {
   padding: 2rem 4rem;
 }
+
+body {
+  font-family: "Poppins", sans-serif;
+}

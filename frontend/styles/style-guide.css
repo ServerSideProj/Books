@@ -1,14 +1,42 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap");
+/* definitions of our   fonts | sizes | colors    */
+
+
+/* Medium */
+@font-face {
+  font-family: 'Chillax';
+  src: url('../assets/fonts/'); /* IE9 Compat Modes */
+  src: url('../assets/fonts/?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../assets/fonts/Chillax-Medium.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../assets/fonts/Chillax-Medium.woff') format('woff'), /* Modern Browsers */
+       url('../assets/fonts/Chillax-Medium.ttf') format('truetype'); /* Safari, Android, iOS */
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* Semibold */
+@font-face {
+  font-family: 'Chillax';
+  src: url('../assets/fonts/Chillax-Semibold.eot'); /* IE9 Compat Modes */
+  src: url('../assets/fonts/Chillax-Semibold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../assets/fonts/Chillax-Semibold.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../assets/fonts/Chillax-Semibold.woff') format('woff'), /* Modern Browsers */
+       url('../assets/fonts/Chillax-Semibold.ttf') format('truetype'); /* Safari, Android, iOS */
+  font-weight: 600;
+  font-style: normal;
+}
 
 :root {
-  --black: #14061f;
+	--bg-light-purple: #fbfafc;
+	--light-pink: #f4c5df;
+	--pink: #dd47c2;
+	--black: #0e0b11;
+	--purple: #641bff;
+	--barbi-pink: #f764cc;
+	--purple-text: #9983b0;
+	--bg-fade-pink: #f4f0f8;
   --white: #f7f7f7;
-  --purple-dark: #251150;
-  --purple-medium: #8c64ff;
-  --purple-light: #cebefd;
-
-  --green: #64f083;
-  --red: #e66c6c;
+  
+  --font-family: "Chillax", sans-serif;
 }
 
 /* Colors */

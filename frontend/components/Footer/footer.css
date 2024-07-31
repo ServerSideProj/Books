@@ -1,0 +1,80 @@
+.footer {
+  width: 100%;
+  padding-bottom: 5rem;
+  position: relative;
+}
+
+.container-strokes {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.curved-gradient {
+  position: relative;
+  width: 120%;
+  transform: translateX(-5%);
+}
+
+.c-g-1 {
+  margin-bottom: -73px;
+}
+
+.curved-gradient.in-view {
+  transform: translateX(10%); /* Final state */
+}
+
+.fly-book {
+  position: absolute;
+  animation: floating 2s ease-in-out infinite;
+}
+.fly-book1 {
+  top: 8rem;
+  left: 5rem;
+}
+.fly-book2 {
+  bottom: 1rem;
+  right: 2rem;
+}
+
+.logo-footer {
+  width: 7.5rem;
+  margin-bottom: 2rem;
+}
+
+@keyframes floating {
+  0% {
+    transform: translate(0, 0px);
+  }
+  50% {
+    transform: translate(0, 15px);
+  }
+  100% {
+    transform: translate(0, -0px);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .huge-img {
+    width: 6rem;
+  }
+  .footer-inner {
+    gap: 1rem;
+  }
+
+  .fly-book1 {
+    display: none;
+  }
+
+  .fly-book2 {
+    bottom: 0rem;
+    right: 0rem;
+    width: 80%;
+  }
+  .footer {
+    height: 90vh;
+  }
+  .logo-footer {
+    width: 4.5rem;
+  }
+}

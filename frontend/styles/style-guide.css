@@ -133,7 +133,7 @@
 }
 
 .xl-text {
-  font-size: 1.125rem; /* 20px */
+  font-size: 1.25rem; /* 20px */
 }
 
 .xxl-text {
@@ -146,4 +146,28 @@
 
 .bold {
   font-weight: 600;
+}
+
+@media screen and (max-width: 768px) {
+  /* texts */
+
+  .xxsm-text {
+    font-size: 0.4rem;
+  }
+
+  .xsm-text {
+    font-size: 0.55rem;
+  }
+
+  .sm-text {
+    font-size: 0.7rem;
+  }
+
+  .md-text {
+    font-size: 0.875rem;
+  }
+
+  .l-text {
+    font-size: 1rem;
+  }
 }

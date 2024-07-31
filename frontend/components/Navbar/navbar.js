@@ -88,7 +88,7 @@ const generateMobileNavbar = (isLoggedIn) => {
             alt="user-image"
             class="user-image-md"
           />
-          <p class="xl-text username-nav">username</p>
+          <p class="l-text username-nav">username</p>
         </div>
         <div class="icons-container">
           <p class="sm-text bold md-text">0 points</p>
@@ -106,10 +106,10 @@ const generateMobileNavbar = (isLoggedIn) => {
           </div>
         </div>
         <div class="container-nav-texts">
-          <a href="/" class="l-text">Home</a>
-          <a href="/bookstore" class="l-text">Bookstore</a>
-          <a href="/notifications" class="l-text">Notifications</a>
-          <a href="/profile" class="l-text">Profile</a>
+          <a href="/" class="xl-text">Home</a>
+          <a href="/bookstore" class="xl-text">Bookstore</a>
+          <a href="/notifications" class="xl-text">Notifications</a>
+          <a href="/profile" class="xl-text">Profile</a>
         </div>
       </div>
       <p class="logout md-text">Log out</p>
@@ -123,11 +123,11 @@ const generateMobileNavbar = (isLoggedIn) => {
             alt="user-image"
             class="user-image-md"
           />
-          <p class="xl-text username-nav">Not registered</p>
+          <p class="l-text username-nav">Not registered</p>
         </div>
         <div class="container-nav-texts">
-          <a href="/" class="l-text">Home</a>
-          <a href="/bookstore" class="l-text">Bookstore</a>
+          <a href="/" class="xl-text">Home</a>
+          <a href="/bookstore" class="xl-text">Bookstore</a>
         </div>
       </div>
       <div class="container-flex-col center">

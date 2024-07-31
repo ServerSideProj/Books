@@ -1,136 +1,149 @@
 /* definitions of our   fonts | sizes | colors    */
 
+/* Regular */
+@font-face {
+  font-family: "Chillax";
+  src: url("../assets/fonts/"); /* IE9 Compat Modes */
+  src: url("../assets/fonts/?#iefix") format("embedded-opentype"),
+    /* IE6-IE8 */ url("../assets/fonts/Chillax-Regular.woff2") format("woff2"),
+    /* Super Modern Browsers */ url("../assets/fonts/Chillax-Regular.woff")
+      format("woff"),
+    /* Modern Browsers */ url("../assets/fonts/Chillax-Regular.ttf")
+      format("truetype"); /* Safari, Android, iOS */
+  font-weight: 400;
+  font-style: normal;
+}
 
 /* Medium */
 @font-face {
-  font-family: 'Chillax';
-  src: url('../assets/fonts/'); /* IE9 Compat Modes */
-  src: url('../assets/fonts/?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('../assets/fonts/Chillax-Medium.woff2') format('woff2'), /* Super Modern Browsers */
-       url('../assets/fonts/Chillax-Medium.woff') format('woff'), /* Modern Browsers */
-       url('../assets/fonts/Chillax-Medium.ttf') format('truetype'); /* Safari, Android, iOS */
+  font-family: "Chillax";
+  src: url("../assets/fonts/"); /* IE9 Compat Modes */
+  src: url("../assets/fonts/?#iefix") format("embedded-opentype"),
+    /* IE6-IE8 */ url("../assets/fonts/Chillax-Medium.woff2") format("woff2"),
+    /* Super Modern Browsers */ url("../assets/fonts/Chillax-Medium.woff")
+      format("woff"),
+    /* Modern Browsers */ url("../assets/fonts/Chillax-Medium.ttf")
+      format("truetype"); /* Safari, Android, iOS */
   font-weight: 500;
   font-style: normal;
 }
 
 /* Semibold */
 @font-face {
-  font-family: 'Chillax';
-  src: url('../assets/fonts/Chillax-Semibold.eot'); /* IE9 Compat Modes */
-  src: url('../assets/fonts/Chillax-Semibold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('../assets/fonts/Chillax-Semibold.woff2') format('woff2'), /* Super Modern Browsers */
-       url('../assets/fonts/Chillax-Semibold.woff') format('woff'), /* Modern Browsers */
-       url('../assets/fonts/Chillax-Semibold.ttf') format('truetype'); /* Safari, Android, iOS */
+  font-family: "Chillax";
+  src: url("../assets/fonts/Chillax-Semibold.eot"); /* IE9 Compat Modes */
+  src: url("../assets/fonts/Chillax-Semibold.eot?#iefix")
+      format("embedded-opentype"),
+    /* IE6-IE8 */ url("../assets/fonts/Chillax-Semibold.woff2") format("woff2"),
+    /* Super Modern Browsers */ url("../assets/fonts/Chillax-Semibold.woff")
+      format("woff"),
+    /* Modern Browsers */ url("../assets/fonts/Chillax-Semibold.ttf")
+      format("truetype"); /* Safari, Android, iOS */
   font-weight: 600;
   font-style: normal;
 }
 
 :root {
-	--bg-light-purple: #fbfafc;
-	--light-pink: #f4c5df;
-	--pink: #dd47c2;
-	--black: #0e0b11;
-	--purple: #641bff;
-	--barbi-pink: #f764cc;
-	--purple-text: #9983b0;
-	--bg-fade-pink: #f4f0f8;
+  --bg-light-purple: #fbfafc;
+  --light-pink: #f4c5df;
+  --pink: #dd47c2;
+  --black: #0e0b11;
+  --purple: #641bff;
+  --barbi-pink: #f764cc;
+  --purple-text: #9983b0;
+  --bg-fade-pink: #f4f0f8;
   --white: #f7f7f7;
-  
+  --gradient-180: linear-gradient(
+    180deg,
+    rgba(244, 197, 223, 1) 0%,
+    rgba(221, 71, 194, 1) 61%,
+    rgba(153, 46, 228, 1) 100%
+  );
+  --gradient-90: linear-gradient(
+    90deg,
+    rgba(244, 197, 223, 1) 0%,
+    rgba(221, 71, 194, 1) 61%,
+    rgba(153, 46, 228, 1) 100%
+  );
+  --gradient-full-90: linear-gradient(
+    90deg,
+    rgba(244, 197, 223, 1) 0%,
+    rgba(221, 71, 194, 1) 14%,
+    rgba(153, 46, 228, 1) 75%,
+    rgb(14, 11, 17) 100%
+  );
+
   --font-family: "Chillax", sans-serif;
 }
 
 /* Colors */
 
-.text-black {
-  color: var(--black);
+.brabi-pink-text {
+  color: var(--barbi-pink);
 }
 
-.text-purple {
-  color: var(--purple-dark);
-}
-
-.text-purple-medium {
-  color: var(--purple-medium);
-}
-
-.text-purple-light {
-  color: var(--purple-light);
-}
-
-.text-white {
+.white-text {
   color: var(--white);
 }
 
-.text-red {
-  color: var(--red);
+.pink-text {
+  color: var(--pink);
 }
 
-.text-green {
-  color: var(--green);
+.black-text {
+  color: var(--black);
+}
+
+.purple-text {
+  color: var(--purple);
+}
+
+.light-pink-text {
+  color: var(--light-pink);
+}
+
+.bg-light-purple {
+  background-color: var(--bg-light-purple);
+}
+
+.bg-fade-pink {
+  background-color: var(--bg-fade-pink);
 }
 
 /* texts */
-.text-xs {
-  font-size: 0.75rem;
-  line-height: 1rem;
+
+.xxsm-text {
+  font-size: 0.625rem; /* 10px */
 }
 
-.text-sm {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+.xsm-text {
+  font-size: 0.75rem; /* 12px */
 }
 
-.text-base {
-  font-size: 1rem;
-  line-height: 1.5rem;
+.sm-text {
+  font-size: 0.876rem; /* 14px */
 }
 
-.text-lg {
-  font-size: 1.125rem;
-  line-height: 1.75rem;
+.md-text {
+  font-size: 1rem; /* 16px */
 }
 
-.text-xl {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
+.l-text {
+  font-size: 1.125rem; /* 18px */
 }
 
-.text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem;
+.xl-text {
+  font-size: 1.125rem; /* 20px */
 }
 
-.text-3xl {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
+.xxl-text {
+  font-size: 1.5rem; /* 24px */
 }
 
-.text-4xl {
-  font-size: 2.25rem;
-  line-height: 2.5rem;
+.big-text {
+  font-size: 2rem; /* 32px */
 }
 
-.text-5xl {
-  font-size: 3rem;
-  line-height: 1.5rem;
-}
-
-.text-6xl {
-  font-size: 3.75rem;
-  line-height: 3.125rem;
-}
-
-.text-7xl {
-  font-size: 4.5rem;
-  line-height: 3.125rem;
-}
-
-.text-8xl {
-  font-size: 6rem;
-  line-height: 5rem;
-}
-
-.text-9xl {
-  font-size: 8rem;
-  line-height: 6.25rem;
+.bold {
+  font-weight: 600;
 }

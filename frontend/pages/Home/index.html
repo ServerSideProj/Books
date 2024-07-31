@@ -22,11 +22,12 @@
     <script src="../../components/Navbar/navbar.js" type="module"></script>
     <script src="../../components/Footer/footer.js"></script>
 
-    <!-- Scripts for this page-->
-    <script src="./homepage.js"></script>
-
     <!-- Styles for this page -->
     <link rel="stylesheet" href="./homepage.css" />
+    <link rel="stylesheet" href="../../components/SmallCard/smcard.css" />
+    <!-- Scripts for this page-->
+    <script src="./homepage.js"></script>
+    <script src="../../components/SmallCard/smcard.js"></script>
 
     <title>Storytime</title>
   </head>
@@ -34,7 +35,59 @@
     <div class="navbar"></div>
 
     <div class="main">
-      <!-- <h1>Hi there, come back later :)</h1> -->
+      <div class="hero-homepage">
+        <img
+          src="../../assets/logo/storytime-text.svg"
+          alt="storytime"
+          class="title-hero"
+        />
+        <p class="text-hero">
+          It’s always hard to start reading,<br />
+          but lets make it
+          <span class="black-text gradient-text">fantastic</span>
+        </p>
+        <img
+          src="../../assets/images/books-home-page.svg"
+          alt="books pink & purple"
+          class="books-hero"
+        />
+      </div>
+      <div class="container-text-story">
+        <p class="reveal-text">
+          <span>
+            Once upon a time, <br />
+            In a world full of stories,<br />
+            Readers gathered to explore, <br />
+            And share their literary glories.
+          </span>
+        </p>
+        <div class="container-top-books">
+          <div class="inner-container"></div>
+        </div>
+      </div>
+      <div class="container-quiz-banner">
+        <div class="container-flex-col">
+          <p class="huge-text nowrap-tx">Daily Quiz</p>
+          <p class="xl-text purple-fade">Excited to earn more coins?</p>
+          <a
+            href="/pages/quiz"
+            class="btn btn-gradient md-text margin-top-4"
+            id="to-quiz"
+          >
+            Let's go!</a
+          >
+        </div>
+        <img
+          src="../../assets/images/quiz-banner-image.jpg"
+          alt=""
+          class="banner-image"
+        />
+      </div>
+      <div class="container-authors">
+        <div class="line line1"></div>
+        <div class="line line2"></div>
+        <div class="line line3"></div>
+      </div>
     </div>
     <div class="footer"></div>
   </body>

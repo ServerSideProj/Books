@@ -3,19 +3,20 @@ $(document).ready(function () {
 });
 
 const generateFooter = () => {
-  const footer = `<div class="container-strokes">
-        <img
-          src="../../assets/images/curved-gradient.svg"
-          alt="curved-line"
-          class="curved-gradient c-g-1"
-        />
-        <img
-          src="../../assets/images/curved-gradient.svg"
-          alt="curved-line"
-          class="curved-gradient c-g-2"
-        />
-      </div>
-      <img
+  const footer =
+    // <div class="container-strokes">
+    //       <img
+    //         src="../../assets/images/curved-gradient.svg"
+    //         alt="curved-line"
+    //         class="curved-gradient c-g-1"
+    //       />
+    //       <img
+    //         src="../../assets/images/curved-gradient.svg"
+    //         alt="curved-line"
+    //         class="curved-gradient c-g-2"
+    //       />
+    //     </div>
+    `<img
         src="../../assets/images/book1-100.svg"
         class="fly-book fly-book1"
         alt=""

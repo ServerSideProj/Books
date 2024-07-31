@@ -51,7 +51,7 @@ const generateDesktopNavbar = (isLoggedIn) => {
             </div>
             <div class="container-full-space right">
                 <p class="sm-text gradient-text">
-                    0 points
+                    0 coins
                 </p>
                 <div class="container-gap-sm">
                     <p class="sm-text username-nav">username</p>
@@ -91,7 +91,7 @@ const generateMobileNavbar = (isLoggedIn) => {
           <p class="l-text username-nav">username</p>
         </div>
         <div class="icons-container">
-          <p class="sm-text bold md-text">0 points</p>
+          <p class="sm-text bold md-text">0 coins</p>
           <div class="container-gap-30">
             <img
               src="../../assets/icons/heart.svg"

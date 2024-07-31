@@ -6,9 +6,9 @@ body {
   box-sizing: border-box;
 }
 
-.main {
+/* .main {
   padding: 2rem 4rem;
-}
+} */
 
 html,
 body {
@@ -21,10 +21,6 @@ body {
 }
 body {
   cursor: url("../assets/images/cursor.svg"), auto;
-}
-
-.main {
-  min-height: 96vh;
 }
 
 * {
@@ -51,13 +47,6 @@ a {
 
 .btn:hover {
   transform: scale(0.98) translateY(2px);
-}
-
-.gradient-text {
-  background: linear-gradient(90deg, #d87eaf 0%, #dd47c2 40%, #641bff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline-block;
 }
 
 .navbar {
@@ -117,4 +106,8 @@ a {
 
 .margin-top-4 {
   margin-top: 4rem;
+}
+
+.nowrap-tx {
+  text-wrap: nowrap;
 }

@@ -103,6 +103,10 @@ a {
   gap: 2rem;
 }
 
+.gap-5 {
+  gap: 5rem;
+}
+
 .container-flex {
   display: flex;
 }

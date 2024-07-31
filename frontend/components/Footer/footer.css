@@ -71,10 +71,24 @@
     right: 0rem;
     width: 80%;
   }
+
   .footer {
-    height: 90vh;
+    height: 80vh;
   }
+
   .logo-footer {
     width: 4.5rem;
+  }
+
+  .gap-5 {
+    gap: 2rem;
+  }
+
+  .c-g-1 {
+    margin-bottom: -23px;
+  }
+
+  .curved-gradient {
+    width: 200%;
   }
 }

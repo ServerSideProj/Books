@@ -27,14 +27,14 @@ const generateDesktopNavbar = (isLoggedIn) => {
   const loggedOutNav = `
     <div class="navbar-desktop">
         <div class="container-full-space">
-            <a href="/bookstore" class="sm-text">Bookstore</a>
+            <a href="/pages/bookstore" class="sm-text">Bookstore</a>
         </div>
         <div class="logo-container">
-            <a href="/"><img src="../../assets/logo/logo-nav.svg" alt="logo" class="logo-nav"></a>
+            <a href="/pages/home"><img src="../../assets/logo/logo-nav.svg" alt="logo" class="logo-nav"></a>
         </div>
         <div class="container-full-space right">
-            <a href="/login" class="sm-text">Login</a>
-            <a href="/signup" class="btn btn-gradient btn-signup-nav sm-text">Sign up</a>
+            <a href="/pages/login" class="sm-text">Login</a>
+            <a href="/pages/signup" class="btn btn-gradient btn-signup-nav sm-text">Sign up</a>
         </div>
     </div>
 `;
@@ -43,8 +43,8 @@ const generateDesktopNavbar = (isLoggedIn) => {
             <div class="container-full-space">
                 <img src="../../assets/icons/Shopping cart.svg" alt="Shopping Cart" class="cart-icon icon">
                 <img src="../../assets/icons/heart.svg" alt="heart" class="heart-icon icon">
-                <a href="/bookstore" class="sm-text">Bookstore</a>
-                <a href="/notifications" class="sm-text">Notifications</a>
+                <a href="/pages/bookstore" class="sm-text">Bookstore</a>
+                <a href="/pages/notifications" class="sm-text">Notifications</a>
             </div>
             <div class="logo-container">
                 <img src="../../assets/logo/logo-nav.svg" alt="logo" class="logo-nav">
@@ -106,10 +106,10 @@ const generateMobileNavbar = (isLoggedIn) => {
           </div>
         </div>
         <div class="container-nav-texts">
-          <a href="/" class="xl-text">Home</a>
-          <a href="/bookstore" class="xl-text">Bookstore</a>
-          <a href="/notifications" class="xl-text">Notifications</a>
-          <a href="/profile" class="xl-text">Profile</a>
+          <a href="/pages/home" class="xl-text">Home</a>
+          <a href="/pages/bookstore" class="xl-text">Bookstore</a>
+          <a href="/pages/notifications" class="xl-text">Notifications</a>
+          <a href="/pages/profile" class="xl-text">Profile</a>
         </div>
       </div>
       <p class="logout md-text">Log out</p>
@@ -126,15 +126,15 @@ const generateMobileNavbar = (isLoggedIn) => {
           <p class="l-text username-nav">Not registered</p>
         </div>
         <div class="container-nav-texts">
-          <a href="/" class="xl-text">Home</a>
-          <a href="/bookstore" class="xl-text">Bookstore</a>
+          <a href="/pages/home" class="xl-text">Home</a>
+          <a href="/pages/bookstore" class="xl-text">Bookstore</a>
         </div>
       </div>
       <div class="container-flex-col center">
-        <a href="/signup" class="btn btn-gradient btn-signup-nav md-text"
+        <a href="/pages/signup" class="btn btn-gradient btn-signup-nav md-text"
           >Sign up</a
         >
-        <a href="/login" class="sm-text">Login</a>
+        <a href="/pages/login" class="sm-text">Login</a>
       </div>
     </div>`;
 

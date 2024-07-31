@@ -4,7 +4,7 @@
     {
         private int copyId;
         private string title;
-        private string ownerEmail = "";
+        private string ownerEmail;
 
         public BookCopy(int copyId, string title, string ownerEmail)
         {

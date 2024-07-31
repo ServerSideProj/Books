@@ -1,4 +1,6 @@
-﻿namespace Backend.BI
+﻿using Backend.BL;
+
+namespace Backend.BI
 {
     public class Book
     {
@@ -13,10 +15,12 @@
         private bool isEbook;
         private DateOnly publishDate;
         private int pageCount;
+        private string subtitle;
         private Author[] authors;
         private string[] categories;
+        private Review[] reviews;
 
-        public Book(string title, string description, string language, float avgRating, int ratingCount, string maturityRating, string infoLink, string publisher, bool isEbook, DateOnly publishDate, int pageCount, Author[] authors, string[] categories)
+        public Book(string title, string description, string language, float avgRating, int ratingCount, string maturityRating, string infoLink, string publisher, bool isEbook, DateOnly publishDate, int pageCount, string subtitle, Author[] authors, string[] categories, Review[] reviews)
         {
             Title = title;
             Description = description;
@@ -29,8 +33,10 @@
             IsEbook = isEbook;
             PublishDate = publishDate;
             PageCount = pageCount;
+            Subtitle = subtitle;
             Authors = authors;
             Categories = categories;
+            Reviews = reviews;
         }
 
         public string Title { get => title; set => title = value; }
@@ -44,7 +50,9 @@
         public bool IsEbook { get => isEbook; set => isEbook = value; }
         public DateOnly PublishDate { get => publishDate; set => publishDate = value; }
         public int PageCount { get => pageCount; set => pageCount = value; }
+        public string Subtitle { get => subtitle; set => subtitle = value; }
         public Author[] Authors { get => authors; set => authors = value; }
         public string[] Categories { get => categories; set => categories = value; }
+        public Review[] Reviews { get => reviews; set => reviews = value; }
     }
 }

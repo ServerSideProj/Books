@@ -14,7 +14,7 @@
 
 .books-hero {
   transform: translateY(-12%);
-  height: 18rem;
+  height: 26rem;
 }
 
 .text-hero {
@@ -30,7 +30,7 @@
   padding-bottom: 10rem;
 }
 
-.container-text-story span {
+.reveal-text span {
   text-align: center;
   width: 100%;
   color: rgba(182, 165, 198, 0.3);
@@ -211,7 +211,11 @@
     height: 100vh;
   }
 
-  .container-text-story span {
+  .books-hero {
+    height: 16rem;
+  }
+
+  .reveal-text span {
     font-size: 1.5rem;
   }
 

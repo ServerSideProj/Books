@@ -14,7 +14,7 @@ $(document).ready(function () {
   // Initial check
   updateNavbar();
 
-  // Update on resize
+  // Update nav on resize
   $(window).resize(function () {
     updateNavbar();
   });

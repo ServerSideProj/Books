@@ -26,9 +26,12 @@
     <link rel="stylesheet" href="./homepage.css" />
     <link rel="stylesheet" href="../../components/SmallCard/smcard.css" />
     <link rel="stylesheet" href="../../components/BookCard/bookcard.css" />
+    <link rel="stylesheet" href="../../components/Popup/popup.css" />
     <!-- Scripts for this page-->
     <script src="./homepage.js"></script>
     <script src="../../components/SmallCard/smcard.js"></script>
+    <script src="../../components/BookCard/bookcard.js"></script>
+    <script src="../../components/Popup/popup.js"></script>
 
     <title>Storytime</title>
   </head>
@@ -68,80 +71,26 @@
               <div class="container-flex-col gap-0">
                 <div class="titles-contatiner">
                   <p class="xxl-text">Top Physical Books</p>
-                  <img
-                    src="../../assets/images/see-all-books-btn.svg"
-                    alt="see all books"
-                    class="btn btn-to-all-books"
-                  />
+                  <a href="/pages/bookstore"
+                    ><img
+                      src="../../assets/images/see-all-books-btn.svg"
+                      alt="see all books"
+                      class="btn btn-to-all-books"
+                  /></a>
                 </div>
-                <div class="row-books">
-                  <div class="book-card">
-                    <div class="book-car-img">
-                      <div class="like-btn on-cover-bg">
-                        <img
-                          src="../../assets/icons/heart-white-stroke.svg"
-                          alt="heart"
-                        />
-                      </div>
-                      <div class="container-flex flex-end-space width100">
-                        <div
-                          class="price-wrapper on-cover-bg white-text xsm-text"
-                        >
-                          7 $
-                        </div>
-                        <div
-                          class="type-wrapper on-cover-bg white-text xsm-text"
-                        >
-                          Physical
-                        </div>
-                      </div>
-                    </div>
-                    <div class="container-flex-col gap-0">
-                      <p class="md-text">Name of the Book</p>
-                      <p class="xsm-text grey-text">Name of the Author</p>
-                    </div>
-                    <div class="extra-details-card"></div>
-                  </div>
-                </div>
+                <div id="top-ebooks" class="row-books"></div>
               </div>
               <div class="container-flex-col gap-0">
                 <div class="titles-contatiner">
                   <p class="xxl-text">Top eBooks</p>
-                  <img
-                    src="../../assets/images/see-all-books-btn.svg"
-                    alt="see all books"
-                    class="btn btn-to-all-books"
-                  />
+                  <a href="/pages/bookstore"
+                    ><img
+                      src="../../assets/images/see-all-books-btn.svg"
+                      alt="see all books"
+                      class="btn btn-to-all-books"
+                  /></a>
                 </div>
-                <div class="row-books">
-                  <div class="book-card">
-                    <div class="book-car-img">
-                      <div class="like-btn on-cover-bg">
-                        <img
-                          src="../../assets/icons/heart-white-stroke.svg"
-                          alt="heart"
-                        />
-                      </div>
-                      <div class="container-flex flex-end-space width100">
-                        <div
-                          class="price-wrapper on-cover-bg white-text xsm-text"
-                        >
-                          7 $
-                        </div>
-                        <div
-                          class="type-wrapper on-cover-bg white-text xsm-text"
-                        >
-                          Physical
-                        </div>
-                      </div>
-                    </div>
-                    <div class="container-flex-col gap-0">
-                      <p class="md-text">Name of the Book</p>
-                      <p class="xsm-text grey-text">Name of the Author</p>
-                    </div>
-                    <div class="extra-details-card"></div>
-                  </div>
-                </div>
+                <div id="top-physicals" class="row-books"></div>
               </div>
             </div>
           </div>

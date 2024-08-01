@@ -75,13 +75,19 @@ a {
   right: 2rem;
   height: 1.3rem;
 }
-
+.btn-x:hover {
+  transform: scale(1.2);
+}
 .huge-img {
   width: 10rem;
 }
 
 .gap-0 {
   gap: 0;
+}
+
+.gap-03 {
+  gap: 0.3rem;
 }
 
 .gap-1 {
@@ -100,8 +106,12 @@ a {
   display: flex;
 }
 
-.center {
+.center-ver {
   justify-content: center;
+}
+
+.center-hor {
+  align-items: center;
 }
 
 .margin-top-4 {

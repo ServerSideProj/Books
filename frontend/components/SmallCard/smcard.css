@@ -11,9 +11,9 @@
 }
 
 .image-author {
-  width: 80px;
+  width: 75px;
   height: 100px;
-  background-size: cover;
+  object-fit: cover;
   border-radius: 12px;
 }
 

@@ -7,7 +7,7 @@ const generatecards = () => {
     for (let i = 0; i < 8; i++) {
       const card = `
         <div class="sm-card">
-            <img src="" alt="" class="image-author" />
+            <img src="../../assets/images/author-placeholder.png" alt="" class="image-author" />
             <div class="container-flex-col">
             <p class="xl-text">name of author</p>
             <p class="sm-text grey-text">Number of books: <span class="books-amount">4</span></p>

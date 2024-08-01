@@ -1,10 +1,12 @@
 .navbar-desktop {
   display: flex;
   height: 4.5rem;
-  position: relative;
+  position: fixed;
   align-items: center;
-  padding: 2rem 3rem 0 3rem;
+  padding: 2rem 3rem 1rem 3rem;
   width: 100%;
+  z-index: 4;
+  background-color: var(--bg-light-purple);
 }
 
 .container-full-space {

@@ -20,4 +20,5 @@
         public string Biography { get => biography; set => biography = value; }
         public string WikiLink { get => wikiLink; set => wikiLink = value; }
     }
+}
 

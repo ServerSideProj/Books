@@ -14,13 +14,11 @@
     <link rel="stylesheet" href="../../styles/general.css" />
     <link rel="stylesheet" href="../../components/Navbar/navbar-desktop.css" />
     <link rel="stylesheet" href="../../components/Navbar/navbar-mobile.css" />
-    <link rel="stylesheet" href="../../components/Footer/footer.css" />
 
     <!-- Scripts for all pages-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../services/auth.js" type="module"></script>
     <script src="../../components/Navbar/navbar.js" type="module"></script>
-    <script src="../../components/Footer/footer.js"></script>
 
     <!-- Styles for this page -->
     <link rel="stylesheet" href="./quiz.css" />
@@ -31,7 +29,57 @@
   </head>
   <body>
     <div class="navbar"></div>
-    <div class="main">hi</div>
-    <div class="footer"></div>
+    <div class="main">
+      <div class="hero-quiz">
+        <p class="huge-text nowrap-tx">Daily Quiz</p>
+        <div class="container-flex-col center opening">
+          <p class="xl-text purple-fade">
+            You have 5 questions about books, authors and everything in
+            between.<br />
+            Ready?
+          </p>
+          <div
+            id="btn-start-quiz"
+            class="btn btn-gradient md-text margin-top-4"
+          >
+            Start Quiz
+          </div>
+        </div>
+        <div class="container-questions none">
+          <div class="container-flex-col">
+            <div class="container-timing">
+              <div class="count-questions">
+                <span class="count">1</span> / 5
+              </div>
+              <div class="time">00:00</div>
+            </div>
+            <p id="question" class="xl-text purple-fade">
+              You have 5 questions about books, authors and everything in
+              between?
+            </p>
+            <div class="ans-container">
+              <div class="ans" id="ans1">
+                <p class="md-text">Answer exmaple</p>
+              </div>
+              <div class="ans" id="ans2">
+                <p class="md-text">Answer exmaple</p>
+              </div>
+              <div class="ans" id="ans3">
+                <p class="md-text">Answer exmaple</p>
+              </div>
+              <div class="ans" id="ans4">
+                <p class="md-text">Answer exmaple</p>
+              </div>
+            </div>
+            <div
+              id="next-question"
+              class="btn btn-gradient md-text margin-top-4 disabled"
+            >
+              Next
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

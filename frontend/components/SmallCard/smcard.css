@@ -3,26 +3,16 @@
   border-radius: 16px;
   box-shadow: 0 4px 14px -1px rgba(115, 77, 196, 0.2);
   width: fit-content;
-  padding: 2rem;
+  padding: 1rem;
   display: flex;
   align-items: center;
   gap: 1rem;
+  transition: transform 0.5s ease;
 }
 
 .image-author {
-  width: 100px;
-  height: 119px;
+  width: 80px;
+  height: 100px;
   background-size: cover;
   border-radius: 12px;
-}
-
-.container-authors {
-  display: flex;
-  gap: 1.3rem;
-}
-
-.line {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.3rem;
 }

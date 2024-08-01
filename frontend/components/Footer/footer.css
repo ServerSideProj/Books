@@ -2,6 +2,8 @@
   width: 100%;
   padding-bottom: 5rem;
   position: relative;
+  background-color: var(--bg-fade-pink);
+  padding-top: 3rem;
 }
 
 .container-strokes {
@@ -29,7 +31,7 @@
   animation: floating 2s ease-in-out infinite;
 }
 .fly-book1 {
-  top: 8rem;
+  top: -6rem;
   left: 5rem;
 }
 .fly-book2 {

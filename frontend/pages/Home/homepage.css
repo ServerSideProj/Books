@@ -99,6 +99,63 @@
   border-radius: 30rem;
 }
 
+.container-authors {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 14rem 0;
+  padding-bottom: 20rem;
+}
+
+.line {
+  display: flex;
+  width: max-content;
+  padding: 1rem 1rem;
+}
+
+.line.left > *,
+.line.right > * {
+  display: flex;
+  height: fit-content;
+  gap: 1.3rem;
+}
+
+.sm-card:hover {
+  transform: scale(1.1);
+}
+
+.line.right {
+  display: flex;
+  animation: 60s slideLeft infinite linear;
+}
+
+.line.left {
+  align-self: end;
+  animation: 70s slideRight infinite linear;
+}
+
+.title-authors {
+  margin: 2rem auto;
+}
+
+@keyframes slideRight {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(50%);
+  }
+}
+
+@keyframes slideLeft {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 @keyframes grow {
   0% {
     width: 80%;

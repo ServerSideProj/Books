@@ -189,4 +189,16 @@
   .l-text {
     font-size: 1rem;
   }
+
+  .xl-text {
+    font-size: 1rem;
+  }
+
+  .xxl-text {
+    font-size: 1.2rem;
+  }
+
+  .huge-text {
+    font-size: 3rem;
+  }
 }

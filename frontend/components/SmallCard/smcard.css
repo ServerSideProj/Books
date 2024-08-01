@@ -16,3 +16,10 @@
   background-size: cover;
   border-radius: 12px;
 }
+
+@media screen and (max-width: 1000px) {
+  .image-author {
+    width: 60px;
+    height: 77px;
+  }
+}

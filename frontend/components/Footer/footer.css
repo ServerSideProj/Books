@@ -69,9 +69,9 @@
   }
 
   .fly-book2 {
-    bottom: 0rem;
+    bottom: 1rem;
     right: 0rem;
-    width: 80%;
+    width: 70%;
   }
 
   .footer {
@@ -92,5 +92,9 @@
 
   .curved-gradient {
     width: 200%;
+  }
+
+  .margin-top-4 {
+    margin-top: 2rem;
   }
 }

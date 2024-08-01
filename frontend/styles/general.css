@@ -111,3 +111,12 @@ a {
 .nowrap-tx {
   text-wrap: nowrap;
 }
+
+.flex-end-space {
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.width100 {
+  width: 100%;
+}

@@ -1,0 +1,55 @@
+.book-card {
+  box-shadow: 0 5px 20px 0 rgba(153, 131, 176, 0.2);
+  background: var(--white);
+  border-radius: 8px;
+  padding: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.book-car-img {
+  background-image: url("../../assets/images/book-cover-placeholder.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  padding: 10px;
+  border-radius: 8px;
+  width: 179px;
+  height: 268px;
+  position: relative;
+}
+
+.like-btn {
+  width: 14px;
+  right: 10px;
+  position: absolute;
+  padding: 16px;
+}
+
+.price-wrapper,
+.type-wrapper {
+  padding: 12px;
+}
+
+.on-cover-bg {
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.421);
+  border-radius: 40px;
+  height: 14px;
+  backdrop-filter: blur(10px);
+  display: flex;
+  transition: opacity 0.35s ease-in-out;
+  opacity: 0;
+}
+
+.book-card:hover .on-cover-bg {
+  opacity: 100%;
+}
+
+.book-card:hover {
+  transform: scale(1.03);
+}
+
+.like-btn.liked.on-cover-bg {
+  opacity: 100%;
+}

@@ -14,13 +14,11 @@
     <link rel="stylesheet" href="../../styles/general.css" />
     <link rel="stylesheet" href="../../components/Navbar/navbar-desktop.css" />
     <link rel="stylesheet" href="../../components/Navbar/navbar-mobile.css" />
-    <link rel="stylesheet" href="../../components/Footer/footer.css" />
 
     <!-- Scripts for all pages-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../services/auth.js" type="module"></script>
     <script src="../../components/Navbar/navbar.js" type="module"></script>
-    <script src="../../components/Footer/footer.js"></script>
 
     <!-- Styles for this page -->
     <link rel="stylesheet" href="../../styles/connect.css" />
@@ -32,8 +30,40 @@
   <body>
     <div class="navbar"></div>
     <div class="main">
-      <img src="../../assets/images/login-image.png" alt="" />
+      <div class="hero-connect">
+        <div class="container-flex-col center left-side">
+          <div class="container-flex-col center gap-0">
+            <p class="huge-text title-center nowrap-tx">Welcome back!</p>
+            <p class="sm-text purple-fade title-center">
+              It’s always hard to start reading, but lets make it
+              <span class="gradient-text">fantastic</span>
+            </p>
+          </div>
+          <form class="form-login">
+            <input type="email" placeholder="Email" class="input-box-sqr" />
+            <input
+              type="password"
+              placeholder="Password"
+              class="input-box-sqr xsm-text"
+            />
+            <p class="xsm-text purple-fade font-reg">
+              Not registered yet?
+              <a href="/pages/Signup/">Sign up</a>
+            </p>
+            <input
+              id="login-btn"
+              class="btn btn-gradient btn-signup-nav sm-text"
+              type="submit"
+              value="Login"
+            />
+          </form>
+        </div>
+        <img
+          src="../../assets/images/login-image.png"
+          alt="papers image"
+          class="img-hero"
+        />
+      </div>
     </div>
-    <div class="footer"></div>
   </body>
 </html>

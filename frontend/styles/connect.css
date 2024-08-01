@@ -1,5 +1,83 @@
 .main {
   display: flex;
-  height: 100vh;
-  margin-top: 10rem;
+  position: relative;
+  width: 100%;
+}
+
+.hero-connect {
+  display: flex;
+  height: 86vh;
+  width: 100%;
+  justify-content: space-between;
+  padding: 2rem 3rem;
+  margin-top: 5rem;
+  margin-bottom: 3rem;
+}
+
+.huge-text.center-text {
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 22rem;
+  align-items: center;
+}
+
+::placeholder {
+  color: var(--purple-fade);
+  font-size: 12px;
+}
+
+input:focus-visible {
+  outline: 2px solid #b7b8f8;
+}
+
+.input-box-sqr {
+  box-shadow: inset 0 3px 2px 0 rgba(229, 220, 238, 0.5);
+  background: var(--bg-fade-pink);
+  color: var(--purple-fade);
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  border: transparent;
+  font-family: var(--font-family);
+  width: 100%;
+  min-height: 2.4rem;
+}
+
+.left-side {
+  padding-top: 14vh;
+  gap: 5rem;
+  width: 100%;
+}
+
+.img-hero {
+  width: 70%;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+#login-btn {
+  width: fit-content;
+  padding: 0.6rem 2rem;
+  font-weight: 500;
+  margin-top: 5rem;
+}
+
+.title-center {
+  text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  .img-hero {
+    display: none;
+  }
+  form {
+    width: 100%;
+  }
+  .left-side .sm-text {
+    font-size: 0.875rem;
+  }
 }

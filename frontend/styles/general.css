@@ -43,6 +43,8 @@ a {
   background: rgb(236, 79, 165);
   background: var(--gradient-180);
   box-shadow: inset 0px 2px 3px 0px var(--barbi-pink);
+  border: transparent;
+  font-family: var(--font-family);
 }
 
 .btn:hover {
@@ -78,6 +80,7 @@ a {
 .btn-x:hover {
   transform: scale(1.2);
 }
+
 .huge-img {
   width: 10rem;
 }

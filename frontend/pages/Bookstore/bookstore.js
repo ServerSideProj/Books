@@ -37,4 +37,6 @@ const renderBooks = (books) => {
   });
 };
 
-const openFiltersPopup = () => {};
+const openFiltersPopup = () => {
+  $(".bg-dark");
+};

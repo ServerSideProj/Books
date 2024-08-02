@@ -166,3 +166,37 @@ input[type="number"]::-webkit-inner-spin-button {
   max-height: 80vh;
   background-color: #fff;
 }
+
+@media screen and (max-width: 768px) {
+  .main {
+    padding: 5rem 1rem;
+  }
+
+  .mobile-flex-col {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  #more-filters > p {
+    display: none;
+  }
+  .btn-border-purple.btn-fill {
+    padding: 8px 8px;
+  }
+
+  .search-container {
+    width: 200px;
+  }
+
+  .btn-search {
+    padding: 8px 15px;
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .search-group {
+    flex-direction: column;
+    align-items: end;
+  }
+}

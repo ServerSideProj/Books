@@ -18,6 +18,7 @@
 
     <!-- Scripts for all pages-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../../services/constants.js"></script>
     <script src="../../services/auth.js" type="module"></script>
     <script src="../../components/Navbar/navbar.js" type="module"></script>
     <script src="../../components/Popup/popup.js"></script>
@@ -113,8 +114,25 @@
               <p class="sm-text">oldest to newest</p>
             </div>
           </div>
-
-          <div class="container-options"></div>
+        </div>
+        <div class="container-bot-border">
+          <div class="wrapper-title-filter">
+            <p class="xl-text">Book Type</p>
+          </div>
+          <div class="container-options container-flex-col space gap-03">
+            <div data-type="both" class="opt">
+              <img src="../../assets/icons/circle.svg" alt="sqr-icon" />
+              <p class="sm-text">Both</p>
+            </div>
+            <div data-type="ebooks" class="opt">
+              <img src="../../assets/icons/circle.svg" alt="sqr-icon" />
+              <p class="sm-text">Only eBooks</p>
+            </div>
+            <div data-type="phys" class="opt">
+              <img src="../../assets/icons/circle.svg" alt="sqr-icon" />
+              <p class="sm-text">Only physical books</p>
+            </div>
+          </div>
         </div>
         <div class="container-flex-col center gap-1"></div>
         <div class="btn select-btn sm-text font-reg btn-gradient">Select</div>

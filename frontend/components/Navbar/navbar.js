@@ -58,7 +58,7 @@ const generateDesktopNavbar = (isLoggedIn) => {
                     <img src="../../assets/images/user-profile-image.svg" alt="profile image" class="profile-image-sm">
                 </div>
                 <p class="sm-text">|</p>
-                <p class="sm-text">Log out</p>
+                <p class="sm-text logout">Log out</p>
             </div>
         </div>
     `;

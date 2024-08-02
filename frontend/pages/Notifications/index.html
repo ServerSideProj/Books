@@ -18,20 +18,55 @@
 
     <!-- Scripts for all pages-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../../services/constants.js"></script>
     <script src="../../services/auth.js" type="module"></script>
     <script src="../../components/Navbar/navbar.js" type="module"></script>
     <script src="../../components/Footer/footer.js"></script>
 
     <!-- Styles for this page -->
-    <link rel="stylesheet" href="./.css" />
+    <link rel="stylesheet" href="./notifications.css" />
     <!-- Scripts for this page-->
-    <script src="./.js"></script>
+    <script src="./notifications.js"></script>
 
     <title>Notifications</title>
   </head>
   <body>
     <div class="navbar"></div>
-    <div class="main">hi</div>
+    <div class="main">
+      <img
+        src="../../assets/images/image-notification-bg.png"
+        alt="books"
+        class="bg-notif"
+      />
+      <div class="notifications-wrapper">
+        <h1 class="big-text font-med">Notifications</h1>
+        <div class="container-cart-books">
+          <div class="book-list">
+            <div class="container-flex gap-1 center-hor book-details">
+              <img
+                src="../../assets/images/book-cover-placeholder.jpg"
+                alt=""
+                class="book-cover"
+              />
+              <div>
+                <div class="title md-text">Name of the book</div>
+                <div class="author sm-text">Name of the author</div>
+              </div>
+            </div>
+            <div class="purple-text font-reg sm-text offer">
+              <span class="bold username">Username</span> sent an offer
+            </div>
+            <div class="actions">
+              <div class="offer-coins xl-text purple-text">
+                <span>50</span> coins
+              </div>
+              <div class="btn btn-purple sm-text">Accept</div>
+              <div class="btn btn-grey-stroke sm-text">Reject</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="footer"></div>
   </body>
 </html>

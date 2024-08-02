@@ -18,6 +18,8 @@ $(document).ready(function () {
     const filter = $(this).data("price-filter");
     sortAndRenderBooks(filter);
   });
+
+  $(".more-filters").on("click", openFiltersPopup);
 });
 
 // get all books from server
@@ -34,3 +36,5 @@ const renderBooks = (books) => {
     bookstore.append(generateBookCard(false));
   });
 };
+
+const openFiltersPopup = () => {};

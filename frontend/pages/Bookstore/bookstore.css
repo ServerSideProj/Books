@@ -126,8 +126,43 @@ input[type="number"]::-webkit-inner-spin-button {
   padding: 9px 20px;
   width: 316px;
   height: 35px;
-  margin-left: auto;
   box-shadow: inset 2px 2px 5px 0 rgba(153, 131, 176, 0.2),
     0 4px 4px 0 rgba(153, 131, 176, 0.2);
   background: var(--bg-fade-pink);
+  display: flex;
+  gap: 0.7rem;
+}
+
+.btn-search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 30px;
+  padding: 9px 20px;
+  width: fit-content;
+  box-shadow: inset 2px 2px 5px 0 rgba(153, 131, 176, 0.2),
+    0 4px 4px 0 rgba(153, 131, 176, 0.2);
+  background: var(--bg-fade-pink);
+  height: 35px;
+  transition: all 0.2s ease;
+}
+
+.btn-search:hover {
+  background-color: rgba(153, 131, 176, 0.41);
+}
+
+::placeholder {
+  color: var(--purple-fade);
+  font-size: 14px;
+}
+.search-group {
+  display: flex;
+  gap: 0.4rem;
+  margin-left: auto;
+}
+
+.popup-container {
+  padding: 2rem 2rem;
+  max-height: 80vh;
+  background-color: #fff;
 }

@@ -14,11 +14,13 @@
     <link rel="stylesheet" href="../../styles/general.css" />
     <link rel="stylesheet" href="../../components/Navbar/navbar-desktop.css" />
     <link rel="stylesheet" href="../../components/Navbar/navbar-mobile.css" />
+    <link rel="stylesheet" href="../../components/Popup/popup.css" />
 
     <!-- Scripts for all pages-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../services/auth.js" type="module"></script>
     <script src="../../components/Navbar/navbar.js" type="module"></script>
+    <script src="../../components/Popup/popup.js"></script>
 
     <!-- Styles for this page -->
     <link rel="stylesheet" href="../../components/BookCard/bookcard.css" />
@@ -31,6 +33,87 @@
   </head>
   <body>
     <div class="navbar"></div>
+    <div class="bg-dark">
+      <div class="popup-container gap-02">
+        <img src="../../assets/icons/X.svg" class="btn-x" />
+        <p class="xxl-text bold">Filters</p>
+        <div class="container-bot-border">
+          <div class="wrapper-title-filter">
+            <p class="xl-text">Category</p>
+            <div class="search-container">
+              <input type="text" placeholder="category..." />
+              <img src="../../assets/icons/search-icon.svg" alt="search-icon" />
+            </div>
+          </div>
+
+          <div class="container-options"></div>
+        </div>
+        <div class="container-bot-border">
+          <div class="wrapper-title-filter">
+            <p class="xl-text">Author</p>
+            <div class="search-container">
+              <input type="text" placeholder="author name..." />
+              <img src="../../assets/icons/search-icon.svg" alt="search-icon" />
+            </div>
+          </div>
+
+          <div class="container-options"></div>
+        </div>
+        <div class="container-bot-border">
+          <div class="wrapper-title-filter">
+            <p class="xl-text">Friends' Books</p>
+            <div class="search-container">
+              <input type="text" placeholder="alice143..." />
+              <img src="../../assets/icons/search-icon.svg" alt="search-icon" />
+            </div>
+          </div>
+
+          <div class="container-options"></div>
+        </div>
+        <div class="container-bot-border">
+          <div class="wrapper-title-filter">
+            <p class="xl-text">Rate</p>
+          </div>
+          <div class="container-options container-flex space">
+            <div data-stars="3" class="opt">
+              <img src="../../assets/icons/sqr-icon.svg" alt="sqr-icon" />
+              <p class="sm-text">3 stars or less</p>
+            </div>
+            <div data-stars="4" class="opt">
+              <img src="../../assets/icons/sqr-icon.svg" alt="sqr-icon" />
+              <p class="sm-text">4 stars</p>
+            </div>
+            <div data-stars="5" class="opt">
+              <img src="../../assets/icons/sqr-icon.svg" alt="sqr-icon" />
+              <p class="sm-text">5 stars</p>
+            </div>
+          </div>
+        </div>
+        <div class="container-bot-border">
+          <div class="wrapper-title-filter">
+            <p class="xl-text">Release Date</p>
+          </div>
+          <div class="container-options container-flex-col space gap-03">
+            <div data-date="none" class="opt">
+              <img src="../../assets/icons/circle.svg" alt="sqr-icon" />
+              <p class="sm-text">none</p>
+            </div>
+            <div data-date="newest to oldest" class="opt">
+              <img src="../../assets/icons/circle.svg" alt="sqr-icon" />
+              <p class="sm-text">newest to oldest</p>
+            </div>
+            <div data-date="oldest to newest" class="opt">
+              <img src="../../assets/icons/circle.svg" alt="sqr-icon" />
+              <p class="sm-text">oldest to newest</p>
+            </div>
+          </div>
+
+          <div class="container-options"></div>
+        </div>
+        <div class="container-flex-col center gap-1"></div>
+        <div class="btn select-btn sm-text font-reg btn-gradient">Select</div>
+      </div>
+    </div>
     <div class="main">
       <div class="container-flex center-hor top-filters-container">
         <div class="container-flex filters">
@@ -42,7 +125,7 @@
             <p class="sm-text">Max price</p>
             <input type="number" class="sm-text" value="50" min="0" max="200" />
           </div>
-          <div class="btn-border-purple btn-fill">
+          <div class="btn-border-purple btn-fill" id="more-filters">
             <img
               src="../../assets/icons/filter.svg"
               alt="filter"
@@ -73,8 +156,12 @@
       <div class="container-flex-col main-store">
         <div class="container-flex">
           <p class="bold xxl-text"><span>100</span> Books</p>
-          <div class="search-container">
-            <img src="../../assets/icons/search-con.svg" alt="" />
+          <div class="search-group">
+            <div class="search-container">
+              <img src="../../assets/icons/search-icon.svg" alt="search-icon" />
+              <input type="text" placeholder="title, word in a book..." />
+            </div>
+            <div class="btn-search sm-text">Search</div>
           </div>
         </div>
         <div class="books-container"></div>

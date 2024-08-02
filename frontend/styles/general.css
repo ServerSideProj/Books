@@ -151,6 +151,10 @@ a {
   min-height: 2.4rem;
 }
 
+.container-flex.space {
+  justify-content: space-between;
+}
+
 @media screen and (max-width: 768px) {
   .center-on-mobile {
     align-items: center;

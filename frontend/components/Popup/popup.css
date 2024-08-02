@@ -9,7 +9,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  display: none;
+  display: flex;
 }
 
 .popup-container {
@@ -23,4 +23,47 @@
 
 .bg-dark.open {
   display: flex;
+}
+
+/* popup filters */
+
+.container-bot-border {
+  border-bottom: 1px solid rgba(153, 131, 176, 0.41);
+  padding: 10px 0px;
+  width: 100%;
+  height: fit-content;
+  margin-bottom: 10px;
+  max-height: 9rem;
+  overflow-y: scroll;
+}
+
+.wrapper-title-filter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5rem;
+  padding: 0.4rem 1px;
+}
+
+.bg-dark .search-container {
+  width: 150px;
+  height: 100%;
+  padding: 7px 13px;
+}
+.select-btn {
+  align-self: flex-end;
+}
+
+.opt {
+  gap: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.opt img {
+  width: 18px;
+}
+
+.container-options {
+  margin-right: 20px;
 }

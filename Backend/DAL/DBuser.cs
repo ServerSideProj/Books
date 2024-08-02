@@ -105,7 +105,7 @@ namespace Backend.DAL
         {
             using (SqlConnection con = connect("myProjDB"))
             {
-                SqlCommand cmd = new SqlCommand("sp_getAllUsers", con);
+                SqlCommand cmd = new SqlCommand("sp_GetAllUsers", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 List<Users> users = new List<Users>();

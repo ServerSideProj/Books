@@ -14,24 +14,71 @@
     <link rel="stylesheet" href="../../styles/general.css" />
     <link rel="stylesheet" href="../../components/Navbar/navbar-desktop.css" />
     <link rel="stylesheet" href="../../components/Navbar/navbar-mobile.css" />
-    <link rel="stylesheet" href="../../components/Footer/footer.css" />
 
     <!-- Scripts for all pages-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../services/auth.js" type="module"></script>
     <script src="../../components/Navbar/navbar.js" type="module"></script>
-    <script src="../../components/Footer/footer.js"></script>
 
     <!-- Styles for this page -->
     <link rel="stylesheet" href="../../components/BookCard/bookcard.css" />
+    <link rel="stylesheet" href="./bookstore.css" />
     <!-- Scripts for this page-->
     <script src="../../components/BookCard/bookcard.js"></script>
+    <script src="./bookstore.js"></script>
 
     <title>Bookstore</title>
   </head>
   <body>
     <div class="navbar"></div>
-    <div class="main"></div>
-    <div class="footer"></div>
+    <div class="main">
+      <div class="container-flex center-hor top-filters-container">
+        <div class="container-flex filters">
+          <div class="btn-border-purple btn-fill">
+            <p class="sm-text">Min price</p>
+            <input type="number" class="sm-text" value="0" min="0" max="200" />
+          </div>
+          <div class="btn-border-purple btn-fill">
+            <p class="sm-text">Max price</p>
+            <input type="number" class="sm-text" value="50" min="0" max="200" />
+          </div>
+          <div class="btn-border-purple btn-fill">
+            <img
+              src="../../assets/icons/filter.svg"
+              alt="filter"
+              class="filter-icon"
+            />
+            <p class="sm-text">More Filters</p>
+          </div>
+        </div>
+        <div class="container-flex-col relative">
+          <div class="container-flex gap-03 price-filter">
+            <p class="md-text">Price: Low to High</p>
+            <img
+              src="../../assets/icons/arrow-down.svg"
+              alt="arrow btn"
+              class="arrow-btn"
+            />
+          </div>
+          <div class="sm-popup">
+            <p data-price-filter="low-to-high" class="sm-text selected">
+              Price: Low to High
+            </p>
+            <p data-price-filter="high-to-low" class="sm-text">
+              Price: High to Low
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="container-flex-col main-store">
+        <div class="container-flex">
+          <p class="bold xxl-text"><span>100</span> Books</p>
+          <div class="search-container">
+            <img src="../../assets/icons/search-con.svg" alt="" />
+          </div>
+        </div>
+        <div class="books-container"></div>
+      </div>
+    </div>
   </body>
 </html>

@@ -1,0 +1,133 @@
+.main {
+  padding: 7rem 11rem;
+}
+
+/* top filters styles */
+/* ------------------ */
+
+.filters {
+  gap: 1rem;
+}
+
+.top-filters-container {
+  width: 100%;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(153, 131, 176, 0.41);
+  padding-bottom: 20px;
+}
+
+.btn-border-purple {
+  border: 1px solid rgba(153, 131, 176, 0.41);
+  border-radius: 4px;
+  padding: 10px 16px;
+  gap: 0.7rem;
+  transition: all 0.2s ease;
+  align-items: center;
+}
+
+.btn-border-purple.btn-fill:hover {
+  background-color: rgba(153, 131, 176, 0.41);
+}
+
+.btn-border-purple.btn-fill {
+  display: flex;
+  justify-content: space-between;
+}
+
+input {
+  background-color: transparent;
+  border: transparent;
+  font-family: var(--font-family);
+  height: 100%;
+  width: 100%;
+}
+.btn-border-purple input {
+  text-align: end;
+  width: 40px;
+}
+
+input:focus-visible {
+  outline: transparent;
+}
+
+.filter-icon {
+  height: 15px;
+}
+
+.btn-border-purple p {
+  text-wrap: nowrap;
+}
+
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.arrow-btn.open {
+  transform: rotateX(180deg);
+}
+
+.sm-popup {
+  display: none;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  background: #fff;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  width: fit-content;
+  overflow: auto;
+  position: absolute;
+  margin-top: 2.5rem;
+  right: 0;
+}
+
+.sm-popup.open {
+  display: flex;
+}
+
+.arrow-btn {
+  transition: transform 0.4s ease;
+}
+
+.sm-popup p.selected {
+  background-color: #eae8ec;
+}
+
+.sm-popup p {
+  padding: 20px 24px;
+  width: 174px;
+  height: 60px;
+}
+
+.price-filter {
+  padding: 0.4rem;
+  align-self: flex-end;
+}
+
+.relative {
+  position: relative;
+}
+
+/* books */
+/* ------------------ */
+
+.main-store {
+  padding: 1.5rem;
+  gap: 2rem;
+  width: 100%;
+}
+
+.books-container {
+  width: 100%;
+}
+
+.search-container {
+  border-radius: 30px;
+  padding: 9px 20px;
+  width: 316px;
+  height: 35px;
+  margin-left: auto;
+  box-shadow: inset 2px 2px 5px 0 rgba(153, 131, 176, 0.2),
+    0 4px 4px 0 rgba(153, 131, 176, 0.2);
+  background: var(--bg-fade-pink);
+}

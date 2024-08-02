@@ -1,0 +1,72 @@
+.main {
+  height: 100vh;
+  padding: 11rem 11rem 5rem 11rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.container-cart-books {
+  max-height: 50vh;
+}
+
+.book-list {
+  display: grid;
+  grid-template-columns: 2.5fr 1fr 1fr 1fr 0.3fr;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.book-list.header {
+  background-color: #f8f4fc;
+  border-radius: 0.5rem;
+  color: var(--purple-fade);
+}
+.book-cover {
+  width: 70px;
+  height: 110px;
+  border-radius: 4px;
+}
+
+.book-details .author {
+  color: #888;
+}
+
+#buy-books-btn {
+  width: fit-content;
+  padding: 1rem 2rem;
+  align-self: center;
+  margin-top: auto;
+}
+
+@media screen and (max-width: 1400px) {
+  .main {
+    padding: 6rem 5rem 5rem 5rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .main {
+    padding: 6rem 1rem 5rem 1rem;
+  }
+
+  .header {
+    visibility: hidden;
+  }
+
+  .actions {
+    grid-area: delete;
+  }
+  .book-details {
+    grid-area: card;
+  }
+
+  .book-list {
+    grid-template-columns: 1fr 1fr 1fr 0.2fr;
+    grid-template-areas:
+      "card card card delete"
+      "type language price delete";
+  }
+}

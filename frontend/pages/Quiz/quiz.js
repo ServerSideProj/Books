@@ -162,6 +162,48 @@ const finishQuiz = () => {
     }
   });
 
-  console.log(`Correct answers: ${corrects} out of ${questions.length}`);
-  // לעשות לידבורד
+  // send resaults to server
+  sendResultsToServer(corrects, seconds);
+  showLastPageQuiz(corrects);
+};
+
+const showLastPageQuiz = (corrects = -1) => {
+  if (corrects === -1) {
+    // get the amount of correct answers from server
+  }
+
+  $(".final").removeClass("none");
+  $(".container-questions").addClass("none");
+
+  // display resualts
+  $(".add-coins").html(corrects);
+  $(".bg-scores .count").html(corrects);
+  $("#total-time > span").html($(".time")[0].outerText);
+
+  for (let i = 1; i <= 5; i++) {
+    const user = `<div class="input-box-sqr flex center-hor gap-1">
+            <div class="circle-gradient md-text">${i}</div>
+            <p class="username">${"name of user"}</p>
+            <div class="total-time">${"00:00"}</div>
+            </div>`;
+    $("#usernames-lead").append(user);
+  }
+};
+
+// send resaults of quiz to server
+const sendResultsToServer = (score, time) => {
+  $.ajax({
+    url: "path/to/your/api/endpoint", // Replace with your API endpoint
+    method: "POST",
+    contentType: "application/json",
+    data: JSON.stringify({ score: score, time: time }),
+    success: function (response) {
+      console.log("Results sent successfully", response);
+      // Optionally handle the response
+    },
+    error: function (error) {
+      console.error("Error sending results", error);
+      // Optionally handle the error
+    },
+  });
 };

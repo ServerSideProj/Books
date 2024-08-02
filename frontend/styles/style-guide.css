@@ -205,4 +205,8 @@
   .huge-text {
     font-size: 3rem;
   }
+
+  .big-text {
+    font-size: 1.7rem;
+  }
 }

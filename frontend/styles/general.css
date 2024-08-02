@@ -134,6 +134,23 @@ a {
   width: 100%;
 }
 
+.flex {
+  display: flex;
+}
+
+/* the pink bg like the one in the login */
+.input-box-sqr {
+  box-shadow: inset 0 3px 2px 0 rgba(229, 220, 238, 0.5);
+  background: var(--bg-fade-pink);
+  color: var(--purple-fade);
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  border: transparent;
+  font-family: var(--font-family);
+  width: 100%;
+  min-height: 2.4rem;
+}
+
 @media screen and (max-width: 768px) {
   .center-on-mobile {
     align-items: center;

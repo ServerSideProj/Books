@@ -122,6 +122,17 @@ namespace Backend.BI
             return dbBook.GetAllBooks();
         }
 
+        public static List<BookCopy> GetAllEBookCopies()
+        {
+            DBbook dbBook = new DBbook();
+            return dbBook.GetAllEbookCopies();
+        }
+
+        public static List<BookCopy> GetAllPhysBookCopies()
+        {
+            DBbook dbBook = new DBbook();
+            return dbBook.GetAllPhysBookCopies();
+        }
     }
 
 

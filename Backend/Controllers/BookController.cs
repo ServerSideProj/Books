@@ -110,5 +110,19 @@ namespace Backend.Controllers
             List<Book> books = Book.GetAllBooks();
             return Ok(books);
         }
+
+        [HttpGet("ebook-copies")]
+        public ActionResult<List<BookCopy>> GetAllEBookCopies()
+        {
+            List<BookCopy> books = Book.GetAllEBookCopies();
+            return Ok(books);
+        }
+
+        [HttpGet("physical-copies")]
+        public ActionResult<List<BookCopy>> GetAllPhysBookCopies()
+        {
+            List<BookCopy> books = Book.GetAllPhysBookCopies();
+            return Ok(books);
+        }
     }
 }

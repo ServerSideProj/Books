@@ -1,4 +1,6 @@
-﻿namespace Backend.BL
+﻿using Backend.DAL;
+
+namespace Backend.BL
 {
     public class Question
     {
@@ -25,6 +27,16 @@
         public string WrongAnswer1 { get => wrongAnswer1; set => wrongAnswer1 = value; }
         public string WrongAnswer2 { get => wrongAnswer2; set => wrongAnswer2 = value; }
         public string WrongAnswer3 { get => wrongAnswer3; set => wrongAnswer3 = value; }
+
+        public static void GenerateQuestions()
+        {
+            QuestionGenerator generator = new QuestionGenerator();
+            List<Question> questions = generator.GenerateQuestions(3);
+
+            DBquiz dbQuiz = new DBquiz();
+            dbQuiz.SaveQuestions(questions);
+        }
     }
+
 
 }

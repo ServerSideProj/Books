@@ -21,11 +21,16 @@
     <script src="../../services/auth.js" type="module"></script>
     <script src="../../components/Navbar/navbar.js" type="module"></script>
 
-    <!-- Scripts for this page-->
-    <script src="./bookInfo.js"></script>
-
     <!-- Styles for this page -->
+    <!-- flickity - For the carousel of reviews-->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/flickity@2/dist/flickity.min.css"
+    />
     <link rel="stylesheet" href="./bookInfo.css" />
+    <!-- Scripts for this page-->
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    <script src="./bookInfo.js"></script>
 
     <title>Book</title>
   </head>
@@ -67,8 +72,23 @@
                 <div class="category">Sience Fiction</div>
               </div>
             </div>
-            <div class="container-flex">
-              <div class="rate">0.0</div>
+            <div class="container-flex center-hor">
+              <div class="rate l-text">0.0</div>
+              <div class="stars-container">*****</div>
+              <div class="rate l-text">(<span id="num-of-rates"></span>)</div>
+            </div>
+            <div class="margin-top-2">
+              <div class="container-flex">
+                <img
+                  class="language-icon"
+                  src="../../assets/icons/Translate.svg"
+                  alt="Translate"
+                />
+                <p class="l-text">
+                  Languages: <span id="languages">XXXXXX</span>
+                </p>
+              </div>
+              <a class="see-more xsm-text" href="">See more in Google</a>
             </div>
           </div>
         </div>
@@ -80,6 +100,53 @@
             <div class="price">Price: <span id="price">5</span> $</div>
             <div id="add-to-cart-btn" class="btn btn-gradient sm-text font-reg">
               Add to Cart
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container-summary">
+        <p class="big-text">Summary</p>
+        <p class="sm-text" id="description">cmdkcmdkcmkmdkmck</p>
+        <div class="see-more btn">read more</div>
+      </div>
+
+      <div class="reviews-container">
+        <p class="big-text title-reviews">Reviews</p>
+        <div class="reviews-wrapper gallery js-flickity">
+          <div class="review-card gallery-cell">
+            <p class="sm-text text-center font-reg">
+              “I've been using this web hosting service for a few months now and
+              overall it's been fine. The uptime has been good and I haven't had
+              any major issues. The pricing is also reasonable. Nothing The
+              uptime has been good and I haven't had any major issues. The
+              pricing is also reasonable. Nothing particularly stands out as
+              exceptional, but it gets the job done.”
+            </p>
+            <div class="stars-container">*****</div>
+            <div class="container-flex-col gap-03 center-hor">
+              <img
+                src="../../assets/images/user-profile-image.svg"
+                alt="user-profile-image"
+                class="user-image"
+              />
+              <p class="username">Username</p>
+            </div>
+          </div>
+          <div class="review-card gallery-cell">
+            <p class="sm-text text-center font-reg">
+              “I've been using this web hosting service for a few months now and
+              overall it's been fine. The uptime has been good and I haven't had
+              any major reasonable. Nothing particularly stands out as
+              exceptional, but it gets the job done.”
+            </p>
+            <div class="stars-container">*****</div>
+            <div class="container-flex-col gap-03 center-hor">
+              <img
+                src="../../assets/images/user-profile-image.svg"
+                alt="user-profile-image"
+                class="user-image"
+              />
+              <p class="username">Username</p>
             </div>
           </div>
         </div>

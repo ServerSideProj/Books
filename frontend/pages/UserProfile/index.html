@@ -22,15 +22,98 @@
     <script src="../../components/Navbar/navbar.js" type="module"></script>
 
     <!-- Styles for this page -->
+    <link rel="stylesheet" href="../../components/Popup/popup.css" />
     <link rel="stylesheet" href="./profile.css" />
     <!-- Scripts for this page-->
+    <script src="../../components/Popup/popup.js" type="module"></script>
     <script src="./profile.js"></script>
 
     <title>Profile</title>
   </head>
   <body>
     <div class="navbar"></div>
-    <div class="main">hi</div>
-    <div class="footer"></div>
+    <div class="wrapper-add-book">
+      <span class="tooltiptext sm-text font-reg">Add or create a new book</span>
+      <a href="../CreateBook/">
+        <img
+          src="../../assets/icons/plus-btn.svg"
+          alt="plus-btn"
+          class="add-book btn"
+        />
+      </a>
+    </div>
+    <div class="bg-dark">
+      <div class="popup-container gap-2">
+        <img src="../../assets/icons/X.svg" class="btn-x" />
+        <div class="container-flex-col gap-03 center">
+          <p class="xl-text">
+            <span id="num-of-follow">0</span>
+            <span id="popup-type">Followers</span>
+          </p>
+          <div class="search-container">
+            <input type="text" placeholder="Name of user" />
+            <img src="../../assets/icons/search-icon.svg" alt="search-icon" />
+          </div>
+        </div>
+        <div class="container-users-friends">
+          <!-- this is the structure of a friend card -->
+          <div class="container-friend">
+            <div class="friend-wrapper">
+              <img
+                src="../../assets/images/user-profile-image.svg"
+                alt="profile image"
+                class="friend-profile-img"
+              />
+              <p class="friend-name">username</p>
+            </div>
+            <div class="btn xsm-text btn-follow">Following</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="main">
+      <div class="header">
+        <div class="wrapper-image-profile">
+          <img
+            src="../../assets/images/user-profile-image.svg"
+            alt="user-profile-image"
+            class="user-photo"
+          />
+          <div>
+            <img
+              src="../../assets/icons/add-image-icon.png"
+              alt="add-image-icon"
+              class="add-image-icon btn"
+            />
+          </div>
+          <input type="file" id="file-input" class="hidden" accept="image/*" />
+        </div>
+        <div class="data-user">
+          <div class="inner-data sm-text">
+            <span id="num-books">0</span> Books
+          </div>
+          <div class="inner-data sm-text">
+            <span id="followers">0</span> Followers
+          </div>
+          <div class="inner-data sm-text">
+            <span id="following">0</span> Following
+          </div>
+        </div>
+      </div>
+      <div class="inner-nav">
+        <div id="all-books" class="opt">My Books</div>
+        <div id="read" class="opt">Already Read</div>
+        <div id="liked" class="opt">Wish List</div>
+      </div>
+      <div class="inner-page inner-page-books">
+        <p class="">books will be generate here!</p>
+      </div>
+      <div class="inner-page inner-page-read">
+        <p class="">read books</p>
+      </div>
+      <div class="inner-page inner-page-liked">
+        <p class="">likeddd</p>
+      </div>
+    </div>
   </body>
 </html>

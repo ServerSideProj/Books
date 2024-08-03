@@ -69,7 +69,9 @@ const generateDesktopNavbar = (isLoggedIn) => {
 const generateMobileNavbar = (isLoggedIn) => {
   const nav = `<div class="nav-mobile">
       <div class="logo-container">
+      <a href="/pages/home">
         <img src="../../assets/logo/logo-nav.svg" alt="logo" class="logo-nav" />
+        </a>
       </div>
       <div class="hamburger-container">
         <img

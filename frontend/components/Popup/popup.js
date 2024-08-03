@@ -26,3 +26,6 @@ const popupLogin = () => {
     $(".bg-dark").removeClass("open");
   });
 };
+
+// type can be: following (Following) | followers (remove)
+const popupFriends = (type) => {};

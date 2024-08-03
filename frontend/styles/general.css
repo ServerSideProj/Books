@@ -47,8 +47,20 @@ a {
   font-family: var(--font-family);
 }
 
+.btn {
+  transition: transform 0.1s ease-in-out;
+}
+
 .btn:hover {
   transform: scale(0.98) translateY(2px);
+}
+
+a {
+  transition: all 0.1s ease-in-out;
+}
+
+a:hover:not(.btn-gradient) {
+  color: var(--barbi-pink);
 }
 
 .navbar {

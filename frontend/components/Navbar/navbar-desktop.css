@@ -31,6 +31,7 @@
   align-items: center;
   height: 100%;
   width: fit-content;
+  transition: transform 0.1s ease;
 }
 
 .cart-icon {
@@ -50,4 +51,8 @@
 
 .gradient-text p {
   color: inherit;
+}
+
+.logo-container:hover {
+  transform: scale(1.08);
 }

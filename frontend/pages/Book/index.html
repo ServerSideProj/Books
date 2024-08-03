@@ -14,26 +14,76 @@
     <link rel="stylesheet" href="../../styles/general.css" />
     <link rel="stylesheet" href="../../components/Navbar/navbar-desktop.css" />
     <link rel="stylesheet" href="../../components/Navbar/navbar-mobile.css" />
-    <link rel="stylesheet" href="../../components/Footer/footer.css" />
 
     <!-- Scripts for all pages-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../services/constants.js"></script>
     <script src="../../services/auth.js" type="module"></script>
     <script src="../../components/Navbar/navbar.js" type="module"></script>
-    <script src="../../components/Footer/footer.js"></script>
 
     <!-- Scripts for this page-->
-    <script src="./.js"></script>
+    <script src="./bookInfo.js"></script>
 
     <!-- Styles for this page -->
-    <link rel="stylesheet" href="./.css" />
+    <link rel="stylesheet" href="./bookInfo.css" />
 
     <title>Book</title>
   </head>
   <body>
     <div class="navbar"></div>
-    <div class="main">hi</div>
-    <div class="footer"></div>
+    <div class="main">
+      <div class="container-book-info">
+        <div class="container-flex gap-2">
+          <img
+            src="../../assets/images/book-cover-placeholder.jpg"
+            alt=""
+            class="book-cover"
+          />
+          <div class="texts-container">
+            <div>
+              <div class="title">Name of Book</div>
+              <div class="authors">Name of author1, name of author2...</div>
+            </div>
+            <div id="info-about-book">
+              <div id="type" class="tag-border-purple xsm-text">eBook</div>
+              <div id="adult" class="tag-border-purple xsm-text">
+                <img src="../../assets/icons/Users.svg" alt="Users" />
+                Adults content
+              </div>
+              <div id="pages" class="tag-border-purple xsm-text">
+                <img
+                  src="../../assets/icons/Document text.svg"
+                  alt="Document"
+                />
+                <span id="pages-num">000</span>
+                pages
+              </div>
+            </div>
+            <div class="container-flex-col">
+              <p class="l-text">Categories:</p>
+              <div id="categories">
+                <!-- only need to create category div and inser the name of the category in js -->
+                <div class="category">Horror</div>
+                <div class="category">Sience Fiction</div>
+              </div>
+            </div>
+            <div class="container-flex">
+              <div class="rate">0.0</div>
+            </div>
+          </div>
+        </div>
+        <div class="btns">
+          <div class="like-container btn">
+            <img src="../../assets/icons/heart-white-stroke.svg" alt="heart" />
+          </div>
+          <div class="wrapper-flex-end">
+            <div class="price">Price: <span id="price">5</span> $</div>
+            <div id="add-to-cart-btn" class="btn btn-gradient sm-text font-reg">
+              Add to Cart
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

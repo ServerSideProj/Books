@@ -1,0 +1,129 @@
+.main {
+  padding-top: 6rem;
+  min-height: 100dvh;
+}
+
+.container-book-info {
+  padding: 0 5rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.btns {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+#add-to-cart-btn {
+  padding: 0.5rem 2.4rem;
+  box-shadow: inset 0 2px 3px 0 var(--barbi-pink),
+    0 9px 15px 0 rgba(244, 134, 217, 0.5);
+  background: radial-gradient(
+    296% 158.75% at 50.85% -5%,
+    rgb(244, 197, 223) 0%,
+    rgb(221, 71, 194) 38.01524043083191%,
+    rgb(153, 46, 228) 65.49999713897705%,
+    rgb(14, 11, 17) 100%
+  );
+}
+
+.wrapper-flex-end {
+  display: flex;
+  align-items: end;
+  flex-direction: column;
+}
+
+.price {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1.6rem;
+  background-image: url("../../assets/images/btn-border-gradient-sqr.svg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+#price {
+  padding: 0 0.4rem;
+}
+
+.like-container {
+  background: var(--grey-light);
+  border-radius: 30px;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s ease;
+}
+.like-container:hover {
+  background: #d7b4d5;
+}
+
+.book-cover {
+  border-radius: 8px;
+  height: 450px;
+  width: 300px;
+}
+
+.title {
+  font-size: 2.5rem;
+}
+
+.authors {
+  font-size: 1rem;
+  color: #9983b0;
+  font-weight: 400;
+}
+
+#info-about-book {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.tag-border-purple {
+  border: 1.3px solid rgba(174, 151, 199, 0.81);
+
+  color: rgba(142, 113, 174, 0.81);
+  border-radius: 4px;
+  padding: 4px 8px;
+  gap: 0.7rem;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+}
+
+.category {
+  background-color: #9983b044;
+  color: #9881b0;
+  border-radius: 4px;
+  padding: 6px 14px;
+  gap: 0.7rem;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  font-size: 0.8rem;
+}
+
+#categories {
+  margin-top: 10px;
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.tag-border-purple:has(img) {
+  gap: 0.2rem;
+}
+
+.texts-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
+}

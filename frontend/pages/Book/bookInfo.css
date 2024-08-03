@@ -6,8 +6,9 @@
 
 .container-book-info {
   padding: 0 5rem;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: auto 1fr auto;
 }
 
 .btns {
@@ -173,4 +174,55 @@
 
 .title-reviews {
   padding: 0 5rem;
+}
+
+@media screen and (max-width: 768px) {
+  .mobile-flex-col {
+    flex-direction: column;
+  }
+
+  .texts-container {
+    gap: 0.5rem;
+  }
+
+  .container-book-info {
+    gap: 0.5rem;
+    padding: 0 2rem;
+    grid-template-columns: 1fr;
+  }
+  .btns {
+    flex-direction: row-reverse;
+  }
+  .wrapper-flex-end {
+    align-items: start;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .authors {
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .book-cover {
+    justify-self: center;
+  }
+
+  .container-summary {
+    padding: 4rem 2rem;
+  }
+
+  .title-reviews {
+    padding: 1rem 2rem;
+  }
+
+  .language-icon {
+    width: 16px;
+    margin-right: 10px;
+  }
+  .review-card {
+    max-width: 18rem;
+  }
 }

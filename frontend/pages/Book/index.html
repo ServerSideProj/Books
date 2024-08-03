@@ -38,60 +38,57 @@
     <div class="navbar"></div>
     <div class="main">
       <div class="container-book-info">
-        <div class="container-flex gap-2">
-          <img
-            src="../../assets/images/book-cover-placeholder.jpg"
-            alt=""
-            class="book-cover"
-          />
-          <div class="texts-container">
-            <div>
-              <div class="title">Name of Book</div>
-              <div class="authors">Name of author1, name of author2...</div>
+        <img
+          src="../../assets/images/book-cover-placeholder.jpg"
+          alt=""
+          class="book-cover"
+        />
+        <!-- <div class="container-flex gap-2 mobile-flex-col"> -->
+        <div class="texts-container">
+          <div>
+            <div class="title">Name of Book</div>
+            <div class="authors">Name of author1, name of author2...</div>
+          </div>
+          <div id="info-about-book">
+            <div id="type" class="tag-border-purple xsm-text">eBook</div>
+            <div id="adult" class="tag-border-purple xsm-text">
+              <img src="../../assets/icons/Users.svg" alt="Users" />
+              Adults content
             </div>
-            <div id="info-about-book">
-              <div id="type" class="tag-border-purple xsm-text">eBook</div>
-              <div id="adult" class="tag-border-purple xsm-text">
-                <img src="../../assets/icons/Users.svg" alt="Users" />
-                Adults content
-              </div>
-              <div id="pages" class="tag-border-purple xsm-text">
-                <img
-                  src="../../assets/icons/Document text.svg"
-                  alt="Document"
-                />
-                <span id="pages-num">000</span>
-                pages
-              </div>
-            </div>
-            <div class="container-flex-col">
-              <p class="l-text">Categories:</p>
-              <div id="categories">
-                <!-- only need to create category div and inser the name of the category in js -->
-                <div class="category">Horror</div>
-                <div class="category">Sience Fiction</div>
-              </div>
-            </div>
-            <div class="container-flex center-hor">
-              <div class="rate l-text">0.0</div>
-              <div class="stars-container">*****</div>
-              <div class="rate l-text">(<span id="num-of-rates"></span>)</div>
-            </div>
-            <div class="margin-top-2">
-              <div class="container-flex">
-                <img
-                  class="language-icon"
-                  src="../../assets/icons/Translate.svg"
-                  alt="Translate"
-                />
-                <p class="l-text">
-                  Languages: <span id="languages">XXXXXX</span>
-                </p>
-              </div>
-              <a class="see-more xsm-text" href="">See more in Google</a>
+            <div id="pages" class="tag-border-purple xsm-text">
+              <img src="../../assets/icons/Document text.svg" alt="Document" />
+              <span id="pages-num">000</span>
+              pages
             </div>
           </div>
+          <div class="container-flex-col gap-0">
+            <p class="l-text">Categories:</p>
+            <div id="categories">
+              <!-- only need to create category div and inser the name of the category in js -->
+              <div class="category">Horror</div>
+              <div class="category">Sience Fiction</div>
+            </div>
+          </div>
+          <div class="container-flex center-hor">
+            <div class="rate l-text">0.0</div>
+            <div class="stars-container">*****</div>
+            <div class="rate l-text">(<span id="num-of-rates"></span>)</div>
+          </div>
+          <div class="margin-top-2">
+            <div class="container-flex">
+              <img
+                class="language-icon"
+                src="../../assets/icons/Translate.svg"
+                alt="Translate"
+              />
+              <p class="l-text">
+                Languages: <span id="languages">XXXXXX</span>
+              </p>
+            </div>
+            <a class="see-more xsm-text" href="">See more in Google</a>
+          </div>
         </div>
+        <!-- </div> -->
         <div class="btns">
           <div class="like-container btn">
             <img src="../../assets/icons/heart-white-stroke.svg" alt="heart" />

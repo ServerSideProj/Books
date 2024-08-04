@@ -115,3 +115,18 @@
   width: fit-content;
   padding: 10px 40px;
 }
+
+@media screen and (max-width: 760px) {
+  .popup-flex-row {
+    flex-direction: column;
+    padding: 2rem;
+    align-items: center;
+  }
+
+  .bg-dark {
+    padding: 1rem;
+  }
+  .send-offer-btn {
+    align-self: center;
+  }
+}

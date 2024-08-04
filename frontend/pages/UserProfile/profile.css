@@ -22,6 +22,7 @@
   flex-direction: column;
   gap: 0.4rem;
 }
+
 .opt {
   height: 2rem;
 }
@@ -37,6 +38,10 @@
 .inner-page-liked,
 .inner-page-books {
   min-height: 60vh;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 2rem;
+  flex-wrap: wrap;
 }
 
 .user-photo {
@@ -172,7 +177,7 @@ input:focus-visible {
 
 @media screen and (max-width: 1000px) {
   .main {
-    padding: 5rem 2rem;
+    padding: 6rem 2rem;
   }
   .inner-nav {
     font-size: 0.8rem;

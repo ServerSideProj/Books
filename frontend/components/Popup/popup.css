@@ -9,7 +9,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  display: none;
+  display: flex;
 }
 
 .popup-container {
@@ -66,4 +66,52 @@
 
 .container-options {
   margin-right: 20px;
+}
+
+.sqr-purple-btn {
+  box-shadow: inset 2px 4px 8px 0 rgba(255, 255, 255, 0.3),
+    2px 3px 4px 0 rgba(153, 131, 176, 0.2);
+  background: var(--bg-fade-pink);
+  color: #7a6392;
+  border: 1px solid rgba(153, 131, 176, 0.29);
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+}
+
+.sqr-purple-btn.selected {
+  background: var(--purple);
+  color: white;
+}
+
+.book-cover {
+  border-radius: 8px;
+  height: 300px;
+  width: 200px;
+}
+
+.popup-flex-row {
+  display: flex;
+  flex-direction: row;
+  padding: 4rem;
+}
+
+.card-popup {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.bg-white {
+  background-color: var(--white);
+}
+
+.send-offer-btn {
+  width: fit-content;
+  padding: 10px 40px;
 }

@@ -12,7 +12,7 @@
   overflow: auto;
 }
 
-.book-car-img {
+.book-card-img {
   background-image: url("../../assets/images/book-cover-placeholder.jpg");
   background-repeat: no-repeat;
   background-size: cover;

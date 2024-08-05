@@ -1,4 +1,11 @@
 $(document).ready(function () {
+  $(".switch-btn").on("click", function () {
+    $(".switch-btn").toggleClass("checked");
+    if ($(".switch-btn").hasClass("checked")) {
+      confetti();
+    }
+  });
+
   $(".inner-page-books, .inner-page-read, .inner-page-liked").hide();
   // Show the "My Books" page by default
   $(".inner-page-books").show();

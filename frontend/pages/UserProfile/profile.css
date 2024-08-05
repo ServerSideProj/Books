@@ -147,6 +147,40 @@ input:focus-visible {
   flex-direction: column;
 }
 
+.row-bot-line {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(153, 131, 176, 0.29);
+}
+
+.switch-btn {
+  border-radius: 28px;
+  padding: 4px;
+  width: 80px;
+  height: fit-content;
+  box-shadow: 0 4px 6px 1px rgba(153, 131, 176, 0.29);
+  background: rgba(255, 255, 255, 0.604);
+  transition: 0.5s ease all;
+  display: flex;
+}
+
+.switch-btn .circle-switch {
+  background-image: url("../../assets/icons/grey-x-icon.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 34px;
+  height: 34px;
+}
+
+.switch-btn.checked {
+  justify-content: flex-end;
+}
+
+.switch-btn.checked .circle-switch {
+  background-image: url("../../assets/icons/pink-check-icon.svg");
+}
+
 /* btn add a book */
 
 .add-book {

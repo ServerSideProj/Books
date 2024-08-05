@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="./profile.css" />
     <!-- Scripts for this page-->
     <script src="../../components/BookCard/bookcard.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     <script src="../../components/Popup/popup.js" type="module"></script>
     <script src="./profile.js"></script>
 
@@ -45,31 +46,37 @@
       </a>
     </div>
     <div class="bg-dark">
-      <div class="popup-container gap-2">
+      <div class="popup-container popup-flex-row gap-2 bg-white">
         <img src="../../assets/icons/X.svg" class="btn-x" />
-        <div class="container-flex-col gap-03 center">
-          <p class="xl-text">
-            <span id="num-of-follow">0</span>
-            <span id="popup-type">Followers</span>
-          </p>
-          <div class="search-container">
-            <input type="text" placeholder="Name of user" />
-            <img src="../../assets/icons/search-icon.svg" alt="search-icon" />
+        <div class="card-popup">
+          <img
+            src="../../assets/images/book-cover-placeholder.jpg"
+            alt="book cover"
+            class="book-cover"
+          />
+          <div class="container-flex-col center">
+            <p class="title l-text">Name of Book</p>
+            <p class="authors sm-text grey-text">Names of authors</p>
           </div>
         </div>
-        <div class="container-users-friends">
-          <!-- this is the structure of a friend card -->
-          <div class="container-friend">
-            <div class="friend-wrapper">
-              <img
-                src="../../assets/images/user-profile-image.svg"
-                alt="profile image"
-                class="friend-profile-img"
-              />
-              <p class="friend-name">username</p>
+        <div class="container-flex-col center-ver">
+          <div class="row-bot-line">
+            <p class="xl-text">Finished reading?</p>
+            <div class="switch-btn">
+              <div class="circle-switch"></div>
             </div>
-            <div class="btn xsm-text btn-follow">Following</div>
           </div>
+          <div class="row-bot-line">
+            <p class="xl-text">Sell the book?</p>
+          </div>
+          <div class="container-flex gap-1">
+            <div class="btn sqr-purple-btn selected">5</div>
+            <div class="btn sqr-purple-btn">10</div>
+            <div class="btn sqr-purple-btn">20</div>
+            <div class="btn sqr-purple-btn">30</div>
+            <div class="btn sqr-purple-btn">50</div>
+          </div>
+          <div class="btn btn-gradient send-offer-btn">Send Offer</div>
         </div>
       </div>
     </div>

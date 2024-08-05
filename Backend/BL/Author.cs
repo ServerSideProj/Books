@@ -10,6 +10,8 @@ namespace Backend.BI
         private string biography;
         private string wikiLink;
 
+        private static readonly DBauthor dbAuthor = new DBauthor(); 
+
         public Author(int id, string name, string biography, string wikiLink)
         {
             Id = id;
@@ -25,16 +27,12 @@ namespace Backend.BI
 
         public static void AddAuthor(Author author)
         {
-            DBauthor dbAuthor = new DBauthor();
             dbAuthor.AddAuthor(author);
         }
 
         public static void DeleteAuthor(int authorId)
         {
-            DBauthor dbAuthor = new DBauthor();
-            dbAuthor.DeleteAuthor(authorId);
+            dbAuthor.DeleteAuthor(authorId); 
         }
     }
-
 }
-

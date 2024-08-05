@@ -17,5 +17,23 @@ namespace Backend.Controllers
            Question.GenerateQuestions();
            return Ok("Questions saved successfully.");
         }
+
+        [HttpPost("generate")]
+        public IActionResult GenerateQuizzes([FromQuery] int numberOfQuizzes)
+        {
+            try
+            {
+                int createdQuizzesCount = Quiz.GenerateQuizzes(numberOfQuizzes);
+
+                return Ok(new
+                {
+                    Message = $"{createdQuizzesCount} quizzes were successfully created."
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Error = ex.Message });
+            }
+        }
     }
 }

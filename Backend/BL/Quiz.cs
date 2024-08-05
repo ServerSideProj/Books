@@ -1,4 +1,6 @@
-﻿namespace Backend.BL
+﻿using Backend.DAL;
+
+namespace Backend.BL
 {
     public class Quiz
     {
@@ -13,5 +15,11 @@
 
         public int QuizId { get => quizId; set => quizId = value; }
         public Question[] Questions { get => questions; set => questions = value; }
+
+        public static int GenerateQuizzes(int numberOfQuizzes)
+        {
+            DBquiz dbquiz = new DBquiz();
+            return dbquiz.GenerateQuizzes(numberOfQuizzes);
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Backend.BI;
 using Backend.DAL;
+using System;
 
 public class BookCopy : Book
 {
@@ -10,21 +11,19 @@ public class BookCopy : Book
     public BookCopy() : base() { }
 
     // Simplified constructor
-    public BookCopy(int copyId, string title, string ownerEmail)
-        : base(title, "", "", 0, 0, "", "", "", true, DateTime.MinValue, 0, "", null, null)
+    public BookCopy(int copyId, int bookId, string ownerEmail)  // Changed from title to bookId
+        : base(bookId, "", "", "", 0, 0, "", "", "", true, DateTime.MinValue, 0, "", null, null, 0)  // Updated constructor to include bookId
     {
         CopyId = copyId;
         OwnerEmail = ownerEmail;
     }
 
-
-
-    public BookCopy(int copyId, string title, string description, string language, float avgRating,
+    public BookCopy(int copyId, int bookId,string title ,string description, string language, float avgRating,
                     int ratingCount, string maturityRating, string infoLink, string publisher,
                     bool isEbook, DateTime publishDate, int pageCount, string subtitle,
-                    string[] categories, Author[] authors, string ownerEmail)
-        : base(title, description, language, avgRating, ratingCount, maturityRating, infoLink, publisher,
-               isEbook, publishDate, pageCount, subtitle, categories, authors)
+                    string[] categories, List<Author> authors, string ownerEmail, decimal price)
+        : base(bookId,title, description, language, avgRating, ratingCount, maturityRating, infoLink, publisher,
+               isEbook, publishDate, pageCount, subtitle, categories, authors, price) 
     {
         CopyId = copyId;
         OwnerEmail = ownerEmail;

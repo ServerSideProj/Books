@@ -249,5 +249,18 @@ namespace Backend.DAL
                 return followedUsers;
             }
         }
+
+        public void DeleteUser(string email)
+        {
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                SqlCommand cmd = new SqlCommand("sp_DeleteUser", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@Email", email);
+
+                cmd.ExecuteNonQuery();
+            }
+        }
     }
 }

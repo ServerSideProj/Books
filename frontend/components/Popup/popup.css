@@ -9,7 +9,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  display: flex;
+  display: none;
 }
 
 .popup-container {
@@ -116,7 +116,7 @@
 }
 
 .bg-white {
-  background-color: var(--white);
+  background-color: var(--white) !important;
 }
 
 .send-offer-btn {

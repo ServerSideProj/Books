@@ -19,6 +19,7 @@
     <!-- Scripts for all pages-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../services/constants.js"></script>
+    <script src="../../services/ajax.js"></script>
     <script src="../../services/auth.js" type="module"></script>
     <script src="../../components/Navbar/navbar.js" type="module"></script>
     <script src="../../components/Popup/popup.js"></script>
@@ -35,7 +36,7 @@
   <body>
     <div class="navbar"></div>
     <div class="bg-dark">
-      <div class="popup-container gap-02">
+      <div id="popup-filters" class="popup-container gap-02">
         <img src="../../assets/icons/X.svg" class="btn-x" />
         <p class="xxl-text bold">Filters</p>
         <div class="container-bot-border">

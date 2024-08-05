@@ -18,6 +18,7 @@
     <!-- Scripts for all pages-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../services/constants.js"></script>
+    <script src="../../services/ajax.js"></script>
     <script src="../../services/auth.js" type="module"></script>
     <script src="../../components/Navbar/navbar.js" type="module"></script>
 
@@ -36,7 +37,10 @@
   <body>
     <div class="navbar"></div>
     <div class="bg-dark">
-      <div class="popup-container popup-flex-row gap-2 bg-white">
+      <div
+        id="popup-book-sale"
+        class="popup-container popup-flex-row gap-2 bg-white"
+      >
         <img src="../../assets/icons/X.svg" class="btn-x" />
         <div class="card-popup">
           <img

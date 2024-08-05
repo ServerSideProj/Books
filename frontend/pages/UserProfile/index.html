@@ -18,6 +18,7 @@
     <!-- Scripts for all pages-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../services/constants.js"></script>
+    <script src="../../services/ajax.js"></script>
     <script src="../../services/auth.js" type="module"></script>
     <script src="../../components/Navbar/navbar.js" type="module"></script>
 
@@ -46,7 +47,10 @@
       </a>
     </div>
     <div class="bg-dark">
-      <div class="popup-container popup-flex-row gap-2 bg-white">
+      <div
+        id="popup-book-info"
+        class="popup-container popup-flex-row gap-2 bg-white"
+      >
         <img src="../../assets/icons/X.svg" class="btn-x" />
         <div class="card-popup">
           <img
@@ -62,21 +66,24 @@
         <div class="container-flex-col center-ver">
           <div class="row-bot-line">
             <p class="xl-text">Finished reading?</p>
-            <div class="switch-btn">
+            <div class="switch-btn done">
               <div class="circle-switch"></div>
             </div>
           </div>
           <div class="row-bot-line">
-            <p class="xl-text">Sell the book?</p>
+            <p class="xl-text">Open for sale?</p>
+            <div class="switch-btn sale">
+              <div class="circle-switch"></div>
+            </div>
           </div>
-          <div class="container-flex gap-1">
-            <div class="btn sqr-purple-btn selected">5</div>
-            <div class="btn sqr-purple-btn">10</div>
-            <div class="btn sqr-purple-btn">20</div>
-            <div class="btn sqr-purple-btn">30</div>
-            <div class="btn sqr-purple-btn">50</div>
+          <div class="container-flex-col gap-1 width100">
+            <div class="row-bot-line no-line padding-0">
+              <p class="xl-text">Write a review</p>
+              <div class="stars">*****</div>
+            </div>
+            <textarea class="input-box-sqr"></textarea>
+            <div class="btn btn-gradient">Send</div>
           </div>
-          <div class="btn btn-gradient send-offer-btn">Send Offer</div>
         </div>
       </div>
     </div>

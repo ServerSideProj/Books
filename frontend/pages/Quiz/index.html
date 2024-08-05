@@ -18,6 +18,7 @@
     <!-- Scripts for all pages-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../services/constants.js"></script>
+    <script src="../../services/ajax.js"></script>
     <script src="../../services/auth.js" type="module"></script>
     <script src="../../components/Navbar/navbar.js" type="module"></script>
 
@@ -50,7 +51,7 @@
           <div class="container-flex-col">
             <div class="container-timing">
               <div class="count-questions">
-                <span class="count">1</span> / 5
+                <span id="count" class="count">1</span> / 5
               </div>
               <div class="time">00:00</div>
             </div>

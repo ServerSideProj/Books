@@ -53,26 +53,26 @@ namespace Backend.Controllers
             }
         }
 
-        [HttpPut("updateProfileImage")]
-        public ActionResult UpdateProfileImage([FromBody] JsonElement requestData)
-        {
-            if (!requestData.TryGetProperty("Email", out JsonElement emailElement) ||
-                !requestData.TryGetProperty("ProfileImage", out JsonElement profileImageElement))
-            {
-                return BadRequest("Email or ProfileImage is missing.");
-            }
+        //[HttpPut("updateProfileImage")]
+        //public ActionResult UpdateProfileImage([FromBody] JsonElement requestData)
+        //{
+        //    if (!requestData.TryGetProperty("Email", out JsonElement emailElement) ||
+        //        !requestData.TryGetProperty("ProfileImage", out JsonElement profileImageElement))
+        //    {
+        //        return BadRequest("Email or ProfileImage is missing.");
+        //    }
 
-            string email = emailElement.GetString();
-            string profileImageLink = profileImageElement.GetString();
+        //    string email = emailElement.GetString();
+        //    string profileImageLink = profileImageElement.GetString();
 
-            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(profileImageLink))
-            {
-                return BadRequest("Email or ProfileImage cannot be null or empty.");
-            }
+        //    if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(profileImageLink))
+        //    {
+        //        return BadRequest("Email or ProfileImage cannot be null or empty.");
+        //    }
 
-            Users.UpdateProfileImage(email, profileImageLink);
-            return Ok("Profile image updated successfully.");
-        }
+        //    Users.UpdateProfileImage(email, profileImageLink);
+        //    return Ok("Profile image updated successfully.");
+        //}
 
         // GET api/users/usernames
         [HttpGet("usernames")]
@@ -92,17 +92,15 @@ namespace Backend.Controllers
 
         [HttpGet("followers/{email}")]
         public ActionResult<List<Users>> GetFollowers(string email)
-        {
-            Users user = new Users(email, "", "", ""); // Dummy instance to call the method
-            List<Users> followers = user.GetFollowers();
+        { 
+            List<Users> followers = Users.GetFollowers(email);
             return Ok(followers);
         }
 
         [HttpGet("followedBy/{email}")]
         public ActionResult<List<Users>> GetUsersFollowedBy(string email)
         {
-            Users user = new Users(email, "", "", ""); // Dummy instance to call the method
-            List<Users> followedUsers = user.GetUsersFollowedBy();
+            List<Users> followedUsers = Users.GetUsersFollowedBy(email);
             return Ok(followedUsers);
         }
 
@@ -172,6 +170,20 @@ namespace Backend.Controllers
             else
             {
                 return StatusCode(500, "An unknown error occurred.");
+            }
+        }
+
+        [HttpDelete("{email}")]
+        public IActionResult DeleteUser(string email)
+        {
+            try
+            {
+                Users.DeleteUser(email);
+                return Ok(new { Message = "User deleted successfully." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Error = ex.Message });
             }
         }
     }

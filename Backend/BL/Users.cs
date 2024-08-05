@@ -57,16 +57,16 @@ namespace Backend.BI
             return dbUser.GetAllUsers();
         }
 
-        public List<Users> GetFollowers()
+        public static List<Users> GetFollowers(string email)
         {
             DBuser dbUser = new DBuser();
-            return dbUser.GetFollowers(this.Email);
+            return dbUser.GetFollowers(email);
         }
 
-        public List<Users> GetUsersFollowedBy()
+        public static List<Users> GetUsersFollowedBy(string email)
         {
             DBuser dbUser = new DBuser();
-            return dbUser.GetUsersFollowedBy(this.Email);
+            return dbUser.GetUsersFollowedBy(email);
         }
 
         public static int AddFriend(string followerEmail, string followingEmail)
@@ -79,6 +79,12 @@ namespace Backend.BI
         {
             DBuser dbUser = new DBuser();
             return dbUser.ChangePassword(email, oldPassword, newPassword);
+        }
+
+        public static void DeleteUser(string email)
+        {
+            DBuser dbUser = new DBuser();
+            dbUser.DeleteUser(email);
         }
     }
 }

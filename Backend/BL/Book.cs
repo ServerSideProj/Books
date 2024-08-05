@@ -1,10 +1,13 @@
 ﻿using Backend.BL;
 using Backend.DAL;
+using System;
+using System.Collections.Generic;
 
 namespace Backend.BI
 {
     public class Book
     {
+        private int id;  // Book ID
         private string title;
         private string description;
         private string language;
@@ -18,13 +21,15 @@ namespace Backend.BI
         private int pageCount;
         private string subtitle;
         private string[] categories;
-        private Author[] authors;
+        private List<Author> authors;  // Changed to a list of Author objects
+        private decimal price; // Price in dollars
 
-        public Book(string title, string description, string language, float avgRating, int ratingCount,
+        public Book(int id, string title, string description, string language, float avgRating, int ratingCount,
                     string maturityRating, string infoLink, string publisher, bool isEbook,
                     DateTime publishDate, int pageCount, string subtitle,
-                    string[] categories, Author[] authors)
+                    string[] categories, List<Author> authors, decimal price)  // Changed to a list of Author objects
         {
+            Id = id;
             Title = title;
             Description = description;
             Language = language;
@@ -38,7 +43,8 @@ namespace Backend.BI
             PageCount = pageCount;
             Subtitle = subtitle;
             Categories = categories;
-            Authors = authors;
+            Authors = authors;  // Changed to a list of Author objects
+            Price = price;
         }
 
         // Default constructor
@@ -46,6 +52,7 @@ namespace Backend.BI
         {
         }
 
+        public int Id { get => id; set => id = value; }
         public string Title { get => title; set => title = value; }
         public string Description { get => description; set => description = value; }
         public string Language { get => language; set => language = value; }
@@ -59,7 +66,8 @@ namespace Backend.BI
         public int PageCount { get => pageCount; set => pageCount = value; }
         public string Subtitle { get => subtitle; set => subtitle = value; }
         public string[] Categories { get => categories; set => categories = value; }
-        public Author[] Authors { get => authors; set => authors = value; }
+        public List<Author> Authors { get => authors; set => authors = value; }  // Changed to a list of Author objects
+        public decimal Price { get => price; set => price = value; }
 
 
         public static List<Book> GetTop5PopularPhysBooks()
@@ -80,16 +88,16 @@ namespace Backend.BI
             return dbBook.GetBooksByCategories(categories);
         }
 
-        public static List<Book> GetBooksByAuthor(string authorName)
+        public static List<Book> GetBooksByAuthor(int authorId)  // Changed to authorId
         {
             DBbook dbBook = new DBbook();
-            return dbBook.GetBooksByAuthor(authorName);
+            return dbBook.GetBooksByAuthor(authorId);  // Updated method call
         }
 
-        public static List<Review> GetReviewsByBook(string title)
+        public static List<Review> GetReviewsByBook(int bookId)
         {
             DBbook dbBook = new DBbook();
-            return dbBook.GetReviewsByBook(title);
+            return dbBook.GetReviewsByBook(bookId);
         }
 
         public static List<Book> GetBooksByRatingRange(int minRating, int maxRating)
@@ -98,10 +106,10 @@ namespace Backend.BI
             return dbBook.GetBooksByRatingRange(minRating, maxRating);
         }
 
-        public static void AddReview(string title, string email, string reviewText, int rating, bool finishedReading)
+        public static void AddReview(int bookId, string email, string reviewText, int rating, bool finishedReading)
         {
             DBbook dbBook = new DBbook();
-            dbBook.AddReview(title, email, reviewText, rating, finishedReading);
+            dbBook.AddReview(bookId, email, reviewText, rating, finishedReading);
         }
 
         public static void AddBooks(List<Book> books)
@@ -133,7 +141,11 @@ namespace Backend.BI
             DBbook dbBook = new DBbook();
             return dbBook.GetAllPhysBookCopies();
         }
+
+        public static void DeleteBook(int bookId)
+        {
+            DBbook dbBook = new DBbook();
+            dbBook.DeleteBook(bookId);
+        }
     }
-
-
 }

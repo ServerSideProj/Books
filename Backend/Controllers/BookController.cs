@@ -31,17 +31,17 @@ namespace Backend.Controllers
             return Ok(books);
         }
 
-        [HttpGet("reviews/{title}")]
-        public ActionResult<List<Review>> GetReviewsByBook(string title)
+        [HttpGet("reviews/{bookId}")]
+        public ActionResult<List<Review>> GetReviewsByBook(int bookId)  
         {
-            List<Review> reviews = Book.GetReviewsByBook(title);
+            List<Review> reviews = Book.GetReviewsByBook(bookId);  
             return Ok(reviews);
         }
 
         [HttpGet("by-author")]
-        public ActionResult<List<Book>> GetBooksByAuthor([FromQuery] string authorName)
+        public ActionResult<List<Book>> GetBooksByAuthor([FromQuery] int authorId) 
         {
-            List<Book> books = Book.GetBooksByAuthor(authorName);
+            List<Book> books = Book.GetBooksByAuthor(authorId);  
             return Ok(books);
         }
 
@@ -55,7 +55,7 @@ namespace Backend.Controllers
         [HttpPost("review")]
         public ActionResult AddReview([FromBody] Review review)
         {
-            Book.AddReview(review.Title, review.Email, review.ReviewText, review.Rating, review.FinishedReading);
+            Book.AddReview(review.BookId, review.Email, review.ReviewText, review.Rating, review.FinishedReading); 
             return Ok("Review added successfully.");
         }
 
@@ -81,24 +81,24 @@ namespace Backend.Controllers
         }
 
         [HttpPost("add-ebook-copy")]
-        public ActionResult<int> AddEbookCopy([FromBody] JsonElement jsonRequest)
+        public ActionResult<int> AddEbookCopy([FromBody] JsonElement bookcopy)
         {
-            string title = jsonRequest.GetProperty("Title").GetString();
-            string ownerEmail = jsonRequest.GetProperty("OwnerEmail").GetString();
+            int bookId = bookcopy.GetProperty("BookId").GetInt32();  
+            string ownerEmail = bookcopy.GetProperty("OwnerEmail").GetString();
 
-            BookCopy ebookCopy = new BookCopy(0, title, ownerEmail);
+            BookCopy ebookCopy = new BookCopy(0, bookId, ownerEmail);  
             int copyId = BookCopy.AddEbookCopy(ebookCopy);
 
             return Ok(new { message = "Ebook copy added successfully.", CopyId = copyId });
         }
 
         [HttpPost("add-physbook-copy")]
-        public ActionResult<int> AddPhysBookCopy([FromBody] JsonElement jsonRequest)
+        public ActionResult<int> AddPhysBookCopy([FromBody] JsonElement bookcopy)
         {
-            string title = jsonRequest.GetProperty("Title").GetString();
-            string ownerEmail = jsonRequest.GetProperty("OwnerEmail").GetString();
+            int bookId = bookcopy.GetProperty("BookId").GetInt32();  
+            string ownerEmail = bookcopy.GetProperty("OwnerEmail").GetString();
 
-            PhysBookCopy physBookCopy = new PhysBookCopy(0, title, ownerEmail, false, 0m);
+            PhysBookCopy physBookCopy = new PhysBookCopy(0, bookId, ownerEmail, false); 
             int copyId = PhysBookCopy.AddPhysBookCopy(physBookCopy);
 
             return Ok(new { message = "Physical book copy added successfully.", CopyId = copyId });
@@ -123,6 +123,20 @@ namespace Backend.Controllers
         {
             List<BookCopy> books = Book.GetAllPhysBookCopies();
             return Ok(books);
+        }
+
+        [HttpDelete("{bookId}")]
+        public IActionResult DeleteBook(int bookId)  
+        {
+            try
+            {
+                Book.DeleteBook(bookId); 
+                return Ok(new { Message = "Book deleted successfully." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Error = ex.Message });
+            }
         }
     }
 }

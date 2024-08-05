@@ -1,4 +1,7 @@
-﻿namespace Backend.BI
+﻿using Backend.Controllers;
+using Backend.DAL;
+
+namespace Backend.BI
 {
     public class Author
     {
@@ -19,6 +22,19 @@
         public string Name { get => name; set => name = value; }
         public string Biography { get => biography; set => biography = value; }
         public string WikiLink { get => wikiLink; set => wikiLink = value; }
+
+        public static void AddAuthor(Author author)
+        {
+            DBauthor dbAuthor = new DBauthor();
+            dbAuthor.AddAuthor(author);
+        }
+
+        public static void DeleteAuthor(int authorId)
+        {
+            DBauthor dbAuthor = new DBauthor();
+            dbAuthor.DeleteAuthor(authorId);
+        }
     }
+
 }
 

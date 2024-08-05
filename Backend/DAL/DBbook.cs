@@ -6,6 +6,7 @@ using Backend.BI;
 using Backend.BL;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
+using System.Net;
 
 namespace Backend.DAL
 {
@@ -85,7 +86,7 @@ namespace Backend.DAL
         }
 
         // Get All Reviews for a Specific Book
-        public List<Review> GetReviewsByBook(string title)
+        public List<Review> GetReviewsByBook(int bookId)
         {
             List<Review> reviews = new List<Review>();
 
@@ -94,7 +95,7 @@ namespace Backend.DAL
                 using (SqlCommand cmd = new SqlCommand("sp_GetReviewsByBook", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@Title", title);
+                    cmd.Parameters.AddWithValue("@BookId", bookId);  // Updated to use bookId
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -102,7 +103,7 @@ namespace Backend.DAL
                         {
                             reviews.Add(new Review(
                                 reviewNum: Convert.ToInt32(reader["reviewNum"]),
-                                title: reader["title"].ToString(),
+                                bookId: Convert.ToInt32(reader["bookId"]),
                                 reviewText: reader["review"].ToString(),
                                 email: reader["email"].ToString(),
                                 rating: Convert.ToInt32(reader["rating"]),
@@ -112,12 +113,11 @@ namespace Backend.DAL
                     }
                 }
             }
-
             return reviews;
         }
 
         // Get Books by Specific Author(s)
-        public List<Book> GetBooksByAuthor(string authorName)
+        public List<Book> GetBooksByAuthor(int authorId)
         {
             List<Book> books = new List<Book>();
 
@@ -126,7 +126,7 @@ namespace Backend.DAL
                 using (SqlCommand cmd = new SqlCommand("sp_GetBooksByAuthor", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@AuthorName", authorName);
+                    cmd.Parameters.AddWithValue("@AuthorID", authorId);  // Updated to use authorId
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -193,14 +193,14 @@ namespace Backend.DAL
         }
 
         // Add Review for a Book (and Update Book Rating)
-        public void AddReview(string title, string email, string reviewText, int rating, bool finishedReading)
+        public void AddReview(int bookId, string email, string reviewText, int rating, bool finishedReading)
         {
             using (SqlConnection con = connect("myProjDB"))
             {
                 using (SqlCommand cmd = new SqlCommand("sp_AddReview", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@Title", title);
+                    cmd.Parameters.AddWithValue("@BookId", bookId);  // Updated to use bookId
                     cmd.Parameters.AddWithValue("@Email", email);
                     cmd.Parameters.AddWithValue("@Review", reviewText);
                     cmd.Parameters.AddWithValue("@Rating", rating);
@@ -235,6 +235,7 @@ namespace Backend.DAL
             }
         }
 
+
         // Get Books Purchased by a User with Sale Status
         public List<Book> GetBooksPurchasedByUserWithSaleStatus(string userEmail)
         {
@@ -251,40 +252,25 @@ namespace Backend.DAL
                 {
                     while (reader.Read())
                     {
-                        books.Add(new Book(
-                            title: reader["title"].ToString(),
-                            description: reader["description"].ToString(),
-                            language: reader["language"].ToString(),
-                            avgRating: Convert.ToSingle(reader["avgRating"]),
-                            ratingCount: Convert.ToInt32(reader["ratingCount"]),
-                            maturityRating: reader["maturityRating"].ToString(),
-                            infoLink: reader["infoLink"].ToString(),
-                            publisher: reader["publisher"].ToString(),
-                            isEbook: Convert.ToBoolean(reader["isEbook"]),
-                            publishDate: ((DateTime)reader["publishDate"]),
-                            pageCount: Convert.ToInt32(reader["pageCount"]),
-                            subtitle: reader["subtitle"].ToString(),
-                            categories: GetCategoriesByBookTitle(reader["title"].ToString()),
-                            authors: GetAuthorsByBookTitle(reader["title"].ToString())
-                        ));
+                        books.Add(MapBook(reader));
                     }
                 }
 
                 return books;
             }
-        }
+        } ///????????????????
 
         // Get authors for a specific book title
-        private Author[] GetAuthorsByBookTitle(string title)
+        private List<Author> GetAuthorsByBookId(int bookId)
         {
             List<Author> authors = new List<Author>();
 
             using (SqlConnection con = connect("myProjDB"))
             {
-                SqlCommand cmd = new SqlCommand("sp_GetAuthorsByBookTitle", con);
+                SqlCommand cmd = new SqlCommand("sp_GetAuthorsByBookId", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@Title", title);
+                cmd.Parameters.AddWithValue("@BookId", bookId);
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
@@ -300,20 +286,20 @@ namespace Backend.DAL
                 }
             }
 
-            return authors.ToArray();
+            return authors;
         }
 
         // Get categories for a specific book title
-        private string[] GetCategoriesByBookTitle(string title)
+        private string[] GetCategoriesByBookId(int bookId)
         {
             List<string> categories = new List<string>();
 
             using (SqlConnection con = connect("myProjDB"))
             {
-                SqlCommand cmd = new SqlCommand("sp_GetCategoriesByBookTitle", con);
+                SqlCommand cmd = new SqlCommand("sp_GetCategoriesByBookId", con);  // Changed stored procedure
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@Title", title);
+                cmd.Parameters.AddWithValue("@BookId", bookId);  // Updated to use bookId
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
@@ -327,8 +313,8 @@ namespace Backend.DAL
             return categories.ToArray();
         }
 
-        // Add Books
-        public void AddBooks(List<Book> books)
+            // Add Books
+            public void AddBooks(List<Book> books)
         {
             using (SqlConnection con = connect("myProjDB"))
             {
@@ -338,6 +324,7 @@ namespace Backend.DAL
                     {
                         foreach (var book in books)
                         {
+                            int bookId;
                             using (SqlCommand cmd = new SqlCommand("sp_AddBook", con, transaction))
                             {
                                 cmd.CommandType = CommandType.StoredProcedure;
@@ -354,9 +341,11 @@ namespace Backend.DAL
                                 cmd.Parameters.AddWithValue("@PublishDate", book.PublishDate);
                                 cmd.Parameters.AddWithValue("@PageCount", book.PageCount);
                                 cmd.Parameters.AddWithValue("@Subtitle", book.Subtitle);
+                                cmd.Parameters.AddWithValue("@Price", book.Price);
 
-                                cmd.ExecuteNonQuery();
-                            }
+                                bookId = Convert.ToInt32(cmd.ExecuteScalar());  
+                            } 
+                        
 
                             // Add authors and map them to the book
                             foreach (var author in book.Authors)
@@ -367,7 +356,7 @@ namespace Backend.DAL
                                 {
                                     authorBookCmd.CommandType = CommandType.StoredProcedure;
 
-                                    authorBookCmd.Parameters.AddWithValue("@Title", book.Title);
+                                    authorBookCmd.Parameters.AddWithValue("@BookId", bookId);  // Use bookId
                                     authorBookCmd.Parameters.AddWithValue("@AuthorID", authorId);
 
                                     authorBookCmd.ExecuteNonQuery();
@@ -383,7 +372,7 @@ namespace Backend.DAL
                                 {
                                     categoryBookCmd.CommandType = CommandType.StoredProcedure;
 
-                                    categoryBookCmd.Parameters.AddWithValue("@Title", book.Title);
+                                    categoryBookCmd.Parameters.AddWithValue("@BookId", bookId);  // Use bookId
                                     categoryBookCmd.Parameters.AddWithValue("@Category", category);
 
                                     categoryBookCmd.ExecuteNonQuery();
@@ -407,7 +396,7 @@ namespace Backend.DAL
             SqlCommand checkCmd = new SqlCommand("sp_CheckAuthorExists", con, transaction);
             checkCmd.CommandType = CommandType.StoredProcedure;
 
-            checkCmd.Parameters.AddWithValue("@Name", author.Name);
+            checkCmd.Parameters.AddWithValue("@Name", author.Name); 
 
             object result = checkCmd.ExecuteScalar();
 
@@ -454,13 +443,14 @@ namespace Backend.DAL
                 SqlCommand cmd = new SqlCommand("sp_AddEbookCopy", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@Title", ebookCopy.Title);
+                cmd.Parameters.AddWithValue("@BookId", ebookCopy.Id);  // Updated to use bookId
                 cmd.Parameters.AddWithValue("@OwnerEmail", (object)ebookCopy.OwnerEmail ?? DBNull.Value);
 
-                // return new copy id
+                // return new copy bookId
                 return Convert.ToInt32(cmd.ExecuteScalar());
             }
         }
+
 
         public int AddPhysBookCopy(PhysBookCopy physBookCopy)
         {
@@ -469,15 +459,14 @@ namespace Backend.DAL
                 SqlCommand cmd = new SqlCommand("sp_AddPhysBookCopy", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@Title", physBookCopy.Title);
+                cmd.Parameters.AddWithValue("@BookId", physBookCopy.Id);  // Updated to use bookId
                 cmd.Parameters.AddWithValue("@OwnerEmail", (object)physBookCopy.OwnerEmail ?? DBNull.Value);
-                cmd.Parameters.AddWithValue("@IsForSale", physBookCopy.IsForSale);
-                cmd.Parameters.AddWithValue("@Price", physBookCopy.Price);
 
-                // return new copy id
+                // return new copy bookId
                 return Convert.ToInt32(cmd.ExecuteScalar());
             }
         }
+
 
         public List<Book> GetAllBooks()
         {
@@ -504,6 +493,7 @@ namespace Backend.DAL
         private Book MapBook(SqlDataReader reader)
         {
             return new Book(
+                id: Convert.ToInt32(reader["id"]),
                 title: reader["title"].ToString(),
                 description: reader["description"].ToString(),
                 language: reader["language"].ToString(),
@@ -516,17 +506,19 @@ namespace Backend.DAL
                 publishDate: ((DateTime)reader["publishDate"]),
                 pageCount: Convert.ToInt32(reader["pageCount"]),
                 subtitle: reader["subtitle"].ToString(),
-                categories: GetCategoriesByBookTitle(reader["title"].ToString()),
-                authors: GetAuthorsByBookTitle(reader["title"].ToString())
+                categories: GetCategoriesByBookId(Convert.ToInt32(reader["id"])),
+                authors: GetAuthorsByBookId(Convert.ToInt32(reader["id"])),
+                price: Convert.ToDecimal(reader["price"])
             );
         }
 
         // maps SQL data to appropriate BookCopy object
         private BookCopy MapBookCopy(SqlDataReader reader)
         {
-            string title = reader["title"].ToString();
+            int bookId = Convert.ToInt32(reader["bookId"]);  // Updated to use bookId
             bool isEbook = Convert.ToBoolean(reader["isEbook"]);
 
+            string title = reader["title"].ToString();
             int copyId = Convert.ToInt32(reader["copyId"]);
             string description = reader["description"].ToString();
             string language = reader["language"].ToString();
@@ -539,14 +531,16 @@ namespace Backend.DAL
             int pageCount = Convert.ToInt32(reader["pageCount"]);
             string subtitle = reader["subtitle"].ToString();
             string ownerEmail = reader["ownerEmail"].ToString();
-            var categories = GetCategoriesByBookTitle(title);
-            var authors = GetAuthorsByBookTitle(title);
+            var categories = GetCategoriesByBookId(bookId);  // Updated to use bookId
+            var authors = GetAuthorsByBookId(bookId);  // Updated to use bookId
+            decimal price = Convert.ToDecimal(reader["price"]);
 
             if (isEbook)
             {
                 // EBookCopy
                 return new BookCopy(
                     copyId: copyId,
+                    bookId: bookId,
                     title: title,
                     description: description,
                     language: language,
@@ -560,18 +554,19 @@ namespace Backend.DAL
                     pageCount: pageCount,
                     subtitle: subtitle,
                     categories: categories.ToArray(),
-                    authors: authors.ToArray(),
-                    ownerEmail: ownerEmail
-                );
+                    authors: authors,
+                    ownerEmail: ownerEmail,
+                    price: price
+                ) ;
             }
             else
             {
-                //PhysBookCopy
+                // PhysBookCopy
                 bool isForSale = Convert.ToBoolean(reader["isForSale"]);
-                decimal price = Convert.ToDecimal(reader["price"]);
 
                 return new PhysBookCopy(
                     copyId: copyId,
+                    bookId: bookId, 
                     title: title,
                     description: description,
                     language: language,
@@ -585,7 +580,7 @@ namespace Backend.DAL
                     pageCount: pageCount,
                     subtitle: subtitle,
                     categories: categories.ToArray(),
-                    authors: authors.ToArray(),
+                    authors: authors,
                     ownerEmail: ownerEmail,
                     isForSale: isForSale,
                     price: price
@@ -640,6 +635,19 @@ namespace Backend.DAL
             return physBookCopies;
         }
 
+        public void DeleteBook(int bookId)
+        {
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                SqlCommand cmd = new SqlCommand("sp_DeleteBook", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@BookId", bookId);  // Updated to use bookId
+
+                cmd.ExecuteNonQuery();
+            }
+        }
     }
+
 
 }

@@ -71,7 +71,7 @@ namespace Backend.DAL
             using (SqlConnection con = connect("myProjDB"))
             {
                 SqlCommand cmd = new SqlCommand("sp_UpdateUserProfileImage", con);
-                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("@Email", email);
                 cmd.Parameters.AddWithValue("@ProfileImage", profileImageLink);
@@ -260,6 +260,35 @@ namespace Backend.DAL
                 cmd.Parameters.AddWithValue("@Email", email);
 
                 cmd.ExecuteNonQuery();
+            }
+        }
+
+        public void UpdateUserCoins(string userEmail, decimal coinsAmount)
+        {
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                SqlCommand cmd = new SqlCommand("sp_UpdateUserCoins", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@UserEmail", userEmail);
+                cmd.Parameters.AddWithValue("@CoinsAmount", coinsAmount);
+
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        // Method to get the user's current coin balance
+        public int GetUserCoins(string userEmail)
+        {
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                SqlCommand cmd = new SqlCommand("sp_GetUserCoins", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@UserEmail", userEmail);
+
+                object result = cmd.ExecuteScalar();
+                return result != null ? Convert.ToInt32(result) : 0;
             }
         }
     }

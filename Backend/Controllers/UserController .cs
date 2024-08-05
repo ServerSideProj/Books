@@ -53,27 +53,6 @@ namespace Backend.Controllers
             }
         }
 
-        //[HttpPut("updateProfileImage")]
-        //public ActionResult UpdateProfileImage([FromBody] JsonElement requestData)
-        //{
-        //    if (!requestData.TryGetProperty("Email", out JsonElement emailElement) ||
-        //        !requestData.TryGetProperty("ProfileImage", out JsonElement profileImageElement))
-        //    {
-        //        return BadRequest("Email or ProfileImage is missing.");
-        //    }
-
-        //    string email = emailElement.GetString();
-        //    string profileImageLink = profileImageElement.GetString();
-
-        //    if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(profileImageLink))
-        //    {
-        //        return BadRequest("Email or ProfileImage cannot be null or empty.");
-        //    }
-
-        //    Users.UpdateProfileImage(email, profileImageLink);
-        //    return Ok("Profile image updated successfully.");
-        //}
-
         // GET api/users/usernames
         [HttpGet("usernames")]
         public ActionResult<List<string>> GetAllUsernames()
@@ -185,6 +164,41 @@ namespace Backend.Controllers
             {
                 return StatusCode(500, new { Error = ex.Message });
             }
+
         }
+
+        [HttpPost("UploadProfileImage")]
+        public async Task<IActionResult> UploadProfileImage([FromForm] IFormFile file, [FromForm] string email)
+        {
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest("No file uploaded.");
+            }
+
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "UploadedFiles");
+
+            // Ensure the directory exists
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            // Generate a unique filename
+            var uniqueFileName = $"{email}_{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
+            var filePath = Path.Combine(path, uniqueFileName);
+
+            // Save the file
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            // Update the user's profile image in the database
+            Users.UpdateProfileImage(email, uniqueFileName);
+
+            // Return status code and the image link
+            return Ok(new { ImageName = uniqueFileName });
+        }
+
     }
 }

@@ -12,12 +12,12 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-//app.UseStaticFiles(new StaticFileOptions()
-//{
-//    FileProvider = new PhysicalFileProvider(
-//        Path.Combine(Directory.GetCurrentDirectory(), @"FilesUploads")),
-//    RequestPath = new PathString("/Images")
-//});
+app.UseStaticFiles(new StaticFileOptions()
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "UploadedFiles")),
+    RequestPath = "/Images"
+});
 
 
 app.UseHttpsRedirection();

@@ -152,6 +152,15 @@ input:focus-visible {
   justify-content: space-between;
   padding: 1rem 0;
   border-bottom: 1px solid rgba(153, 131, 176, 0.29);
+  align-items: center;
+}
+
+.row-bot-line.no-line {
+  border-bottom: unset;
+}
+
+.padding-0 {
+  padding: 0rem;
 }
 
 .switch-btn {
@@ -179,6 +188,21 @@ input:focus-visible {
 
 .switch-btn.checked .circle-switch {
   background-image: url("../../assets/icons/pink-check-icon.svg");
+}
+
+textarea.input-box-sqr {
+  width: 25rem;
+  height: 4rem;
+}
+
+textarea:focus-visible {
+  border: 2px solid var(--purple-fade);
+  outline: transparent;
+}
+
+textarea + .btn {
+  width: fit-content;
+  align-self: flex-end;
 }
 
 /* btn add a book */
@@ -230,5 +254,12 @@ input:focus-visible {
   .add-image-icon {
     width: 20px;
     right: -4px;
+  }
+  .popup-container {
+    padding: 4rem 2rem;
+    width: 90%;
+  }
+  textarea.input-box-sqr {
+    width: 100%;
   }
 }

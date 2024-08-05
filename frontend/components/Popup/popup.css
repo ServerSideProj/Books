@@ -116,7 +116,7 @@
 }
 
 .bg-white {
-  background-color: var(--white);
+  background-color: var(--white) !important;
 }
 
 .send-offer-btn {

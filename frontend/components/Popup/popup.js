@@ -1,4 +1,5 @@
-//
+// pages: bookstore, homepage (any time a user want to do an action that only sign in users can)
+// show popup that requiqre the user to login or to create account.
 const popupLogin = () => {
   const popup = `
         <div id="popup-login" class="popup-container gap-2">
@@ -27,10 +28,11 @@ const popupLogin = () => {
   });
 };
 
+// page: user-profile, other-user-frofile
 // type can be: following (Following) | followers (remove)
 const popupFriends = (type) => {
   const popup = `
-   <div class="popup-container gap-2">
+   <div id="popup-friends" class="popup-container gap-2">
         <img src="../../assets/icons/X.svg" class="btn-x" />
         <div class="container-flex-col gap-03 center">
           <p class="xl-text">
@@ -53,14 +55,14 @@ const popupFriends = (type) => {
               />
               <p class="friend-name">username</p>
             </div>
-            <div class="btn xsm-text btn-follow">Following</div>
+            <div class="btn xsm-text btn-follow">${type}</div>
           </div>
         </div>
       </div>`;
 
   $(".bg-dark").addClass("open");
   $(".bg-dark").append(popup);
-  $("#popup-login").addClass("open");
+  $("#popup-friends").addClass("open");
 
   // Remove previous event listeners
   $(".btn-x").off("click");
@@ -71,13 +73,14 @@ const popupFriends = (type) => {
   });
 };
 
-//
+// page: bookstore
+// show a popup of many options of filter the books on display.
 const popupFilters = () => {
   const popup = ``;
 
   $(".bg-dark").addClass("open");
   $(".bg-dark").append(popup);
-  $("#popup-Filters").addClass("open");
+  $("#popup-filters").addClass("open");
 
   // Remove previous event listeners
   $(".btn-x").off("click");
@@ -88,8 +91,9 @@ const popupFilters = () => {
   });
 };
 
-//
-const popupBookIfo = () => {
+// page: profile
+// shows the user information on a book (done reading? for sale? write review)
+const popupBookInfo = () => {
   const popup = ``;
 
   $(".bg-dark").addClass("open");
@@ -98,15 +102,28 @@ const popupBookIfo = () => {
 
   // Remove previous event listeners
   $(".btn-x").off("click");
+  $(".switch-btn").off("click");
 
   // Add event listener to the "btn-x" to close the nav slide
   $(".btn-x").on("click", () => {
     $(".popup-container").removeClass("open");
   });
+
+  // add listener to switch btns
+  $(".switch-btn.sale").on("click", function () {
+    $(this).toggleClass("checked");
+  });
+  $(".switch-btn.done").on("click", function () {
+    $(this).toggleClass("checked");
+    if ($(this).hasClass("checked")) {
+      confetti();
+    }
+  });
 };
 
-//
-const popupBookSale = () => {
+// page: other-user-profile
+// shows a popup
+const popupBookSaleOffer = () => {
   const popup = ``;
 
   $(".bg-dark").addClass("open");

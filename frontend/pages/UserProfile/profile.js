@@ -1,26 +1,10 @@
 $(document).ready(function () {
   $(".inner-page-books, .inner-page-read, .inner-page-liked").hide();
-  // Show the "My Books" page by default
   $(".inner-page-books").show();
-  // Add 'checked' class to the "My Books" option
   $("#all-books").addClass("checked");
 
   // Change the inner page on option click
-  $(".opt").click(function () {
-    $(".opt").removeClass("checked");
-    $(this).addClass("checked");
-
-    $(".inner-page-books, .inner-page-read, .inner-page-liked").hide();
-
-    // Show the relevant page based on the clicked option's id
-    if (this.id === "all-books") {
-      $(".inner-page-books").show();
-    } else if (this.id === "read") {
-      $(".inner-page-read").show();
-    } else if (this.id === "liked") {
-      $(".inner-page-liked").show();
-    }
-  });
+  $(".opt").click("click", (e) => changeInnerPage(e.target));
 
   // Trigger file input click on btn click
   $(".add-image-icon").click(function () {
@@ -40,5 +24,22 @@ const changeProfile = (e) => {
       $(".user-photo").attr("src", event.target.result);
     };
     reader.readAsDataURL(file);
+  }
+};
+
+// Change the inner page on option click
+const changeInnerPage = (opt) => {
+  $(".opt").removeClass("checked");
+  $(opt).addClass("checked");
+
+  $(".inner-page-books, .inner-page-read, .inner-page-liked").hide();
+
+  // Show the relevant page based on the clicked option's id
+  if (opt.id === "all-books") {
+    $(".inner-page-books").show();
+  } else if (opt.id === "read") {
+    $(".inner-page-read").show();
+  } else if (opt.id === "liked") {
+    $(".inner-page-liked").show();
   }
 };

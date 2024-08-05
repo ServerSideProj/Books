@@ -1,5 +1,3 @@
-const API_URL = ""; /////// put here our api
-
 /**
  * Login function
  * @returns {Promise<boolean>}

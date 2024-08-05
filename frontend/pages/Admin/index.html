@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Styles for all pages -->
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="../../assets/icons/fav-icon.png"
+    />
+    <link rel="stylesheet" href="../../styles/style-guide.css" />
+    <link rel="stylesheet" href="../../styles/general.css" />
+    <link rel="stylesheet" href="../../components/Navbar/navbar-desktop.css" />
+    <link rel="stylesheet" href="../../components/Navbar/navbar-mobile.css" />
+
+    <!-- Scripts for all pages-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../../services/constants.js"></script>
+    <script src="../../services/ajax.js"></script>
+    <script src="../../services/auth.js" type="module"></script>
+    <script src="../../components/Navbar/navbar.js" type="module"></script>
+
+    <!-- data tables -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/2.1.3/css/dataTables.dataTables.css"
+    />
+    <script src="https://cdn.datatables.net/2.1.3/js/dataTables.js"></script>
+    <!-- Styles for this page -->
+    <link rel="stylesheet" href="./admin.css" />
+    <!-- Scripts for this page-->
+    <script src="./admin.js"></script>
+
+    <title>Admin</title>
+  </head>
+  <body>
+    <div class="navbar"></div>
+    <div class="main">
+      <!-- <div class="header"></div> -->
+      <div class="inner-nav">
+        <div id="books" class="opt selected">All Books</div>
+        <div id="users" class="opt">All Users</div>
+        <div id="authors" class="opt">All Authors</div>
+      </div>
+      <div class="inner-page inner-page-books">
+        <table id="booksTable" class="display">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Title</th>
+              <th>Language</th>
+              <th>Avg Rating</th>
+              <th>Rating Count</th>
+              <th>Maturity Rating</th>
+              <th>Book Type</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div class="inner-page inner-page-users">
+        <table id="usersTable" class="display">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Purcheses amount</th>
+              <th>Following</th>
+              <th>Followers</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+      <div class="inner-page inner-page-authors">
+        <table id="authorsTable" class="display">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Books Written</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

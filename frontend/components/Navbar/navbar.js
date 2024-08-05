@@ -47,18 +47,20 @@ const generateDesktopNavbar = (isLoggedIn) => {
                 <a href="/pages/notifications" class="sm-text">Notifications</a>
             </div>
             <div class="logo-container">
-                <img src="../../assets/logo/logo-nav.svg" alt="logo" class="logo-nav">
-            </div>
+            <a href="/pages/home"><img src="../../assets/logo/logo-nav.svg" alt="logo" class="logo-nav"></a>
+        </div>
             <div class="container-full-space right">
                 <p class="sm-text gradient-text">
                     0 coins
                 </p>
+                <a href='/pages/userprofile'>
                 <div class="container-gap-sm">
                     <p class="sm-text username-nav">username</p>
                     <img src="../../assets/images/user-profile-image.svg" alt="profile image" class="profile-image-sm">
-                </div>
+                </div> </a>
                 <p class="sm-text">|</p>
-                <p class="sm-text logout">Log out</p>
+                <a>
+                <p class="sm-text logout">Log out</p></a>
             </div>
         </div>
     `;

@@ -5,6 +5,8 @@
 
 .bg-notif {
   width: 100%;
+  height: 30vh;
+  object-fit: cover;
 }
 
 .notifications-wrapper {

@@ -1,0 +1,122 @@
+.step {
+  display: none;
+  gap: 24px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.step.show {
+  display: flex;
+}
+
+.random-btn {
+  color: #5a148c;
+  font-size: 24px;
+  line-height: 125%;
+  letter-spacing: -0.06em;
+  border-bottom: 2.7px solid #600b9c;
+  width: fit-content;
+}
+
+.next-btn {
+  display: flex;
+  gap: 7px;
+  margin-top: 3rem;
+  margin-left: 26px;
+}
+
+.step-number {
+  width: 45px;
+  text-align: center;
+  display: flex;
+  font-size: 1.2rem;
+  justify-content: center;
+  border-radius: 8px;
+}
+
+.step-1,
+.step-2 {
+  padding-top: 10rem;
+}
+.step-3 {
+  padding-top: 6rem;
+}
+
+.step-2 {
+  width: 90%;
+}
+
+#input-desc {
+  width: 100%;
+  min-height: 5rem;
+  text-wrap: wrap;
+  align-items: flex-start;
+}
+
+.step .btn-generate {
+  width: fit-content;
+  height: fit-content;
+  padding: 10px 30px;
+  font-size: 1.3rem;
+}
+
+.btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.step #book-cover-img {
+  width: 260px;
+  height: 400px;
+}
+
+textarea:focus-visible {
+  border: 2px solid var(--purple-fade);
+  outline: transparent;
+}
+
+.border-bot-btn {
+  border-bottom: 1.2px solid #87699d;
+  color: #87699d;
+  width: fit-content;
+}
+
+@media screen and (max-width: 760px) {
+  .main {
+    padding: 4rem 1rem;
+  }
+  .step .btn-generate {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+  .step .btn-generate img {
+    width: 20px;
+  }
+  .step {
+    padding-top: 2rem;
+    gap: 8px;
+  }
+  .step-3 {
+    padding-top: 0rem;
+  }
+
+  .random-btn {
+    font-size: 1rem;
+  }
+
+  .step .big-text {
+    font-size: 1.4rem;
+  }
+
+  .step #book-cover-img {
+    width: 200px;
+    height: fit-content;
+  }
+
+  .step-3 > * {
+    align-items: center;
+  }
+}

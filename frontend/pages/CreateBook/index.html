@@ -106,7 +106,10 @@
         <div class="container-flex-col full-width">
           <p class="xxl-text font-reg">Select the relevant categories:</p>
           <div class="container-categories">
-            <div class="category"></div>
+            <div class="category">
+              <!-- add in js all categories -->
+              <!-- <div class="category"></div> -->
+            </div>
           </div>
         </div>
         <div class="container-flex-col full-width">
@@ -126,7 +129,98 @@
         </div>
         <div id="create-book" class="btn btn-gradient">Create Book</div>
       </div>
-      <div id="generate-book-page" class="inner-page"></div>
+      <div id="generate-book-page" class="inner-page">
+        <div class="step step-1">
+          <div class="btn-gradient step-number">1</div>
+          <p class="big-text text-center">Select relevant categories</p>
+          <div class="container-categories">
+            <!-- add in js all categories -->
+            <!-- <div class="btn category">abcdefg</div> -->
+          </div>
+          <p class="btn random-btn">Random</p>
+        </div>
+        <div class="step step-2">
+          <div class="btn-gradient step-number">2</div>
+          <p class="big-text text-center">Book’s description</p>
+          <textarea
+            type="text"
+            class="input-box-sqr l-text black-text"
+            id="input-desc"
+          ></textarea>
+          <p>Or</p>
+          <div
+            class="btn btn-generate container-flex center-ver center-hor text-center"
+          >
+            <img src="../../assets/icons/Sparkles.svg" alt="Sparkles" />
+            <p>Generate Answer</p>
+          </div>
+        </div>
+        <div class="step step-3">
+          <div class="btn-gradient step-number">3</div>
+          <p class="big-text text-center">Book’s cover</p>
+          <div class="container-flex mobile-flex-col gap-2">
+            <img
+              id="book-cover-img"
+              src="../../assets/images/none-cover.svg"
+              alt="cover book"
+            />
+            <div class="btns">
+              <div
+                class="btn btn-generate container-flex center-ver center-hor text-center"
+              >
+                <img src="../../assets/icons/Sparkles.svg" alt="Sparkles" />
+                <p>Generate Answer</p>
+              </div>
+              <div id="upload-file" class="btn l-text">
+                <img src="../../assets/icons/Inbox in.svg" alt="upload file" />
+                <p>upload file</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="step step-4">
+          <p class="big-text text-center">Your Book</p>
+          <div class="container-flex-col center-hor mobile-flex-col gap-2">
+            <img
+              id="book-cover-img"
+              src="../../assets/images/none-cover.svg"
+              alt="cover book"
+            />
+            <!-- fill this data on js -->
+            <div class="title"></div>
+            <div class="author"></div>
+            <div class="categories"></div>
+            <div class="btns">
+              <div
+                class="btn btn-generate container-flex center-ver center-hor text-center"
+              >
+                <p>Make Public</p>
+              </div>
+              <a href="../userProfile">
+                <div class="btn border-bot-btn">Nah... not this time</div></a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="btn next-btn xl-text center-hor">
+          <p>Next</p>
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 25 25"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M9.5 5.5L16.5 12.5L9.5 19.5"
+              stroke="#111827"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+      </div>
     </div>
   </body>
 </html>

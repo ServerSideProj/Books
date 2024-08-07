@@ -20,7 +20,8 @@ body {
   font-weight: 500;
 }
 body {
-  cursor: url("../assets/images/cursor.svg"), auto;
+  /* cursor: url("../assets/images/cursor.svg"), auto; */
+  cursor: url("../assets/icons/mouse.svg"), auto;
 }
 
 * {
@@ -30,6 +31,12 @@ body {
 a {
   text-decoration: none;
   color: var(--black);
+}
+
+a:hover,
+.btn:hover,
+.icon:hover {
+  /* cursor: url("../assets/icons/mouse-pointer.svg"), auto; */
 }
 
 .text-center {
@@ -164,7 +171,8 @@ a:hover:not(.btn-gradient) {
   border: transparent;
   font-family: var(--font-family);
   width: 100%;
-  min-height: 2.4rem;
+  min-height: 2.8rem;
+  font-size: 1rem;
 }
 
 .container-flex.space {

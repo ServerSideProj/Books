@@ -1,18 +1,30 @@
+var step = 1;
 $(document).ready(function () {
   // Navigate between inner pages
   $(".btn-insert").click(goPageInsertBook);
   $(".btn-generate").click(goPageGenerateBook);
+});
 
-  // Add author input
-  $(".btn-add-author").click(addAuthor);
+const goPageInsertBook = () => {
+  $(".inner-page").removeClass("show");
+  $("#insert-book-page").addClass("show");
+
+  getAllLanguages();
 
   // Handle file upload
   $("#upload-file").click(function () {
     $("#file-input").click();
   });
-
   $("#file-input").change(function (e) {
     handleFileUpload(e);
+  });
+
+  // Add author input
+  $(".btn-add-author").click(addAuthor);
+
+  // Delegate the click event for dynamically added delete buttons
+  $(".container-authors").on("click", ".delete", function () {
+    $(this).parent().remove();
   });
 
   // Handle create book
@@ -23,22 +35,17 @@ $(document).ready(function () {
       alert("Please fill all the fields.");
     }
   });
-
-  // Delegate the click event for dynamically added delete buttons
-  $(".container-authors").on("click", ".delete", function () {
-    $(this).parent().remove();
-  });
-});
-
-const goPageInsertBook = () => {
-  $(".inner-page").removeClass("show");
-  $("#insert-book-page").addClass("show");
-  getAllLanguages();
 };
 
 const goPageGenerateBook = () => {
   $(".inner-page").removeClass("show");
   $("#generate-book-page").addClass("show");
+
+  // Handle random category selection
+  $(".random-btn").click(selectRandomCategories);
+
+  $(`.step-${step}`).addClass("show");
+  $(".next-btn").on("click", nextStep);
 };
 
 // Get all languages for the dropdown
@@ -164,4 +171,35 @@ const getAllData = () => {
     }
   });
   */
+};
+
+// Select random categories
+const selectRandomCategories = () => {
+  const categories = $(".container-categories .category");
+  const numberOfCategories = categories.length;
+  const randomCount = Math.floor(Math.random() * 2) + 2;
+
+  // Remove existing selected class
+  categories.removeClass("selected");
+
+  // Pick random categories
+  const randomCategories = [];
+  while (randomCategories.length < randomCount) {
+    const randomIndex = Math.floor(Math.random() * numberOfCategories);
+    if (!randomCategories.includes(randomIndex)) {
+      randomCategories.push(randomIndex);
+    }
+  }
+
+  // Add selected class to picked categories
+  randomCategories.forEach((index) => {
+    $(categories[index]).addClass("selected");
+  });
+};
+
+const nextStep = () => {
+  $(`.step-${step}`).removeClass("show");
+  step++;
+  $(`.step-${step}`).addClass("show");
+  if (step === 4) $(".next-btn").hide();
 };

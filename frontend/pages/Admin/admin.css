@@ -60,10 +60,6 @@
   width: fit-content;
 }
 
-.hidden {
-  display: none;
-}
-
 .data-user {
   display: flex;
   gap: 2rem;

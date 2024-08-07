@@ -23,7 +23,8 @@
     <script src="../../components/Navbar/navbar.js" type="module"></script>
 
     <!-- Styles for this page -->
-    <link rel="stylesheet" href="./createBook.css" />
+    <link rel="stylesheet" href="./insertBook.css" />
+    <link rel="stylesheet" href="./generateBook.css" />
     <!-- Scripts for this page-->
     <script src="./createBook.js"></script>
 
@@ -32,8 +33,100 @@
   <body>
     <div class="navbar"></div>
     <div class="main">
-      
-    </div>
+      <div class="inner-page container-choice show">
+        <p class="huge-text nowrap-tx">Your Book</p>
+        <div class="container-flex-col center opening">
+          <p class="xl-text purple-fade">What would you like to do today?</p>
+          <div
+            class="container-flex gap-2 margin-top-4 xxl-text mobile-flex-col"
+          >
+            <div class="btn btn-insert center-ver text-center">
+              Upload an existing book
+            </div>
+            <div
+              class="btn btn-generate container-flex center-ver center-hor text-center"
+            >
+              <img src="../../assets/icons/Sparkles.svg" alt="Sparkles" />
+              <p>Generate Your own book</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="insert-book-page" class="inner-page">
+        <div class="container-flex center-hor gap-2 mobile-flex-col-reverse">
+          <div class="container-flex-col center-hor gap-1">
+            <p class="xxl-text font-reg">Add cover image to the book</p>
+            <div id="upload-file" class="btn l-text">
+              <img src="../../assets/icons/Inbox in.svg" alt="upload file" />
+              <p>upload file</p>
+            </div>
+            <input
+              type="file"
+              id="file-input"
+              class="hidden"
+              accept="image/*"
+            />
+          </div>
+          <img
+            id="book-cover-img"
+            src="../../assets/images/none-cover.svg"
+            alt="cover book"
+          />
+        </div>
+        <div class="container-flex-col full-width">
+          <p class="xxl-text font-reg">Insert the book’s title</p>
+          <input
+            type="text"
+            placeholder="example: Harry Potter and the Philosopher's Stone"
+            class="input-box-sqr l-text black-text"
+          />
+        </div>
+        <div class="container-flex-col full-width">
+          <p class="xxl-text font-reg">Insert book’s description:</p>
+          <input
+            type="text"
+            placeholder="Summary of the books..."
+            class="input-box-sqr l-text"
+          />
+        </div>
+        <div class="container-flex-col full-width">
+          <p class="xxl-text font-reg">Add authors:</p>
+          <div class="container-authors">
+            <input
+              type="text"
+              placeholder="example: J. K. Rowling"
+              class="input-box-sqr l-text"
+            />
+          </div>
+          <div class="btn-add-author">
+            <img src="../../assets/icons/Plus.svg" alt="plus btn" />
+            <p class="xl-text">Add author</p>
+          </div>
+        </div>
+        <div class="container-flex-col full-width">
+          <p class="xxl-text font-reg">Select the relevant categories:</p>
+          <div class="container-categories">
+            <div class="category"></div>
+          </div>
+        </div>
+        <div class="container-flex-col full-width">
+          <div class="language-selection center-ver">
+            <p class="xxl-text font-reg">Book's language:</p>
+
+            <div class="custom-select">
+              <select
+                id="language"
+                name="language"
+                class="input-box-sqr dropdown"
+              >
+                <option value="">Loading...</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div id="create-book" class="btn btn-gradient">Create Book</div>
+      </div>
+      <div id="generate-book-page" class="inner-page"></div>
     </div>
   </body>
 </html>

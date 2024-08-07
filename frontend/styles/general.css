@@ -171,6 +171,10 @@ a:hover:not(.btn-gradient) {
   justify-content: space-between;
 }
 
+.hidden {
+  display: none;
+}
+
 @media screen and (max-width: 768px) {
   .center-on-mobile {
     align-items: center;

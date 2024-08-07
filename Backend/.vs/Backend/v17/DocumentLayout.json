@@ -3,6 +3,34 @@
   "WorkspaceRootPath": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\bl\\bookcopy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:bl\\bookcopy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\dal\\dbbook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:dal\\dbbook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\bl\\physbookcopy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:bl\\physbookcopy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\bl\\questiongenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:bl\\questiongenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\bl\\question.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:bl\\question.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\bl\\book.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:bl\\book.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\controllers\\bookcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:controllers\\bookcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -27,10 +55,6 @@
       "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:dal\\dbuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\dal\\dbbook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:dal\\dbbook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\bl\\userscore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:bl\\userscore.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -43,18 +67,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\controllers\\transactioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:controllers\\transactioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\bl\\book.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:bl\\book.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\bl\\bookcopy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:bl\\bookcopy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\bl\\questiongenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:bl\\questiongenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\bl\\quiz.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -73,20 +85,8 @@
       "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:bl\\author.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\bl\\question.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:bl\\question.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\bl\\physbookcopy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:bl\\physbookcopy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\dal\\dbtransaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:dal\\dbtransaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\controllers\\bookcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:controllers\\bookcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\controllers\\authorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -104,9 +104,6 @@
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ran\\Desktop\\Final proj\\Backend\\BI\\Author.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ran\\Desktop\\Final proj\\Backend\\BI\\Book.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ran\\Desktop\\Final proj\\Backend\\BI\\User.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -117,11 +114,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 24,
+          "SelectedChildIndex": 15,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 17,
               "Title": "Quiz.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\BL\\Quiz.cs",
               "RelativeDocumentMoniker": "BL\\Quiz.cs",
@@ -130,8 +127,7 @@
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAA9AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-31T16:10:59.607Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Bookmark",
@@ -139,7 +135,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 15,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Documents\\GitHub\\Server-Side-Proj\\backend\\Program.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\Documents\\GitHub\\Server-Side-Proj\\backend\\Program.cs",
@@ -147,12 +143,11 @@
               "RelativeToolTip": "..\\..\\..\\..\\Documents\\GitHub\\Server-Side-Proj\\backend\\Program.cs",
               "ViewState": "AQIAAAYAAAAAAAAAAAAAABkAAAADAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-05T15:59:59.516Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-05T15:59:59.516Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 14,
               "Title": "FileUploadController.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Documents\\GitHub\\Server-Side-Proj\\backend\\Controllers\\FileUploadController.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\Documents\\GitHub\\Server-Side-Proj\\backend\\Controllers\\FileUploadController.cs",
@@ -160,12 +155,11 @@
               "RelativeToolTip": "..\\..\\..\\..\\Documents\\GitHub\\Server-Side-Proj\\backend\\Controllers\\FileUploadController.cs",
               "ViewState": "AQIAAAkAAAAAAAAAAAAAAC0AAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-05T15:58:37.4Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-05T15:58:37.4Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 16,
               "Title": "TransactionController.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\Controllers\\TransactionController.cs",
               "RelativeDocumentMoniker": "Controllers\\TransactionController.cs",
@@ -173,12 +167,11 @@
               "RelativeToolTip": "Controllers\\TransactionController.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAADUAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-05T15:46:46.103Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-05T15:46:46.103Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
               "Title": "DBtransaction.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\DAL\\DBtransaction.cs",
               "RelativeDocumentMoniker": "DAL\\DBtransaction.cs",
@@ -186,12 +179,11 @@
               "RelativeToolTip": "DAL\\DBtransaction.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAJkAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-05T15:06:02.825Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-05T15:06:02.825Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 19,
               "Title": "Transaction.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\BL\\Transaction.cs",
               "RelativeDocumentMoniker": "BL\\Transaction.cs",
@@ -199,12 +191,11 @@
               "RelativeToolTip": "BL\\Transaction.cs",
               "ViewState": "AQIAACUAAAAAAAAAAAAYwFEAAABTAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-05T13:48:39.642Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-05T13:48:39.642Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 18,
               "Title": "review.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\BL\\review.cs",
               "RelativeDocumentMoniker": "BL\\review.cs",
@@ -212,38 +203,37 @@
               "RelativeToolTip": "BL\\review.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-31T16:09:13.156Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-31T16:09:13.156Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 5,
               "Title": "Book.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\BL\\Book.cs",
               "RelativeDocumentMoniker": "BL\\Book.cs",
               "ToolTip": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\BL\\Book.cs",
               "RelativeToolTip": "BL\\Book.cs",
-              "ViewState": "AQIAAFkAAAAAAAAAAAAAwAkAAAAYAAAA",
+              "ViewState": "AQIAADMAAAAAAAAAAAAAAEwAAABeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-31T16:03:58.268Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 2,
               "Title": "PhysBookCopy.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\BL\\PhysBookCopy.cs",
               "RelativeDocumentMoniker": "BL\\PhysBookCopy.cs",
               "ToolTip": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\BL\\PhysBookCopy.cs",
               "RelativeToolTip": "BL\\PhysBookCopy.cs",
-              "ViewState": "AQIAAAEAAAAAAAAAAAD4vxoAAAAtAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAACYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-31T16:14:02.773Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 4,
               "Title": "Question.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\BL\\Question.cs",
               "RelativeDocumentMoniker": "BL\\Question.cs",
@@ -256,7 +246,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 13,
               "Title": "UserScore.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\BL\\UserScore.cs",
               "RelativeDocumentMoniker": "BL\\UserScore.cs",
@@ -264,25 +254,24 @@
               "RelativeToolTip": "BL\\UserScore.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-31T16:11:54.732Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-31T16:11:54.732Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 6,
               "Title": "BookController.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\Controllers\\BookController.cs",
               "RelativeDocumentMoniker": "Controllers\\BookController.cs",
               "ToolTip": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\Controllers\\BookController.cs",
               "RelativeToolTip": "Controllers\\BookController.cs",
-              "ViewState": "AQIAAFEAAAAAAAAAAAAAAGwAAAAIAAAA",
+              "ViewState": "AQIAADwAAAAAAAAAAAAAAE4AAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-02T12:52:13.59Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 20,
               "Title": "Author.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\BL\\Author.cs",
               "RelativeDocumentMoniker": "BL\\Author.cs",
@@ -290,38 +279,37 @@
               "RelativeToolTip": "BL\\Author.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAACIAAAAtAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-31T16:03:54.819Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-31T16:03:54.819Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
               "Title": "DBbook.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\DAL\\DBbook.cs",
               "RelativeDocumentMoniker": "DAL\\DBbook.cs",
               "ToolTip": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\DAL\\DBbook.cs",
               "RelativeToolTip": "DAL\\DBbook.cs",
-              "ViewState": "AQIAAB0CAAAAAAAAAIAwwBcCAAAMAAAA",
+              "ViewState": "AQIAAEABAAAAAAAAAAAAAFoBAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-02T12:01:21.184Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 0,
               "Title": "BookCopy.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\BL\\BookCopy.cs",
               "RelativeDocumentMoniker": "BL\\BookCopy.cs",
               "ToolTip": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\BL\\BookCopy.cs",
               "RelativeToolTip": "BL\\BookCopy.cs",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAAAAkAAAA5AAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB4AAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-31T16:04:11.35Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 11,
               "Title": "Users.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\BL\\Users.cs",
               "RelativeDocumentMoniker": "BL\\Users.cs",
@@ -329,8 +317,7 @@
               "RelativeToolTip": "BL\\Users.cs",
               "ViewState": "AQIAACQAAAAAAAAAAAAAACsAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-31T16:04:17.488Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-31T16:04:17.488Z"
             },
             {
               "$type": "Document",
@@ -342,12 +329,11 @@
               "RelativeToolTip": "DAL\\DBauthor.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAACcAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-05T08:47:31.126Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-05T08:47:31.126Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 3,
               "Title": "QuestionGenerator.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\BL\\QuestionGenerator.cs",
               "RelativeDocumentMoniker": "BL\\QuestionGenerator.cs",
@@ -360,7 +346,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 12,
               "Title": "DBuser.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\DAL\\DBuser.cs",
               "RelativeDocumentMoniker": "DAL\\DBuser.cs",
@@ -368,8 +354,7 @@
               "RelativeToolTip": "DAL\\DBuser.cs",
               "ViewState": "AQIAAC0AAAAAAAAAAAAawFAAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-01T15:04:51.45Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-01T15:04:51.45Z"
             },
             {
               "$type": "Document",
@@ -381,12 +366,11 @@
               "RelativeToolTip": "Controllers\\AuthorController.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAACUAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-05T08:46:09.412Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-05T08:46:09.412Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 10,
               "Title": "DBservices.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\DAL\\DBservices.cs",
               "RelativeDocumentMoniker": "DAL\\DBservices.cs",
@@ -394,12 +378,11 @@
               "RelativeToolTip": "DAL\\DBservices.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-01T15:04:54.771Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-01T15:04:54.771Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 9,
               "Title": "UserController .cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\Controllers\\UserController .cs",
               "RelativeDocumentMoniker": "Controllers\\UserController .cs",
@@ -407,12 +390,11 @@
               "RelativeToolTip": "Controllers\\UserController .cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAMEAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-01T16:02:02.509Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-01T16:02:02.509Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 8,
               "Title": "QuizController.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\Controllers\\QuizController.cs",
               "RelativeDocumentMoniker": "Controllers\\QuizController.cs",
@@ -420,18 +402,17 @@
               "RelativeToolTip": "Controllers\\QuizController.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABwAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-03T13:11:14.883Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-03T13:11:14.883Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 7,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAAAIAAAAAAAAAAIAwwBIAAAAaAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-01T15:38:32.027Z",
               "EditorCaption": ""
@@ -462,17 +443,6 @@
             {
               "$type": "Document",
               "DocumentIndex": 26,
-              "Title": "Book.cs",
-              "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Backend\\BI\\Book.cs",
-              "RelativeDocumentMoniker": "..\\..\\Backend\\BI\\Book.cs",
-              "ToolTip": "C:\\Users\\ran\\Desktop\\Final proj\\Backend\\BI\\Book.cs",
-              "RelativeToolTip": "..\\..\\Backend\\BI\\Book.cs",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-26T15:33:18.53Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 27,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Backend\\BI\\User.cs",
               "RelativeDocumentMoniker": "..\\..\\Backend\\BI\\User.cs",

@@ -7,7 +7,7 @@ namespace Backend.BI
 {
     public class Book
     {
-        private int id; 
+        private int id;
         private string title;
         private string description;
         private string language;
@@ -21,15 +21,18 @@ namespace Backend.BI
         private int pageCount;
         private string subtitle;
         private string[] categories;
-        private List<Author> authors;  
-        private decimal price; 
+        private List<Author> authors;
+        private decimal price;
+        private bool active;
+        private string imageLink;
 
         private static readonly DBbook dbBook = new DBbook();
 
         public Book(int id, string title, string description, string language, float avgRating, int ratingCount,
                     string maturityRating, string infoLink, string publisher, bool isEbook,
                     DateTime publishDate, int pageCount, string subtitle,
-                    string[] categories, List<Author> authors, decimal price)
+                    string[] categories, List<Author> authors, decimal price, bool active,
+                     string imageLink) // Added parameters
         {
             Id = id;
             Title = title;
@@ -47,6 +50,8 @@ namespace Backend.BI
             Categories = categories;
             Authors = authors;
             Price = price;
+            Active = active;  // Set active property
+            ImageLink = imageLink;  // Set imageLink property
         }
 
         public Book()
@@ -69,6 +74,8 @@ namespace Backend.BI
         public string[] Categories { get => categories; set => categories = value; }
         public List<Author> Authors { get => authors; set => authors = value; }
         public decimal Price { get => price; set => price = value; }
+        public bool Active { get => active; set => active = value; }  // Added active property
+        public string ImageLink { get => imageLink; set => imageLink = value; }  // Added imageLink property
 
         public static List<Book> GetTop5PopularPhysBooks()
         {
@@ -118,6 +125,11 @@ namespace Backend.BI
         public static List<Book> GetAllBooks()
         {
             return dbBook.GetAllBooks();
+        }
+
+        public static List<Book> GetAllActiveBooks()
+        {
+            return dbBook.GetAllActiveBooks();
         }
 
         public static List<BookCopy> GetAllEBookCopies()

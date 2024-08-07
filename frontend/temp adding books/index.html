@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Books to Server</title>
+</head>
+<body>
+    <h1>Google Books API Fetcher</h1>
+    <button id="fetchBooks">Fetch and Send Books</button>
+
+    <script>
+        async function fetchBooks() {
+            const books = [];
+            const ebookQuery = 'filter=ebooks';
+            const physicalBookQuery = '';
+            const delayMs = 1000; // 1 second delay between each API call
+
+            // Fetch eBooks
+            await fetchBooksByType(ebookQuery, true, books, delayMs);
+
+            // Fetch Physical Books
+            await fetchBooksByType(physicalBookQuery, false, books, delayMs);
+
+            // Send the books to the server
+            await sendBooksToServer(books);
+        }
+
+        async function fetchBooksByType(query, isEbook, books, delayMs) {
+            let fetchedBooks = [];
+            let startIndex = 0;
+
+            while (fetchedBooks.length < 50) {
+                const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=subject:fiction&${query}&maxResults=40&startIndex=${startIndex}`);
+                const data = await response.json();
+
+                data.items.forEach(item => {
+                    if (!fetchedBooks.some(book => book.id === item.id)) {
+                        fetchedBooks.push(formatBook(item, isEbook, fetchedBooks.length));
+                    }
+                });
+
+                // Update the startIndex and delay the next API call if needed
+                startIndex += 40;
+                await new Promise(resolve => setTimeout(resolve, delayMs));
+
+                // If all books are fetched, break
+                if (!data.items || data.items.length < 40) {
+                    break;
+                }
+            }
+
+            // Ensure exactly 50 books are added to the final list
+            for (let i = 0; i < 50 && i < fetchedBooks.length; i++) {
+                books.push(fetchedBooks[i]);
+            }
+        }
+
+        function formatBook(item, isEbook, id) {
+            const volumeInfo = item.volumeInfo;
+            const saleInfo = item.saleInfo;
+        
+            let publishDate = null;
+            if (volumeInfo.publishedDate) {
+                try {
+                    const parsedDate = new Date(volumeInfo.publishedDate);
+                    if (parsedDate >= new Date('1753-01-01') && parsedDate <= new Date('9999-12-31')) {
+                        publishDate = parsedDate.toISOString();
+                    } else {
+                        publishDate = '1753-01-01T00:00:00Z'; // Default to the minimum valid date
+                    }
+                } catch (e) {
+                    publishDate = '1753-01-01T00:00:00Z'; // Default to the minimum valid date on error
+                }
+            } else {
+                publishDate = '1753-01-01T00:00:00Z'; // Default to the minimum valid date if no date provided
+            }
+        
+            const formattedBook = {
+                id: id,
+                title: volumeInfo.title || "N/A",
+                description: volumeInfo.description || "No description available",
+                language: volumeInfo.language || "Unknown",
+                avgRating: volumeInfo.averageRating || 0,
+                ratingCount: volumeInfo.ratingsCount || 0,
+                maturityRating: volumeInfo.maturityRating || "NOT_MATURE",
+                infoLink: volumeInfo.infoLink || "N/A",
+                publisher: volumeInfo.publisher || "Unknown",
+                isEbook: saleInfo.isEbook,
+                publishDate: publishDate, // Use the validated or default date
+                pageCount: volumeInfo.pageCount || 0,
+                subtitle: volumeInfo.subtitle || "",
+                categories: volumeInfo.categories || ["Uncategorized"],
+                authors: formatAuthors(volumeInfo.authors || ["Unknown Author"]),
+                price: saleInfo && saleInfo.retailPrice ? saleInfo.retailPrice.amount : 0,
+                active: true,
+                imageLink: volumeInfo.imageLinks && volumeInfo.imageLinks.smallThumbnail ? volumeInfo.imageLinks.smallThumbnail : null
+            };
+        
+            return formattedBook;
+        }
+
+        function formatAuthors(authors) {
+            return authors.map((author, index) => {
+                return {
+                    id: index,
+                    name: author,
+                    biography: "Biography not available",
+                    wikiLink: "https://en.wikipedia.org/wiki/" + encodeURIComponent(author)
+                };
+            });
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toISOString();
+        }
+
+        async function sendBooksToServer(books) {
+            try {
+                const response = await fetch('https://localhost:7136/api/Book/add-books', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(books)
+                });
+
+                if (response.ok) {
+                    console.log('Books sent successfully');
+                } else {
+                    console.error('Failed to send books', response.status, response.statusText);
+                }
+            } catch (error) {
+                console.error('Error sending books to server:', error);
+            }
+        }
+
+        document.getElementById('fetchBooks').addEventListener('click', fetchBooks);
+    </script>
+</body>
+</html>

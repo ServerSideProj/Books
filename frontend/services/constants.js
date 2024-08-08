@@ -1,7 +1,7 @@
 /////// לשנות את כל הערכים לפי הנתיבים הנכונים
 
 // For home:
-const PORT = "7105";
+const PORT = "7136";
 const API_URL = `https://localhost:${PORT}/api/`;
 
 const FILE_URL = `https://localhost:${PORT}/api/FileUpload`;

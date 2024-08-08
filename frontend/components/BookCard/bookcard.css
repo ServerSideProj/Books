@@ -19,8 +19,8 @@
   display: flex;
   padding: 10px;
   border-radius: 8px;
-  width: 179px;
-  height: 268px;
+  min-width: 200px;
+  height: 319px;
   position: relative;
 }
 

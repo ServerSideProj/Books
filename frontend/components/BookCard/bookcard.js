@@ -119,3 +119,45 @@ const addForSale = () => {
     </div>`;
   return sign;
 };
+
+// Function to generate book card from data
+function generateBookCard_homepage(book) {
+  return `
+    <div class="book-card">
+      <div class="book-card-img" style="background-image: url('${
+        book.imageLink
+      }');">
+        <div class="btn like-btn on-cover-bg">
+          <img src="../../assets/icons/heart-white-stroke.svg" alt="heart"/>
+        </div>
+        <div class="container-flex flex-end-space width100">
+          <div class="price-wrapper on-cover-bg white-text xsm-text">
+            $${book.price}
+          </div>
+          <div class="type-wrapper on-cover-bg white-text xsm-text">
+            eBook
+          </div>
+        </div>
+      </div>
+      <div class="container-flex-col gap-0">
+        <p class="md-text">${book.title}</p>
+        <p class="xsm-text grey-text font-reg">${book.authors
+          .map((author) => author.name)
+          .join(", ")}</p>
+      </div>
+      <div class="extra-details-card">
+        <div class="container-flex-col gap-0">
+          <div class="container-flex gap-03 center-hor">
+            <p class="md-text">${book.avgRating}</p>
+            <img src="../../assets/icons/star-empty.svg" alt="star"/>
+            <p class="xsm-text grey-text font-reg">(${book.ratingCount})</p>
+          </div>
+          <p class="sm-text grey-text font-reg">${book.ratingCount} reviews</p>
+        </div>
+        <a href="${book.infoLink}" target="_blank" class="btn add-to-cart">
+          <img src="../../assets/icons/btn-add-cart.svg" alt="more info"/>
+        </a>
+      </div>
+    </div>
+  `;
+}

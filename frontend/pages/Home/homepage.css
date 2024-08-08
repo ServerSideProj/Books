@@ -232,17 +232,25 @@
     padding: 4rem 2rem;
     padding-right: 0;
     height: fit-content;
+    overflow: hidden;
   }
 
   .row-books {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     width: 100%;
     gap: 1rem;
-    overflow-x: scroll;
+    overflow-x: auto; /* Allows horizontal scrolling */
     padding-bottom: 2rem;
     padding-right: 1rem;
+    scroll-snap-type: x mandatory; /* Optional: For smooth scrolling */
   }
+
+  .book-card {
+    flex: 0 0 auto; /* Prevents flex items from shrinking or growing */
+    scroll-snap-align: start; /* Optional: For smooth scrolling */
+  }
+
   .titles-contatiner {
     padding-right: 1rem;
   }

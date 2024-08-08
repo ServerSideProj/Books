@@ -25,6 +25,7 @@ namespace Backend.BI
         private decimal price;
         private bool active;
         private string imageLink;
+        private string previewLink;
 
         private static readonly DBbook dbBook = new DBbook();
 
@@ -32,7 +33,7 @@ namespace Backend.BI
                     string maturityRating, string infoLink, string publisher, bool isEbook,
                     DateTime publishDate, int pageCount, string subtitle,
                     string[] categories, List<Author> authors, decimal price, bool active,
-                     string imageLink) // Added parameters
+                     string imageLink, string previewLink) 
         {
             Id = id;
             Title = title;
@@ -50,8 +51,9 @@ namespace Backend.BI
             Categories = categories;
             Authors = authors;
             Price = price;
-            Active = active;  // Set active property
-            ImageLink = imageLink;  // Set imageLink property
+            Active = active;
+            ImageLink = imageLink;
+            PreviewLink = previewLink;
         }
 
         public Book()
@@ -74,8 +76,9 @@ namespace Backend.BI
         public string[] Categories { get => categories; set => categories = value; }
         public List<Author> Authors { get => authors; set => authors = value; }
         public decimal Price { get => price; set => price = value; }
-        public bool Active { get => active; set => active = value; }  // Added active property
-        public string ImageLink { get => imageLink; set => imageLink = value; }  // Added imageLink property
+        public bool Active { get => active; set => active = value; }  
+        public string ImageLink { get => imageLink; set => imageLink = value; }
+        public string PreviewLink { get => previewLink; set => previewLink = value; }
 
         public static List<Book> GetTop5PopularPhysBooks()
         {

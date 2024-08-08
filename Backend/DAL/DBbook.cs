@@ -313,8 +313,8 @@ namespace Backend.DAL
             return categories.ToArray();
         }
 
-            // Add Books
-            public void AddBooks(List<Book> books)
+        // Add Books
+        public void AddBooks(List<Book> books)
         {
             using (SqlConnection con = connect("myProjDB"))
             {
@@ -343,11 +343,11 @@ namespace Backend.DAL
                                 cmd.Parameters.AddWithValue("@Subtitle", book.Subtitle);
                                 cmd.Parameters.AddWithValue("@Price", book.Price);
                                 cmd.Parameters.AddWithValue("@Active", book.Active);
-                                cmd.Parameters.AddWithValue("@ImageLink", book.ImageLink); // Add this line
+                                cmd.Parameters.AddWithValue("@ImageLink", book.ImageLink);
+                                cmd.Parameters.AddWithValue("@PreviewLink", book.IsEbook ? (object)book.PreviewLink ?? DBNull.Value : DBNull.Value);
 
-                                bookId = Convert.ToInt32(cmd.ExecuteScalar());  
-                            } 
-                        
+                                bookId = Convert.ToInt32(cmd.ExecuteScalar());
+                            }
 
                             // Add authors and map them to the book
                             foreach (var author in book.Authors)
@@ -358,7 +358,7 @@ namespace Backend.DAL
                                 {
                                     authorBookCmd.CommandType = CommandType.StoredProcedure;
 
-                                    authorBookCmd.Parameters.AddWithValue("@BookId", bookId);  // Use bookId
+                                    authorBookCmd.Parameters.AddWithValue("@BookId", bookId);
                                     authorBookCmd.Parameters.AddWithValue("@AuthorID", authorId);
 
                                     authorBookCmd.ExecuteNonQuery();
@@ -374,7 +374,7 @@ namespace Backend.DAL
                                 {
                                     categoryBookCmd.CommandType = CommandType.StoredProcedure;
 
-                                    categoryBookCmd.Parameters.AddWithValue("@BookId", bookId);  // Use bookId
+                                    categoryBookCmd.Parameters.AddWithValue("@BookId", bookId);
                                     categoryBookCmd.Parameters.AddWithValue("@Category", category);
 
                                     categoryBookCmd.ExecuteNonQuery();
@@ -392,6 +392,7 @@ namespace Backend.DAL
                 }
             }
         }
+
 
         private int EnsureAuthorExists(SqlConnection con, SqlTransaction transaction, Author author)
         {
@@ -491,7 +492,6 @@ namespace Backend.DAL
             }
         }
 
-        // maps SQL data to Book object
         private Book MapBook(SqlDataReader reader)
         {
             return new Book(
@@ -512,11 +512,11 @@ namespace Backend.DAL
                 authors: GetAuthorsByBookId(Convert.ToInt32(reader["id"])),
                 price: Convert.ToDecimal(reader["price"]),
                 active: Convert.ToBoolean(reader["active"]),
-                imageLink: reader["imageLink"].ToString()  // Added imageLink
+                imageLink: reader["imageLink"].ToString(),
+                previewLink: reader["isEbook"] != DBNull.Value && Convert.ToBoolean(reader["isEbook"]) ? reader["previewLink"].ToString() : null // Include previewLink only if it's an eBook
             );
         }
 
-        // maps SQL data to appropriate BookCopy object
         // maps SQL data to appropriate BookCopy object
         private BookCopy MapBookCopy(SqlDataReader reader)
         {
@@ -537,7 +537,8 @@ namespace Backend.DAL
             int pageCount = Convert.ToInt32(reader["pageCount"]);
             string subtitle = reader["subtitle"].ToString();
             string ownerEmail = reader["ownerEmail"].ToString();
-            string imageLink = reader["imageLink"].ToString();  // Added imageLink
+            string imageLink = reader["imageLink"].ToString();
+            string previewLink = reader["previewLink"] != DBNull.Value ? reader["previewLink"].ToString() : null;
             var categories = GetCategoriesByBookId(bookId);
             var authors = GetAuthorsByBookId(bookId);
             decimal price = Convert.ToDecimal(reader["price"]);
@@ -565,7 +566,8 @@ namespace Backend.DAL
                     ownerEmail: ownerEmail,
                     price: price,
                     isActive: isActive,
-                    imageLink: imageLink  // Include imageLink
+                    imageLink: imageLink,
+                    previewLink: previewLink
                 );
             }
             else
@@ -594,7 +596,8 @@ namespace Backend.DAL
                     isForSale: isForSale,
                     price: price,
                     isActive: isActive,
-                    imageLink: imageLink  // Include imageLink
+                    imageLink: imageLink,
+                    previewLink: previewLink
                 );
             }
         }

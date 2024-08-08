@@ -21,10 +21,10 @@ namespace Backend.BL
         public PhysBookCopy(int copyId, int bookId, string title, string description, string language, float avgRating,
                             int ratingCount, string maturityRating, string infoLink, string publisher,
                             bool isEbook, DateTime publishDate, int pageCount, string subtitle,
-                            string[] categories, List<Author> authors, string ownerEmail, bool isForSale, decimal price, bool isActive, string imageLink) 
+                            string[] categories, List<Author> authors, string ownerEmail, bool isForSale, decimal price, bool isActive, string imageLink, string previewLink) 
             : base(copyId, bookId, title, description, language, avgRating, ratingCount, maturityRating,
                    infoLink, publisher, isEbook, publishDate, pageCount, subtitle, categories,
-                   authors, ownerEmail, price, isActive, imageLink)  
+                   authors, ownerEmail, price, isActive, imageLink, previewLink)  
         {
             IsForSale = isForSale;
         }

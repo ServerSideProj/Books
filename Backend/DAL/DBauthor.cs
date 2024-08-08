@@ -2,7 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 
-using Backend.BI;
+using Backend.BL;
 
 
 namespace Backend.DAL
@@ -35,6 +35,34 @@ namespace Backend.DAL
 
                 cmd.ExecuteNonQuery();
             }
+        }
+
+        public List<Author> GetAllAuthors()
+        {
+            List<Author> authors = new List<Author>();
+
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                using (SqlCommand cmd = new SqlCommand("sp_GetAllAuthors", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            authors.Add(new Author(
+                                id: Convert.ToInt32(reader["id"]),
+                                name: reader["name"].ToString(),
+                                biography: reader["biography"].ToString(),
+                                wikiLink: reader["wikiLink"].ToString()
+                            ));
+                        }
+                    }
+                }
+            }
+
+            return authors;
         }
     }
 }

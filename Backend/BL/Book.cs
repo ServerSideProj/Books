@@ -3,7 +3,7 @@ using Backend.DAL;
 using System;
 using System.Collections.Generic;
 
-namespace Backend.BI
+namespace Backend.BL
 {
     public class Book
     {

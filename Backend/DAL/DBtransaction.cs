@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using Backend.BL;
-using Backend.BI;
 
 namespace Backend.DAL
 {

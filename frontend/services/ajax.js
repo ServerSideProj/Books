@@ -45,3 +45,8 @@ function sendData(url, data, successCallback, errorCallback) {
 // Expose functions globally
 window.fetchData = fetchData;
 window.sendData = sendData;
+
+// Function to handle error response
+const onError = (error) => {
+  console.log(error);
+};

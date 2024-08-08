@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Backend.BI;
+using Backend.BL;
 using System.Collections.Generic;
 using System.Text.Json;
 

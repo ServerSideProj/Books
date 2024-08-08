@@ -2,7 +2,6 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Collections.Generic;
-using Backend.BI;
 using Backend.BL;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;

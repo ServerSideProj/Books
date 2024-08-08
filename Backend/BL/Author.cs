@@ -1,7 +1,8 @@
 ﻿using Backend.Controllers;
 using Backend.DAL;
+using System.Collections.Generic;
 
-namespace Backend.BI
+namespace Backend.BL
 {
     public class Author
     {
@@ -10,7 +11,7 @@ namespace Backend.BI
         private string biography;
         private string wikiLink;
 
-        private static readonly DBauthor dbAuthor = new DBauthor(); 
+        private static readonly DBauthor dbAuthor = new DBauthor();
 
         public Author(int id, string name, string biography, string wikiLink)
         {
@@ -32,7 +33,12 @@ namespace Backend.BI
 
         public static void DeleteAuthor(int authorId)
         {
-            dbAuthor.DeleteAuthor(authorId); 
+            dbAuthor.DeleteAuthor(authorId);
+        }
+
+        public static List<Author> GetAllAuthors()
+        {
+            return dbAuthor.GetAllAuthors();
         }
     }
 }

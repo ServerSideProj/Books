@@ -2,7 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Collections.Generic;
-using Backend.BI;
+using Backend.BL;
 
 namespace Backend.DAL
 {

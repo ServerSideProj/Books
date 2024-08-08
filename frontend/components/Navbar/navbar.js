@@ -64,7 +64,31 @@ const generateDesktopNavbar = (isLoggedIn) => {
             </div>
         </div>
     `;
+  const adminNav = `<div class="navbar-desktop">
+        <div class="container-full-space">
+          <a href="/pages/bookstore" class="sm-text">Bookstore</a>
+        </div>
+        <div class="logo-container">
+          <a href="/pages/home"
+            ><img
+              src="../../assets/logo/logo-nav.svg"
+              alt="logo"
+              class="logo-nav"
+          /></a>
+        </div>
+        <div class="container-full-space right">
+          <a href="/pages/Admin"><p class="sm-text">Admin Page</p></a>
+          <p class="sm-text">|</p>
+          <a> <p class="sm-text logout">Log out</p></a>
+        </div>
+      </div>`;
+
   $(".navbar").html(isLoggedIn ? loggedInNav : loggedOutNav);
+
+  // add the check if the user is an admin
+
+  // if (!admin) $(".navbar").html(isLoggedIn ? loggedInNav : loggedOutNav);
+  // else $(".navbar").html(adminNav);
 };
 
 // create navbar desktop - user is logged!

@@ -11,18 +11,27 @@ namespace Backend.Controllers
     {
         // POST api/users/register
         [HttpPost("register")]
-        public ActionResult<string> Register([FromBody] Users user)
+        public ActionResult<object> Register([FromBody] Users user)
         {
             string result = user.Register();
             if (result == "Registration successful.")
             {
-                return Ok(result);
+                var response = new
+                {
+                    username = user.Username,
+                    email = user.Email,
+                    profileImageLink = "",
+                    coins = 0,
+                    message = result
+                };
+                return Ok(response);
             }
             else
             {
-                return BadRequest(result);
+                return BadRequest(new { message = result });
             }
         }
+
 
         // POST api/users/login
         [HttpPost("login")]

@@ -2,15 +2,21 @@
  * Login function
  * @returns {Promise<boolean>}
  */
+
+
+
 export async function login(username, password) {
   try {
-    const response = await fetch(`${API_URL}/login`, {
+    console.log(username, password);
+    const response = await fetch(`${API_URL}Users/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({ Email: username, Password: password }),
     });
+    
+    console.log(response);
 
     if (!response.ok) {
       throw new Error("Login failed");
@@ -18,11 +24,16 @@ export async function login(username, password) {
 
     const data = await response.json();
 
-    if (data.token) {
-      localStorage.setItem("authToken", data.token);
+    // Store relevant user details in localStorage
+    if (data.username && data.email) {
+      localStorage.setItem("authToken", data.username);
+      localStorage.setItem("email", data.email);
+      localStorage.setItem("profileImageLink", data.profileImageLink);
+      localStorage.setItem("coins", data.coins);
+
       return true;
     } else {
-      throw new Error("Login failed");
+      throw new Error("Login failed: Incomplete data received");
     }
   } catch (error) {
     console.error(error);
@@ -35,6 +46,9 @@ export async function login(username, password) {
  */
 export function logout() {
   localStorage.removeItem("authToken");
+  localStorage.removeItem("email");
+  localStorage.removeItem("profileImageLink");
+  localStorage.removeItem("coins");
   location.reload();
 }
 
@@ -54,21 +68,16 @@ export function getAuthToken() {
   return localStorage.getItem("authToken");
 }
 
-/**
- * Register function (optional, if your application supports user registration)
- * @param {string} username
- * @param {string} password
- * @param {string} email
- * @returns {Promise<boolean>}
- */
+
+
 export async function register(username, password, email) {
   try {
-    const response = await fetch(`${API_URL}/register`, {
+    const response = await fetch(`${API_URL}Users/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username, password, email }),
+      body: JSON.stringify({username: username,password: password,email: email ,coins: 0,profileImageLink: "" }),
     });
 
     if (!response.ok) {
@@ -76,9 +85,14 @@ export async function register(username, password, email) {
     }
 
     const data = await response.json();
+    
+    console.log(data)
 
-    if (data.token) {
-      localStorage.setItem("authToken", data.token);
+    if (data.username && data.email) {
+      localStorage.setItem("authToken", data.username);
+      localStorage.setItem("email", data.email);
+      localStorage.setItem("profileImageLink", data.profileImageLink);
+      localStorage.setItem("coins", data.coins);
       return true;
     } else {
       throw new Error("Registration failed");

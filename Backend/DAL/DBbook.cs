@@ -686,7 +686,6 @@ namespace Backend.DAL
                     }
                 }
             }
-
             return books;
         }
     }

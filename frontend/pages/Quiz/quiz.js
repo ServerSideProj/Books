@@ -4,6 +4,8 @@ var interval;
 var questions = [];
 var arrAns = [];
 var finalAnsForQues = ""; // Each time the user clicks next - the final answer will be saved to the array
+var topUsers = [];
+var quizId;
 
 $(document).ready(function () {
   const startButton = $("#btn-start-quiz");
@@ -11,54 +13,52 @@ $(document).ready(function () {
 
   startButton.on("click", startStopwatch);
   nextQuestionButton.on("click", nextQuestion);
+
+  fetchData(
+    API_URL + "Users/daily-quiz/top-5-users-scores",
+    addTopUsers,
+    errCall
+  );
 });
+
+const addTopUsers = (data) => {
+  console.log(data);
+  topUsers = data;
+};
 
 // Get the quiz questions and answers
 const fetchQuestions = () => {
-  //   $.getJSON("path/to/your/questions.json", function (data) {
-  //     questions = data;
-  //     displayQuestion(0);
-  //   });
-  questions = [
-    {
-      question: "What is the capital of France?",
-      answer: "Paris",
-      wrongAnswer1: "London",
-      wrongAnswer2: "Berlin",
-      wrongAnswer3: "Madrid",
-    },
-    {
-      question: "What is 2 + 2?",
-      answer: "4",
-      wrongAnswer1: "3",
-      wrongAnswer2: "5",
-      wrongAnswer3: "6",
-    },
-    {
-      question: "What is the capital of Japan?",
-      answer: "Tokyo",
-      wrongAnswer1: "Beijing",
-      wrongAnswer2: "Seoul",
-      wrongAnswer3: "Bangkok",
-    },
-    {
-      question: "What is the largest ocean?",
-      answer: "Pacific",
-      wrongAnswer1: "Atlantic",
-      wrongAnswer2: "Indian",
-      wrongAnswer3: "Arctic",
-    },
-    {
-      question: "What is the square root of 16?",
-      answer: "4",
-      wrongAnswer1: "3",
-      wrongAnswer2: "5",
-      wrongAnswer3: "6",
-    },
-  ];
-  displayQuestion(0);
+  fetchData(
+    API_URL +
+      "Quiz/daily-quiz/" +
+      encodeURIComponent(localStorage.getItem("email")),
+    displayQuestions,
+    errCall
+  );
 };
 
+const displayQuestions = (data) => {
+  console.log(data);
+  if (data.message === "You have already taken today's quiz.") {
+    // If the user has already taken the quiz, show the last page with their results
+    showLastPageQuiz(-1, data);
+  } else if (data.message === "Here is your daily quiz.") {
+    // If this is a new quiz, display the questions
+    quizId = data.quiz.quizId;
+    console.log(data.quiz.quizId);
+    questions = data.quiz.questions;
+    console.log(questions);
+    displayQuestion(0);
+  } else {
+    console.error("Unexpected response from server:", data);
+    alert("There was an error retrieving your quiz. Please try again later.");
+  }
+};
+
+const errCall = (error) => {
+  console.error("Error fetching quiz:", error);
+  alert("There was an error fetching your quiz. Please try again later.");
+};
 // Shuffle the answers of each question
 const shuffleArray = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
@@ -78,7 +78,7 @@ const displayQuestion = (index) => {
     { text: questionData.wrongAnswer3, isCorrect: false },
   ]);
 
-  $("#question").text(questionData.question);
+  $("#question").text(questionData.questionText);
 
   $(".ans").each(function (i) {
     $(this).removeClass("selected");
@@ -167,43 +167,56 @@ const finishQuiz = () => {
   showLastPageQuiz(corrects);
 };
 
-const showLastPageQuiz = (corrects = -1) => {
+const showLastPageQuiz = (corrects = -1, data = null) => {
+  let index = 1;
   if (corrects === -1) {
-    // get the amount of correct answers from server
+    console.log(data);
+
+    $(".add-coins").html(data.quiz.score * 3);
+    $(".bg-scores .count").html(data.score);
+    $("#total-time > span").html(formatTime(data.timeInSeconds));
+  } else {
+    // display resualts
+    $(".add-coins").html(corrects);
+    $(".bg-scores .count").html(corrects);
+    $("#total-time > span").html($(".time")[0].outerText);
   }
 
   $(".final").removeClass("none");
   $(".container-questions").addClass("none");
 
-  // display resualts
-  $(".add-coins").html(corrects);
-  $(".bg-scores .count").html(corrects);
-  $("#total-time > span").html($(".time")[0].outerText);
-
-  for (let i = 1; i <= 5; i++) {
-    const user = `<div class="input-box-sqr flex center-hor gap-1">
-            <div class="circle-gradient md-text">${i}</div>
-            <p class="username">${"name of user"}</p>
-            <div class="total-time">${"00:00"}</div>
-            </div>`;
+  while (index <= topUsers.length) {
+    const user = `
+        <div class="input-box-sqr flex center-hor gap-1">
+            <div class="circle-gradient md-text">${index}</div>
+            <p class="username">${
+              topUsers[index - 1].username
+            }</p> <!-- Username -->
+            <div class="score flex center-hor">${
+              topUsers[index - 1].score
+            }/5</div> <!-- Score -->
+            <div class="total-time">${formatTime(
+              topUsers[index - 1].timeInSeconds
+            )}</div> <!-- Time -->
+        </div>`;
     $("#usernames-lead").append(user);
+    index++;
   }
 };
 
 // send resaults of quiz to server
 const sendResultsToServer = (score, time) => {
-  $.ajax({
-    url: "path/to/your/api/endpoint", // Replace with your API endpoint
-    method: "POST",
-    contentType: "application/json",
-    data: JSON.stringify({ score: score, time: time }),
-    success: function (response) {
-      console.log("Results sent successfully", response);
-      // Optionally handle the response
-    },
-    error: function (error) {
-      console.error("Error sending results", error);
-      // Optionally handle the error
-    },
-  });
+  let data = {
+    quizId: quizId,
+    userMail: localStorage.getItem("email"),
+    score: score,
+    timeInSeconds: time,
+    username: localStorage.getItem("authToken"),
+  };
+  localStorage.getItem("coins") = (parseInt(localStorage.getItem("coins")) + (score * 3))
+  sendData(API_URL + "Quiz/save-score", data, end, end);
+};
+
+const end = (data) => {
+  console.log(data);
 };

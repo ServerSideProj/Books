@@ -291,5 +291,37 @@ namespace Backend.DAL
                 return result != null ? Convert.ToInt32(result) : 0;
             }
         }
+
+        public List<UserScore> GetTop5UserScores(int quizId)
+        {
+            List<UserScore> topScores = new List<UserScore>();
+
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                using (SqlCommand cmd = new SqlCommand("sp_GetTop5UserScores", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@quizId", quizId);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            UserScore userScore = new UserScore(
+                                quizId: quizId,
+                                userMail: reader.GetString(0),
+                                score: reader.GetInt32(1),
+                                timeInSeconds: reader.GetInt32(2),
+                                username: reader.GetString(3)
+                            );
+                            topScores.Add(userScore);
+                        }
+                    }
+                }
+            }
+
+            return topScores;
+        }
+
     }
 }

@@ -3,8 +3,40 @@
   "WorkspaceRootPath": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\bl\\book.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:bl\\book.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\dal\\dbauthor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:dal\\dbauthor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\bl\\author.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:bl\\author.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\controllers\\authorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:controllers\\authorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\controllers\\usercontroller .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:controllers\\usercontroller .cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\dal\\dbbook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:dal\\dbbook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\dal\\dbservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:dal\\dbservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\controllers\\bookcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:controllers\\bookcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -17,22 +49,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\dal\\dbuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:dal\\dbuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\dal\\dbservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:dal\\dbservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\dal\\dbbook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:dal\\dbbook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\bl\\book.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:bl\\book.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\controllers\\bookcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:controllers\\bookcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\bl\\bookcopy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -81,27 +97,8 @@
       "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:bl\\transaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\bl\\author.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:bl\\author.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\dal\\dbtransaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:dal\\dbtransaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\controllers\\authorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:controllers\\authorcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\dal\\dbauthor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:dal\\dbauthor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|c:\\users\\ran\\desktop\\final proj\\books\\backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{7E87B8B4-BE8F-4C6B-B8EF-40F8C952AC0C}|Backend.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ran\\Desktop\\Final proj\\Backend\\BI\\Author.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -111,11 +108,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 22,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 21,
               "Title": "Quiz.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\BL\\Quiz.cs",
               "RelativeDocumentMoniker": "BL\\Quiz.cs",
@@ -132,7 +129,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 19,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Documents\\GitHub\\Server-Side-Proj\\backend\\Program.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\Documents\\GitHub\\Server-Side-Proj\\backend\\Program.cs",
@@ -144,7 +141,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 18,
               "Title": "FileUploadController.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Documents\\GitHub\\Server-Side-Proj\\backend\\Controllers\\FileUploadController.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\Documents\\GitHub\\Server-Side-Proj\\backend\\Controllers\\FileUploadController.cs",
@@ -156,7 +153,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 20,
               "Title": "TransactionController.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\Controllers\\TransactionController.cs",
               "RelativeDocumentMoniker": "Controllers\\TransactionController.cs",
@@ -168,7 +165,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 24,
               "Title": "DBtransaction.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\DAL\\DBtransaction.cs",
               "RelativeDocumentMoniker": "DAL\\DBtransaction.cs",
@@ -180,7 +177,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 23,
               "Title": "Transaction.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\BL\\Transaction.cs",
               "RelativeDocumentMoniker": "BL\\Transaction.cs",
@@ -192,7 +189,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 22,
               "Title": "review.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\BL\\review.cs",
               "RelativeDocumentMoniker": "BL\\review.cs",
@@ -204,19 +201,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 0,
               "Title": "Book.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\BL\\Book.cs",
               "RelativeDocumentMoniker": "BL\\Book.cs",
               "ToolTip": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\BL\\Book.cs",
               "RelativeToolTip": "BL\\Book.cs",
-              "ViewState": "AQIAAGAAAAAAAAAAAAAAABgAAAAdAAAA",
+              "ViewState": "AQIAAAIAAAAAAAAAAAAjwAkAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-31T16:03:58.268Z"
+              "WhenOpened": "2024-07-31T16:03:58.268Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 13,
               "Title": "PhysBookCopy.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\BL\\PhysBookCopy.cs",
               "RelativeDocumentMoniker": "BL\\PhysBookCopy.cs",
@@ -228,7 +226,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 15,
               "Title": "Question.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\BL\\Question.cs",
               "RelativeDocumentMoniker": "BL\\Question.cs",
@@ -240,7 +238,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 17,
               "Title": "UserScore.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\BL\\UserScore.cs",
               "RelativeDocumentMoniker": "BL\\UserScore.cs",
@@ -252,44 +250,43 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "BookController.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\Controllers\\BookController.cs",
               "RelativeDocumentMoniker": "Controllers\\BookController.cs",
               "ToolTip": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\Controllers\\BookController.cs",
               "RelativeToolTip": "Controllers\\BookController.cs",
-              "ViewState": "AQIAAD8AAAAAAAAAAAAAAE4AAAAMAAAA",
+              "ViewState": "AQIAAIUAAAAAAAAAAAAAAGoAAAAsAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-02T12:52:13.59Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 3,
               "Title": "Author.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\BL\\Author.cs",
               "RelativeDocumentMoniker": "BL\\Author.cs",
               "ToolTip": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\BL\\Author.cs",
               "RelativeToolTip": "BL\\Author.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACIAAAAtAAAA",
+              "ViewState": "AQIAABgAAAAAAAAAAAAAwDYAAAAzAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-31T16:03:54.819Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "DBbook.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\DAL\\DBbook.cs",
               "RelativeDocumentMoniker": "DAL\\DBbook.cs",
               "ToolTip": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\DAL\\DBbook.cs",
               "RelativeToolTip": "DAL\\DBbook.cs",
-              "ViewState": "AQIAABkAAAAAAAAAAAAawBsCAAAeAAAA",
+              "ViewState": "AQIAAH8CAAAAAAAAAAAAAJcCAABAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-02T12:01:21.184Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-02T12:01:21.184Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 12,
               "Title": "BookCopy.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\BL\\BookCopy.cs",
               "RelativeDocumentMoniker": "BL\\BookCopy.cs",
@@ -301,7 +298,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 10,
               "Title": "Users.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\BL\\Users.cs",
               "RelativeDocumentMoniker": "BL\\Users.cs",
@@ -309,24 +306,23 @@
               "RelativeToolTip": "BL\\Users.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-31T16:04:17.488Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-31T16:04:17.488Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 1,
               "Title": "DBauthor.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\DAL\\DBauthor.cs",
               "RelativeDocumentMoniker": "DAL\\DBauthor.cs",
               "ToolTip": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\DAL\\DBauthor.cs",
               "RelativeToolTip": "DAL\\DBauthor.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACcAAAABAAAA",
+              "ViewState": "AQIAAE4AAAAAAAAAAAAWwFYAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-05T08:47:31.126Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 14,
               "Title": "QuestionGenerator.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\BL\\QuestionGenerator.cs",
               "RelativeDocumentMoniker": "BL\\QuestionGenerator.cs",
@@ -338,7 +334,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 11,
               "Title": "DBuser.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\DAL\\DBuser.cs",
               "RelativeDocumentMoniker": "DAL\\DBuser.cs",
@@ -346,24 +342,23 @@
               "RelativeToolTip": "DAL\\DBuser.cs",
               "ViewState": "AQIAACoAAAAAAAAAAAAawEIAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-01T15:04:51.45Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-01T15:04:51.45Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 4,
               "Title": "AuthorController.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\Controllers\\AuthorController.cs",
               "RelativeDocumentMoniker": "Controllers\\AuthorController.cs",
               "ToolTip": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\Controllers\\AuthorController.cs",
               "RelativeToolTip": "Controllers\\AuthorController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACUAAAAJAAAA",
+              "ViewState": "AQIAACwAAAAAAAAAAAAAwEgAAAA8AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-05T08:46:09.412Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "DBservices.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\DAL\\DBservices.cs",
               "RelativeDocumentMoniker": "DAL\\DBservices.cs",
@@ -371,25 +366,23 @@
               "RelativeToolTip": "DAL\\DBservices.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABQAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-01T15:04:54.771Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-01T15:04:54.771Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
               "Title": "UserController .cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\Controllers\\UserController .cs",
               "RelativeDocumentMoniker": "Controllers\\UserController .cs",
               "ToolTip": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\Controllers\\UserController .cs",
               "RelativeToolTip": "Controllers\\UserController .cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAARAAAA",
+              "ViewState": "AQIAAJYAAAAAAAAAAAAAABMAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-01T16:02:02.509Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-01T16:02:02.509Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 16,
               "Title": "QuizController.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\Controllers\\QuizController.cs",
               "RelativeDocumentMoniker": "Controllers\\QuizController.cs",
@@ -401,7 +394,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 9,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -409,12 +402,11 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABoAAAAtAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-08-01T15:38:32.027Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-08-01T15:38:32.027Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 2,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Books\\Backend\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
@@ -423,17 +415,6 @@
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2024-08-01T15:39:22.056Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
-              "Title": "Author.cs",
-              "DocumentMoniker": "C:\\Users\\ran\\Desktop\\Final proj\\Backend\\BI\\Author.cs",
-              "RelativeDocumentMoniker": "..\\..\\Backend\\BI\\Author.cs",
-              "ToolTip": "C:\\Users\\ran\\Desktop\\Final proj\\Backend\\BI\\Author.cs",
-              "RelativeToolTip": "..\\..\\Backend\\BI\\Author.cs",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-26T15:41:32.469Z"
             }
           ]
         }

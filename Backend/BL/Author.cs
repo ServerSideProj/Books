@@ -10,21 +10,25 @@ namespace Backend.BL
         private string name;
         private string biography;
         private string wikiLink;
+        private string pictureUrl; 
 
         private static readonly DBauthor dbAuthor = new DBauthor();
 
-        public Author(int id, string name, string biography, string wikiLink)
+
+        public Author(int id, string name, string biography, string wikiLink, string pictureUrl)
         {
             Id = id;
             Name = name;
             Biography = biography;
             WikiLink = wikiLink;
+            PictureUrl = pictureUrl; 
         }
 
         public int Id { get => id; set => id = value; }
         public string Name { get => name; set => name = value; }
         public string Biography { get => biography; set => biography = value; }
         public string WikiLink { get => wikiLink; set => wikiLink = value; }
+        public string PictureUrl { get => pictureUrl; set => pictureUrl = value; } 
 
         public static void AddAuthor(Author author)
         {
@@ -40,5 +44,16 @@ namespace Backend.BL
         {
             return dbAuthor.GetAllAuthors();
         }
+
+        public static void UpdateAuthor(Author author)
+        {
+            dbAuthor.UpdateAuthor(author);
+        }
+
+        public static IEnumerable<object> GetAuthorWithBookCount()
+        {
+            return dbAuthor.GetAuthorWithBookCount();
+        }
+
     }
 }

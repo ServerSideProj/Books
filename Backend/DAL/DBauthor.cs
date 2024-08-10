@@ -1,9 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-
 using Backend.BL;
-
 
 namespace Backend.DAL
 {
@@ -19,6 +18,7 @@ namespace Backend.DAL
                 cmd.Parameters.AddWithValue("@Name", author.Name);
                 cmd.Parameters.AddWithValue("@Biography", author.Biography);
                 cmd.Parameters.AddWithValue("@WikiLink", author.WikiLink);
+                cmd.Parameters.AddWithValue("@PictureUrl", author.PictureUrl); 
 
                 cmd.ExecuteNonQuery();
             }
@@ -52,10 +52,11 @@ namespace Backend.DAL
                         while (reader.Read())
                         {
                             authors.Add(new Author(
-                                id: Convert.ToInt32(reader["id"]),
-                                name: reader["name"].ToString(),
-                                biography: reader["biography"].ToString(),
-                                wikiLink: reader["wikiLink"].ToString()
+                                id: Convert.ToInt32(reader["Id"]),
+                                name: reader["Name"].ToString(),
+                                biography: reader["Biography"].ToString(),
+                                wikiLink: reader["WikiLink"].ToString(),
+                                pictureUrl: reader["PictureUrl"].ToString() 
                             ));
                         }
                     }
@@ -64,5 +65,52 @@ namespace Backend.DAL
 
             return authors;
         }
+
+        public void UpdateAuthor(Author author)
+        {
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                SqlCommand cmd = new SqlCommand("sp_UpdateAuthor", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@Id", author.Id);
+                cmd.Parameters.AddWithValue("@Name", author.Name);
+                cmd.Parameters.AddWithValue("@Biography", author.Biography);
+                cmd.Parameters.AddWithValue("@WikiLink", author.WikiLink);
+                cmd.Parameters.AddWithValue("@PictureUrl", author.PictureUrl);
+
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public IEnumerable<object> GetAuthorWithBookCount()
+        {
+            var authors = new List<object>();
+
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                SqlCommand cmd = new SqlCommand("sp_GetAuthorWithBookCount", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        authors.Add(new
+                        {
+                            Id = Convert.ToInt32(reader["Id"]),
+                            Name = reader["Name"].ToString(),
+                            Biography = reader.IsDBNull(reader.GetOrdinal("Biography")) ? "" : reader["Biography"].ToString(),
+                            WikiLink = reader.IsDBNull(reader.GetOrdinal("WikiLink")) ? "" : reader["WikiLink"].ToString(),
+                            PictureUrl = reader.IsDBNull(reader.GetOrdinal("PictureUrl")) ? "" : reader["PictureUrl"].ToString(),
+                            BookCount = Convert.ToInt32(reader["BookCount"])
+                        });
+                    }
+                }
+
+                return authors;
+            }
+        }
+
     }
 }

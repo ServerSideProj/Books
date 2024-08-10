@@ -259,34 +259,7 @@ namespace Backend.DAL
             }
         } ///????????????????
 
-        // Get authors for a specific book title
-        private List<Author> GetAuthorsByBookId(int bookId)
-        {
-            List<Author> authors = new List<Author>();
 
-            using (SqlConnection con = connect("myProjDB"))
-            {
-                SqlCommand cmd = new SqlCommand("sp_GetAuthorsByBookId", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-
-                cmd.Parameters.AddWithValue("@BookId", bookId);
-
-                using (SqlDataReader reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        authors.Add(new Author(
-                            id: Convert.ToInt32(reader["id"]),
-                            name: reader["name"].ToString(),
-                            biography: reader["biography"].ToString(),
-                            wikiLink: reader["wikiLink"].ToString()
-                        ));
-                    }
-                }
-            }
-
-            return authors;
-        }
 
         // Get categories for a specific book title
         private string[] GetCategoriesByBookId(int bookId)
@@ -414,6 +387,7 @@ namespace Backend.DAL
                 insertCmd.Parameters.AddWithValue("@Name", author.Name);
                 insertCmd.Parameters.AddWithValue("@Biography", author.Biography);
                 insertCmd.Parameters.AddWithValue("@WikiLink", author.WikiLink);
+                insertCmd.Parameters.AddWithValue("@PictureUrl", author.PictureUrl);
 
                 return Convert.ToInt32(insertCmd.ExecuteScalar()); // Return the new Author ID
             }
@@ -514,6 +488,36 @@ namespace Backend.DAL
                 imageLink: reader["imageLink"].ToString(),
                 previewLink: reader["isEbook"] != DBNull.Value && Convert.ToBoolean(reader["isEbook"]) ? reader["previewLink"].ToString() : null // Include previewLink only if it's an eBook
             );
+        }
+
+        // Get authors for a specific book title
+        private List<Author> GetAuthorsByBookId(int bookId)
+        {
+            List<Author> authors = new List<Author>();
+
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                SqlCommand cmd = new SqlCommand("sp_GetAuthorsByBookId", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@BookId", bookId);
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        authors.Add(new Author(
+                            id: Convert.ToInt32(reader["id"]),
+                            name: reader["name"].ToString(),
+                            biography: reader["biography"].ToString(),
+                            wikiLink: reader["wikiLink"].ToString(),
+                            pictureUrl: reader["PictureUrl"].ToString()
+                        ));
+                    }
+                }
+            }
+
+            return authors;
         }
 
         // maps SQL data to appropriate BookCopy object
@@ -657,7 +661,7 @@ namespace Backend.DAL
                 SqlCommand cmd = new SqlCommand("sp_DeleteBook", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@BookId", bookId);  // Updated to use bookId
+                cmd.Parameters.AddWithValue("@BookId", bookId); 
 
                 cmd.ExecuteNonQuery();
             }

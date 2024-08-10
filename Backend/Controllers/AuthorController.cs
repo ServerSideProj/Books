@@ -1,7 +1,6 @@
 ﻿using Backend.BL;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Backend.Controllers
 {
@@ -48,6 +47,37 @@ namespace Backend.Controllers
             catch (Exception ex)
             {
                 return StatusCode(500, new { Error = ex.Message });
+            }
+        }
+
+        [HttpPost("update-authors")]
+        public IActionResult UpdateAuthors([FromBody] List<Author> authors)
+        {
+            try
+            {
+                foreach (var author in authors)
+                {
+                    Author.UpdateAuthor(author);
+                }
+                return Ok(new { Message = "Authors updated successfully." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Error = ex.Message });
+            }
+        }
+
+        [HttpGet("authors-with-book-count")]
+        public IActionResult GetAuthorWithBookCount()
+        {
+            var authorsInfo = Author.GetAuthorWithBookCount();
+            if (authorsInfo != null)
+            {
+                return Ok(authorsInfo);
+            }
+            else
+            {
+                return NotFound(new { Message = "Authors not found." });
             }
         }
     }

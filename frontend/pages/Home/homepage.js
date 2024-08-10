@@ -96,9 +96,12 @@ const topPhysFetchSuccess = (response) => {
 };
 
 const getAuthors = () => {
-  fetchData(API_URL + allAuthorsUrl, gotAllAuthors, onError);
+  fetchData(API_URL + 'Author/authors-with-book-count', gotAllAuthors, onError);
 };
 
+
 const gotAllAuthors = (response) => {
-  console.log(response);
+  const data = response;
+  generatecards(data);
 };
+

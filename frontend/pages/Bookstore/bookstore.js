@@ -2,7 +2,7 @@ const isLoggedIn = localStorage.getItem("authToken") !== null;
 var arrBooks = []; // the books that available on screen
 $(document).ready(function () {
   // Initial render of books
-  renderBooks(arrBooks);
+  getAllBooks();
 
   $(".price-filter").on("click", function () {
     $(".price-filter > img").toggleClass("open");
@@ -24,16 +24,21 @@ $(document).ready(function () {
 
 // get all books from server
 const getAllBooks = () => {
-  // arrBooks =
+  fetchData(API_URL + "Book/all-active-books", renderBooks, error);
 };
+
+function error(e) {
+  console.log(e);
+}
 
 // Render books on screen
 const renderBooks = (books) => {
+  arrBooks = books;
   const bookstore = $(".books-container");
   bookstore.empty();
 
   books.forEach((book) => {
-    bookstore.append(generateBookCard(false));
+    bookstore.append(generateBookCard(false, book));
   });
 };
 

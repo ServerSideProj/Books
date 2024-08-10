@@ -119,6 +119,9 @@ input[type="number"]::-webkit-inner-spin-button {
 
 .books-container {
   width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .search-container {
@@ -167,9 +170,9 @@ input[type="number"]::-webkit-inner-spin-button {
   background-color: #fff;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1000px) {
   .main {
-    padding: 5rem 1rem;
+    padding: 5.5rem 1rem;
   }
 
   .mobile-flex-col {
@@ -191,6 +194,10 @@ input[type="number"]::-webkit-inner-spin-button {
   .btn-search {
     padding: 8px 15px;
     font-size: 12px;
+  }
+  .books-container {
+    justify-content: center;
+    gap: 1rem;
   }
 }
 

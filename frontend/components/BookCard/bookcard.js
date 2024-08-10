@@ -1,73 +1,30 @@
-const generateBookCard = (isDefault, book) => {
-  // check if need to add extra details to card
-  if (isDefault) {
-    const bookcardDefault = `<div class="book-card">
-      <div class="book-card-img">
-          <div class="btn like-btn on-cover-bg">
-          <img
-              src="../../assets/icons/heart-white-stroke.svg"
-              alt="heart"
-          />
-          </div>
+const generateBookCard_default = (book) => {
+  return `
+    <div data-book-id=${book.id} class="book-card">
+      <div class="book-card-img" style="background-image: url('${
+        book.imageLink
+      }');">
           <div class="container-flex flex-end-space width100">
           <div
               class="price-wrapper on-cover-bg white-text xsm-text"
           >
-              7 $
+              $${book.price}
           </div>
           <div
               class="type-wrapper on-cover-bg white-text xsm-text"
           >
-              Physical
+          ${book.isEbook ? "eBook" : "Physical"}
           </div>
           </div>
       </div>
           <div class="container-flex-col gap-0">
-              <p class="md-text">Name of the Book</p>
+              <p class="md-text">${book.title}</p>
               <p class="xsm-text grey-text font-reg">
-              Name of the Author
-              </p>
-          </div>
-      
-      </div>`;
-    return bookcardDefault;
-  } else {
-    const bookcardFull = `<div class="book-card">
-      <div class="book-card-img">
-          <div class="btn like-btn on-cover-bg">
-          <img
-              src="${book.imageLink}"
-              alt="${book.title || "Book Image"}"
-          />
-          </div>
-          <div class="container-flex flex-end-space width100">
-          <div
-              class="price-wrapper on-cover-bg white-text xsm-text"
-          >
-              ${book.price ? book.price + " $" : "N/A"}
-          </div>
-          <div
-              class="type-wrapper on-cover-bg white-text xsm-text"
-          >
-              ${book.isEbook ? "eBook" : "Physical"}
-          </div>
-          </div>
-      </div>
-          <div class="container-flex-col gap-0">
-              <p class="md-text">${book.title || "Name of the Book"}</p>
-              <p class="xsm-text grey-text font-reg">
-              ${
-                book.authors && book.authors.length > 0
-                  ? book.authors.map((author) => author.name).join(", ")
-                  : "Name of the Author"
-              }
+              ${book.authors.map((author) => author.name).join(", ")}
               </p>
           </div>
       </div>`;
-    return bookcardFull;
-  }
 };
-
 const addBookmark = (type) => {
   //type can be "sale" or "done"
   const bookmark = `<img
@@ -103,9 +60,9 @@ const addForSale = () => {
 };
 
 // Function to generate book card from data
-function generateBookCard_homepage(book) {
+function generateBookCard_allDetails(book) {
   return `
-    <div class="book-card">
+    <div data-book-id=${book.id} class="book-card">
       <div class="book-card-img" style="background-image: url('${
         book.imageLink
       }');">
@@ -117,15 +74,15 @@ function generateBookCard_homepage(book) {
             $${book.price}
           </div>
           <div class="type-wrapper on-cover-bg white-text xsm-text">
-            eBook
+            ${book.isEbook ? "eBook" : "Physical"}
           </div>
         </div>
       </div>
-      <div class="container-flex-col gap-0">
+      <div class="container-flex-col gap-0 width100">
         <p class="md-text">${book.title}</p>
-        <p class="xsm-text grey-text font-reg">${book.authors
-          .map((author) => author.name)
-          .join(", ")}</p>
+        <p class="xsm-text grey-text font-reg">
+        ${book.authors.map((author) => author.name).join(", ")}
+          </p>
       </div>
       <div class="extra-details-card">
         <div class="container-flex-col gap-0">

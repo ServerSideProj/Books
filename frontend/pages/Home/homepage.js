@@ -5,8 +5,8 @@ const topPhysBooksUrl = "Book/popular-physical-books"; // URL to fetch the top 5
 const allAuthorsUrl = "Author/all-authors";
 
 $(document).ready(function () {
-  getTopEBooks();
   getTopPhysical();
+  getTopEBooks();
 
   getAuthors();
 });
@@ -14,39 +14,11 @@ $(document).ready(function () {
 const getTopEBooks = () => {
   // get the top ebooks from server
   fetchData(API_URL + topEbooksUrl, topEBooksFetchSuccess, onError);
-
-  for (let i = 0; i < 5; i++) {
-    let card = generateBookCard(true);
-    $("#top-ebooks").append(card);
-  }
-  $("#top-ebooks > *").each(function () {
-    const likeBtn = $(this).find(".like-btn").get(0);
-    $(likeBtn).on("click", function () {
-      if (isLoggedIn) $(this).toggleClass("liked");
-      else {
-        popupLogin();
-      }
-    });
-  });
 };
 
 const getTopPhysical = () => {
   // get the top physical books from server
   fetchData(API_URL + topPhysBooksUrl, topPhysFetchSuccess, onError);
-
-  for (let i = 0; i < 5; i++) {
-    let card = generateBookCard(true);
-    $("#top-physicals").append(card);
-  }
-  $("#top-physicals > *").each(function () {
-    const likeBtn = $(this).find(".like-btn").get(0);
-    $(likeBtn).on("click", function () {
-      if (isLoggedIn) $(this).toggleClass("liked");
-      else {
-        popupLogin();
-      }
-    });
-  });
 };
 
 // get the top ebooks from server
@@ -56,19 +28,15 @@ const topEBooksFetchSuccess = (response) => {
 
   // Iterate through the response to get the top 5 ebooks
   response.slice(0, 5).forEach((book) => {
-    const bookCard = generateBookCard_homepage(book);
+    const bookCardHtml = generateBookCard_default(book); // Get the HTML string
+    const $bookCard = $(bookCardHtml); // Convert to jQuery object
 
-    topEbooksContainer.append(bookCard);
-  });
-
-  // Attach event handlers for the like buttons
-  topEbooksContainer.find(".like-btn").each(function () {
-    $(this).on("click", function () {
-      if (isLoggedIn) $(this).toggleClass("liked");
-      else {
-        popupLogin();
-      }
+    // Add click event listener to the book card
+    $bookCard.click(() => {
+      window.location.href = `/pages/Book?id=${book.id}`;
     });
+
+    topEbooksContainer.append($bookCard);
   });
 };
 
@@ -77,31 +45,24 @@ const topPhysFetchSuccess = (response) => {
   const topPhysContainer = $("#top-physicals");
   topPhysContainer.empty(); // Clear previous content
 
-  // Iterate through the response to get the top 5 ebooks
+  // Iterate through the response to get the top 5 physical books
   response.slice(0, 5).forEach((book) => {
-    const bookCard = generateBookCard_homepage(book);
+    const bookCardHtml = generateBookCard_default(book); // Get the HTML string
+    const $bookCard = $(bookCardHtml); // Convert HTML string to jQuery object
 
-    topPhysContainer.append(bookCard);
-  });
-
-  // Attach event handlers for the like buttons
-  topPhysContainer.find(".like-btn").each(function () {
-    $(this).on("click", function () {
-      if (isLoggedIn) $(this).toggleClass("liked");
-      else {
-        popupLogin();
-      }
+    // Add click event listener to the book card
+    $bookCard.click(() => {
+      window.location.href = `/pages/Book?id=${book.id}`;
     });
+
+    topPhysContainer.append($bookCard);
   });
 };
-
 const getAuthors = () => {
-  fetchData(API_URL + 'Author/authors-with-book-count', gotAllAuthors, onError);
+  fetchData(API_URL + "Author/authors-with-book-count", gotAllAuthors, onError);
 };
-
 
 const gotAllAuthors = (response) => {
   const data = response;
-  generatecards(data);
+  generateCards(data);
 };
-

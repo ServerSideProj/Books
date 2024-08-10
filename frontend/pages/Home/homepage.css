@@ -90,6 +90,7 @@
 .row-books {
   display: flex;
   justify-content: space-between;
+  padding: 20px 0;
 }
 
 .container-quiz-banner {
@@ -197,7 +198,24 @@
   }
 }
 
+@media screen and (max-width: 1380px) {
+  .row-books {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 1rem;
+    overflow-x: auto;
+    padding-bottom: 2rem;
+    padding-right: 1rem;
+    scroll-snap-type: x mandatory;
+  }
+}
+
 @media screen and (max-width: 1000px) {
+  .main {
+    padding: 5.5rem 0rem;
+  }
+
   .title-hero {
     width: 16rem;
   }

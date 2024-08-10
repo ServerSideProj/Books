@@ -1,5 +1,8 @@
 const isLoggedIn = localStorage.getItem("authToken") !== null;
+const allBooksUrl = "Book/all-active-books";
+
 var arrBooks = []; // the books that available on screen
+
 $(document).ready(function () {
   // Initial render of books
   getAllBooks();
@@ -24,7 +27,7 @@ $(document).ready(function () {
 
 // get all books from server
 const getAllBooks = () => {
-  fetchData(API_URL + "Book/all-active-books", renderBooks, error);
+  fetchData(API_URL + allBooksUrl, renderBooks, error);
 };
 
 function error(e) {
@@ -38,7 +41,15 @@ const renderBooks = (books) => {
   bookstore.empty();
 
   books.forEach((book) => {
-    bookstore.append(generateBookCard(false, book));
+    const bookCardHtml = generateBookCard_allDetails(book); // Get the HTML string
+    const $bookCard = $(bookCardHtml);
+
+    // Add click event listener to the book card
+    $bookCard.click(() => {
+      window.location.href = `/pages/Book?id=${book.id}`;
+    });
+
+    bookstore.append($bookCard);
   });
 };
 

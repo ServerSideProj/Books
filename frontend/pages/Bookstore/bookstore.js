@@ -22,17 +22,13 @@ $(document).ready(function () {
     sortAndRenderBooks(filter);
   });
 
-  $(".more-filters").on("click", openFiltersPopup);
+  $("#more-filters").on("click", popupFilters);
 });
 
 // get all books from server
 const getAllBooks = () => {
-  fetchData(API_URL + allBooksUrl, renderBooks, error);
+  fetchData(API_URL + allBooksUrl, renderBooks, onError);
 };
-
-function error(e) {
-  console.log(e);
-}
 
 // Render books on screen
 const renderBooks = (books) => {
@@ -46,13 +42,20 @@ const renderBooks = (books) => {
 
     // Add click event listener to the book card
     $bookCard.click(() => {
-      window.location.href = `/pages/Book?id=${book.id}`;
+      const bookUrl = `/pages/Book/index.html?id=${book.id}`;
+      window.location.href = bookUrl;
+    });
+
+    // add listener to the like btn (and prevent from going to the page of the book)
+    $bookCard.find(".like-btn").on("click", function (event) {
+      event.stopPropagation();
+      if (isLoggedIn) {
+        $(this).toggleClass("liked");
+      } else {
+        popupLogin();
+      }
     });
 
     bookstore.append($bookCard);
   });
-};
-
-const openFiltersPopup = () => {
-  $(".bg-dark");
 };

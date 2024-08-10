@@ -76,7 +76,110 @@ const popupFriends = (type) => {
 // page: bookstore
 // show a popup of many options of filter the books on display.
 const popupFilters = () => {
-  const popup = ``;
+  const popup = `
+  <div id="popup-filters" class="popup-container gap-02">
+        <img src="../../assets/icons/X.svg" class="btn-x" />
+        <p class="xxl-text bold">Filters</p>
+        <div class="container-bot-border">
+          <div class="wrapper-title-filter">
+            <p class="xl-text">Category</p>
+            <div class="search-container">
+              <input type="text" placeholder="category..." />
+              <img src="../../assets/icons/search-icon.svg" alt="search-icon" />
+            </div>
+          </div>
+
+          <div class="container-options">
+            <!-- לבנות דרך הקוד, ולשים לב לא לשכוח להוסיף לכל קומפוננטה את הדאטה סט כאטריביוט -->
+          </div>
+        </div>
+        <div class="container-bot-border">
+          <div class="wrapper-title-filter">
+            <p class="xl-text">Author</p>
+            <div class="search-container">
+              <input type="text" placeholder="author name..." />
+              <img src="../../assets/icons/search-icon.svg" alt="search-icon" />
+            </div>
+          </div>
+
+          <div class="container-options">
+            <!-- לבנות דרך הקוד, ולשים לב לא לשכוח להוסיף לכל קומפוננטה את הדאטה סט כאטריביוט -->
+          </div>
+        </div>
+        <div class="container-bot-border">
+          <div class="wrapper-title-filter">
+            <p class="xl-text">Friends' Books</p>
+            <div class="search-container">
+              <input type="text" placeholder="alice143..." />
+              <img src="../../assets/icons/search-icon.svg" alt="search-icon" />
+            </div>
+          </div>
+
+          <div class="container-options">
+            <!-- לבנות דרך הקוד, ולשים לב לא לשכוח להוסיף לכל קומפוננטה את הדאטה סט כאטריביוט -->
+          </div>
+        </div>
+        <div class="container-bot-border">
+          <div class="wrapper-title-filter">
+            <p class="xl-text">Rate</p>
+          </div>
+          <div class="container-options container-flex space">
+            <div data-stars="3" class="opt">
+              <img src="../../assets/icons/sqr-icon.svg" alt="sqr-icon" />
+              <p class="sm-text">3 stars or less</p>
+            </div>
+            <div data-stars="4" class="opt">
+              <img src="../../assets/icons/sqr-icon.svg" alt="sqr-icon" />
+              <p class="sm-text">4 stars</p>
+            </div>
+            <div data-stars="5" class="opt">
+              <img src="../../assets/icons/sqr-icon.svg" alt="sqr-icon" />
+              <p class="sm-text">5 stars</p>
+            </div>
+          </div>
+        </div>
+        <div class="container-bot-border">
+          <div class="wrapper-title-filter">
+            <p class="xl-text">Release Date</p>
+          </div>
+          <div class="container-options container-flex-col space gap-03">
+            <div data-date="none" class="opt">
+              <img src="../../assets/icons/circle.svg" alt="sqr-icon" />
+              <p class="sm-text">none</p>
+            </div>
+            <div data-date="newest to oldest" class="opt">
+              <img src="../../assets/icons/circle.svg" alt="sqr-icon" />
+              <p class="sm-text">newest to oldest</p>
+            </div>
+            <div data-date="oldest to newest" class="opt">
+              <img src="../../assets/icons/circle.svg" alt="sqr-icon" />
+              <p class="sm-text">oldest to newest</p>
+            </div>
+          </div>
+        </div>
+        <div class="container-bot-border">
+          <div class="wrapper-title-filter">
+            <p class="xl-text">Book Type</p>
+          </div>
+          <div class="container-options container-flex-col space gap-03">
+            <div data-type="both" class="opt">
+              <img src="../../assets/icons/circle.svg" alt="sqr-icon" />
+              <p class="sm-text">Both</p>
+            </div>
+            <div data-type="ebooks" class="opt">
+              <img src="../../assets/icons/circle.svg" alt="sqr-icon" />
+              <p class="sm-text">Only eBooks</p>
+            </div>
+            <div data-type="phys" class="opt">
+              <img src="../../assets/icons/circle.svg" alt="sqr-icon" />
+              <p class="sm-text">Only physical books</p>
+            </div>
+          </div>
+        </div>
+        <div class="container-flex-col center gap-1"></div>
+        <div class="btn select-btn sm-text font-reg btn-gradient">Select</div>
+      </div>
+  `;
 
   $(".bg-dark").addClass("open");
   $(".bg-dark").append(popup);
@@ -87,7 +190,8 @@ const popupFilters = () => {
 
   // Add event listener to the "btn-x" to close the nav slide
   $(".btn-x").on("click", () => {
-    $(".popup-container").removeClass("open");
+    $("#popup-filters").removeClass("open");
+    $(".bg-dark").removeClass("open");
   });
 };
 

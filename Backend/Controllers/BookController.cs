@@ -2,6 +2,7 @@
 using Backend.BL;
 using System.Collections.Generic;
 using System.Text.Json;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace Backend.Controllers
 {
@@ -22,6 +23,21 @@ namespace Backend.Controllers
             List<Book> books = Book.GetTop5PopularEbooks();
             return Ok(books);
         }
+
+        [HttpGet("{id}")]
+        public ActionResult<Book> GetBookById(int id)
+        {
+            List<Book> books = Book.GetAllBooks();
+            var book = books.FirstOrDefault(b => b.Id == id);
+
+            if (book == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(book);
+        }
+
 
         [HttpGet("by-categories")]
         public ActionResult<List<Book>> GetBooksByCategories([FromQuery] string categories)

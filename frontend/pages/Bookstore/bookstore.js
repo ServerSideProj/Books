@@ -4,6 +4,9 @@ const allBooksUrl = "Book/all-active-books";
 var arrBooks = []; // the books that available on screen
 
 $(document).ready(function () {
+  $("#loader").show();
+  $(".main").hide();
+
   // Initial render of books
   getAllBooks();
 
@@ -32,6 +35,9 @@ const getAllBooks = () => {
 
 // Render books on screen
 const renderBooks = (books) => {
+  $("#loader").hide();
+  $(".main").show();
+
   arrBooks = books;
   const bookstore = $(".books-container");
   bookstore.empty();

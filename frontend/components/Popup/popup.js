@@ -25,6 +25,7 @@ const popupLogin = () => {
   // Add event listener to the "btn-x" to close the nav slide
   $(".btn-x").on("click", () => {
     $("#popup-login").removeClass("open");
+    $(".bg-dark").removeClass("open");
   });
 };
 
@@ -70,6 +71,7 @@ const popupFriends = (type) => {
   // Add event listener to the "btn-x" to close the nav slide
   $(".btn-x").on("click", () => {
     $(".popup-container").removeClass("open");
+    $(".bg-dark").removeClass("open");
   });
 };
 
@@ -240,5 +242,24 @@ const popupBookSaleOffer = () => {
   // Add event listener to the "btn-x" to close the nav slide
   $(".btn-x").on("click", () => {
     $(".popup-container").removeClass("open");
+  });
+};
+
+// page: book info
+// show a popup of a author data
+const authorData = () => {
+  const popup = ``;
+
+  $(".bg-dark").addClass("open");
+  $(".bg-dark").append(popup);
+  $("#popup-filters").addClass("open");
+
+  // Remove previous event listeners
+  $(".btn-x").off("click");
+
+  // Add event listener to the "btn-x" to close the nav slide
+  $(".btn-x").on("click", () => {
+    $("#popup-filters").removeClass("open");
+    $(".bg-dark").removeClass("open");
   });
 };

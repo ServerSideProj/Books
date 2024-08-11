@@ -23,19 +23,20 @@
     <script src="../../components/Navbar/navbar.js" type="module"></script>
 
     <!-- Styles for this page -->
-    <!-- flickity - For the carousel of reviews-->
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/flickity@2/dist/flickity.min.css"
-    />
+    <link rel="stylesheet" href="../../components/Popup/popup.css" />
     <link rel="stylesheet" href="./bookInfo.css" />
     <!-- Scripts for this page-->
-    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    <script src="../../components/Popup/popup.js"></script>
     <script src="./bookInfo.js"></script>
 
     <title>Book</title>
   </head>
   <body>
+    <div id="loader" class="bg-loader">
+      <div class="loader"></div>
+      <p>Loading...</p>
+    </div>
+    <div class="bg-dark"></div>
     <div class="navbar"></div>
     <div class="main">
       <div class="container-book-info">
@@ -44,11 +45,10 @@
           alt=""
           class="book-cover"
         />
-        <!-- <div class="container-flex gap-2 mobile-flex-col"> -->
         <div class="texts-container">
           <div>
-            <div class="title">Name of Book</div>
-            <div class="authors">Name of author1, name of author2...</div>
+            <div class="title"></div>
+            <div class="authors"></div>
           </div>
           <div id="info-about-book">
             <div id="type" class="tag-border-purple xsm-text">eBook</div>
@@ -65,7 +65,7 @@
           <div class="container-flex-col gap-0">
             <p class="l-text">Categories:</p>
             <div id="categories">
-              <!-- only need to create category div and inser the name of the category in js -->
+              <!-- only need to create category div and insert the name of the category in js -->
               <div class="category">Horror</div>
               <div class="category">Sience Fiction</div>
             </div>
@@ -82,20 +82,17 @@
                 src="../../assets/icons/Translate.svg"
                 alt="Translate"
               />
-              <p class="l-text">
-                Languages: <span id="languages">XXXXXX</span>
-              </p>
+              <p class="l-text">Language: <span id="languages"></span></p>
             </div>
             <a class="see-more xsm-text" href="">See more in Google</a>
           </div>
         </div>
-        <!-- </div> -->
         <div class="btns">
           <div class="like-container btn">
             <img src="../../assets/icons/heart-white-stroke.svg" alt="heart" />
           </div>
           <div class="wrapper-flex-end">
-            <div class="price">Price: <span id="price">5</span> $</div>
+            <div class="price">Price: $<span id="price"></span></div>
             <div id="add-to-cart-btn" class="btn btn-gradient sm-text font-reg">
               Add to Cart
             </div>
@@ -104,50 +101,13 @@
       </div>
       <div class="container-summary">
         <p class="big-text">Summary</p>
-        <p class="sm-text" id="description">cmdkcmdkcmkmdkmck</p>
-        <div class="see-more btn">read more</div>
+        <p class="sm-text" id="description">...</p>
+        <div class="see-more-sum btn">read more</div>
       </div>
 
       <div class="reviews-container">
         <p class="big-text title-reviews">Reviews</p>
-        <div class="reviews-wrapper gallery js-flickity">
-          <div class="review-card gallery-cell">
-            <p class="sm-text text-center font-reg">
-              “I've been using this web hosting service for a few months now and
-              overall it's been fine. The uptime has been good and I haven't had
-              any major issues. The pricing is also reasonable. Nothing The
-              uptime has been good and I haven't had any major issues. The
-              pricing is also reasonable. Nothing particularly stands out as
-              exceptional, but it gets the job done.”
-            </p>
-            <div class="stars-container">*****</div>
-            <div class="container-flex-col gap-03 center-hor">
-              <img
-                src="../../assets/images/user-profile-image.svg"
-                alt="user-profile-image"
-                class="user-image"
-              />
-              <p class="username">Username</p>
-            </div>
-          </div>
-          <div class="review-card gallery-cell">
-            <p class="sm-text text-center font-reg">
-              “I've been using this web hosting service for a few months now and
-              overall it's been fine. The uptime has been good and I haven't had
-              any major reasonable. Nothing particularly stands out as
-              exceptional, but it gets the job done.”
-            </p>
-            <div class="stars-container">*****</div>
-            <div class="container-flex-col gap-03 center-hor">
-              <img
-                src="../../assets/images/user-profile-image.svg"
-                alt="user-profile-image"
-                class="user-image"
-              />
-              <p class="username">Username</p>
-            </div>
-          </div>
-        </div>
+        <div class="reviews-wrapper"></div>
       </div>
     </div>
   </body>

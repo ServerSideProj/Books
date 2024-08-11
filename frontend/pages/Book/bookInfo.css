@@ -134,13 +134,15 @@
   padding: 10px;
 }
 
-.see-more {
+.see-more,
+.see-more-sum {
   text-decoration: underline;
   width: fit-content;
 }
 
 .language-icon {
-  width: 24px;
+  width: 19px;
+  margin-right: 10px;
 }
 
 .container-summary {
@@ -164,6 +166,24 @@
   border-radius: 16px;
   padding: 40px 30px;
   max-width: 23rem;
+  min-width: 300px;
+}
+
+.reviews-container {
+  overflow: hidden;
+  padding-left: 3rem;
+}
+
+.reviews-wrapper {
+  padding-top: 1rem;
+  display: flex;
+  width: 100vw;
+  height: fit-content;
+  flex-wrap: nowrap;
+  overflow: scroll;
+  padding-bottom: 2rem;
+  gap: 1rem;
+  padding-right: 4rem;
 }
 
 .user-image {
@@ -173,7 +193,24 @@
 }
 
 .title-reviews {
-  padding: 0 5rem;
+  padding: 0 2rem;
+}
+
+#description {
+  height: 3.8rem;
+  overflow: hidden;
+}
+#description.open {
+  height: fit-content;
+  overflow: unset;
+}
+.author-link {
+  text-decoration: underline;
+}
+
+.author-link:hover {
+  color: var(--purple);
+  font-weight: 600;
 }
 
 @media screen and (max-width: 768px) {
@@ -208,6 +245,8 @@
 
   .book-cover {
     justify-self: center;
+    height: auto;
+    width: 250px;
   }
 
   .container-summary {
@@ -215,7 +254,7 @@
   }
 
   .title-reviews {
-    padding: 1rem 2rem;
+    padding: 0rem 1rem;
   }
 
   .language-icon {
@@ -224,5 +263,9 @@
   }
   .review-card {
     max-width: 18rem;
+  }
+
+  .reviews-container {
+    padding-left: 20px;
   }
 }

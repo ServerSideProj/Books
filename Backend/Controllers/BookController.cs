@@ -38,7 +38,6 @@ namespace Backend.Controllers
             return Ok(book);
         }
 
-
         [HttpGet("by-categories")]
         public ActionResult<List<Book>> GetBooksByCategories([FromQuery] string categories)
         {
@@ -47,9 +46,9 @@ namespace Backend.Controllers
         }
 
         [HttpGet("reviews/{bookId}")]
-        public ActionResult<List<Review>> GetReviewsByBook(int bookId)  
+        public ActionResult<List<Review>> GetReviewsByBook(int bookId)
         {
-            List<Review> reviews = Book.GetReviewsByBook(bookId);  
+            List<Review> reviews = Book.GetReviewsByBook(bookId);
             return Ok(reviews);
         }
 

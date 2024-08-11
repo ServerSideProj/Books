@@ -94,7 +94,7 @@ namespace Backend.DAL
                 using (SqlCommand cmd = new SqlCommand("sp_GetReviewsByBook", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@BookId", bookId);  // Updated to use bookId
+                    cmd.Parameters.AddWithValue("@BookId", bookId);
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -106,7 +106,9 @@ namespace Backend.DAL
                                 reviewText: reader["review"].ToString(),
                                 email: reader["email"].ToString(),
                                 rating: Convert.ToInt32(reader["rating"]),
-                                finishedReading: Convert.ToBoolean(reader["finishedReading"])
+                                finishedReading: Convert.ToBoolean(reader["finishedReading"]),
+                                username: reader["username"].ToString(),    
+                                profileImage: reader["profileImage"].ToString()
                             ));
                         }
                     }
@@ -114,6 +116,7 @@ namespace Backend.DAL
             }
             return reviews;
         }
+
 
         // Get Books by Specific Author(s)
         public List<Book> GetBooksByAuthor(int authorId)
@@ -125,7 +128,7 @@ namespace Backend.DAL
                 using (SqlCommand cmd = new SqlCommand("sp_GetBooksByAuthor", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@AuthorID", authorId);  // Updated to use authorId
+                    cmd.Parameters.AddWithValue("@AuthorID", authorId);  
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
@@ -199,7 +202,7 @@ namespace Backend.DAL
                 using (SqlCommand cmd = new SqlCommand("sp_AddReview", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@BookId", bookId);  // Updated to use bookId
+                    cmd.Parameters.AddWithValue("@BookId", bookId); 
                     cmd.Parameters.AddWithValue("@Email", email);
                     cmd.Parameters.AddWithValue("@Review", reviewText);
                     cmd.Parameters.AddWithValue("@Rating", rating);
@@ -268,10 +271,10 @@ namespace Backend.DAL
 
             using (SqlConnection con = connect("myProjDB"))
             {
-                SqlCommand cmd = new SqlCommand("sp_GetCategoriesByBookId", con);  // Changed stored procedure
+                SqlCommand cmd = new SqlCommand("sp_GetCategoriesByBookId", con);  
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@BookId", bookId);  // Updated to use bookId
+                cmd.Parameters.AddWithValue("@BookId", bookId); 
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {

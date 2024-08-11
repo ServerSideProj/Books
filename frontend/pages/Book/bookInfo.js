@@ -1,7 +1,13 @@
+const isLoggedIn = localStorage.getItem("authToken") !== null;
+var bookId;
 $(document).ready(function () {
+  // Show the loader initially
+  $("#loader").show();
+  $(".main").hide();
+
   // Extract the book ID from the URL query string
   const urlParams = new URLSearchParams(window.location.search);
-  const bookId = urlParams.get("id");
+  bookId = urlParams.get("id");
 
   if (bookId) {
     fetchBookData(bookId);
@@ -12,17 +18,61 @@ $(document).ready(function () {
 
 // get the book's data from the server
 const fetchBookData = (bookId) => {
-  const bookUrl = `${API_URL}/Book/${bookId}`;
+  const bookUrl = `${API_URL}Book/${bookId}`;
+  const reviewsUrl = `${API_URL}Book/reviews/${bookId}`;
   fetchData(bookUrl, displayBookData, onError);
+  fetchData(reviewsUrl, displayReviews, onError);
 };
 
 const displayBookData = (book) => {
+  $("#loader").hide();
+  $(".main").show();
+
+  // add listener to the "read more" btn
+  $(".see-more-sum").on("click", (e) => {
+    $("#description").toggleClass("open");
+    if ($("#description").hasClass("open")) e.target.innerText = "read less";
+    else e.target.innerText = "read more";
+  });
+
+  // add listener to the like btn
+  $(".like-container").on("click", function () {
+    if (isLoggedIn) {
+      $(this).toggleClass("liked");
+    } else {
+      popupLogin();
+    }
+  });
+
+  // add listener to the like btn
+  $("#add-to-cart-btn").on("click", function () {
+    if (isLoggedIn) {
+      addToCart();
+    } else {
+      popupLogin();
+    }
+  });
+
   // Update the book cover image
   $(".book-cover").attr("src", book.imageLink);
 
   // Update the title and authors
   $(".title").text(book.title);
-  $(".authors").text(book.authors.map((author) => author.name).join(", "));
+
+  // Update the title and authors
+  const authorsHtml = book.authors
+    .map(
+      (author) =>
+        `<span class="author-link" data-author-id="${author.id}">${author.name}</span>`
+    )
+    .join(", ");
+  $(".authors").html(authorsHtml);
+
+  // Attach click event listeners to authors
+  $(".author-link").click(function () {
+    const authorId = $(this).data("author-id");
+    openPopupAuthor(authorId);
+  });
 
   // Update the book type
   $("#type").text(book.isEbook ? "eBook" : "Physical");
@@ -64,4 +114,44 @@ const displayBookData = (book) => {
 
   // Update the "See more in Google" link
   $(".see-more").attr("href", book.infoLink);
+};
+
+const displayReviews = (reviews) => {
+  if (reviews.length === 0) {
+    $(".reviews-wrapper").append(
+      `<p class="padding-left-2">No reviews yet.</p>`
+    );
+    return;
+  }
+  let allReviewsHtml = "";
+
+  for (let i = 0; i < reviews.length; i++) {
+    let profileImage =
+      reviews[i].profileImage || "../../assets/images/user-profile-image.svg";
+    let username = reviews[i].username || "Anonymous";
+
+    let reviewCard = `
+      <div class="review-card">
+              <p class="sm-text text-center font-reg">${reviews[i].reviewText}</p>
+              <div class="stars-container">
+                Rating: <span>${reviews[i].rating}</span>
+              </div>
+              <div class="container-flex-col gap-03 center-hor">
+                <img
+                  src="${profileImage}"
+                  alt="user-profile-image"
+                  class="user-image"
+                />
+                <p class="username">${username}</p>
+              </div>
+            </div>
+      `;
+    allReviewsHtml += reviewCard;
+  }
+  $(".reviews-wrapper").append(allReviewsHtml);
+};
+
+// add this item to the cart
+const addToCart = () => {
+  // bookId
 };

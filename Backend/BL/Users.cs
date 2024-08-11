@@ -77,5 +77,11 @@ namespace Backend.BL
         {
             dbUser.DeleteUser(email);
         }
+
+        public static List<UserScore> GetTop5UserScores()
+        {
+            Quiz.GetCurrentQuizId();
+            return dbUser.GetTop5UserScores(Quiz.CurrentQuizId);
+        }
     }
 }

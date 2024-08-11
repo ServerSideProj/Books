@@ -2,6 +2,7 @@
 using Backend.BL;
 using System.Collections.Generic;
 using System.Text.Json;
+using Backend.DAL;
 
 namespace Backend.Controllers
 {
@@ -209,5 +210,17 @@ namespace Backend.Controllers
             return Ok(new { ImageName = uniqueFileName });
         }
 
+        [HttpGet("daily-quiz/top-5-users-scores")]
+        public IActionResult GetTop5UserScores()
+        {
+            List<UserScore> topScores = Users.GetTop5UserScores();
+
+            if (topScores.Count == 0)
+            {
+                return Ok(new List<UserScore>());
+            }
+
+            return Ok(topScores);
+        }
     }
 }

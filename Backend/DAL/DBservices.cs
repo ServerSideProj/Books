@@ -19,8 +19,5 @@ namespace Backend.DAL
             con.Open();
             return con;
         }
-
-
     }
-
 }

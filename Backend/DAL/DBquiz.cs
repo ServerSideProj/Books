@@ -122,5 +122,111 @@ namespace Backend.DAL
 
             return quizId;
         }
+
+        public (Quiz quiz, UserScore userScore) GetDailyQuiz(string userEmail, int currentQuizId)
+        {
+            UserScore userScore = GetUserScore(userEmail, currentQuizId);
+
+            Quiz dailyQuiz = GetQuizById(currentQuizId);
+
+            if (dailyQuiz == null)
+            {
+                GenerateQuizzes(1);
+                dailyQuiz = GetQuizById(currentQuizId);
+            }
+
+            else if (userScore != null)
+            {
+                Quiz existingQuiz = GetQuizById(userScore.QuizId);
+                return (existingQuiz, userScore);
+            }
+
+            return (dailyQuiz, null);
+        }
+
+        private UserScore GetUserScore(string userEmail, int quizId)
+        {
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                using (SqlCommand cmd = new SqlCommand("sp_GetUserScore", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;  
+                    cmd.Parameters.AddWithValue("@userEmail", userEmail);  
+                    cmd.Parameters.AddWithValue("@quizId", quizId); 
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new UserScore(
+                                quizId: reader.GetInt32(0),
+                                userMail: reader.GetString(1),
+                                score: reader.GetInt32(2),
+                                timeInSeconds: reader.GetInt32(3)
+                            );
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
+        private Quiz GetQuizById(int quizId)
+        {
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                using (SqlCommand cmd = new SqlCommand("sp_GetQuizById", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@quiz_id", quizId);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        List<Question> questionsList = new List<Question>();
+
+                        while (reader.Read())
+                        {
+                            Question question = new Question(
+                                reader.GetInt32(0),     
+                                reader.GetString(1),    
+                                reader.GetString(2),    
+                                reader.GetString(3),    
+                                reader.GetString(4),    
+                                reader.GetString(5)     
+                            );
+
+                            questionsList.Add(question);
+                        }
+
+                        if (questionsList.Count > 0)
+                        {
+                            return new Quiz(
+                                quizId: quizId,
+                                questions: questionsList.ToArray()  // Convert list to array
+                            );
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
+        public void SaveUserScore(UserScore userScore)
+        {
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                using (SqlCommand cmd = new SqlCommand("sp_SaveUserScore", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@quizId", userScore.QuizId);
+                    cmd.Parameters.AddWithValue("@userMail", userScore.UserMail);
+                    cmd.Parameters.AddWithValue("@score", userScore.Score);
+                    cmd.Parameters.AddWithValue("@TimeInSecond", userScore.TimeInSeconds);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

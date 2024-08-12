@@ -86,10 +86,10 @@ namespace Backend.Controllers
             return Ok(followers);
         }
 
-        [HttpGet("followedBy/{email}")]
-        public ActionResult<List<Users>> GetUsersFollowedBy(string email)
+        [HttpGet("following/{email}")]
+        public ActionResult<List<Users>> GetUsersFollowing(string email)
         {
-            List<Users> followedUsers = Users.GetUsersFollowedBy(email);
+            List<Users> followedUsers = Users.GetUsersFollowing(email);
             return Ok(followedUsers);
         }
 

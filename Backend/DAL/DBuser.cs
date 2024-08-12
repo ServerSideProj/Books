@@ -221,7 +221,7 @@ namespace Backend.DAL
         }
 
 
-        public List<Users> GetUsersFollowedBy(string email)
+        public List<Users> GetUsersFollowing(string email)
         {
             using (SqlConnection con = connect("myProjDB"))
             {

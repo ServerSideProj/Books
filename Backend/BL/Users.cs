@@ -58,9 +58,9 @@ namespace Backend.BL
             return dbUser.GetFollowers(email);
         }
 
-        public static List<Users> GetUsersFollowedBy(string email)
+        public static List<Users> GetUsersFollowing(string email)
         {
-            return dbUser.GetUsersFollowedBy(email);
+            return dbUser.GetUsersFollowing(email);
         }
 
         public static int AddFriend(string followerEmail, string followingEmail)

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Net;
 using Backend.BL;
 
 namespace Backend.DAL
@@ -25,7 +26,7 @@ namespace Backend.DAL
             }
         }
 
-        public int GetRecentTransactionCount(string buyerEmail)
+        public int GetRecentTransactionCount(string buyerEmail, string salerEmail)
         {
             using (SqlConnection con = connect("myProjDB"))
             {
@@ -33,6 +34,7 @@ namespace Backend.DAL
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("@BuyerEmail", buyerEmail);
+                cmd.Parameters.AddWithValue("@SalerEmail", salerEmail);
 
                 return Convert.ToInt32(cmd.ExecuteScalar());
             }
@@ -149,5 +151,79 @@ namespace Backend.DAL
                 cmd.ExecuteNonQuery();
             }
         }
+
+        public IEnumerable<object> GetTransactionsForSeller(string salerEmail)
+        {
+            var transactions = new List<object>();
+
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                using (SqlCommand cmd = new SqlCommand("sp_GetTransactionsForSeller", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@salerEmail", salerEmail);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var transaction = new
+                            {
+                                TransactionId = reader.GetInt32(reader.GetOrdinal("transactionId")),
+                                SalerEmail = reader.GetString(reader.GetOrdinal("salerEmail")),
+                                BuyerEmail = reader.GetString(reader.GetOrdinal("buyerEmail")),
+                                CoinsOffer = reader.GetDecimal(reader.GetOrdinal("coinsOffer")),
+                                CopyId = reader.GetInt32(reader.GetOrdinal("copyId")),
+                                BookId = reader.GetInt32(reader.GetOrdinal("bookId")),
+                                IsActive = reader.GetBoolean(reader.GetOrdinal("isActive")),
+                                IsAccepted = reader.GetBoolean(reader.GetOrdinal("isAccepted")),
+                                TransactionDate = reader.GetDateTime(reader.GetOrdinal("transactionDate")),
+                                OwnerEmail = reader.GetString(reader.GetOrdinal("ownerEmail")),
+                                IsForSale = reader.GetBoolean(reader.GetOrdinal("isForSale")),
+                                Title = reader.GetString(reader.GetOrdinal("title")),
+                                ImageLink = reader.GetString(reader.GetOrdinal("imageLink")),
+                                authors = GetAuthorsByBookId(reader.GetInt32(reader.GetOrdinal("bookId"))),
+                                username = reader.GetString(reader.GetOrdinal("username"))
+
+                            };
+
+                            transactions.Add(transaction);
+                        }
+                    }
+                }
+            }
+
+            return transactions;
+        }
+
+        private List<Author> GetAuthorsByBookId(int bookId)
+        {
+            List<Author> authors = new List<Author>();
+
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                SqlCommand cmd = new SqlCommand("sp_GetAuthorsByBookId", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@BookId", bookId);
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        authors.Add(new Author(
+                            id: Convert.ToInt32(reader["id"]),
+                            name: reader["name"].ToString(),
+                            biography: reader["biography"].ToString(),
+                            wikiLink: reader["wikiLink"].ToString(),
+                            pictureUrl: reader["PictureUrl"].ToString()
+                        ));
+                    }
+                }
+            }
+
+            return authors;
+        }
+
     }
 }

@@ -30,6 +30,7 @@
     <!-- Scripts for this page-->
     <script src="../../components/BookCard/bookcard.js"></script>
     <script src="./bookstore.js"></script>
+    <script src="./filters.js"></script>
 
     <title>Bookstore</title>
   </head>
@@ -98,13 +99,16 @@
       </div>
       <div class="container-flex-col main-store">
         <div class="container-flex">
-          <p class="bold xxl-text"><span>100</span> Books</p>
+          <p class="bold xxl-text"><span id="num-books">100</span> Books</p>
           <div class="search-group">
             <div class="search-container">
+              <input
+                id="search-input"
+                type="text"
+                placeholder="title, word in a book..."
+              />
               <img src="../../assets/icons/search-icon.svg" alt="search-icon" />
-              <input type="text" placeholder="title, word in a book..." />
             </div>
-            <div class="btn-search sm-text">Search</div>
           </div>
         </div>
         <div class="books-container"></div>

@@ -51,18 +51,6 @@
   align-items: center;
 }
 
-.btn-grey-stroke {
-  opacity: 80%;
-  border: 2px solid rgba(148, 148, 148, 0.8);
-  border-radius: 4px;
-  padding: 4px 20px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgb(148, 148, 148);
-}
-
 .actions {
   display: flex;
   gap: 0.7rem;

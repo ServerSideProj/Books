@@ -243,6 +243,18 @@ a:hover:not(.btn-gradient) {
 .loader::after {
   --s: -1, -1;
 }
+
+.btn-grey-stroke {
+  opacity: 80%;
+  border: 2px solid rgba(148, 148, 148, 0.8);
+  border-radius: 4px;
+  padding: 4px 20px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(76 74 74);
+}
 @keyframes l7-0 {
   0% {
     transform: scaleX(1) rotate(0deg);

@@ -82,60 +82,53 @@ const popupFilters = () => {
   <div id="popup-filters" class="popup-container gap-02">
         <img src="../../assets/icons/X.svg" class="btn-x" />
         <p class="xxl-text bold">Filters</p>
+      <div class="container-flex-col width100">
         <div class="container-bot-border">
           <div class="wrapper-title-filter">
             <p class="xl-text">Category</p>
             <div class="search-container">
-              <input type="text" placeholder="category..." />
-              <img src="../../assets/icons/search-icon.svg" alt="search-icon" />
+            <input list="categories" id="category-input" placeholder="Pick a category">
+            <datalist id="categories"></datalist>
             </div>
-          </div>
-
-          <div class="container-options">
-            <!-- לבנות דרך הקוד, ולשים לב לא לשכוח להוסיף לכל קומפוננטה את הדאטה סט כאטריביוט -->
           </div>
         </div>
         <div class="container-bot-border">
           <div class="wrapper-title-filter">
             <p class="xl-text">Author</p>
             <div class="search-container">
-              <input type="text" placeholder="author name..." />
-              <img src="../../assets/icons/search-icon.svg" alt="search-icon" />
+              <input list="authors" id="author-input" placeholder="Pick an author" />
+              <datalist id="authors"></datalist>
             </div>
           </div>
-
-          <div class="container-options">
-            <!-- לבנות דרך הקוד, ולשים לב לא לשכוח להוסיף לכל קומפוננטה את הדאטה סט כאטריביוט -->
-          </div>
         </div>
-        <div class="container-bot-border">
+        <div id="filter-friends" class="container-bot-border">
           <div class="wrapper-title-filter">
             <p class="xl-text">Friends' Books</p>
             <div class="search-container">
-              <input type="text" placeholder="alice143..." />
-              <img src="../../assets/icons/search-icon.svg" alt="search-icon" />
+              <input list="friends" id="friends-input" placeholder="Pick a friend" />
+              <datalist id="friends"></datalist>
             </div>
-          </div>
-
-          <div class="container-options">
-            <!-- לבנות דרך הקוד, ולשים לב לא לשכוח להוסיף לכל קומפוננטה את הדאטה סט כאטריביוט -->
           </div>
         </div>
         <div class="container-bot-border">
           <div class="wrapper-title-filter">
             <p class="xl-text">Rate</p>
           </div>
-          <div class="container-options container-flex space">
+          <div class="container-options container-flex space mobile-col" data-stars="true">
+            <div data-stars="0" class="opt">
+              <img src="../../assets/icons/circle-checked.svg" alt="sqr-icon" />
+              <p class="sm-text">all rates</p>
+            </div>
             <div data-stars="3" class="opt">
-              <img src="../../assets/icons/sqr-icon.svg" alt="sqr-icon" />
-              <p class="sm-text">3 stars or less</p>
+              <img src="../../assets/icons/circle.svg" alt="sqr-icon" />
+              <p class="sm-text">above 3 stars</p>
             </div>
             <div data-stars="4" class="opt">
-              <img src="../../assets/icons/sqr-icon.svg" alt="sqr-icon" />
-              <p class="sm-text">4 stars</p>
+              <img src="../../assets/icons/circle.svg" alt="sqr-icon" />
+              <p class="sm-text">above 4 stars</p>
             </div>
             <div data-stars="5" class="opt">
-              <img src="../../assets/icons/sqr-icon.svg" alt="sqr-icon" />
+              <img src="../../assets/icons/circle.svg" alt="sqr-icon" />
               <p class="sm-text">5 stars</p>
             </div>
           </div>
@@ -144,14 +137,10 @@ const popupFilters = () => {
           <div class="wrapper-title-filter">
             <p class="xl-text">Release Date</p>
           </div>
-          <div class="container-options container-flex-col space gap-03">
-            <div data-date="none" class="opt">
-              <img src="../../assets/icons/circle.svg" alt="sqr-icon" />
-              <p class="sm-text">none</p>
-            </div>
+          <div class="container-options container-flex-col space gap-03" data-date="true">
             <div data-date="newest to oldest" class="opt">
-              <img src="../../assets/icons/circle.svg" alt="sqr-icon" />
-              <p class="sm-text">newest to oldest</p>
+            <img src="../../assets/icons/circle.svg" alt="sqr-icon" />
+            <p class="sm-text">newest to oldest</p>
             </div>
             <div data-date="oldest to newest" class="opt">
               <img src="../../assets/icons/circle.svg" alt="sqr-icon" />
@@ -163,9 +152,9 @@ const popupFilters = () => {
           <div class="wrapper-title-filter">
             <p class="xl-text">Book Type</p>
           </div>
-          <div class="container-options container-flex-col space gap-03">
+          <div class="container-options container-flex-col space gap-03" data-type="true">
             <div data-type="both" class="opt">
-              <img src="../../assets/icons/circle.svg" alt="sqr-icon" />
+              <img src="../../assets/icons/circle-checked.svg" alt="sqr-icon" />
               <p class="sm-text">Both</p>
             </div>
             <div data-type="ebooks" class="opt">
@@ -178,14 +167,23 @@ const popupFilters = () => {
             </div>
           </div>
         </div>
-        <div class="container-flex-col center gap-1"></div>
-        <div class="btn select-btn sm-text font-reg btn-gradient">Select</div>
+        <div class="container-flex-col center gap-1 "></div>
+        <div class="btns-space container-flex">
+          <div class="btn clear-btn sm-text font-reg btn-grey-stroke">Clear all filters</div>
+          <div class="btn select-btn sm-text font-reg btn-gradient">Select</div>
+        </div>
       </div>
+    </div>
   `;
 
   $(".bg-dark").addClass("open");
   $(".bg-dark").append(popup);
   $("#popup-filters").addClass("open");
+  if (!isLoggedIn) {
+    $("#friends-input").parent().css("background-color", "var(--grey-light)");
+    $("#friends-input").attr("placeholder", "Have no friends yet.");
+    $("#friends-input").css("pointer-events", "none");
+  }
 
   // Remove previous event listeners
   $(".btn-x").off("click");

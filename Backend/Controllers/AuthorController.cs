@@ -8,33 +8,6 @@ namespace Backend.Controllers
     [ApiController]
     public class AuthorController : ControllerBase
     {
-        [HttpPost]
-        public IActionResult AddAuthor([FromBody] Author author)
-        {
-            try
-            {
-                Author.AddAuthor(author);
-                return Ok(new { Message = "Author added successfully." });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { Error = ex.Message });
-            }
-        }
-
-        [HttpDelete("{authorId}")]
-        public IActionResult DeleteAuthor(int authorId)
-        {
-            try
-            {
-                Author.DeleteAuthor(authorId);
-                return Ok(new { Message = "Author deleted successfully." });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { Error = ex.Message });
-            }
-        }
 
         [HttpGet("all-authors")]
         public IActionResult GetAllAuthors()
@@ -47,6 +20,34 @@ namespace Backend.Controllers
             catch (Exception ex)
             {
                 return StatusCode(500, new { Error = ex.Message });
+            }
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult<Book> GetAuthorById(int id)
+        {
+            List<Author> authors = Author.GetAllAuthors();
+            var author = authors.FirstOrDefault(a => a.Id == id);
+
+            if (author == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(author);
+        }
+
+        [HttpGet("authors-with-book-count")]
+        public IActionResult GetAuthorWithBookCount()
+        {
+            var authorsInfo = Author.GetAuthorWithBookCount();
+            if (authorsInfo != null)
+            {
+                return Ok(authorsInfo);
+            }
+            else
+            {
+                return NotFound(new { Message = "Authors not found." });
             }
         }
 
@@ -67,17 +68,31 @@ namespace Backend.Controllers
             }
         }
 
-        [HttpGet("authors-with-book-count")]
-        public IActionResult GetAuthorWithBookCount()
+        [HttpPost]
+        public IActionResult AddAuthor([FromBody] Author author)
         {
-            var authorsInfo = Author.GetAuthorWithBookCount();
-            if (authorsInfo != null)
+            try
             {
-                return Ok(authorsInfo);
+                Author.AddAuthor(author);
+                return Ok(new { Message = "Author added successfully." });
             }
-            else
+            catch (Exception ex)
             {
-                return NotFound(new { Message = "Authors not found." });
+                return StatusCode(500, new { Error = ex.Message });
+            }
+        }
+        
+        [HttpDelete("{authorId}")]
+        public IActionResult DeleteAuthor(int authorId)
+        {
+            try
+            {
+                Author.DeleteAuthor(authorId);
+                return Ok(new { Message = "Author deleted successfully." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Error = ex.Message });
             }
         }
     }

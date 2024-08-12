@@ -15,6 +15,12 @@ $(document).ready(function () {
     $(".sm-popup").toggleClass("open");
   });
 
+  // add listener to the pricing filter
+  // $(".").on("click", function () {
+  //   $(".price-filter > img").toggleClass("open");
+  //   $(".sm-popup").toggleClass("open");
+  // });
+
   // Event handler for filter price
   $(".sm-popup p").on("click", function () {
     $(".sm-popup p").removeClass("selected");
@@ -57,6 +63,22 @@ const renderBooks = (books) => {
       event.stopPropagation();
       if (isLoggedIn) {
         $(this).toggleClass("liked");
+        //
+        //
+        // TODO:
+        // add to favorites in database
+        //
+        //
+      } else {
+        popupLogin();
+      }
+    });
+
+    // add listener to the add to cart btn (and prevent from going to the page of the book)
+    $bookCard.find(".add-to-cart").on("click", function (event) {
+      event.stopPropagation();
+      if (isLoggedIn) {
+        addToCart(event.target.getAttribute("data-book-id"));
       } else {
         popupLogin();
       }

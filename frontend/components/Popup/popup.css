@@ -29,6 +29,7 @@
 #popup-filters.open,
 #popup-friends.open,
 #popup-book-info.open,
+#popup-author.open,
 #popup-book-sale.open {
   display: flex;
 }
@@ -39,6 +40,24 @@
 
 #popup-login .btn {
   padding: 0.7rem 3rem;
+}
+
+#popup-author {
+  width: 70vw;
+}
+
+#popup-author a {
+  text-decoration: underline;
+}
+
+.justify-content-space {
+  justify-content: space-between;
+}
+
+.author-image {
+  border-radius: 8px;
+  width: 200px;
+  height: auto;
 }
 
 /* popup filters */
@@ -139,10 +158,27 @@
     align-items: center;
   }
 
+  #popup-login {
+    width: 90vw;
+    padding: 4rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   .bg-dark {
     padding: 1rem;
   }
   .send-offer-btn {
     align-self: center;
+  }
+
+  .author-image {
+    width: 150px;
+  }
+
+  #popup-author {
+    padding: 4rem 2rem;
+    width: 90vw;
   }
 }

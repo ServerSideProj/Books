@@ -63,6 +63,10 @@
   position: relative;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+.icons-container div {
+  align-items: center;
 }
 
 .icons-container::after {

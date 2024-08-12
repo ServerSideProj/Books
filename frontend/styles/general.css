@@ -165,11 +165,26 @@ a:hover:not(.btn-gradient) {
   display: flex;
 }
 
+.top-popup {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 4rem;
+  border-radius: 3rem;
+  background-color: #fff;
+  box-shadow: 0 5px 20px 0 rgba(153, 131, 176, 0.2);
+  z-index: 4;
+  padding: 2rem 4rem;
+  left: 50%;
+  transform: translate(-50%, 0);
+  opacity: 0;
+}
+
 /* the pink bg like the one in the login */
 .input-box-sqr {
   box-shadow: inset 0 3px 2px 0 rgba(229, 220, 238, 0.5);
   background: var(--bg-fade-pink);
-  color: var(--purple-fade);
   border-radius: 4px;
   padding: 0.5rem 1rem;
   border: transparent;
@@ -177,6 +192,12 @@ a:hover:not(.btn-gradient) {
   width: 100%;
   min-height: 2.8rem;
   font-size: 1rem;
+  transition: 0.3s color ease, 0.3s background-color ease;
+}
+
+.input-box-sqr.wrong {
+  color: red;
+  background-color: rgba(232, 108, 108, 0.279);
 }
 
 .container-flex.space {
@@ -251,5 +272,10 @@ a:hover:not(.btn-gradient) {
 
   .padding-left-2 {
     padding-left: 1rem;
+  }
+
+  .top-popup {
+    padding: 1rem 2rem;
+    top: 2rem;
   }
 }

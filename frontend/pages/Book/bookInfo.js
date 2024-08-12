@@ -71,7 +71,8 @@ const displayBookData = (book) => {
   // Attach click event listeners to authors
   $(".author-link").click(function () {
     const authorId = $(this).data("author-id");
-    openPopupAuthor(authorId);
+    const authorUrl = `${API_URL}Author/${authorId}`;
+    fetchData(authorUrl, openPopupAuthor, onError);
   });
 
   // Update the book type
@@ -149,9 +150,4 @@ const displayReviews = (reviews) => {
     allReviewsHtml += reviewCard;
   }
   $(".reviews-wrapper").append(allReviewsHtml);
-};
-
-// add this item to the cart
-const addToCart = () => {
-  // bookId
 };

@@ -24,7 +24,7 @@ const popupLogin = () => {
 
   // Add event listener to the "btn-x" to close the nav slide
   $(".btn-x").on("click", () => {
-    $("#popup-login").removeClass("open");
+    $(".bg-dark").empty();
     $(".bg-dark").removeClass("open");
   });
 };
@@ -70,7 +70,7 @@ const popupFriends = (type) => {
 
   // Add event listener to the "btn-x" to close the nav slide
   $(".btn-x").on("click", () => {
-    $(".popup-container").removeClass("open");
+    $(".bg-dark").empty();
     $(".bg-dark").removeClass("open");
   });
 };
@@ -192,7 +192,7 @@ const popupFilters = () => {
 
   // Add event listener to the "btn-x" to close the nav slide
   $(".btn-x").on("click", () => {
-    $("#popup-filters").removeClass("open");
+    $(".bg-dark").empty();
     $(".bg-dark").removeClass("open");
   });
 };
@@ -212,7 +212,8 @@ const popupBookInfo = () => {
 
   // Add event listener to the "btn-x" to close the nav slide
   $(".btn-x").on("click", () => {
-    $(".popup-container").removeClass("open");
+    $(".bg-dark").empty();
+    $(".bg-dark").removeClass("open");
   });
 
   // add listener to switch btns
@@ -241,25 +242,41 @@ const popupBookSaleOffer = () => {
 
   // Add event listener to the "btn-x" to close the nav slide
   $(".btn-x").on("click", () => {
-    $(".popup-container").removeClass("open");
+    $(".bg-dark").empty();
+    $(".bg-dark").removeClass("open");
   });
 };
 
 // page: book info
 // show a popup of a author data
-const authorData = () => {
-  const popup = ``;
+const openPopupAuthor = (author) => {
+  const popup = `
+    <div id="popup-author" class="popup-container container-flex-col gap-1">
+        <img src="../../assets/icons/X.svg" class="btn-x" />
+        <div class="container-flex justify-content-space"> 
+        <p class="xxl-text">${author.name}</p>
+          <img
+            src="${
+              author.pictureUrl || "../../assets/images/author-placeholder.png"
+            }"
+            alt="author image"
+            class="author-image"
+          />
+        </div>
+        <p class="md-text">${author.biography}</p>
+        <a href="${author.wikiLink}" class="more-info">more-info</a>
+      </div>`;
 
   $(".bg-dark").addClass("open");
   $(".bg-dark").append(popup);
-  $("#popup-filters").addClass("open");
+  $("#popup-author").addClass("open");
 
   // Remove previous event listeners
   $(".btn-x").off("click");
 
   // Add event listener to the "btn-x" to close the nav slide
   $(".btn-x").on("click", () => {
-    $("#popup-filters").removeClass("open");
+    $(".bg-dark").empty();
     $(".bg-dark").removeClass("open");
   });
 };

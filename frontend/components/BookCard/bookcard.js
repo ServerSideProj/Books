@@ -93,9 +93,11 @@ function generateBookCard_allDetails(book) {
           </div>
           <p class="sm-text grey-text font-reg">${book.ratingCount} reviews</p>
         </div>
-        <a href="${book.infoLink}" target="_blank" class="btn add-to-cart">
-          <img src="../../assets/icons/btn-add-cart.svg" alt="more info"/>
-        </a>
+        <div class="btn add-to-cart">
+          <img src="../../assets/icons/btn-add-cart.svg" alt="more info" data-book-id="${
+            book.id
+          }"/>
+        </div>
       </div>
     </div>
   `;

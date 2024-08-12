@@ -10,6 +10,14 @@ namespace Backend.Controllers
     [ApiController]
     public class BookController : ControllerBase
     {
+
+        [HttpGet("all-books")]
+        public ActionResult<List<Book>> GetAllBooks()
+        {
+            List<Book> books = Book.GetAllBooks();
+            return Ok(books);
+        }
+
         [HttpGet("popular-physical-books")]
         public ActionResult<List<Book>> GetTop5PopularPhysBooks()
         {
@@ -66,11 +74,26 @@ namespace Backend.Controllers
             return Ok(books);
         }
 
-        [HttpPost("review")]
-        public ActionResult AddReview([FromBody] Review review)
+
+        [HttpGet("all-active-books")]
+        public ActionResult<List<Book>> GetAllActiveBooks()
         {
-            Book.AddReview(review.BookId, review.Email, review.ReviewText, review.Rating, review.FinishedReading); 
-            return Ok("Review added successfully.");
+            List<Book> books = Book.GetAllActiveBooks();
+            return Ok(books);
+        }
+
+        [HttpGet("ebook-copies")]
+        public ActionResult<List<BookCopy>> GetAllEBookCopies()
+        {
+            List<BookCopy> books = Book.GetAllEBookCopies();
+            return Ok(books);
+        }
+
+        [HttpGet("physical-copies")]
+        public ActionResult<List<BookCopy>> GetAllPhysBookCopies()
+        {
+            List<BookCopy> books = Book.GetAllPhysBookCopies();
+            return Ok(books);
         }
 
         [HttpGet("user-purchases/{userEmail}")]
@@ -85,6 +108,14 @@ namespace Backend.Controllers
         {
             List<Book> books = Book.GetBooksPurchasedByUserWithSaleStatus(userEmail);
             return Ok(books);
+        }
+
+
+        [HttpPost("review")]
+        public ActionResult AddReview([FromBody] Review review)
+        {
+            Book.AddReview(review.BookId, review.Email, review.ReviewText, review.Rating, review.FinishedReading); 
+            return Ok("Review added successfully.");
         }
 
         [HttpPost("add-books")]
@@ -116,34 +147,6 @@ namespace Backend.Controllers
             int copyId = PhysBookCopy.AddPhysBookCopy(physBookCopy);
 
             return Ok(new { message = "Physical book copy added successfully.", CopyId = copyId });
-        }
-
-        [HttpGet("all-books")]
-        public ActionResult<List<Book>> GetAllBooks()
-        {
-            List<Book> books = Book.GetAllBooks();
-            return Ok(books);
-        }
-
-        [HttpGet("all-active-books")]
-        public ActionResult<List<Book>> GetAllActiveBooks()
-        {
-            List<Book> books = Book.GetAllActiveBooks();
-            return Ok(books);
-        }
-
-        [HttpGet("ebook-copies")]
-        public ActionResult<List<BookCopy>> GetAllEBookCopies()
-        {
-            List<BookCopy> books = Book.GetAllEBookCopies();
-            return Ok(books);
-        }
-
-        [HttpGet("physical-copies")]
-        public ActionResult<List<BookCopy>> GetAllPhysBookCopies()
-        {
-            List<BookCopy> books = Book.GetAllPhysBookCopies();
-            return Ok(books);
         }
 
         [HttpDelete("{bookId}")]

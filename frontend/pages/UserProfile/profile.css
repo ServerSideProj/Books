@@ -49,6 +49,7 @@
   height: 5rem;
   border-radius: 10rem;
   object-fit: cover;
+  overflow: hidden;
 }
 
 .add-image-icon {

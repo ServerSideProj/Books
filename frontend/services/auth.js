@@ -3,8 +3,6 @@
  * @returns {Promise<boolean>}
  */
 
-
-
 export async function login(username, password) {
   try {
     console.log(username, password);
@@ -15,7 +13,7 @@ export async function login(username, password) {
       },
       body: JSON.stringify({ Email: username, Password: password }),
     });
-    
+
     console.log(response);
 
     if (!response.ok) {
@@ -28,7 +26,10 @@ export async function login(username, password) {
     if (data.username && data.email) {
       localStorage.setItem("authToken", data.username);
       localStorage.setItem("email", data.email);
-      localStorage.setItem("profileImageLink", data.profileImageLink);
+      localStorage.setItem(
+        "profileImageLink",
+        IMAGE_URL + data.profileImageLink
+      );
       localStorage.setItem("coins", data.coins);
 
       return true;
@@ -68,8 +69,6 @@ export function getAuthToken() {
   return localStorage.getItem("authToken");
 }
 
-
-
 export async function register(username, password, email) {
   try {
     const response = await fetch(`${API_URL}Users/register`, {
@@ -77,7 +76,13 @@ export async function register(username, password, email) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({username: username,password: password,email: email ,coins: 0,profileImageLink: "" }),
+      body: JSON.stringify({
+        username: username,
+        password: password,
+        email: email,
+        coins: 0,
+        profileImageLink: "",
+      }),
     });
 
     if (!response.ok) {
@@ -85,8 +90,8 @@ export async function register(username, password, email) {
     }
 
     const data = await response.json();
-    
-    console.log(data)
+
+    console.log(data);
 
     if (data.username && data.email) {
       localStorage.setItem("authToken", data.username);

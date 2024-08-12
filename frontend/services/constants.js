@@ -5,7 +5,7 @@ const PORT = "7136";
 const API_URL = `https://localhost:${PORT}/api/`;
 
 const FILE_URL = `https://localhost:${PORT}/api/FileUpload`;
-const IMAGE_URL = `https://localhost:${PORT}/Images`;
+const IMAGE_URL = `https://localhost:${PORT}/Images/`;
 
 // For Ruppin server
 // export const COURSES_URL = `https://proj.ruppin.ac.il/cgroup80/test2/tar1/api/courses`;

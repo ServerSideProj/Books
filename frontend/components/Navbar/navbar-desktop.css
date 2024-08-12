@@ -39,6 +39,14 @@
   height: 24px;
 }
 
+.profile-image-sm {
+  object-fit: cover;
+  width: 32px;
+  height: 32px;
+  border-radius: 32px;
+  overflow: hidden;
+}
+
 .navbar-desktop .icon:hover {
   transform: scale(1.2);
 }

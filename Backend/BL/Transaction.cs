@@ -61,7 +61,7 @@ namespace Backend.BL
             }
 
             // Check if buyer has made more than 2 transactions in the last hour
-            int transactionCount = dbTransaction.GetRecentTransactionCount(buyerEmail);
+            int transactionCount = dbTransaction.GetRecentTransactionCount(buyerEmail, salerEmail);
             if (transactionCount >= 2)
             {
                 throw new InvalidOperationException("Transaction limit exceeded.");
@@ -96,6 +96,11 @@ namespace Backend.BL
         public static void DeclineTransaction(int transactionId)
         {
             dbTransaction.DeclineTransaction(transactionId);
+        }
+
+        public static IEnumerable<object> GetTransactionsForSeller(string salerEmail)
+        {
+            return dbTransaction.GetTransactionsForSeller(salerEmail);
         }
     }
 }

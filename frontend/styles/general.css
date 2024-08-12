@@ -179,6 +179,7 @@ a:hover:not(.btn-gradient) {
   left: 50%;
   transform: translate(-50%, 0);
   opacity: 0;
+  pointer-events: none;
 }
 
 /* the pink bg like the one in the login */

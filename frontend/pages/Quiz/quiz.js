@@ -177,7 +177,7 @@ const showLastPageQuiz = (corrects = -1, data = null) => {
     $("#total-time > span").html(formatTime(data.timeInSeconds));
   } else {
     // display resualts
-    $(".add-coins").html(corrects);
+    $(".add-coins").html(corrects * 3);
     $(".bg-scores .count").html(corrects);
     $("#total-time > span").html($(".time")[0].outerText);
   }
@@ -213,7 +213,10 @@ const sendResultsToServer = (score, time) => {
     timeInSeconds: time,
     username: localStorage.getItem("authToken"),
   };
-  localStorage.getItem("coins") = (parseInt(localStorage.getItem("coins")) + (score * 3))
+  localStorage.setItem(
+    "coins",
+    parseInt(localStorage.getItem("coins")) + score * 3
+  );
   sendData(API_URL + "Quiz/save-score", data, end, end);
 };
 

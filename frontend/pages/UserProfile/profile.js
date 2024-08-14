@@ -1,4 +1,8 @@
+const isLoggedIn = localStorage.getItem("authToken") !== null;
+
 $(document).ready(function () {
+  if (!isLoggedIn) window.location.href = "/pages/NotFound/";
+
   $(".inner-page-books, .inner-page-read, .inner-page-liked").hide();
   $(".inner-page-books").show();
   $("#all-books").addClass("checked");
@@ -94,7 +98,7 @@ const fetchBooks = () => {
   fetchData(
     API_URL + "Book/user-purchases/" + encodeURIComponent(email),
     renderBooks,
-    ECB
+    onError
   );
 };
 
@@ -104,30 +108,13 @@ const renderBooks = (books) => {
   ownedBooks.empty();
 
   books.forEach((book) => {
-    const bookCardHtml = generateBookCard_allDetails(book);
+    const bookCardHtml = generateBookCard_default(book);
     const $bookCard = $(bookCardHtml);
+    ownedBooks.append($bookCard);
 
     // Add click event listener to the book card
-    $bookCard.click(() => {
-      const bookUrl = `/pages/Book/index.html?id=${book.id}`;
-      window.location.href = bookUrl;
+    $bookCard.on("click", () => {
+      popupBookInfo(book);
     });
-
-    // Add listener to the like button (and prevent going to the book page)
-    $bookCard.find(".like-btn").on("click", function (event) {
-      event.stopPropagation();
-      if (isLoggedIn) {
-        $(this).toggleClass("liked");
-      } else {
-        popupLogin();
-      }
-    });
-
-    // Append the book card to the bookstore container
-    ownedBooks.append($bookCard);
   });
-};
-
-const ECB = (error) => {
-  console.log(error);
 };

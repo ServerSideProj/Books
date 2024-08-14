@@ -182,6 +182,21 @@ a:hover:not(.btn-gradient) {
   pointer-events: none;
 }
 
+.cart-icon.add {
+  animation-name: spin;
+  animation-duration: 2000ms;
+  animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg) scale(1);
+  }
+  to {
+    transform: rotate(360deg) scale(1.3);
+  }
+}
+
 /* the pink bg like the one in the login */
 .input-box-sqr {
   box-shadow: inset 0 3px 2px 0 rgba(229, 220, 238, 0.5);

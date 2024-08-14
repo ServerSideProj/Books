@@ -30,11 +30,14 @@
 #popup-friends.open,
 #popup-book-info.open,
 #popup-author.open,
-#popup-book-sale.open {
+#popup-book-sale.open,
+#popup-on-cart.open,
+#popup-payment.open {
   display: flex;
 }
 
-#popup-login {
+#popup-login,
+#popup-on-cart {
   padding: 4rem 7rem;
 }
 
@@ -46,7 +49,9 @@
   width: 70vw;
 }
 
-#popup-author a {
+#popup-author a,
+#popup-on-cart a,
+#popup-payment a {
   text-decoration: underline;
 }
 

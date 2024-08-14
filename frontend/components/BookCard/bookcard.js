@@ -25,11 +25,11 @@ const generateBookCard_default = (book) => {
           </div>
       </div>`;
 };
-const addBookmark = (type) => {
+const createBookmark = (type) => {
   //type can be "sale" or "done"
   const bookmark = `<img
         src="../../assets/icons/bookmark-${type}.png"
-        class="bookmark"
+        class="bookmark ${type}"
         alt="bookmark"
     />`;
   return bookmark;

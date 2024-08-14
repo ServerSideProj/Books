@@ -197,8 +197,55 @@ const popupFilters = () => {
 
 // page: profile
 // shows the user information on a book (done reading? for sale? write review)
-const popupBookInfo = () => {
-  const popup = ``;
+const popupBookInfo = (book) => {
+  const saleSection = !book.isEbook
+    ? `<div class="row-bot-line">
+       <p class="xl-text">Open for sale?</p>
+       <div class="switch-btn sale">
+         <div class="circle-switch"></div>
+       </div>
+     </div>`
+    : "";
+
+  const popup = `
+  <div id="popup-book-info"
+      class="popup-container popup-flex-row gap-2 bg-white"
+      >
+      <img src="../../assets/icons/X.svg" class="btn-x" />
+      <div class="card-popup">
+        <img
+          src="${
+            book.imageLink || "../../assets/images/book-cover-placeholder.png"
+          } "
+          alt="book cover"
+          class="book-cover"
+        />
+        <div class="container-flex-col center">
+          <p class="title l-text">${book.title}</p>
+          <p class="authors sm-text grey-text"> 
+          ${book.authors.map((author) => author.name).join(", ")}
+          </p>
+        </div>
+      </div>
+      <div class="container-flex-col center-ver">
+        <div class="row-bot-line">
+          <p class="xl-text">Finished reading?</p>
+          <div class="switch-btn done">
+            <div class="circle-switch"></div>
+          </div>
+        </div>
+        ${saleSection}
+        <div class="container-flex-col gap-1 width100">
+          <div class="row-bot-line no-line padding-0">
+            <p class="xl-text">Write a review</p>
+            <div class="stars">*****</div>
+          </div>
+          <textarea class="input-box-sqr"></textarea>
+          <div class="btn btn-gradient">Send</div>
+        </div>
+      </div>
+    </div>
+    `;
 
   $(".bg-dark").addClass("open");
   $(".bg-dark").append(popup);
@@ -217,10 +264,25 @@ const popupBookInfo = () => {
   // add listener to switch btns
   $(".switch-btn.sale").on("click", function () {
     $(this).toggleClass("checked");
+    if ($(this).hasClass("checked")) {
+      let bookmark = createBookmark("sale");
+
+      // Find the corresponding book card and append the bookmark
+      $(`.inner-page-books .book-card[data-book-id="${book.id}"]`).append(
+        bookmark
+      );
+    }
   });
+
   $(".switch-btn.done").on("click", function () {
     $(this).toggleClass("checked");
     if ($(this).hasClass("checked")) {
+      let bookmark = createBookmark("done");
+
+      // Find the corresponding book card and append the bookmark
+      $(`.inner-page-books .book-card[data-book-id="${book.id}"]`).append(
+        bookmark
+      );
       confetti();
     }
   });
@@ -268,6 +330,59 @@ const openPopupAuthor = (author) => {
   $(".bg-dark").addClass("open");
   $(".bg-dark").append(popup);
   $("#popup-author").addClass("open");
+
+  // Remove previous event listeners
+  $(".btn-x").off("click");
+
+  // Add event listener to the "btn-x" to close the nav slide
+  $(".btn-x").on("click", () => {
+    $(".bg-dark").empty();
+    $(".bg-dark").removeClass("open");
+  });
+};
+
+// pages: bookstore, bookInfo
+// show popup that tells the user that this book is already on it's cart list.
+const popupAlreadyOnCart = () => {
+  const popup = `
+        <div id="popup-on-cart" class="popup-container gap-2">
+          <img src="../../assets/icons/X.svg" class="btn-x" />
+          <p class="xxl-text">This book is already in your cart</p>
+          <div class="container-flex-col center gap-1">
+            <a href="/pages/Cart" class="sm-text">Go to cart</a>
+          </div>
+        </div>`;
+
+  $(".bg-dark").append(popup);
+  $(".bg-dark").addClass("open");
+  $("#popup-on-cart").addClass("open");
+
+  // Remove previous event listeners
+  $(".btn-x").off("click");
+
+  // Add event listener to the "btn-x" to close the nav slide
+  $(".btn-x").on("click", () => {
+    $(".bg-dark").empty();
+    $(".bg-dark").removeClass("open");
+  });
+};
+
+// page: cart
+// Popup function for payment confirmation
+const popupPayment = () => {
+  const popup = `
+    <div id="popup-payment" class="popup-container gap-2">
+      <img src="../../assets/icons/X.svg" class="btn-x" />
+      <p class="xxl-text">Added succesfully to your list 📚</p>
+      <div class="container-flex-col center gap-1">
+        <a href="/pages/userProfile" class="sm-text">See all of my books</a>
+      </div>
+    </div>
+  `;
+
+  $(".bg-dark").append(popup);
+  $(".bg-dark").addClass("open");
+  $("#popup-payment").addClass("open");
 
   // Remove previous event listeners
   $(".btn-x").off("click");

@@ -1,6 +1,7 @@
 .main {
   padding: 6rem 10rem;
-  height: 100dvh;
+  min-height: 100dvh;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -25,6 +26,7 @@
 
 .opt {
   height: 2rem;
+  align-items: flex-start;
 }
 
 .opt.checked {
@@ -212,12 +214,13 @@ textarea + .btn {
   position: fixed;
   left: 2rem;
   bottom: 2rem;
+  z-index: 2;
 }
 .wrapper-add-book .tooltiptext {
   visibility: hidden;
   width: 200px;
   background-color: var(--bg-fade-pink);
-  color: var(--purple-fade);
+  color: var(--black);
   text-align: center;
   border-radius: 4px;
   padding: 5px 0;

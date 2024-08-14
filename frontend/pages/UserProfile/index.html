@@ -30,7 +30,7 @@
     <!-- Scripts for this page-->
     <script src="../../components/BookCard/bookcard.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
-    <script src="../../components/Popup/popup.js" type="module"></script>
+    <script src="../../components/Popup/popup.js"></script>
     <script src="./profile.js"></script>
 
     <title>Profile</title>
@@ -47,47 +47,7 @@
         />
       </a>
     </div>
-    <div class="bg-dark">
-      <div
-        id="popup-book-info"
-        class="popup-container popup-flex-row gap-2 bg-white"
-      >
-        <img src="../../assets/icons/X.svg" class="btn-x" />
-        <div class="card-popup">
-          <img
-            src="../../assets/images/book-cover-placeholder.jpg"
-            alt="book cover"
-            class="book-cover"
-          />
-          <div class="container-flex-col center">
-            <p class="title l-text">Name of Book</p>
-            <p class="authors sm-text grey-text">Names of authors</p>
-          </div>
-        </div>
-        <div class="container-flex-col center-ver">
-          <div class="row-bot-line">
-            <p class="xl-text">Finished reading?</p>
-            <div class="switch-btn done">
-              <div class="circle-switch"></div>
-            </div>
-          </div>
-          <div class="row-bot-line">
-            <p class="xl-text">Open for sale?</p>
-            <div class="switch-btn sale">
-              <div class="circle-switch"></div>
-            </div>
-          </div>
-          <div class="container-flex-col gap-1 width100">
-            <div class="row-bot-line no-line padding-0">
-              <p class="xl-text">Write a review</p>
-              <div class="stars">*****</div>
-            </div>
-            <textarea class="input-box-sqr"></textarea>
-            <div class="btn btn-gradient">Send</div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div class="bg-dark"></div>
     <div class="main">
       <div class="header">
         <div class="wrapper-image-profile">
@@ -123,7 +83,7 @@
         <div id="liked" class="opt">Wish List</div>
       </div>
       <div class="inner-page inner-page-books">
-        <p class="">books will be generate here!</p>
+        <p class="">Loading Books</p>
       </div>
       <div class="inner-page inner-page-read">
         <p class="">read books</p>

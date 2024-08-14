@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="../../styles/general.css" />
     <link rel="stylesheet" href="../../components/Navbar/navbar-desktop.css" />
     <link rel="stylesheet" href="../../components/Navbar/navbar-mobile.css" />
+    <link rel="stylesheet" href="../../components/Popup/popup.css" />
 
     <!-- Scripts for all pages-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -21,16 +22,24 @@
     <script src="../../services/ajax.js"></script>
     <script src="../../services/auth.js" type="module"></script>
     <script src="../../components/Navbar/navbar.js" type="module"></script>
+    <script src="../../components/Popup/popup.js"></script>
 
     <!-- Styles for this page -->
     <link rel="stylesheet" href="./cart.css" />
     <!-- Scripts for this page-->
+    <script src="../../services/global_func.js"></script>
     <script src="./cart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
     <title>Cart</title>
   </head>
   <body>
     <div class="navbar"></div>
+    <div id="loader" class="bg-loader">
+      <div class="loader"></div>
+      <p>Loading...</p>
+    </div>
+    <div class="bg-dark"></div>
     <div class="main">
       <h1 class="big-text font-med text-center">Cart</h1>
       <div class="book-list header l-text">
@@ -39,35 +48,20 @@
         <div class="md-text">Language</div>
         <div class="md-text">Price</div>
       </div>
-      <div class="container-cart-books">
-        <div class="book-list">
-          <div class="container-flex gap-1 center-hor book-details">
-            <img
-              src="../../assets/images/book-cover-placeholder.jpg"
-              alt=""
-              class="book-cover"
-            />
-            <div>
-              <div class="title md-text">Name of the book</div>
-              <div class="author sm-text">Name of the author</div>
-            </div>
-          </div>
-          <div class="type purple-text font-reg">eBook</div>
-          <div class="language purple-text font-reg">English</div>
-          <div class="price">5 $</div>
-          <div class="actions">
-            <img
-              src="../../assets/icons/trash-icon.svg"
-              alt="trash-icon"
-              class="btn delete"
-            />
-          </div>
+      <div class="container-cart-books"></div>
+      <div class="total-stats">
+        <div class="container-flex">
+          <p>Books amount:</p>
+          <span id="amount"></span>
+        </div>
+        <div class="container-flex">
+          <p>Total price:</p>
+          <span id="ttl-price"></span>
         </div>
       </div>
       <div id="buy-books-btn" class="btn btn-gradient btn-signup-nav md-text">
         Get all books
       </div>
     </div>
-    <div class="footer"></div>
   </body>
 </html>

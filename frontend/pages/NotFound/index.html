@@ -3,9 +3,79 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>44 Not Found<0/title>
+    <title>Not Found</title>
   </head>
+  <link rel="stylesheet" href="../../styles/style-guide.css" />
+  <link rel="stylesheet" href="../../styles/general.css" />
+  <style>
+    /*======================
+    404 page
+=======================*/
+
+    .page_404 {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+      background: #ffffff;
+    }
+
+    .page_404 img {
+      width: 100%;
+    }
+
+    .four_zero_four_bg {
+      background-image: url(https://cdn.dribbble.com/users/285475/screenshots/2083086/dribbble_1.gif);
+      height: 400px;
+      background-position: center;
+      width: 900px;
+    }
+    .text-center {
+      text-align: center;
+    }
+
+    .four_zero_four_bg h1 {
+      font-size: 80px;
+    }
+
+    h1 {
+      font-size: 5rem;
+    }
+
+    .four_zero_four_bg h3 {
+      font-size: 80px;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .btn {
+      margin-top: 20px;
+    }
+  </style>
   <body>
-    <p>Not Found the page -- design will come soon...</p>
+    <section class="page_404">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="container col-sm-10 col-sm-offset-1 text-center">
+              <h1 class="text-center">404 Page not found</h1>
+              <div class="four_zero_four_bg"></div>
+
+              <div class="contant_box_404">
+                <h3 class="h2">Look like you're lost</h3>
+
+                <p>the page you are looking for not avaible!</p>
+              </div>
+              <a href="../../pages/Home/" class="btn btn-gradient">Go Home</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </body>
 </html>

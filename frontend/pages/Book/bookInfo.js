@@ -47,7 +47,7 @@ const displayBookData = (book) => {
   // add listener to the like btn
   $("#add-to-cart-btn").on("click", function () {
     if (isLoggedIn) {
-      addToCart();
+      addToCart(bookId);
     } else {
       popupLogin();
     }

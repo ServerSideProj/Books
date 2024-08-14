@@ -136,7 +136,7 @@ const payment = () => {
         (response) => {
           console.log("Ebook copy added successfully:", response.CopyId);
         },
-        (error) => {
+        (xhr, status, error) => {
           console.error("Error adding ebook copy:", error);
         }
       );
@@ -150,7 +150,7 @@ const payment = () => {
             response.CopyId
           );
         },
-        (error) => {
+        (xhr, status, error) => {
           console.error("Error adding physical book copy:", error);
         }
       );

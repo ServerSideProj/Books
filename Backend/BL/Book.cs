@@ -110,19 +110,14 @@ namespace Backend.BL
             return dbBook.GetBooksByRatingRange(minRating, maxRating);
         }
 
-        public static void AddReview(int bookId, string email, string reviewText, int rating, bool finishedReading)
+        public static void AddReview(int bookId, string email, string reviewText, int rating)
         {
-            dbBook.AddReview(bookId, email, reviewText, rating, finishedReading);
+            dbBook.AddReview(bookId, email, reviewText, rating);
         }
 
         public static void AddBooks(List<Book> books)
         {
             dbBook.AddBooks(books);
-        }
-
-        public static List<Book> GetBooksPurchasedByUserWithSaleStatus(string userEmail)
-        {
-            return dbBook.GetBooksPurchasedByUserWithSaleStatus(userEmail);
         }
 
         public static List<Book> GetAllBooks()
@@ -133,16 +128,6 @@ namespace Backend.BL
         public static List<Book> GetAllActiveBooks()
         {
             return dbBook.GetAllActiveBooks();
-        }
-
-        public static List<BookCopy> GetAllEBookCopies()
-        {
-            return dbBook.GetAllEbookCopies();
-        }
-
-        public static List<BookCopy> GetAllPhysBookCopies()
-        {
-            return dbBook.GetAllPhysBookCopies();
         }
 
         public static void DeleteBook(int bookId)

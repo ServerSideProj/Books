@@ -1,6 +1,4 @@
-﻿using Backend.BL;
-using Backend.DAL;
-using System;
+﻿using Backend.DAL;
 
 namespace Backend.BL
 {
@@ -11,20 +9,20 @@ namespace Backend.BL
         // Default constructor
         public PhysBookCopy() : base() { }
 
-        // Simplified constructor
-        public PhysBookCopy(int copyId, int bookId, string ownerEmail, bool isForSale, bool finishedReading)  
-            : base(copyId, bookId, ownerEmail, finishedReading) 
+        public PhysBookCopy(int copyId, int bookId, string ownerEmail, bool isForSale, bool finishedReading)
+            : base(copyId, bookId, ownerEmail, finishedReading)
         {
             IsForSale = isForSale;
+            IsActive = true; 
         }
 
         public PhysBookCopy(int copyId, int bookId, string title, string description, string language, float avgRating,
                             int ratingCount, string maturityRating, string infoLink, string publisher,
                             bool isEbook, DateTime publishDate, int pageCount, string subtitle,
-                            string[] categories, List<Author> authors, string ownerEmail, bool isForSale, decimal price, bool isActive, string imageLink, string previewLink, bool finishedReading) 
+                            string[] categories, List<Author> authors, string ownerEmail, bool isForSale, decimal price, bool isActive, string imageLink, string previewLink, bool finishedReading)
             : base(copyId, bookId, title, description, language, avgRating, ratingCount, maturityRating,
                    infoLink, publisher, isEbook, publishDate, pageCount, subtitle, categories,
-                   authors, ownerEmail, price, isActive, imageLink, previewLink, finishedReading)  
+                   authors, ownerEmail, price, isActive, imageLink, previewLink, finishedReading)
         {
             IsForSale = isForSale;
         }
@@ -35,6 +33,12 @@ namespace Backend.BL
         {
             DBbook dbBook = new DBbook();
             return dbBook.AddPhysBookCopy(physBookCopy);
+        }
+
+        public static List<PhysBookCopy> GetAllPhysBookCopies()
+        {
+            DBbook dbBook = new DBbook();
+            return dbBook.GetAllPhysBookCopies();
         }
     }
 }

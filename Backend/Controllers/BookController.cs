@@ -85,36 +85,28 @@ namespace Backend.Controllers
         [HttpGet("ebook-copies")]
         public ActionResult<List<BookCopy>> GetAllEBookCopies()
         {
-            List<BookCopy> books = Book.GetAllEBookCopies();
+            List<BookCopy> books = BookCopy.GetAllEBookCopies();
             return Ok(books);
         }
 
         [HttpGet("physical-copies")]
-        public ActionResult<List<BookCopy>> GetAllPhysBookCopies()
+        public ActionResult<List<PhysBookCopy>> GetAllPhysBookCopies()
         {
-            List<BookCopy> books = Book.GetAllPhysBookCopies();
+            List<PhysBookCopy> books = PhysBookCopy.GetAllPhysBookCopies();
             return Ok(books);
         }
 
         [HttpGet("user-purchases/{userEmail}")]
-        public ActionResult<List<Book>> GetBooksPurchasedByUser(string userEmail)
+        public ActionResult<List<BookCopy>> GetBooksPurchasedByUser(string userEmail)
         {
-            List<Book> books = BookCopy.GetBooksPurchasedByUser(userEmail);
+            List<BookCopy> books = BookCopy.GetBooksPurchasedByUser(userEmail);
             return Ok(books);
         }
-
-        [HttpGet("user-purchases-sale-status/{userEmail}")]
-        public ActionResult<List<Book>> GetBooksPurchasedByUserWithSaleStatus(string userEmail)
-        {
-            List<Book> books = Book.GetBooksPurchasedByUserWithSaleStatus(userEmail);
-            return Ok(books);
-        }
-
 
         [HttpPost("review")]
         public ActionResult AddReview([FromBody] Review review)
         {
-            Book.AddReview(review.BookId, review.Email, review.ReviewText, review.Rating, review.FinishedReading); 
+            Book.AddReview(review.BookId, review.Email, review.ReviewText, review.Rating); 
             return Ok("Review added successfully.");
         }
 
@@ -128,10 +120,10 @@ namespace Backend.Controllers
         [HttpPost("add-ebook-copy")]
         public ActionResult<int> AddEbookCopy([FromBody] JsonElement bookcopy)
         {
-            int bookId = bookcopy.GetProperty("BookId").GetInt32();  
+            int bookId = bookcopy.GetProperty("BookId").GetInt32();
             string ownerEmail = bookcopy.GetProperty("OwnerEmail").GetString();
 
-            BookCopy ebookCopy = new BookCopy(0, bookId, ownerEmail);  
+            BookCopy ebookCopy = new BookCopy(0, bookId, ownerEmail, false);  
             int copyId = BookCopy.AddEbookCopy(ebookCopy);
 
             return Ok(new { message = "Ebook copy added successfully.", CopyId = copyId });
@@ -140,10 +132,10 @@ namespace Backend.Controllers
         [HttpPost("add-physbook-copy")]
         public ActionResult<int> AddPhysBookCopy([FromBody] JsonElement bookcopy)
         {
-            int bookId = bookcopy.GetProperty("BookId").GetInt32();  
+            int bookId = bookcopy.GetProperty("BookId").GetInt32();
             string ownerEmail = bookcopy.GetProperty("OwnerEmail").GetString();
 
-            PhysBookCopy physBookCopy = new PhysBookCopy(0, bookId, ownerEmail, false); 
+            PhysBookCopy physBookCopy = new PhysBookCopy(0, bookId, ownerEmail, false, false);  
             int copyId = PhysBookCopy.AddPhysBookCopy(physBookCopy);
 
             return Ok(new { message = "Physical book copy added successfully.", CopyId = copyId });

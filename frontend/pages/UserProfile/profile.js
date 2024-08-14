@@ -7,10 +7,12 @@ $(document).ready(function () {
   $(".inner-page-books").show();
   $("#all-books").addClass("checked");
 
-  const profileImageLink = localStorage.getItem("profileImageLink");
-  if (profileImageLink && profileImageLink !== "") {
-    $(".user-photo").attr("src", profileImageLink);
-  }
+  const profileImageLink = localStorage
+    .getItem("profileImageLink")
+    .endsWith("/Images/")
+    ? "../../assets/images/user-profile-image.svg"
+    : localStorage.getItem("profileImageLink");
+  $(".user-photo").attr("src", profileImageLink);
 
   // Fetch and render books when the page loads
   fetchBooks();
@@ -104,6 +106,7 @@ const fetchBooks = () => {
 
 // Function to render books in the "My Books" section
 const renderBooks = (books) => {
+  console.log(books);
   const ownedBooks = $(".inner-page-books");
   ownedBooks.empty();
 
@@ -114,6 +117,7 @@ const renderBooks = (books) => {
 
     // Add click event listener to the book card
     $bookCard.on("click", () => {
+      console.log(book);
       popupBookInfo(book);
     });
   });

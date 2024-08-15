@@ -10,6 +10,50 @@ namespace Backend.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
+
+        // GET api/users/usernames
+        [HttpGet("usernames")]
+        public ActionResult<List<string>> GetAllUsernames()
+        {
+            List<string> usernames = Users.GetAllUsernames();
+            return Ok(usernames);
+        }
+
+        // GET api/users
+        [HttpGet]
+        public ActionResult<List<Users>> GetAllUsers()
+        {
+            List<Users> users = Users.GetAllUsers();
+            return Ok(users);
+        }
+
+        [HttpGet("followers/{email}")]
+        public ActionResult<List<Users>> GetFollowers(string email)
+        {
+            List<Users> followers = Users.GetFollowers(email);
+            return Ok(followers);
+        }
+
+        [HttpGet("following/{email}")]
+        public ActionResult<List<Users>> GetUsersFollowing(string email)
+        {
+            List<Users> followedUsers = Users.GetUsersFollowing(email);
+            return Ok(followedUsers);
+        }
+
+        [HttpGet("daily-quiz/top-5-users-scores")]
+        public IActionResult GetTop5UserScores()
+        {
+            List<UserScore> topScores = Users.GetTop5UserScores();
+
+            if (topScores.Count == 0)
+            {
+                return Ok(new List<UserScore>());
+            }
+
+            return Ok(topScores);
+        }
+
         // POST api/users/register
         [HttpPost("register")]
         public ActionResult<object> Register([FromBody] Users user)
@@ -63,35 +107,7 @@ namespace Backend.Controllers
             }
         }
 
-        // GET api/users/usernames
-        [HttpGet("usernames")]
-        public ActionResult<List<string>> GetAllUsernames()
-        {
-            List<string> usernames = Users.GetAllUsernames();
-            return Ok(usernames);
-        }
-
-        // GET api/users
-        [HttpGet]
-        public ActionResult<List<Users>> GetAllUsers()
-        {
-            List<Users> users = Users.GetAllUsers();
-            return Ok(users);
-        }
-
-        [HttpGet("followers/{email}")]
-        public ActionResult<List<Users>> GetFollowers(string email)
-        { 
-            List<Users> followers = Users.GetFollowers(email);
-            return Ok(followers);
-        }
-
-        [HttpGet("following/{email}")]
-        public ActionResult<List<Users>> GetUsersFollowing(string email)
-        {
-            List<Users> followedUsers = Users.GetUsersFollowing(email);
-            return Ok(followedUsers);
-        }
+       
 
         // POST api/users/addFriend
         [HttpPost("addFriend")]
@@ -124,6 +140,39 @@ namespace Backend.Controllers
                 default:
                     return StatusCode(500, "An unknown error occurred.");
             }
+        }
+
+        [HttpPost("UploadProfileImage")]
+        public async Task<IActionResult> UploadProfileImage([FromForm] IFormFile file, [FromForm] string email)
+        {
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest("No file uploaded.");
+            }
+
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "UploadedFiles");
+
+            // Ensure the directory exists
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            // Generate a unique filename
+            var uniqueFileName = $"{email}_{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
+            var filePath = Path.Combine(path, uniqueFileName);
+
+            // Save the file
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            // Update the user's profile image in the database
+            Users.UpdateProfileImage(email, uniqueFileName);
+
+            // Return status code and the image link
+            return Ok(new { ImageName = uniqueFileName });
         }
 
         // PUT api/users/changePassword
@@ -176,51 +225,6 @@ namespace Backend.Controllers
             }
 
         }
-
-        [HttpPost("UploadProfileImage")]
-        public async Task<IActionResult> UploadProfileImage([FromForm] IFormFile file, [FromForm] string email)
-        {
-            if (file == null || file.Length == 0)
-            {
-                return BadRequest("No file uploaded.");
-            }
-
-            string path = Path.Combine(Directory.GetCurrentDirectory(), "UploadedFiles");
-
-            // Ensure the directory exists
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-            }
-
-            // Generate a unique filename
-            var uniqueFileName = $"{email}_{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
-            var filePath = Path.Combine(path, uniqueFileName);
-
-            // Save the file
-            using (var stream = new FileStream(filePath, FileMode.Create))
-            {
-                await file.CopyToAsync(stream);
-            }
-
-            // Update the user's profile image in the database
-            Users.UpdateProfileImage(email, uniqueFileName);
-
-            // Return status code and the image link
-            return Ok(new { ImageName = uniqueFileName });
-        }
-
-        [HttpGet("daily-quiz/top-5-users-scores")]
-        public IActionResult GetTop5UserScores()
-        {
-            List<UserScore> topScores = Users.GetTop5UserScores();
-
-            if (topScores.Count == 0)
-            {
-                return Ok(new List<UserScore>());
-            }
-
-            return Ok(topScores);
-        }
+       
     }
 }

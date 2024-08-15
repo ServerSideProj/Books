@@ -201,7 +201,7 @@ const popupBookInfo = (book) => {
   const saleSection = !book.isEbook
     ? `<div class="row-bot-line">
        <p class="xl-text">Open for sale?</p>
-       <div class="switch-btn sale">
+       <div class="switch-btn sale" data-book-id=${book.id} data-copy-id=${book.copyId}>
          <div class="circle-switch"></div>
        </div>
      </div>`
@@ -220,7 +220,7 @@ const popupBookInfo = (book) => {
           alt="book cover"
           class="book-cover"
         />
-        <div class="container-flex-col center">
+        <div class="container-flex-col center text-center">
           <p class="title l-text">${book.title}</p>
           <p class="authors sm-text grey-text"> 
           ${book.authors.map((author) => author.name).join(", ")}
@@ -253,9 +253,12 @@ const popupBookInfo = (book) => {
   $(".bg-dark").append(popup);
   $("#popup-book-info").addClass("open");
 
-  // Set the initial state of the finished reading switch based on the book's status
+  // Set the initial state of the finished reading and sale switches based on the book's status
   if (book.finishedReading) {
     $(".switch-btn.done").addClass("checked");
+  }
+  if (book.isForSale) {
+    $(".switch-btn.sale").addClass("checked");
   }
 
   // Remove previous event listeners
@@ -268,20 +271,39 @@ const popupBookInfo = (book) => {
     $(".bg-dark").removeClass("open");
   });
 
-  // add listener to switch btns
+  // Event handler for the "Sale" toggle bookmark
   $(".switch-btn.sale").on("click", function () {
     $(this).toggleClass("checked");
-    if ($(this).hasClass("checked")) {
-      let bookmark = createBookmark("sale");
+    let isForSale = $(this).hasClass("checked");
 
-      // Find the corresponding book card and append the bookmark
-      $(`.inner-page-books .book-card[data-book-id="${book.id}"]`).append(
-        bookmark
-      );
-    }
+    // Prepare the data to be sent to the server
+    let data = {
+      bookId: book.id,
+      copyId: book.copyId,
+      userEmail: book.ownerEmail,
+      isEbook: book.isEbook,
+      isForSale: isForSale,
+    };
+
+    // Construct the URL with query parameters
+    let url = `${API_URL}Book/update-sale-status?copyId=${
+      data.copyId
+    }&userEmail=${encodeURIComponent(data.userEmail)}&isEbook=${
+      data.isEbook
+    }&isForSale=${data.isForSale}`;
+
+    // Send the POST request with an empty body
+    $.ajax({
+      url: url,
+      type: "POST",
+      success: function (response) {
+        isForSaleStatus(data, response);
+      },
+      error: onError,
+    });
   });
 
-  // Assuming you have a class that corresponds to the switch button for marking a book as read
+  // Event handler for the "Fone" toggle bookmark
   $(".switch-btn.done").on("click", function () {
     $(this).toggleClass("checked");
     let finishedReading = $(this).hasClass("checked");
@@ -302,23 +324,13 @@ const popupBookInfo = (book) => {
       data.isEbook
     }&finishedReading=${data.finishedReading}`;
 
-    // Send the POST request with an empty body
     $.ajax({
-      url: url, // The URL already has the query parameters
+      url: url,
       type: "POST",
       success: function (response) {
-        console.log("Finished reading status updated:", response.message);
-        if (finishedReading) {
-          let bookmark = createBookmark("done");
-          $(
-            `.inner-page-books .book-card[data-book-id="${data.bookId}"]`
-          ).append(bookmark);
-          confetti();
-        }
+        isFinishedReading(data, response);
       },
-      error: function (error) {
-        console.error("Error updating finished reading status:", error);
-      },
+      error: onError,
     });
   });
 };

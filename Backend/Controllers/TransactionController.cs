@@ -9,6 +9,26 @@ namespace Backend.Controllers
     [ApiController]
     public class TransactionController : ControllerBase
     {
+        
+
+        [HttpGet("seller-transactions/{salerEmail}")]
+        public IActionResult GetTransactionsForSeller(string salerEmail)
+        {
+            if (string.IsNullOrEmpty(salerEmail))
+            {
+                return BadRequest("Seller email is required.");
+            }
+
+            IEnumerable<object> transactions = Transaction.GetTransactionsForSeller(salerEmail);
+
+            if (transactions == null)
+            {
+                return NotFound("No transactions found for the provided seller email.");
+            }
+
+            return Ok(transactions);
+        }
+
         [HttpPost("create")]
         public IActionResult CreateTransaction([FromBody] Transaction transaction)
         {
@@ -49,24 +69,6 @@ namespace Backend.Controllers
             {
                 return BadRequest(new { Error = ex.Message });
             }
-        }
-
-        [HttpGet("seller-transactions/{salerEmail}")]
-        public IActionResult GetTransactionsForSeller(string salerEmail)
-        {
-            if (string.IsNullOrEmpty(salerEmail))
-            {
-                return BadRequest("Seller email is required.");
-            }
-
-            IEnumerable<object> transactions = Transaction.GetTransactionsForSeller(salerEmail);
-
-            if (transactions == null)
-            {
-                return NotFound("No transactions found for the provided seller email.");
-            }
-
-            return Ok(transactions);
         }
     }
 }

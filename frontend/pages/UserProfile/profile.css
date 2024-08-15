@@ -204,6 +204,10 @@ textarea + .btn {
   align-self: flex-end;
 }
 
+.card-popup {
+  max-width: 250px;
+}
+
 /* btn add a book */
 
 .add-book {

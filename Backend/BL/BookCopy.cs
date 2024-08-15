@@ -77,4 +77,11 @@ public class BookCopy : Book
         DBbook dbBook = new DBbook();
         return dbBook.UpdateFinishedReadingStatus(copyId, userEmail, isEbook, finishedReading);
     }
+
+    public static bool UpdateSaleStatus(int copyId, string userEmail, bool isEbook, bool isForSale)
+    {
+        DBbook dbBook = new DBbook();
+        return dbBook.UpdateSaleStatus(copyId, userEmail, isEbook, isForSale);
+    }
+
 }

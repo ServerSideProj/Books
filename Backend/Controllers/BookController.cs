@@ -161,6 +161,26 @@ namespace Backend.Controllers
             }
         }
 
+        [HttpPost("update-sale-status")]
+        public IActionResult UpdateSaleStatus(int copyId, string userEmail, bool isEbook, bool isForSale)
+        {
+            if (copyId <= 0 || string.IsNullOrEmpty(userEmail))
+            {
+                return BadRequest(new { message = "Invalid request data." });
+            }
+
+            bool success = BookCopy.UpdateSaleStatus(copyId, userEmail, isEbook, isForSale);
+
+            if (success)
+            {
+                return Ok(new { message = "Sale status updated successfully." });
+            }
+            else
+            {
+                return BadRequest(new { message = "Failed to update sale status." });
+            }
+        }
+
         [HttpDelete("{bookId}")]
         public IActionResult DeleteBook(int bookId)  
         {

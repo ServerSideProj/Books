@@ -127,6 +127,12 @@ const renderBooks = () => {
       $bookCard.append(bookmark);
     }
 
+    // Add the "done" bookmark if the book is finished
+    if (book.isForSale) {
+      let bookmark = createBookmark("sale");
+      $bookCard.append(bookmark);
+    }
+
     // Add click event listener to the book card
     $bookCard.on("click", () => {
       console.log(book);
@@ -136,19 +142,23 @@ const renderBooks = () => {
 };
 
 // the user clicked on btn finished reading - if yes - add bookmark and confetti, else remove book mark.
-const isFinishedReading = (data) => {
-  if (data.finishedReading) {
-    confetti();
-
-    // add the book mark to the relevant book
-    let bookmark = createBookmark("done");
-    $(`.inner-page-books .book-card[data-book-id="${data.bookId}"]`).append(
-      bookmark
-    );
-  } else {
-    $(
-      `.inner-page-books .book-card[data-book-id="${data.bookId}"] 
-img.bookmark.done`
-    ).remove();
+const isFinishedReading = (data, response) => {
+  // Update the relevant book in the array
+  const bookIndex = allUserBooks.findIndex((book) => book.id === data.bookId);
+  if (bookIndex !== -1) {
+    allUserBooks[bookIndex].finishedReading = data.finishedReading;
   }
+
+  renderBooks();
+};
+
+// Success function for updating the sale status
+const isForSaleStatus = (data, response) => {
+  // Update the relevant book in the array
+  const bookIndex = allUserBooks.findIndex((book) => book.id === data.bookId);
+  if (bookIndex !== -1) {
+    allUserBooks[bookIndex].isForSale = data.isForSale;
+  }
+
+  renderBooks();
 };

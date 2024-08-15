@@ -10,31 +10,6 @@ namespace Backend.Controllers
     [ApiController]
     public class QuizController : ControllerBase
     {
-        [HttpPost]
-        [Route("api/questions/save")]
-        public IActionResult SaveQuestions()
-        {
-           Question.GenerateQuestions();
-           return Ok("Questions saved successfully.");
-        }
-
-        [HttpPost("generate")]
-        public IActionResult GenerateQuizzes([FromQuery] int numberOfQuizzes)
-        {
-            try
-            {
-                int createdQuizzesCount = Quiz.GenerateQuizzes(numberOfQuizzes);
-
-                return Ok(new
-                {
-                    Message = $"{createdQuizzesCount} quizzes were successfully created."
-                });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { Error = ex.Message });
-            }
-        }
 
         [HttpGet("daily-quiz/{userEmail}")]
         public IActionResult GetDailyQuiz(string userEmail)
@@ -64,6 +39,32 @@ namespace Backend.Controllers
                     message = "Here is your daily quiz.",
                     quiz = result.quiz
                 });
+            }
+        }
+
+        [HttpPost]
+        [Route("api/questions/save")]
+        public IActionResult SaveQuestions()
+        {
+            Question.GenerateQuestions();
+            return Ok("Questions saved successfully.");
+        }
+
+        [HttpPost("generate")]
+        public IActionResult GenerateQuizzes([FromQuery] int numberOfQuizzes)
+        {
+            try
+            {
+                int createdQuizzesCount = Quiz.GenerateQuizzes(numberOfQuizzes);
+
+                return Ok(new
+                {
+                    Message = $"{createdQuizzesCount} quizzes were successfully created."
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Error = ex.Message });
             }
         }
 

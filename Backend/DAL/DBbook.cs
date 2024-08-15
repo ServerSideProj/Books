@@ -641,7 +641,7 @@ namespace Backend.DAL
             return books;
         }
 
-        // 
+        // update status of "finished reading" a certain book for certain user
         public bool UpdateFinishedReadingStatus(int copyId, string ownerEmail, bool isEbook, bool finishedReading)
         {
             using (SqlConnection con = connect("myProjDB"))
@@ -659,5 +659,22 @@ namespace Backend.DAL
             }
         }
 
+        // update status of "for sale" a certain book for certain user
+        public bool UpdateSaleStatus(int copyId, string ownerEmail, bool isEbook, bool isForSale)
+        {
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                SqlCommand cmd = new SqlCommand("sp_UpdateSaleStatus", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@CopyId", copyId);
+                cmd.Parameters.AddWithValue("@OwnerEmail", ownerEmail);
+                cmd.Parameters.AddWithValue("@IsEbook", isEbook);
+                cmd.Parameters.AddWithValue("@IsForSale", isForSale);
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+                return rowsAffected > 0;
+            }
+        }
     }
 }

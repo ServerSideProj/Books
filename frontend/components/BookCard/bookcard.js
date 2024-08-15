@@ -17,7 +17,7 @@ const generateBookCard_default = (book) => {
           </div>
           </div>
       </div>
-          <div class="container-flex-col gap-0">
+          <div class="container-flex-col gap-0 container-texts-card">
               <p class="md-text">${book.title}</p>
               <p class="xsm-text grey-text font-reg">
               ${book.authors.map((author) => author.name).join(", ")}

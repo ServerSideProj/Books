@@ -1,4 +1,3 @@
-const isLoggedIn = localStorage.getItem("authToken") !== null;
 const allBooksUrl = "Book/all-active-books";
 const allFriendsUrl = "Users/Following/";
 
@@ -24,13 +23,15 @@ $(document).ready(function () {
   $("#loader").show();
   $(".main").hide();
 
-  // get all books
+  // get all books in store
   fetchData(API_URL + allBooksUrl, initializePage, onError);
 
+  const email = localStorage.getItem("email");
+
   if (isLoggedIn) {
-    //get all Friends
+    // get all Friends
     fetchData(
-      API_URL + allFriendsUrl + localStorage.getItem("email"),
+      API_URL + allFriendsUrl + encodeURIComponent(email),
       getAllFriends,
       onError
     );

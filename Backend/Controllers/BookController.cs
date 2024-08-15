@@ -90,17 +90,17 @@ namespace Backend.Controllers
         }
 
         [HttpGet("physical-copies")]
-        public ActionResult<List<PhysBookCopy>> GetAllPhysBookCopies()
+        public ActionResult<List<BookCopy>> GetAllPhysBookCopies()
         {
-            List<PhysBookCopy> books = PhysBookCopy.GetAllPhysBookCopies();
+            List<BookCopy> books = BookCopy.GetAllPhysBookCopies();
             return Ok(books);
         }
 
         [HttpGet("user-purchases/{userEmail}")]
         public ActionResult<List<BookCopy>> GetBooksPurchasedByUser(string userEmail)
         {
-            List<BookCopy> books = BookCopy.GetBooksPurchasedByUser(userEmail);
-            return Ok(books);
+            var bookCopies = BookCopy.GetBooksPurchasedByUser(userEmail);
+            return Ok(bookCopies);
         }
 
         [HttpPost("review")]
@@ -135,10 +135,30 @@ namespace Backend.Controllers
             int bookId = bookcopy.GetProperty("BookId").GetInt32();
             string ownerEmail = bookcopy.GetProperty("OwnerEmail").GetString();
 
-            PhysBookCopy physBookCopy = new PhysBookCopy(0, bookId, ownerEmail, false, false);  
-            int copyId = PhysBookCopy.AddPhysBookCopy(physBookCopy);
+            BookCopy physBookCopy = new BookCopy(0, bookId, ownerEmail, false, false);  
+            int copyId = BookCopy.AddPhysBookCopy(physBookCopy);
 
             return Ok(new { message = "Physical book copy added successfully.", CopyId = copyId });
+        }
+
+        [HttpPost("update-finished-reading")]
+        public IActionResult UpdateFinishedReading(int copyId, string userEmail, bool isEbook, bool finishedReading)
+        {
+            if (copyId <= 0 || string.IsNullOrEmpty(userEmail))
+            {
+                return BadRequest(new { message = "Invalid request data." });
+            }
+
+            bool success = BookCopy.UpdateFinishedReadingStatus(copyId, userEmail, isEbook, finishedReading);
+
+            if (success)
+            {
+                return Ok(new { message = "Finished reading status updated successfully." });
+            }
+            else
+            {
+                return BadRequest(new { message = "Failed to update finished reading status." });
+            }
         }
 
         [HttpDelete("{bookId}")]

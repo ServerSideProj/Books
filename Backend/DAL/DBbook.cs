@@ -226,15 +226,7 @@ namespace Backend.DAL
                     {
                         while (reader.Read())
                         {
-                            bool isEbook = Convert.ToBoolean(reader["isEbook"]);
-                            if (isEbook)
-                            {
-                                bookCopies.Add(MapEbookCopy(reader));
-                            }
-                            else
-                            {
-                                bookCopies.Add(MapPhysBookCopy(reader));
-                            }
+                            bookCopies.Add(MapBookCopy(reader));
                         }
                     }
                 }
@@ -243,28 +235,16 @@ namespace Backend.DAL
             return bookCopies;
         }
 
-        private BookCopy MapEbookCopy(SqlDataReader reader)
-        {
-            return new EbookCopy(
-                copyId: Convert.ToInt32(reader["copyId"]),
-                bookId: Convert.ToInt32(reader["bookId"]),
-                ownerEmail: reader["ownerEmail"].ToString(),
-                finishedReading: Convert.ToBoolean(reader["finishedReading"]),
-                previewLink: reader["previewLink"] != DBNull.Value ? reader["previewLink"].ToString() : null
-            );
-        }
-
-        // Mapping method for Physical Book Copies
-        private PhysBookCopy MapPhysBookCopy(SqlDataReader reader)
+        // maps SQL data to appropriate BookCopy object
+        private BookCopy MapBookCopy(SqlDataReader reader)
         {
             int bookId = Convert.ToInt32(reader["id"]);
-            int copyId = Convert.ToInt32(reader["copyId"]);
-            string ownerEmail = reader["ownerEmail"].ToString();
-            bool isForSale = Convert.ToBoolean(reader["isForSale"]);
+            bool isEbook = Convert.ToBoolean(reader["isEbook"]);
+            bool isActive = Convert.ToBoolean(reader["active"]);
             bool finishedReading = Convert.ToBoolean(reader["finishedReading"]);
 
-            // Common fields for the book
             string title = reader["title"].ToString();
+            int copyId = Convert.ToInt32(reader["copyId"]);
             string description = reader["description"].ToString();
             string language = reader["language"].ToString();
             float avgRating = Convert.ToSingle(reader["avgRating"]);
@@ -275,15 +255,18 @@ namespace Backend.DAL
             DateTime publishDate = (DateTime)reader["publishDate"];
             int pageCount = Convert.ToInt32(reader["pageCount"]);
             string subtitle = reader["subtitle"].ToString();
+            string ownerEmail = reader["ownerEmail"].ToString();
             string imageLink = reader["imageLink"].ToString();
+            string previewLink = reader["previewLink"] != DBNull.Value ? reader["previewLink"].ToString() : null;
             var categories = GetCategoriesByBookId(bookId);
             var authors = GetAuthorsByBookId(bookId);
             decimal price = Convert.ToDecimal(reader["price"]);
-            bool isActive = Convert.ToBoolean(reader["active"]);
-            string previewLink = reader["previewLink"] != DBNull.Value ? reader["previewLink"].ToString() : null;
 
-            // Return a new instance of PhysBookCopy
-            return new PhysBookCopy(
+            // Handle IsForSale as nullable since it applies only to physical books‹
+            bool? isForSale = reader["isForSale"] != DBNull.Value ? (bool?)Convert.ToBoolean(reader["isForSale"]) : null;
+
+            // Create and return a new BookCopy object
+            return new BookCopy(
                 copyId: copyId,
                 bookId: bookId,
                 title: title,
@@ -294,22 +277,21 @@ namespace Backend.DAL
                 maturityRating: maturityRating,
                 infoLink: infoLink,
                 publisher: publisher,
-                isEbook: false, // Assuming phys books are not ebooks
+                isEbook: isEbook,
                 publishDate: publishDate,
                 pageCount: pageCount,
                 subtitle: subtitle,
                 categories: categories.ToArray(),
                 authors: authors,
                 ownerEmail: ownerEmail,
-                isForSale: isForSale,
                 price: price,
                 isActive: isActive,
                 imageLink: imageLink,
                 previewLink: previewLink,
-                finishedReading: finishedReading
+                finishedReading: finishedReading,
+                isForSale: isForSale
             );
         }
-
 
         // Get categories for a specific book title
         private string[] GetCategoriesByBookId(int bookId)
@@ -474,14 +456,14 @@ namespace Backend.DAL
                 cmd.Parameters.AddWithValue("@BookId", ebookCopy.Id);
                 cmd.Parameters.AddWithValue("@OwnerEmail", (object)ebookCopy.OwnerEmail ?? DBNull.Value);
 
-                // return new copy bookId
+                // Return the new copy bookId
                 return Convert.ToInt32(cmd.ExecuteScalar());
             }
         }
 
 
         //
-        public int AddPhysBookCopy(PhysBookCopy physBookCopy)
+        public int AddPhysBookCopy(BookCopy physBookCopy)
         {
             using (SqlConnection con = connect("myProjDB"))
             {
@@ -495,8 +477,6 @@ namespace Backend.DAL
                 return Convert.ToInt32(cmd.ExecuteScalar());
             }
         }
-
-
 
         //
         public List<Book> GetAllBooks()
@@ -576,94 +556,6 @@ namespace Backend.DAL
             return authors;
         }
 
-        // maps SQL data to appropriate BookCopy object
-        private BookCopy MapBookCopy(SqlDataReader reader)
-        {
-            int bookId = Convert.ToInt32(reader["id"]);
-            bool isEbook = Convert.ToBoolean(reader["isEbook"]);
-            bool isActive = Convert.ToBoolean(reader["active"]);
-            bool finishedReading = Convert.ToBoolean(reader["finishedReading"]);
-
-            string title = reader["title"].ToString();
-            int copyId = Convert.ToInt32(reader["copyId"]);
-            string description = reader["description"].ToString();
-            string language = reader["language"].ToString();
-            float avgRating = Convert.ToSingle(reader["avgRating"]);
-            int ratingCount = Convert.ToInt32(reader["ratingCount"]);
-            string maturityRating = reader["maturityRating"].ToString();
-            string infoLink = reader["infoLink"].ToString();
-            string publisher = reader["publisher"].ToString();
-            DateTime publishDate = (DateTime)reader["publishDate"];
-            int pageCount = Convert.ToInt32(reader["pageCount"]);
-            string subtitle = reader["subtitle"].ToString();
-            string ownerEmail = reader["ownerEmail"].ToString();
-            string imageLink = reader["imageLink"].ToString();
-            string previewLink = reader["previewLink"] != DBNull.Value ? reader["previewLink"].ToString() : null;
-            var categories = GetCategoriesByBookId(bookId);
-            var authors = GetAuthorsByBookId(bookId);
-            decimal price = Convert.ToDecimal(reader["price"]);
-
-            if (isEbook)
-            {
-                // EBookCopy
-                return new BookCopy(
-                    copyId: copyId,
-                    bookId: bookId,
-                    finishedReading: finishedReading,
-                    title: title,
-                    description: description,
-                    language: language,
-                    avgRating: avgRating,
-                    ratingCount: ratingCount,
-                    maturityRating: maturityRating,
-                    infoLink: infoLink,
-                    publisher: publisher,
-                    isEbook: isEbook,
-                    publishDate: publishDate,
-                    pageCount: pageCount,
-                    subtitle: subtitle,
-                    categories: categories.ToArray(),
-                    authors: authors,
-                    ownerEmail: ownerEmail,
-                    price: price,
-                    isActive: isActive,
-                    imageLink: imageLink,
-                    previewLink: previewLink
-                );
-            }
-            else
-            {
-                // PhysBookCopy
-                bool isForSale = Convert.ToBoolean(reader["isForSale"]);
-
-                return new PhysBookCopy(
-                    copyId: copyId,
-                    bookId: bookId,
-                    finishedReading: finishedReading,
-                    title: title,
-                    description: description,
-                    language: language,
-                    avgRating: avgRating,
-                    ratingCount: ratingCount,
-                    maturityRating: maturityRating,
-                    infoLink: infoLink,
-                    publisher: publisher,
-                    isEbook: isEbook,
-                    publishDate: publishDate,
-                    pageCount: pageCount,
-                    subtitle: subtitle,
-                    categories: categories.ToArray(),
-                    authors: authors,
-                    ownerEmail: ownerEmail,
-                    isForSale: isForSale,
-                    price: price,
-                    isActive: isActive,
-                    imageLink: imageLink,
-                    previewLink: previewLink
-                );
-            }
-        }
-
         // Get All Ebook Copies
         public List<BookCopy> GetAllEbookCopies()
         {
@@ -689,9 +581,9 @@ namespace Backend.DAL
         }
 
         // Get All Physical Book Copies
-        public List<PhysBookCopy> GetAllPhysBookCopies()
+        public List<BookCopy> GetAllPhysBookCopies()
         {
-            List<PhysBookCopy> physBookCopies = new List<PhysBookCopy>();
+            List<BookCopy> physBookCopies = new List<BookCopy>();
 
             using (SqlConnection con = connect("myProjDB"))
             {
@@ -703,7 +595,7 @@ namespace Backend.DAL
                     {
                         while (reader.Read())
                         {
-                            physBookCopies.Add(MapPhysBookCopy(reader));
+                            physBookCopies.Add(MapBookCopy(reader));
                         }
                     }
                 }
@@ -711,7 +603,6 @@ namespace Backend.DAL
 
             return physBookCopies;
         }
-
 
         //
         public void DeleteBook(int bookId)
@@ -749,5 +640,24 @@ namespace Backend.DAL
             }
             return books;
         }
+
+        // 
+        public bool UpdateFinishedReadingStatus(int copyId, string ownerEmail, bool isEbook, bool finishedReading)
+        {
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                SqlCommand cmd = new SqlCommand("sp_UpdateFinishedReading", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@CopyId", copyId);
+                cmd.Parameters.AddWithValue("@OwnerEmail", ownerEmail);
+                cmd.Parameters.AddWithValue("@IsEbook", isEbook);
+                cmd.Parameters.AddWithValue("@FinishedReading", finishedReading);
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+                return rowsAffected > 0;
+            }
+        }
+
     }
 }

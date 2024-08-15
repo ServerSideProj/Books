@@ -1,5 +1,7 @@
 const isLoggedIn = localStorage.getItem("authToken") !== null;
 
+var allUserBooks = [];
+
 $(document).ready(function () {
   if (!isLoggedIn) window.location.href = "/pages/NotFound/";
 
@@ -99,21 +101,31 @@ const fetchBooks = () => {
 
   fetchData(
     API_URL + "Book/user-purchases/" + encodeURIComponent(email),
-    renderBooks,
+    firstFetchBooks,
     onError
   );
 };
 
+const firstFetchBooks = (books) => {
+  allUserBooks = [...books];
+  renderBooks();
+};
+
 // Function to render books in the "My Books" section
-const renderBooks = (books) => {
-  console.log(books);
+const renderBooks = () => {
   const ownedBooks = $(".inner-page-books");
   ownedBooks.empty();
 
-  books.forEach((book) => {
+  allUserBooks.forEach((book) => {
     const bookCardHtml = generateBookCard_default(book);
     const $bookCard = $(bookCardHtml);
     ownedBooks.append($bookCard);
+
+    // Add the "done" bookmark if the book is finished
+    if (book.finishedReading) {
+      let bookmark = createBookmark("done");
+      $bookCard.append(bookmark);
+    }
 
     // Add click event listener to the book card
     $bookCard.on("click", () => {
@@ -121,4 +133,22 @@ const renderBooks = (books) => {
       popupBookInfo(book);
     });
   });
+};
+
+// the user clicked on btn finished reading - if yes - add bookmark and confetti, else remove book mark.
+const isFinishedReading = (data) => {
+  if (data.finishedReading) {
+    confetti();
+
+    // add the book mark to the relevant book
+    let bookmark = createBookmark("done");
+    $(`.inner-page-books .book-card[data-book-id="${data.bookId}"]`).append(
+      bookmark
+    );
+  } else {
+    $(
+      `.inner-page-books .book-card[data-book-id="${data.bookId}"] 
+img.bookmark.done`
+    ).remove();
+  }
 };

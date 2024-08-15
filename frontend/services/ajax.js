@@ -9,9 +9,9 @@ function fetchData(url, successCallback, errorCallback) {
         successCallback(response);
       }
     },
-    error: function (xhr, status, error) {
+    error: function (error) {
       if (typeof errorCallback === "function") {
-        errorCallback(xhr, status, error);
+        errorCallback(error);
       }
     },
   });
@@ -32,7 +32,7 @@ function sendData(url, data, successCallback, errorCallback) {
     },
     error: function (error) {
       if (typeof errorCallback === "function") {
-        errorCallback(xhr, status, error);
+        errorCallback(error);
       }
     },
   });

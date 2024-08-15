@@ -230,7 +230,9 @@ const popupBookInfo = (book) => {
       <div class="container-flex-col center-ver">
         <div class="row-bot-line">
           <p class="xl-text">Finished reading?</p>
-          <div class="switch-btn done">
+          <div class="switch-btn done" data-book-id=${book.id} data-copy-id=${
+    book.copyId
+  }>
             <div class="circle-switch"></div>
           </div>
         </div>
@@ -250,6 +252,11 @@ const popupBookInfo = (book) => {
   $(".bg-dark").addClass("open");
   $(".bg-dark").append(popup);
   $("#popup-book-info").addClass("open");
+
+  // Set the initial state of the finished reading switch based on the book's status
+  if (book.finishedReading) {
+    $(".switch-btn.done").addClass("checked");
+  }
 
   // Remove previous event listeners
   $(".btn-x").off("click");
@@ -274,17 +281,45 @@ const popupBookInfo = (book) => {
     }
   });
 
+  // Assuming you have a class that corresponds to the switch button for marking a book as read
   $(".switch-btn.done").on("click", function () {
     $(this).toggleClass("checked");
-    if ($(this).hasClass("checked")) {
-      let bookmark = createBookmark("done");
+    let finishedReading = $(this).hasClass("checked");
 
-      // Find the corresponding book card and append the bookmark
-      $(`.inner-page-books .book-card[data-book-id="${book.id}"]`).append(
-        bookmark
-      );
-      confetti();
-    }
+    // Prepare the data to be sent to the server
+    let data = {
+      bookId: book.id,
+      copyId: book.copyId,
+      userEmail: book.ownerEmail,
+      isEbook: book.isEbook,
+      finishedReading: finishedReading,
+    };
+
+    // Construct the URL with query parameters
+    let url = `${API_URL}Book/update-finished-reading?copyId=${
+      data.copyId
+    }&userEmail=${encodeURIComponent(data.userEmail)}&isEbook=${
+      data.isEbook
+    }&finishedReading=${data.finishedReading}`;
+
+    // Send the POST request with an empty body
+    $.ajax({
+      url: url, // The URL already has the query parameters
+      type: "POST",
+      success: function (response) {
+        console.log("Finished reading status updated:", response.message);
+        if (finishedReading) {
+          let bookmark = createBookmark("done");
+          $(
+            `.inner-page-books .book-card[data-book-id="${data.bookId}"]`
+          ).append(bookmark);
+          confetti();
+        }
+      },
+      error: function (error) {
+        console.error("Error updating finished reading status:", error);
+      },
+    });
   });
 };
 

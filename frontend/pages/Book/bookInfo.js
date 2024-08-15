@@ -1,4 +1,4 @@
-const isLoggedIn = localStorage.getItem("authToken") !== null;
+// const isLoggedIn = localStorage.getItem("authToken") !== null;
 var bookId;
 $(document).ready(function () {
   // Show the loader initially

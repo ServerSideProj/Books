@@ -1,13 +1,45 @@
+const isLoggedIn = localStorage.getItem("authToken") !== null;
+
+var allUserBooks = [];
+
+$(document).ready(function () {
+  if (isLoggedIn) {
+    const email = localStorage.getItem("email");
+    // get all books of user
+    fetchData(
+      API_URL + "Book/user-purchases/" + encodeURIComponent(email),
+      gotUserBooks,
+      onError
+    );
+  }
+});
+
+// Fetch all the books the user purchased before
+const gotUserBooks = (books) => {
+  allUserBooks = [...books];
+};
+
 // Add this book to the cart
 const addToCart = (bookId) => {
   // Get the existing cart items from localStorage
   let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
 
+  // Check if the book is already in the user's purchases
+  const bookAlreadyPurchased = allUserBooks.some((book) => book.id == bookId);
+
+  if (bookAlreadyPurchased) {
+    // If the book is already purchased by the user
+    const audio = new Audio("../../assets/sounds/cant-do.mp3");
+    audio.play();
+    popupAlreadyPurchased(); // Display a message or take action for already purchased book
+    return;
+  }
+
   // Check if the book is already in the cart
   const bookAlreadyInCart = cartItems.includes(bookId);
 
   if (bookAlreadyInCart) {
-    // the book already in the cart
+    // the book is already in the cart
     const audio = new Audio("../../assets/sounds/cant-do.mp3");
     audio.play();
     popupAlreadyOnCart();

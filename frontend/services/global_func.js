@@ -31,7 +31,7 @@ const addToCart = (bookId) => {
     // If the book is already purchased by the user
     const audio = new Audio("../../assets/sounds/cant-do.mp3");
     audio.play();
-    popupAlreadyPurchased(); // Display a message or take action for already purchased book
+    popupAlreadyPurchased();
     return;
   }
 

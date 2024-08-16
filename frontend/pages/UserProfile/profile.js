@@ -4,11 +4,40 @@ var allUserBooks = [];
 var likedBooks = [];
 
 $(document).ready(function () {
-  if (!isLoggedIn) window.location.href = "/pages/NotFound/";
+  if (!isLoggedIn) {
+    window.location.href = "/pages/NotFound/";
+    return;
+  }
 
-  $(".inner-page-books, .inner-page-read, .inner-page-liked").hide();
-  $(".inner-page-books").show();
-  $("#all-books").addClass("checked");
+  // Fetch the user's purchased books first
+  const email = localStorage.getItem("email");
+  fetchData(
+    API_URL + "Book/user-purchases/" + encodeURIComponent(email),
+    firstFetchBooks,
+    onError
+  );
+
+  // Check for the 'section' query parameter in the URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const section = urlParams.get("section");
+
+  // Fetch all liked books
+  const likedBooksUrl = `${API_URL}Book/get-liked-books?userEmail=${encodeURIComponent(
+    email
+  )}`;
+  fetchData(
+    likedBooksUrl,
+    function (books) {
+      likedBooks = books;
+      if (section === "liked") {
+        const likedOption = $("#liked");
+        changeInnerPage(likedOption[0]); // Navigate to liked section if specified
+      } else {
+        changeInnerPage($("#all-books")[0]); // Default to all-books if not specified
+      }
+    },
+    onError
+  );
 
   const profileImageLink = localStorage
     .getItem("profileImageLink")
@@ -16,23 +45,6 @@ $(document).ready(function () {
     ? "../../assets/images/user-profile-image.svg"
     : localStorage.getItem("profileImageLink");
   $(".user-photo").attr("src", profileImageLink);
-
-  // Fetch and render books when the page loads
-  fetchBooks();
-
-  // Fetch all liked books
-  const email = localStorage.getItem("email");
-  let url = `${API_URL}Book/get-liked-books?userEmail=${encodeURIComponent(
-    email
-  )}`;
-  fetchData(
-    url,
-    function (books) {
-      likedBooks = books;
-      console.log(likedBooks);
-    },
-    onError
-  );
 
   // Change the inner page on option click
   $(".opt").click("click", (e) => changeInnerPage(e.target));
@@ -50,17 +62,18 @@ $(document).ready(function () {
 const changeInnerPage = (opt) => {
   $(".opt").removeClass("checked");
   $(opt).addClass("checked");
+  innerPage = opt.id;
+  renderCurrentPage();
+};
 
-  // Show the relevant page based on the clicked option's id
-  if (opt.id === "all-books") {
-    innerPage = "all-books";
-    renderBooks(allUserBooks); // Render all books
-  } else if (opt.id === "read") {
-    innerPage = "read";
+// Centralized function to render the current page based on `innerPage`
+const renderCurrentPage = () => {
+  if (innerPage === "all-books") {
+    renderBooks(allUserBooks);
+  } else if (innerPage === "read") {
     const finishedBooks = allUserBooks.filter((book) => book.finishedReading);
-    renderBooks(finishedBooks); // Render only finished reading books
-  } else if (opt.id === "liked") {
-    innerPage = "liked";
+    renderBooks(finishedBooks);
+  } else if (innerPage === "liked") {
     renderBooks(likedBooks);
   }
 };
@@ -71,11 +84,8 @@ const changeProfile = (e) => {
   if (file) {
     const reader = new FileReader();
     reader.onload = function (event) {
-      // Update the local profile image
       $(".user-photo").attr("src", event.target.result);
-
-      // Now save the image to the server
-      saveProfileImage(file);
+      saveProfileImage(file); // Save the image to the server
     };
     reader.readAsDataURL(file);
   }
@@ -84,8 +94,6 @@ const changeProfile = (e) => {
 // Function to save the profile image to the server
 const saveProfileImage = (file) => {
   const email = localStorage.getItem("email");
-
-  // Create a FormData object
   const formData = new FormData();
   formData.append("file", file);
   formData.append("email", email);
@@ -98,31 +106,18 @@ const saveProfileImage = (file) => {
     contentType: false,
     success: function (response) {
       console.log("Upload successful!", response);
-      console.log("Image Link: " + IMAGE_URL + response.imageName);
       $(".user-photo").attr("src", IMAGE_URL + response.imageName);
       localStorage.setItem("profileImageLink", IMAGE_URL + response.imageName);
     },
     error: function (status, error) {
-      console.log("Upload failed:", status);
-      console.log("Error:", error);
+      console.log("Upload failed:", status, error);
     },
   });
 };
 
-// Fetch and render books
-const fetchBooks = () => {
-  const email = localStorage.getItem("email");
-
-  fetchData(
-    API_URL + "Book/user-purchases/" + encodeURIComponent(email),
-    firstFetchBooks,
-    onError
-  );
-};
-
 const firstFetchBooks = (books) => {
   allUserBooks = [...books];
-  renderBooks(allUserBooks);
+  renderCurrentPage();
 };
 
 // Function to render books in the "My Books" section
@@ -149,7 +144,6 @@ const renderBooks = (books) => {
 
     // Add click event listener to the book card
     $bookCard.on("click", () => {
-      console.log(book);
       popupBookInfo(book);
     });
   });
@@ -163,7 +157,7 @@ const isFinishedReading = (data, response) => {
     allUserBooks[bookIndex].finishedReading = data.finishedReading;
   }
 
-  renderBooksByPage();
+  renderCurrentPage();
 };
 
 // Success function for updating the sale status
@@ -173,18 +167,5 @@ const isForSaleStatus = (data, response) => {
   if (bookIndex !== -1) {
     allUserBooks[bookIndex].isForSale = data.isForSale;
   }
-  renderBooksByPage();
-};
-
-// render books to display after inner change in the books statuses
-const renderBooksByPage = () => {
-  // render the books according to the current page
-  if (innerPage === "all-books") {
-    renderBooks(allUserBooks);
-  } else if (innerPage === "read") {
-    const finishedBooks = allUserBooks.filter((book) => book.finishedReading);
-    renderBooks(finishedBooks);
-  } else if (innerPage === "liked") {
-    renderBooks(LikedBooks);
-  }
+  renderCurrentPage();
 };

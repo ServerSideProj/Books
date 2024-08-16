@@ -95,6 +95,16 @@ const renderBooks = (books) => {
       window.location.href = bookUrl;
     });
 
+    // Add listener to the add to cart btn (and prevent from going to the page of the book)
+    $bookCard.find(".add-to-cart").on("click", function (event) {
+      event.stopPropagation();
+      if (isLoggedIn) {
+        addToCart(event.target.getAttribute("data-book-id"));
+      } else {
+        popupLogin();
+      }
+    });
+
     // Add the book card to the bookstore container
     bookstore.append($bookCard);
   });

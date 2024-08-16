@@ -33,7 +33,8 @@ const topEBooksFetchSuccess = (response) => {
 
     // Add click event listener to the book card
     $bookCard.click(() => {
-      window.location.href = `/pages/Book?id=${book.id}`;
+      const bookUrl = `/pages/Book/index.html?id=${book.id}`;
+      window.location.href = bookUrl;
     });
 
     topEbooksContainer.append($bookCard);
@@ -47,12 +48,13 @@ const topPhysFetchSuccess = (response) => {
 
   // Iterate through the response to get the top 5 physical books
   response.slice(0, 5).forEach((book) => {
-    const bookCardHtml = generateBookCard_default(book); // Get the HTML string
-    const $bookCard = $(bookCardHtml); // Convert HTML string to jQuery object
+    const bookCardHtml = generateBookCard_default(book);
+    const $bookCard = $(bookCardHtml);
 
     // Add click event listener to the book card
     $bookCard.click(() => {
-      window.location.href = `/pages/Book?id=${book.id}`;
+      const bookUrl = `/pages/Book/index.html?id=${book.id}`;
+      window.location.href = bookUrl;
     });
 
     topPhysContainer.append($bookCard);

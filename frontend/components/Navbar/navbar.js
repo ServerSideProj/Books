@@ -61,7 +61,7 @@ const generateDesktopNavbar = (isLoggedIn) => {
       <div class="navbar-desktop">
         <div class="container-full-space">
            <a href="/pages/Cart"><img src="../../assets/icons/Shopping cart.svg" alt="Shopping Cart" class="cart-icon icon"></a>
-           <a href="/pages/UserProfile"><img src="../../assets/icons/heart.svg" alt="heart" class="heart-icon icon"></a>
+           <a href="/pages/UserProfile/index.html?section=liked"><img src="../../assets/icons/heart.svg" alt="heart" class="heart-icon icon"></a>
           <a href="/pages/bookstore" class="sm-text">Bookstore</a>
           <a href="/pages/notifications" class="sm-text">Notifications</a>
         </div>
@@ -181,11 +181,7 @@ const generateMobileNavbar = (isLoggedIn) => {
         <div class="icons-container">
           <p class="sm-text bold md-text">${coins} coins</p>
           <div class="container-gap-30">
-             <a href="/pages/UserProfile"><img
-              src="../../assets/icons/heart.svg"
-              alt="heart"
-              class="heart-icon icon"
-            /></a>
+            <a href="/pages/UserProfile/index.html?section=liked"><img src="../../assets/icons/heart.svg" alt="heart" class="heart-icon icon"></a>
             <a href="/pages/Cart"><img
               src="../../assets/icons/Shopping cart.svg"
               alt="Shopping Cart"

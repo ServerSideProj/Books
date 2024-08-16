@@ -413,6 +413,31 @@ const popupAlreadyOnCart = () => {
     $(".bg-dark").removeClass("open");
   });
 };
+// pages: bookstore, bookInfo
+// show popup that tells the user that this book is already on it's cart list.
+const popupAlreadyPurchased = () => {
+  const popup = `
+        <div id="popup-on-cart" class="popup-container gap-2">
+          <img src="../../assets/icons/X.svg" class="btn-x" />
+          <p class="xxl-text">This book is already purchased by you!</p>
+          <div class="container-flex-col center gap-1">
+            <a href="/pages/UserProfile" class="sm-text">See all purchased books</a>
+          </div>
+        </div>`;
+
+  $(".bg-dark").append(popup);
+  $(".bg-dark").addClass("open");
+  $("#popup-on-cart").addClass("open");
+
+  // Remove previous event listeners
+  $(".btn-x").off("click");
+
+  // Add event listener to the "btn-x" to close the nav slide
+  $(".btn-x").on("click", () => {
+    $(".bg-dark").empty();
+    $(".bg-dark").removeClass("open");
+  });
+};
 
 // page: cart
 // Popup function for payment confirmation

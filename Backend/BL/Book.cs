@@ -130,9 +130,20 @@ namespace Backend.BL
             return dbBook.GetAllActiveBooks();
         }
 
+        public static bool UpdateLikeStatus(int bookId, string userEmail)
+        {
+            return dbBook.UpdateLikeStatus(bookId, userEmail);
+        }
+
         public static void DeleteBook(int bookId)
         {
             dbBook.DeleteBook(bookId);
+        }
+
+        // Method to get liked books by a user
+        public static List<dynamic> GetLikedBooksByUser(string userEmail)
+        {
+            return dbBook.GetLikedBooksByUser(userEmail);
         }
     }
 }

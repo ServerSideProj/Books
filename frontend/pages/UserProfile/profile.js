@@ -1,6 +1,7 @@
 const isLoggedIn = localStorage.getItem("authToken") !== null;
-
+var innerPage = "all-books";
 var allUserBooks = [];
+var likedBooks = [];
 
 $(document).ready(function () {
   if (!isLoggedIn) window.location.href = "/pages/NotFound/";
@@ -19,6 +20,20 @@ $(document).ready(function () {
   // Fetch and render books when the page loads
   fetchBooks();
 
+  // Fetch all liked books
+  const email = localStorage.getItem("email");
+  let url = `${API_URL}Book/get-liked-books?userEmail=${encodeURIComponent(
+    email
+  )}`;
+  fetchData(
+    url,
+    function (books) {
+      likedBooks = books;
+      console.log(likedBooks);
+    },
+    onError
+  );
+
   // Change the inner page on option click
   $(".opt").click("click", (e) => changeInnerPage(e.target));
 
@@ -36,18 +51,17 @@ const changeInnerPage = (opt) => {
   $(".opt").removeClass("checked");
   $(opt).addClass("checked");
 
-  $(".inner-page-books, .inner-page-read, .inner-page-liked").hide();
-
   // Show the relevant page based on the clicked option's id
   if (opt.id === "all-books") {
-    $(".inner-page-books").show();
-    fetchBooks(); // Re-fetch and render books when "My Books" is clicked
+    innerPage = "all-books";
+    renderBooks(allUserBooks); // Render all books
   } else if (opt.id === "read") {
-    $(".inner-page-read").show();
-    // Fetch and render read books if needed
+    innerPage = "read";
+    const finishedBooks = allUserBooks.filter((book) => book.finishedReading);
+    renderBooks(finishedBooks); // Render only finished reading books
   } else if (opt.id === "liked") {
-    $(".inner-page-liked").show();
-    // Fetch and render liked books if needed
+    innerPage = "liked";
+    renderBooks(likedBooks);
   }
 };
 
@@ -108,15 +122,15 @@ const fetchBooks = () => {
 
 const firstFetchBooks = (books) => {
   allUserBooks = [...books];
-  renderBooks();
+  renderBooks(allUserBooks);
 };
 
 // Function to render books in the "My Books" section
-const renderBooks = () => {
+const renderBooks = (books) => {
   const ownedBooks = $(".inner-page-books");
   ownedBooks.empty();
 
-  allUserBooks.forEach((book) => {
+  books.forEach((book) => {
     const bookCardHtml = generateBookCard_default(book);
     const $bookCard = $(bookCardHtml);
     ownedBooks.append($bookCard);
@@ -127,7 +141,7 @@ const renderBooks = () => {
       $bookCard.append(bookmark);
     }
 
-    // Add the "done" bookmark if the book is finished
+    // Add the "sale" bookmark if the book is for sale
     if (book.isForSale) {
       let bookmark = createBookmark("sale");
       $bookCard.append(bookmark);
@@ -141,7 +155,7 @@ const renderBooks = () => {
   });
 };
 
-// the user clicked on btn finished reading - if yes - add bookmark and confetti, else remove book mark.
+// Success function for updating the finished reading status
 const isFinishedReading = (data, response) => {
   // Update the relevant book in the array
   const bookIndex = allUserBooks.findIndex((book) => book.id === data.bookId);
@@ -149,7 +163,7 @@ const isFinishedReading = (data, response) => {
     allUserBooks[bookIndex].finishedReading = data.finishedReading;
   }
 
-  renderBooks();
+  renderBooksByPage();
 };
 
 // Success function for updating the sale status
@@ -159,6 +173,18 @@ const isForSaleStatus = (data, response) => {
   if (bookIndex !== -1) {
     allUserBooks[bookIndex].isForSale = data.isForSale;
   }
+  renderBooksByPage();
+};
 
-  renderBooks();
+// render books to display after inner change in the books statuses
+const renderBooksByPage = () => {
+  // render the books according to the current page
+  if (innerPage === "all-books") {
+    renderBooks(allUserBooks);
+  } else if (innerPage === "read") {
+    const finishedBooks = allUserBooks.filter((book) => book.finishedReading);
+    renderBooks(finishedBooks);
+  } else if (innerPage === "liked") {
+    renderBooks(LikedBooks);
+  }
 };

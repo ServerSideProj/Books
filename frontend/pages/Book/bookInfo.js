@@ -38,6 +38,7 @@ const displayBookData = (book) => {
   // add listener to the like btn
   $(".like-container").on("click", function () {
     if (isLoggedIn) {
+      // UpdateLikeStatus()
       $(this).toggleClass("liked");
     } else {
       popupLogin();

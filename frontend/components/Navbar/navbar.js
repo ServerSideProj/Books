@@ -146,9 +146,11 @@ const generateMobileNavbar = (isLoggedIn) => {
     }
     // add nav log in
     else {
-      const profileImageLink =
-        localStorage.getItem("profileImageLink") ||
-        "../../assets/images/user-profile-image.svg";
+      const profileImageLink = localStorage
+        .getItem("profileImageLink")
+        .endsWith("/Images/")
+        ? "../../assets/images/user-profile-image.svg"
+        : localStorage.getItem("profileImageLink");
       const coins = localStorage.getItem("coins") || "0";
 
       const nav = `<div class="nav-mobile">

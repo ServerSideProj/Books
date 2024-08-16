@@ -676,5 +676,62 @@ namespace Backend.DAL
                 return rowsAffected > 0;
             }
         }
+
+        public bool UpdateLikeStatus(int bookId, string userEmail)
+        {
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                SqlCommand cmd = new SqlCommand("sp_UpdateLikeStatus", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@BookId", bookId);
+                cmd.Parameters.AddWithValue("@UserEmail", userEmail);
+
+                SqlParameter returnValue = new SqlParameter("@ReturnValue", SqlDbType.Int);
+                returnValue.Direction = ParameterDirection.ReturnValue;
+                cmd.Parameters.Add(returnValue);
+
+                cmd.ExecuteNonQuery();
+
+                int rowsAffected = (int)cmd.Parameters["@ReturnValue"].Value;
+                return rowsAffected > 0;
+            }
+        }
+
+
+        // Method to get the list of liked books by user
+        public List<dynamic> GetLikedBooksByUser(string userEmail)
+        {
+            List<dynamic> likedBooks = new List<dynamic>();
+
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                using (SqlCommand cmd = new SqlCommand("sp_GetLikedBooksByUser", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@UserEmail", userEmail);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var authors = reader["Authors"].ToString().TrimEnd(',', ' ').Split(", ").Select(name => new { Name = name }).ToArray();
+                            var book = new
+                            {
+                                BookId = Convert.ToInt32(reader["BookId"]),
+                                Title = reader["Title"].ToString(),
+                                Price = Convert.ToDecimal(reader["Price"]),
+                                IsEbook = Convert.ToBoolean(reader["IsEbook"]),
+                                ImageLink = reader["ImageLink"].ToString(),
+                                Authors = authors
+                            };
+                            likedBooks.Add(book);
+                        }
+                    }
+                }
+            }
+
+            return likedBooks;
+        }
     }
 }

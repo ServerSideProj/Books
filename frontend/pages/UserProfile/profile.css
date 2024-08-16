@@ -36,8 +36,6 @@
   transition: 0.2s ease all;
 }
 
-.inner-page-read,
-.inner-page-liked,
 .inner-page-books {
   min-height: 60vh;
   display: flex;

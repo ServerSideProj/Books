@@ -86,7 +86,7 @@ const renderBooks = (books) => {
   bookstore.empty();
 
   books.forEach((book) => {
-    const bookCardHtml = generateBookCard_allDetails(book); // Get the HTML string
+    const bookCardHtml = generateBookCard_allDetails(book);
     const $bookCard = $(bookCardHtml);
 
     // Add click event listener to the book card
@@ -95,33 +95,75 @@ const renderBooks = (books) => {
       window.location.href = bookUrl;
     });
 
-    // add listener to the like btn (and prevent from going to the page of the book)
-    $bookCard.find(".like-btn").on("click", function (event) {
-      event.stopPropagation();
-      if (isLoggedIn) {
-        $(this).toggleClass("liked");
-        //
-        //
-        // TODO:
-        // add to favorites in database
-        //
-        //
-      } else {
-        popupLogin();
-      }
-    });
-
-    // add listener to the add to cart btn (and prevent from going to the page of the book)
-    $bookCard.find(".add-to-cart").on("click", function (event) {
-      event.stopPropagation();
-      if (isLoggedIn) {
-        addToCart(event.target.getAttribute("data-book-id"));
-      } else {
-        popupLogin();
-      }
-    });
-
+    // Add the book card to the bookstore container
     bookstore.append($bookCard);
+  });
+
+  // If the user is logged in, fetch liked books and update the UI
+  if (isLoggedIn) {
+    const email = localStorage.getItem("email");
+    let url = `${API_URL}Book/get-liked-books?userEmail=${encodeURIComponent(
+      email
+    )}`;
+
+    fetchData(
+      url,
+      function (likedBooks) {
+        updateLikedStatusUI(likedBooks, books);
+      },
+      onError
+    );
+  }
+
+  // Attach event listeners for like buttons
+  attachLikeButtonListeners();
+};
+
+// Function to update the UI based on liked books
+const updateLikedStatusUI = (likedBooks, books) => {
+  likedBooks.forEach((likedBookId) => {
+    // Find the corresponding book in the rendered list and mark it as liked
+    const book = books.find((b) => b.id === likedBookId);
+    if (book) {
+      $(
+        `.books-container .book-card[data-book-id="${book.id}"] .like-btn`
+      ).addClass("liked");
+    }
+  });
+};
+
+// Function to attach event listeners for like buttons
+const attachLikeButtonListeners = () => {
+  $(".like-btn").on("click", function (event) {
+    event.stopPropagation();
+    const bookId = $(this).closest(".book-card").data("book-id");
+
+    if (isLoggedIn) {
+      $(this).toggleClass("liked");
+
+      // Prepare the data to be sent to the server
+      const data = {
+        bookId: bookId,
+        userEmail: localStorage.getItem("email"),
+      };
+
+      // Send the request to update the like status
+      $.ajax({
+        url: `${API_URL}Book/update-like-status?bookId=${
+          data.bookId
+        }&userEmail=${encodeURIComponent(data.userEmail)}`,
+        type: "POST",
+        contentType: "application/json",
+        success: function (response) {
+          console.log("Like status updated:", response.message);
+        },
+        error: function (error) {
+          console.error("Error updating like status:", error);
+        },
+      });
+    } else {
+      popupLogin();
+    }
   });
 };
 

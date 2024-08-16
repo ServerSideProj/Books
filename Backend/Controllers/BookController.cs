@@ -103,6 +103,24 @@ namespace Backend.Controllers
             return Ok(bookCopies);
         }
 
+        [HttpGet("get-liked-books")]
+        public IActionResult GetLikedBooks(string userEmail)
+        {
+            if (string.IsNullOrEmpty(userEmail))
+            {
+                return BadRequest(new { message = "Invalid user email." });
+            }
+
+            List<dynamic> likedBooks = Book.GetLikedBooksByUser(userEmail);
+
+            if (likedBooks == null || likedBooks.Count == 0)
+            {
+                return NotFound(new { message = "No liked books found for the user." });
+            }
+
+            return Ok(likedBooks);
+        }
+
         [HttpPost("review")]
         public ActionResult AddReview([FromBody] Review review)
         {
@@ -178,6 +196,26 @@ namespace Backend.Controllers
             else
             {
                 return BadRequest(new { message = "Failed to update sale status." });
+            }
+        }
+
+        [HttpPost("update-like-status")]
+        public IActionResult UpdateLikeStatus(int bookId, string userEmail)
+        {
+            if (bookId <= 0 || string.IsNullOrEmpty(userEmail))
+            {
+                return BadRequest(new { message = "Invalid request data." });
+            }
+
+            bool success = Book.UpdateLikeStatus(bookId, userEmail);
+
+            if (success)
+            {
+                return Ok(new { message = "Like status updated successfully." });
+            }
+            else
+            {
+                return BadRequest(new { message = "Failed to update like status." });
             }
         }
 

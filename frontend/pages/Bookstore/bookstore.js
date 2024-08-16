@@ -1,4 +1,3 @@
-const allBooksUrl = "Book/all-active-books";
 const allFriendsUrl = "Users/Following/";
 
 var arrAllBooks = []; // all the books that available
@@ -6,6 +5,9 @@ var currBooksDisplay = []; // the books that on the display
 var allCategories = [];
 var allAuthors = [];
 var allFriends = [];
+
+var allBooksFetched = false;
+var likedBooksFetched = false;
 
 var activeFilters = {
   rate: 0,
@@ -23,16 +25,33 @@ $(document).ready(function () {
   $("#loader").show();
   $(".main").hide();
 
-  // get all books in store
-  fetchData(API_URL + allBooksUrl, initializePage, onError);
+  // Fetch all books in store
+  let allBooksUrl = API_URL + "Book/all-active-books";
+  fetchData(
+    allBooksUrl,
+    function (books) {
+      arrAllBooks = books;
+      allBooksFetched = true;
+      checkAndInitializeBooks();
+    },
+    onError
+  );
 
-  const email = localStorage.getItem("email");
-
+  // Fetch liked books
   if (isLoggedIn) {
-    // get all Friends
+    const email = localStorage.getItem("email");
+    let likedBooksUrl = `${API_URL}Book/get-liked-books?userEmail=${encodeURIComponent(
+      email
+    )}`;
+
     fetchData(
-      API_URL + allFriendsUrl + encodeURIComponent(email),
-      getAllFriends,
+      likedBooksUrl,
+      function (books) {
+        console.log(books);
+        likedBooks = books;
+        likedBooksFetched = true;
+        checkAndInitializeBooks();
+      },
       onError
     );
   }
@@ -64,6 +83,14 @@ $(document).ready(function () {
   $("#more-filters").on("click", initializePopupFilters);
 });
 
+// Function to check if both fetch operations are complete
+const checkAndInitializeBooks = () => {
+  if (allBooksFetched && likedBooksFetched) {
+    // Once both are fetched, initialize the page
+    initializePage(arrAllBooks, likedBooks);
+  }
+};
+
 // initialize the books only for the first time running.
 const initializePage = (books) => {
   $("#loader").hide();
@@ -92,6 +119,15 @@ const renderBooks = (books) => {
     // Add click event listener to the book card
     $bookCard.click(() => {
       const bookUrl = `/pages/Book/index.html?id=${book.id}`;
+
+      // Check if the book is inside the liked books list
+      const isLiked = likedBooks.some(
+        (likedBook) => likedBook.bookId === book.id
+      );
+
+      // Save the liked status in sessionStorage
+      sessionStorage.setItem(`isLiked`, isLiked);
+
       window.location.href = bookUrl;
     });
 
@@ -131,9 +167,9 @@ const renderBooks = (books) => {
 
 // Function to update the UI based on liked books
 const updateLikedStatusUI = (likedBooks, books) => {
-  likedBooks.forEach((likedBookId) => {
+  likedBooks.forEach((likedBook) => {
     // Find the corresponding book in the rendered list and mark it as liked
-    const book = books.find((b) => b.id === likedBookId);
+    const book = books.find((b) => b.id === likedBook.bookId);
     if (book) {
       $(
         `.books-container .book-card[data-book-id="${book.id}"] .like-btn`
@@ -149,28 +185,24 @@ const attachLikeButtonListeners = () => {
     const bookId = $(this).closest(".book-card").data("book-id");
 
     if (isLoggedIn) {
-      $(this).toggleClass("liked");
+      // Check if the book is already in the user's purchases
+      const bookAlreadyPurchased = allUserBooks.some(
+        (book) => book.id == bookId
+      );
 
-      // Prepare the data to be sent to the server
-      const data = {
-        bookId: bookId,
-        userEmail: localStorage.getItem("email"),
-      };
+      if (!bookAlreadyPurchased) {
+        $(this).toggleClass("liked");
 
-      // Send the request to update the like status
-      $.ajax({
-        url: `${API_URL}Book/update-like-status?bookId=${
-          data.bookId
-        }&userEmail=${encodeURIComponent(data.userEmail)}`,
-        type: "POST",
-        contentType: "application/json",
-        success: function (response) {
-          console.log("Like status updated:", response.message);
-        },
-        error: function (error) {
-          console.error("Error updating like status:", error);
-        },
-      });
+        // Prepare the data to be sent to the server
+        const data = {
+          bookId: bookId,
+          userEmail: localStorage.getItem("email"),
+        };
+
+        updateLikeStatus(data);
+      } else {
+        popupAlreadyPurchased();
+      }
     } else {
       popupLogin();
     }

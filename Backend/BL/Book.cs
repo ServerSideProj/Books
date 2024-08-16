@@ -145,5 +145,11 @@ namespace Backend.BL
         {
             return dbBook.GetLikedBooksByUser(userEmail);
         }
+
+        // Inside Book.cs or relevant class
+        public static bool RemoveFromLikedBooks(int bookId, string userEmail)
+        {
+            return dbBook.RemoveFromLikedBooks(bookId, userEmail);
+        }
     }
 }

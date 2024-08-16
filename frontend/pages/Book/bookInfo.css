@@ -66,6 +66,16 @@
   background: #d7b4d5;
 }
 
+.like-container.liked {
+  opacity: 100%;
+  background: var(--gradient-90);
+  filter: brightness(1);
+}
+
+.like-container.liked img {
+  filter: brightness(1);
+}
+
 .book-cover {
   border-radius: 8px;
   height: 450px;

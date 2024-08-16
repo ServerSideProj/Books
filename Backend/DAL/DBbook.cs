@@ -733,5 +733,26 @@ namespace Backend.DAL
 
             return likedBooks;
         }
+
+        public bool RemoveFromLikedBooks(int bookId, string userEmail)
+        {
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                SqlCommand cmd = new SqlCommand("sp_RemoveFromLikedBooks", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@BookId", bookId);
+                cmd.Parameters.AddWithValue("@UserEmail", userEmail);
+
+                // Execute the command and get the number of rows affected
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                // Return true if the command affected any rows (i.e., the book was removed)
+                return rowsAffected > 0;
+            }
+        }
+
+
+
     }
 }

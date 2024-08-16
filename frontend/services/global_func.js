@@ -74,37 +74,19 @@ const addToCart = (bookId) => {
   }
 };
 
-// update the click on like to a book - front + back
-const updateLikeStatus = (bookId, isLiked) => {
-  const userEmail = localStorage.getItem("email");
-
-  // Construct the URL with query parameters
-  let url = `${API_URL}Book/update-like-status?bookId=${bookId}&userEmail=${encodeURIComponent(
-    userEmail
-  )}&isLiked=${isLiked}`;
-
-  // Send the POST request
+// update the click on like to a book - backed
+const updateLikeStatus = (data) => {
   $.ajax({
-    url: url,
+    url: `${API_URL}Book/update-like-status?bookId=${
+      data.bookId
+    }&userEmail=${encodeURIComponent(data.userEmail)}`,
     type: "POST",
+    contentType: "application/json",
     success: function (response) {
       console.log("Like status updated:", response.message);
-      // Optionally update the UI or handle success
     },
     error: function (error) {
       console.error("Error updating like status:", error);
     },
   });
 };
-
-// Usage when the user clicks the heart icon
-$(".heart-icon").on("click", function () {
-  const bookId = $(this).data("book-id");
-  const isLiked = !$(this).hasClass("liked");
-
-  // Toggle the UI class
-  $(this).toggleClass("liked");
-
-  // Update the like status on the server
-  updateLikeStatus(bookId, isLiked);
-});

@@ -104,18 +104,13 @@ namespace Backend.Controllers
         }
 
         [HttpGet("get-liked-books")]
-        public IActionResult GetLikedBooks(string userEmail)
+        public IActionResult GetLikedBooksByUser(string userEmail)
         {
-            if (string.IsNullOrEmpty(userEmail))
-            {
-                return BadRequest(new { message = "Invalid user email." });
-            }
+            var likedBooks = Book.GetLikedBooksByUser(userEmail);
 
-            List<dynamic> likedBooks = Book.GetLikedBooksByUser(userEmail);
-
-            if (likedBooks == null || likedBooks.Count == 0)
+            if (likedBooks == null || !likedBooks.Any())
             {
-                return NotFound(new { message = "No liked books found for the user." });
+                return Ok(new List<Book>()); // Return an empty array if no liked books are found
             }
 
             return Ok(likedBooks);
@@ -216,6 +211,26 @@ namespace Backend.Controllers
             else
             {
                 return BadRequest(new { message = "Failed to update like status." });
+            }
+        }
+
+        [HttpPost("remove-from-liked-books")]
+        public IActionResult RemoveFromLikedBooks(int bookId, string userEmail)
+        {
+            if (bookId <= 0 || string.IsNullOrEmpty(userEmail))
+            {
+                return BadRequest(new { message = "Invalid request data." });
+            }
+
+            bool success = Book.RemoveFromLikedBooks(bookId, userEmail);
+
+            if (success)
+            {
+                return Ok(new { message = "Book removed from liked books successfully." });
+            }
+            else
+            {
+                return BadRequest(new { message = "Failed to remove book from liked books." });
             }
         }
 

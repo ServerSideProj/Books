@@ -75,6 +75,7 @@ const renderCurrentPage = () => {
     renderBooks(finishedBooks);
   } else if (innerPage === "liked") {
     renderBooks(likedBooks);
+    $(".book-card").css("pointer-events", "none");
   }
 };
 

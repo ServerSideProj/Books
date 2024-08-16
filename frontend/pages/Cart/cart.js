@@ -121,6 +121,10 @@ const noItems = () => {
 };
 
 const payment = () => {
+  // Play the payment sound effect
+  const audio = new Audio("../../assets/sounds/payment.mp3");
+  audio.play();
+
   // Iterate through all items in the cart and send them to the server
   items.forEach((book) => {
     const bookcopy = {
@@ -135,6 +139,8 @@ const payment = () => {
         bookcopy,
         (response) => {
           console.log("Ebook copy added successfully:", response.CopyId);
+          // After adding the book, remove it from the liked books
+          removeFromLikedBooks(book.id, bookcopy.OwnerEmail);
         },
         (xhr, status, error) => {
           console.error("Error adding ebook copy:", error);
@@ -149,6 +155,8 @@ const payment = () => {
             "Physical book copy added successfully:",
             response.CopyId
           );
+          // After adding the book, remove it from the liked books
+          removeFromLikedBooks(book.id, bookcopy.OwnerEmail);
         },
         (xhr, status, error) => {
           console.error("Error adding physical book copy:", error);
@@ -165,10 +173,6 @@ const payment = () => {
   noItems();
 
   popupPayment();
-
-  // Play the payment sound effect
-  const audio = new Audio("../../assets/sounds/payment.mp3");
-  audio.play();
 
   var end = Date.now() + 2 * 1000;
 
@@ -197,3 +201,18 @@ const payment = () => {
     }
   })();
 };
+
+function removeFromLikedBooks(bookId, email) {
+  $.ajax({
+    url: `${API_URL}Book/remove-from-liked-books?bookId=${bookId}&userEmail=${email}`,
+    type: "POST",
+    contentType: "application/json",
+    data: JSON.stringify({ bookId: bookId, userEmail: email }),
+    success: function (response) {
+      console.log("Book removed from liked books:", response.message);
+    },
+    error: function (error) {
+      console.error("Error removing book from liked books:", error);
+    },
+  });
+}

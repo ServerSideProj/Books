@@ -35,11 +35,21 @@ const displayBookData = (book) => {
     else e.target.innerText = "read more";
   });
 
+  if (sessionStorage.getItem(`isLiked`) == "true") {
+    $(".like-container").addClass("liked");
+  } else {
+    $(".like-container").removeClass("liked");
+  }
+
   // add listener to the like btn
   $(".like-container").on("click", function () {
     if (isLoggedIn) {
-      // UpdateLikeStatus()
       $(this).toggleClass("liked");
+      const data = {
+        bookId: book.id,
+        userEmail: localStorage.getItem("email"),
+      };
+      updateLikeStatus(data);
     } else {
       popupLogin();
     }

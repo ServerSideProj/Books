@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -57,7 +57,11 @@
           <div class="container-flex-col center-hor gap-1">
             <p class="xxl-text font-reg">Add cover image to the book</p>
             <div id="upload-file" class="btn l-text">
-              <img src="../../assets/icons/Inbox in.svg" alt="upload file" />
+              <img
+                id="preview-img"
+                src="../../assets/icons/Inbox in.svg"
+                alt="upload file"
+              />
               <p>upload file</p>
             </div>
             <input
@@ -76,6 +80,7 @@
         <div class="container-flex-col full-width">
           <p class="xxl-text font-reg">Insert the book’s title</p>
           <input
+            id="book-title"
             type="text"
             placeholder="example: Harry Potter and the Philosopher's Stone"
             class="input-box-sqr l-text black-text"
@@ -84,6 +89,7 @@
         <div class="container-flex-col full-width">
           <p class="xxl-text font-reg">Insert book’s description:</p>
           <input
+            id="book-description"
             type="text"
             placeholder="Summary of the books..."
             class="input-box-sqr l-text"
@@ -95,7 +101,7 @@
             <input
               type="text"
               placeholder="example: J. K. Rowling"
-              class="input-box-sqr l-text"
+              class="input-box-sqr l-text author-input"
             />
           </div>
           <div class="btn-add-author">

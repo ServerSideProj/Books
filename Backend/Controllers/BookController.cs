@@ -247,5 +247,92 @@ namespace Backend.Controllers
                 return StatusCode(500, new { Error = ex.Message });
             }
         }
+
+        [HttpPost("UploadBookCover")]
+        public async Task<IActionResult> UploadBookCover([FromForm] IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest("No file uploaded.");
+            }
+
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "UploadedFiles");
+
+            // Ensure the directory exists
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            // Generate a unique filename using a GUID
+            var uniqueFileName = $"{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
+            var filePath = Path.Combine(path, uniqueFileName);
+
+            // Save the file
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            // Return status code and the image link
+            return Ok(new { ImageName = uniqueFileName });
+        }
+
+        [HttpPost("insert-book")]
+        public IActionResult InsertBook([FromBody] JsonElement bookJson)
+        {
+            // Check if the JSON element is 'null' or undefined
+            if (bookJson.ValueKind == JsonValueKind.Undefined || bookJson.ValueKind == JsonValueKind.Null)
+            {
+                return BadRequest("Request body is null or undefined.");
+            }
+
+            try
+            {
+                // Parse and create authors from the JSON data
+                var authors = new List<Author>();
+                if (bookJson.TryGetProperty("authors", out JsonElement authorsElement) && authorsElement.ValueKind == JsonValueKind.Array)
+                {
+                    foreach (var authorJson in authorsElement.EnumerateArray())
+                    {
+                        string authorName = authorJson.GetString() ?? "Unknown Author";
+                        var author = new Author(authorName);
+                        authors.Add(author);
+                    }
+                }
+
+                // Parse other book details
+                string title = bookJson.GetProperty("title").GetString() ?? "Untitled";
+                string description = bookJson.GetProperty("description").GetString() ?? "No description available";
+                string language = bookJson.GetProperty("language").GetString() ?? "Unknown";
+                string[] categories = bookJson.TryGetProperty("categories", out JsonElement categoriesElement) && categoriesElement.ValueKind == JsonValueKind.Array
+                    ? categoriesElement.EnumerateArray().Select(c => c.GetString() ?? "Uncategorized").ToArray()
+                    : new string[] { "Uncategorized" };
+                string imageLink = bookJson.GetProperty("imageLink").GetString() ?? "N/A";
+
+                // Create the book object
+                var newBook = new Book(
+                    title,
+                    description,
+                    language,
+                    categories,
+                    authors,
+                    imageLink
+                );
+
+                // Create a list of books to pass to AddBooks
+                List<Book> books = new List<Book> { newBook };
+
+                // Call the method to add the book(s)
+                Book.AddBooks(books);
+
+                return Ok("Book added successfully.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
     }
 }

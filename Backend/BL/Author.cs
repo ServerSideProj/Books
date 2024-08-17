@@ -24,6 +24,15 @@ namespace Backend.BL
             PictureUrl = pictureUrl; 
         }
 
+        public Author(string name)
+        {
+            Id = 0;
+            Name = name;
+            Biography = "Biography not available";
+            WikiLink = "N/A";
+            PictureUrl = "N/A";
+        }
+
         public int Id { get => id; set => id = value; }
         public string Name { get => name; set => name = value; }
         public string Biography { get => biography; set => biography = value; }

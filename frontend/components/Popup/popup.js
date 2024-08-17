@@ -342,8 +342,41 @@ const popupBookInfo = (book) => {
 
 // page: other-user-profile
 // shows a popup
-const popupBookSaleOffer = () => {
-  const popup = ``;
+const popupBookSaleOffer = (book) => {
+  const popup = `
+  <div
+        id="popup-book-sale"
+        class="popup-container popup-flex-row gap-2 bg-white"
+      >
+        <img src="../../assets/icons/X.svg" class="btn-x" />
+        <div class="card-popup">
+          <img
+            src="../../assets/images/book-cover-placeholder.jpg"
+            alt="book cover"
+            class="book-cover"
+          />
+          <div class="container-flex-col center">
+            <p class="title l-text">${book.id}</p>
+            <p class="authors sm-text grey-text">
+            ${book.authors.map((author) => author.name).join(", ")}</p>
+          </div>
+        </div>
+        <div class="container-flex-col center-ver">
+          <div>
+            <p class="xl-text">How many Story-coins would you like to offer</p>
+            <p class="xxl-text bold">for this book?</p>
+          </div>
+          <div class="container-flex gap-1">
+            <div class="btn sqr-purple-btn selected">5</div>
+            <div class="btn sqr-purple-btn">10</div>
+            <div class="btn sqr-purple-btn">20</div>
+            <div class="btn sqr-purple-btn">30</div>
+            <div class="btn sqr-purple-btn">50</div>
+          </div>
+          <div class="btn btn-gradient send-offer-btn">Send Offer</div>
+        </div>
+      </div>
+      `;
 
   $(".bg-dark").addClass("open");
   $(".bg-dark").append(popup);

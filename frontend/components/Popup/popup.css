@@ -32,12 +32,14 @@
 #popup-author.open,
 #popup-book-sale.open,
 #popup-on-cart.open,
-#popup-payment.open {
+#popup-payment.open,
+#popup-text.open {
   display: flex;
 }
 
 #popup-login,
-#popup-on-cart {
+#popup-on-cart,
+#popup-texts {
   padding: 4rem 7rem;
 }
 
@@ -120,11 +122,17 @@
   justify-content: center;
   align-items: center;
   border-radius: 4px;
+  transition: all 0.3s ease;
 }
 
 .sqr-purple-btn.selected {
   background: var(--purple);
   color: white;
+}
+
+.sqr-purple-btn.mark {
+  background-color: pink;
+  filter: drop-shadow(0px 0px 9px pink);
 }
 
 .book-cover {
@@ -145,15 +153,23 @@
   flex-direction: column;
   align-items: center;
   gap: 0.3rem;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 8px;
 }
 
 .bg-white {
   background-color: var(--white) !important;
 }
 
-.send-offer-btn {
+#send-offer-btn {
   width: fit-content;
   padding: 10px 40px;
+  opacity: 20%;
+}
+
+#send-offer-btn.available {
+  opacity: 100%;
 }
 
 .btns-space {
@@ -182,7 +198,8 @@
   .bg-dark {
     padding: 1rem;
   }
-  .send-offer-btn {
+
+  #send-offer-btn {
     align-self: center;
   }
 
@@ -229,7 +246,8 @@
   }
 
   #popup-login,
-  #popup-on-cart {
+  #popup-on-cart,
+  #popup-text {
     padding: 4rem 2rem;
   }
 }

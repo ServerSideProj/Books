@@ -39,11 +39,11 @@ $(document).ready(function () {
     onError
   );
 
-  const profileImageLink = localStorage
-    .getItem("profileImageLink")
-    .endsWith("/Images/")
-    ? "../../assets/images/user-profile-image.svg"
-    : localStorage.getItem("profileImageLink");
+  const profileImageLink =
+    localStorage.getItem("profileImageLink").endsWith("/Images/") ||
+    localStorage.getItem("profileImageLink") == ""
+      ? "../../assets/images/user-profile-image.svg"
+      : localStorage.getItem("profileImageLink");
   $(".user-photo").attr("src", profileImageLink);
 
   // Change the inner page on option click

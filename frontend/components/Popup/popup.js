@@ -351,12 +351,14 @@ const popupBookSaleOffer = (book) => {
         <img src="../../assets/icons/X.svg" class="btn-x" />
         <div class="card-popup">
           <img
-            src="../../assets/images/book-cover-placeholder.jpg"
+            src="${
+              book.imageLink || "../../assets/images/book-cover-placeholder.png"
+            }"
             alt="book cover"
             class="book-cover"
           />
           <div class="container-flex-col center">
-            <p class="title l-text">${book.id}</p>
+            <p class="title l-text">${book.title}</p>
             <p class="authors sm-text grey-text">
             ${book.authors.map((author) => author.name).join(", ")}</p>
           </div>
@@ -367,13 +369,15 @@ const popupBookSaleOffer = (book) => {
             <p class="xxl-text bold">for this book?</p>
           </div>
           <div class="container-flex gap-1">
-            <div class="btn sqr-purple-btn selected">5</div>
+            <div class="btn sqr-purple-btn">5</div>
             <div class="btn sqr-purple-btn">10</div>
             <div class="btn sqr-purple-btn">20</div>
             <div class="btn sqr-purple-btn">30</div>
             <div class="btn sqr-purple-btn">50</div>
           </div>
-          <div class="btn btn-gradient send-offer-btn">Send Offer</div>
+          <div id="send-offer-btn" class="btn btn-gradient" data-copy-id="${
+            book.copyId
+          }" data-book-id="${book.id}">Send Offer</div>
         </div>
       </div>
       `;
@@ -389,6 +393,74 @@ const popupBookSaleOffer = (book) => {
   $(".btn-x").on("click", () => {
     $(".bg-dark").empty();
     $(".bg-dark").removeClass("open");
+  });
+
+  $("#send-offer-btn").on("click", () => {
+    if ($("#send-offer-btn").hasClass("available")) {
+      var selectedText = $(".container-flex .sqr-purple-btn.selected").text();
+      console.log(selectedText);
+
+      // Prepare the data to be sent in the POST request
+      var dataToSend = {
+        transactionId: 0, // changed in the server
+        salerEmail: sessionStorage.getItem("friendEmail"),
+        buyerEmail: localStorage.getItem("email"),
+        coinsOffer: parseInt(selectedText),
+        copyId: $("#send-offer-btn").data("copy-id"),
+        bookId: $("#send-offer-btn").data("book-id"),
+        isActive: true, // changed in the server
+        isAccepted: true, // changed in the server
+        transactionDate: new Date().toISOString(), // changed in the server
+      };
+      console.log(dataToSend);
+
+      // Make the AJAX POST request
+      $.ajax({
+        url: `${API_URL}Transaction/create`,
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(dataToSend),
+        success: function (response) {
+          // Handle the success scenario
+          popupText("Your request was sent successfully!🚀");
+        },
+        error: function (xhr, status, error) {
+          // Check if the error message returned from the server is "Insufficient coins."
+          if (
+            xhr.responseJSON &&
+            xhr.responseJSON.error === "Insufficient coins."
+          ) {
+            popupText("Sorry, you don't have enough Story-coins :(");
+          } else if (
+            xhr.responseJSON &&
+            xhr.responseJSON.error ===
+              "New offer must be greater than the last rejected offer."
+          ) {
+            popupText(
+              "New offer must be greater than the last rejected offer."
+            );
+          } else if (
+            xhr.responseJSON &&
+            xhr.responseJSON.error === "Transaction limit exceeded."
+          ) {
+            popupText(
+              "Transaction limit exceeded. </br> You can make only 2 transactions."
+            );
+          }
+        },
+      });
+    } else {
+      $(".sqr-purple-btn").addClass("mark");
+      setTimeout(function () {
+        $(".sqr-purple-btn").removeClass("mark");
+      }, 1500);
+    }
+  });
+
+  $(".sqr-purple-btn").on("click", (e) => {
+    $(".sqr-purple-btn").removeClass("selected");
+    e.target.classList.add("selected");
+    $("#send-offer-btn").addClass("available");
   });
 };
 
@@ -493,6 +565,29 @@ const popupPayment = () => {
   $(".bg-dark").append(popup);
   $(".bg-dark").addClass("open");
   $("#popup-payment").addClass("open");
+
+  // Remove previous event listeners
+  $(".btn-x").off("click");
+
+  // Add event listener to the "btn-x" to close the nav slide
+  $(".btn-x").on("click", () => {
+    $(".bg-dark").empty();
+    $(".bg-dark").removeClass("open");
+  });
+};
+
+// page: friend profile
+// Popup function for notiffing the request was sent successfuly
+const popupText = (text) => {
+  const popup = `
+        <div id="popup-text" class="popup-container gap-2">
+          <img src="../../assets/icons/X.svg" class="btn-x" />
+          <p class="xxl-text text-center">${text}</p>
+        </div>`;
+
+  $(".bg-dark").empty();
+  $(".bg-dark").append(popup);
+  $("#popup-text").addClass("open");
 
   // Remove previous event listeners
   $(".btn-x").off("click");

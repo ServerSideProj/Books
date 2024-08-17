@@ -1,5 +1,6 @@
 const userEmail = sessionStorage.getItem("friendEmail");
 var userAllBooks = [];
+var filteredBooks = [];
 
 $(document).ready(function () {
   console.log(userEmail);
@@ -13,6 +14,20 @@ $(document).ready(function () {
   $(".oval-btn").click(function () {
     // Remove 'selected' class from all buttons
     $(".oval-btn").removeClass("selected");
+
+    if ($(this)[0].id === "for-sale") {
+      filteredBooks = userAllBooks.filter((book) => {
+        return book.isForSale;
+      });
+      renderBooks(filteredBooks);
+    } else if ($(this)[0].id === "not-sale") {
+      filteredBooks = userAllBooks.filter((book) => {
+        return !book.isForSale;
+      });
+      renderBooks(filteredBooks);
+    } else {
+      renderBooks(userAllBooks);
+    }
 
     // Add 'selected' class to the clicked button
     $(this).addClass("selected");

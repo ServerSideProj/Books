@@ -1,6 +1,7 @@
 const isLoggedIn = localStorage.getItem("authToken") !== null;
 
 var allUserBooks = [];
+var likedBooks = [];
 
 $(document).ready(function () {
   if (isLoggedIn) {
@@ -76,6 +77,17 @@ const addToCart = (bookId) => {
 
 // update the click on like to a book - backed
 const updateLikeStatus = (data) => {
+  // Check if the book is already in the likedBooks list
+  const isLiked = likedBooks.includes(data.bookId);
+
+  if (isLiked) {
+    // If the book is already liked, remove it from the list using filter
+    likedBooks = likedBooks.filter((bookId) => bookId !== data.bookId);
+  } else {
+    // If the book is not liked, add it to the list
+    likedBooks.push(data);
+  }
+
   $.ajax({
     url: `${API_URL}Book/update-like-status?bookId=${
       data.bookId
@@ -87,6 +99,14 @@ const updateLikeStatus = (data) => {
     },
     error: function (error) {
       console.error("Error updating like status:", error);
+      // Revert the optimistic update if the request fails
+      if (isLiked) {
+        // If we removed it but the server failed, add it back
+        likedBooks.push(data.bookId);
+      } else {
+        // If we added it but the server failed, remove it again
+        likedBooks = likedBooks.filter((bookId) => bookId !== data.bookId);
+      }
     },
   });
 };

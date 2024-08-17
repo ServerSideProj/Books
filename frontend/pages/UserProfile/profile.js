@@ -56,6 +56,39 @@ $(document).ready(function () {
 
   // Change profile image on file input change
   $("#file-input").change((e) => changeProfile(e));
+
+  // Determine the API endpoint based on the type
+
+  $(".followers-wrapper").on("click", () => {
+    const url = `${API_URL}Users/followers/${encodeURIComponent(email)}`;
+    $.ajax({
+      url: url,
+      type: "GET",
+      dataType: "json",
+      success: function (response) {
+        popupFriends(response, "followers");
+      },
+      error: function (error) {
+        console.error(`Error fetching ${type}:`, error);
+        // Optionally handle the error by showing an error message in the popup
+      },
+    });
+  });
+  $(".following-wrapper").on("click", () => {
+    const url = `${API_URL}Users/following/${encodeURIComponent(email)}`;
+    $.ajax({
+      url: url,
+      type: "GET",
+      dataType: "json",
+      success: function (response) {
+        popupFriends(response, "following");
+      },
+      error: function (error) {
+        console.error(`Error fetching ${type}:`, error);
+        // Optionally handle the error by showing an error message in the popup
+      },
+    });
+  });
 });
 
 // Change the inner page on option click

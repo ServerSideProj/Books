@@ -44,12 +44,24 @@ const displayBookData = (book) => {
   // add listener to the like btn
   $(".like-container").on("click", function () {
     if (isLoggedIn) {
-      $(this).toggleClass("liked");
-      const data = {
-        bookId: book.id,
-        userEmail: localStorage.getItem("email"),
-      };
-      updateLikeStatus(data);
+      // Check if the book is already in the user's purchases
+      const bookAlreadyPurchased = allUserBooks.some(
+        (book) => book.id == bookId
+      );
+
+      if (!bookAlreadyPurchased) {
+        $(this).toggleClass("liked");
+
+        // Prepare the data to be sent to the server
+        const data = {
+          bookId: bookId,
+          userEmail: localStorage.getItem("email"),
+        };
+
+        updateLikeStatus(data);
+      } else {
+        popupAlreadyPurchased();
+      }
     } else {
       popupLogin();
     }

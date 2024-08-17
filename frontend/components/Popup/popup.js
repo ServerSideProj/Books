@@ -31,14 +31,30 @@ const popupLogin = () => {
 
 // page: user-profile, other-user-frofile
 // type can be: following (Following) | followers (remove)
-const popupFriends = (type) => {
+const popupFriends = (friendsList, type) => {
+  const friendCards = friendsList
+    .map((friend) => {
+      return `
+      <div class="container-friend">
+        <div class="friend-wrapper">
+          <img src="${
+            friend.profileImage || "../../assets/images/user-profile-image.svg"
+          }" alt="profile image" class="friend-profile-img" />
+          <p class="friend-name">${friend.username}</p>
+        </div>
+        <div class="btn xsm-text btn-follow">${type}</div>
+      </div>`;
+    })
+    .join(""); // Join all friend cards into a single string
   const popup = `
    <div id="popup-friends" class="popup-container gap-2">
         <img src="../../assets/icons/X.svg" class="btn-x" />
-        <div class="container-flex-col gap-03 center">
+        <div class="container-flex-col gap-03 center width100">
           <p class="xl-text">
-            <span id="num-of-follow">0</span>
-            <span id="popup-type">Followers</span>
+           <span id="num-of-follow">${friendsList.length}</span>
+            <span id="popup-type">${
+              type.charAt(0).toUpperCase() + type.slice(1)
+            }</span>
           </p>
           <div class="search-container">
             <input type="text" placeholder="Name of user" />
@@ -46,18 +62,7 @@ const popupFriends = (type) => {
           </div>
         </div>
         <div class="container-users-friends">
-<!----------------------- structure of a friend card - needed to be gererate according to friends amount----------------------->
-          <div class="container-friend">
-            <div class="friend-wrapper">
-              <img
-                src="../../assets/images/user-profile-image.svg"
-                alt="profile image"
-                class="friend-profile-img"
-              />
-              <p class="friend-name">username</p>
-            </div>
-            <div class="btn xsm-text btn-follow">${type}</div>
-          </div>
+        ${friendCards}
         </div>
       </div>`;
 
@@ -419,7 +424,7 @@ const popupAlreadyPurchased = () => {
   const popup = `
         <div id="popup-on-cart" class="popup-container gap-2">
           <img src="../../assets/icons/X.svg" class="btn-x" />
-          <p class="xxl-text">This book is already purchased by you!</p>
+          <p class="xxl-text text-center">This book is already purchased by you!</p>
           <div class="container-flex-col center gap-1">
             <a href="/pages/UserProfile" class="sm-text">See all purchased books</a>
           </div>

@@ -112,11 +112,11 @@ input:focus-visible {
 
 .container-friend {
   display: flex;
-  gap: 10rem;
   align-items: center;
   padding: 0.5rem 1rem;
   border-radius: 8px;
   background-color: #ffffff;
+  justify-content: space-between;
 }
 
 .friend-wrapper {
@@ -263,5 +263,10 @@ textarea + .btn {
   }
   textarea.input-box-sqr {
     width: 100%;
+  }
+
+  .bg-dark .search-container {
+    max-width: 100%;
+    background-color: var(--white);
   }
 }

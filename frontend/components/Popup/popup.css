@@ -227,4 +227,9 @@
   .bg-dark .search-container {
     max-width: 165px;
   }
+
+  #popup-login,
+  #popup-on-cart {
+    padding: 4rem 2rem;
+  }
 }

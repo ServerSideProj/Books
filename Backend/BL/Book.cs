@@ -33,7 +33,7 @@ namespace Backend.BL
                     string maturityRating, string infoLink, string publisher, bool isEbook,
                     DateTime publishDate, int pageCount, string subtitle,
                     string[] categories, List<Author> authors, decimal price, bool active,
-                     string imageLink, string previewLink) 
+                     string imageLink, string previewLink)
         {
             Id = id;
             Title = title;
@@ -54,6 +54,29 @@ namespace Backend.BL
             Active = active;
             ImageLink = imageLink;
             PreviewLink = previewLink;
+        }
+
+        public Book(string title,string description,string language,string[] categories,List<Author> authors,string imageLink)
+        {
+            Id = 0;
+            Title = title;
+            Description = description;
+            Language = language;
+            AvgRating = 0.0f;
+            RatingCount = 0;
+            MaturityRating = "Not Rated";
+            InfoLink = "N/A";
+            Publisher = "Unknown";
+            IsEbook = false;
+            PublishDate = DateTime.Now; // Default to current date and time
+            PageCount = 0;
+            Subtitle = "";
+            Categories = categories;
+            Authors = authors;
+            Price = 0.0m;
+            Active = true;
+            ImageLink = imageLink;
+            PreviewLink = "N/A";
         }
 
         public Book()

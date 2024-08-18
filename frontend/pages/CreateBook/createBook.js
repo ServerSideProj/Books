@@ -1,4 +1,7 @@
 var step = 1;
+var selectedCategories = [];
+var imageLink;
+
 $(document).ready(function () {
   // Navigate between inner pages
   $(".btn-insert").click(goPageInsertBook);
@@ -10,6 +13,7 @@ const goPageInsertBook = () => {
   $("#insert-book-page").addClass("show");
 
   getAllLanguages();
+  getAllBookCategories();
 
   // Handle file upload
   $("#upload-file").click(function () {
@@ -30,9 +34,19 @@ const goPageInsertBook = () => {
   // Handle create book
   $("#create-book").click(function () {
     if (checkAllData()) {
-      getAllData();
+      postToServer(getAllData());
     } else {
       alert("Please fill all the fields.");
+    }
+  });
+
+  $("#file-input").on("change", function (event) {
+    const file = event.target.files[0];
+
+    if (file) {
+      uploadBookCover(file);
+    } else {
+      alert("Please select a file to upload.");
     }
   });
 };
@@ -75,13 +89,60 @@ const getAllLanguages = () => {
   });
 };
 
-// Add author input into insert books page
+// Get all book categories and add them as divs with an onclick event
+const getAllBookCategories = () => {
+  $.ajax({
+    url: "https://www.googleapis.com/books/v1/volumes?q=subject",
+    method: "GET",
+    success: function (data) {
+      var categories = new Set();
+      data.items.forEach(function (item) {
+        if (item.volumeInfo && item.volumeInfo.categories) {
+          item.volumeInfo.categories.forEach(function (category) {
+            categories.add(category);
+          });
+        }
+      });
+
+      var container = $(".container-categories .category");
+      container.empty(); // Clear any existing content
+
+      categories.forEach(function (category) {
+        var categoryDiv = $('<div class="category-item"></div>').text(category);
+
+        // Add an onclick event to each category div
+        categoryDiv.on("click", function () {
+          toggleCategory(category, categoryDiv);
+        });
+
+        container.append(categoryDiv);
+      });
+    },
+    error: function () {
+      $(".container-categories .category").html(
+        "<p>Failed to load categories</p>",
+      );
+    },
+  });
+};
+
+// Function to add/remove categories from the selectedCategories array
+function toggleCategory(category, element) {
+  const index = selectedCategories.indexOf(category);
+  if (index === -1) {
+    selectedCategories.push(category);
+    element.css("background-color", "#d3d3d3");
+  } else {
+    selectedCategories.splice(index, 1);
+    element.css("background-color", "");
+  }
+}
+
 const addAuthor = () => {
-  // Create the new input element
   var newInput = $("<input>", {
     type: "text",
     placeholder: "example: J. K. Rowling",
-    class: "input-box-sqr l-text",
+    class: "input-box-sqr l-text author-input",
   });
 
   // Create the delete button
@@ -91,18 +152,23 @@ const addAuthor = () => {
     class: "btn delete",
   });
 
-  // Create a wrapper div for the input and delete button
   var wrapperDiv = $("<div>", {
     class: "author-input-wrapper",
   });
 
-  // Append the input and delete button to the wrapper div
   wrapperDiv.append(newInput);
   wrapperDiv.append(deleteButton);
 
-  // Append the wrapper div to the .container-authors div
   $(".container-authors").append(wrapperDiv);
 };
+
+// Event listener for adding a new author
+$(".btn-add-author").click(addAuthor);
+
+// Event listener for deleting an author input
+$(".container-authors").on("click", ".delete", function () {
+  $(this).parent().remove();
+});
 
 // Handle file upload
 const handleFileUpload = (e) => {
@@ -116,27 +182,76 @@ const handleFileUpload = (e) => {
   }
 };
 
-// Check if all the data is filled
 const checkAllData = () => {
   const title = $("#book-title").val().trim();
   const description = $("#book-description").val().trim();
   const language = $("#language").val().trim();
-  const coverImage = $("#book-cover-img").attr("src");
-  /////////// להוסיף בדיקה על הקטגוריות - למשל שנבחרה לפחות אחת ולא יותר מ-4
-  const authors = $(".container-authors input")
-    .map(function () {
-      return $(this).val().trim();
-    })
-    .get()
-    .filter((author) => author !== "");
+  const coverImage = imageLink;
+  const categories = selectedCategories;
+  const authors = getAuthors();
+
+  const areCategoriesValid = categories.length >= 1 && categories.length <= 3;
 
   return (
     title &&
     description &&
     language &&
     coverImage !== "../../assets/images/none-cover.svg" &&
-    authors.length > 0
+    authors.length > 0 &&
+    areCategoriesValid
   );
+};
+
+const getAuthors = () => {
+  const authors = $(".author-input")
+    .map(function () {
+      return $(this).val().trim(); // Trim each author's name
+    })
+    .get() // Convert jQuery object to a regular array
+    .filter((author) => author !== ""); // Filter out any empty strings
+
+  return authors;
+};
+
+// Function to upload a book cover image using jQuery's $.ajax
+const uploadBookCover = (file) => {
+  const randomFileName = `${generateRandomFileName()}${getFileExtension(
+    file.name,
+  )}`;
+
+  // Create a new FormData object
+  const formData = new FormData();
+  formData.append("file", new File([file], randomFileName)); // Append file with the random name
+
+  // Send the POST request to the server using $.ajax
+  $.ajax({
+    url: API_URL + "Book/UploadBookCover",
+    method: "POST",
+    data: formData,
+    contentType: false,
+    processData: false,
+    success: function (data) {
+      imageLink = IMAGE_URL + data.imageName;
+      console.log("Image uploaded successfully:", imageLink);
+    },
+    error: function (error) {
+      console.error(error);
+    },
+  });
+};
+
+// Utility function to generate a random filename
+const generateRandomFileName = () => {
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+    const r = (Math.random() * 16) | 0,
+      v = c === "x" ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+};
+
+// Utility function to get the file extension
+const getFileExtension = (filename) => {
+  return filename.substring(filename.lastIndexOf("."));
 };
 
 // Get all the data after clicks on "create book" and send to server
@@ -145,32 +260,29 @@ const getAllData = () => {
     title: $("#book-title").val().trim(),
     description: $("#book-description").val().trim(),
     language: $("#language").val().trim(),
-    coverImage: $("#book-cover-img").attr("src"),
-    ////////////////////////////// להוסיף גם את הקטגוריות!!
+    categories: selectedCategories, // Selected categories array
     authors: $(".container-authors input")
       .map(function () {
-        return $(this).val().trim();
+        return $(this).val().trim(); // Collect author names as strings
       })
       .get()
-      .filter((author) => author !== ""),
+      .filter((author) => author !== ""), // Ensure the author name is not empty
+    imageLink: imageLink, // The image link collected earlier
   };
 
-  console.log(data); // Replace with actual server request
-  // Example of sending data to server
-  /*
-  $.ajax({
-    url: 'your-server-endpoint',
-    method: 'POST',
-    contentType: 'application/json',
-    data: JSON.stringify(data),
-    success: function(response) {
-      alert("Book created successfully!");
-    },
-    error: function() {
-      alert("Failed to create book.");
-    }
-  });
-  */
+  return data;
+};
+
+const postToServer = async (data) => {
+  sendData(API_URL + "Book/insert-book", data, bookPosted, bookPostErr);
+};
+
+const bookPosted = (msg) => {
+  console.log("book posted successfuly: " + msg);
+};
+
+const bookPostErr = (error) => {
+  console.log(error);
 };
 
 // Select random categories

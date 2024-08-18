@@ -400,20 +400,23 @@ namespace Backend.DAL
         //
         private int EnsureAuthorExists(SqlConnection con, SqlTransaction transaction, Author author)
         {
-            SqlCommand checkCmd = new SqlCommand("sp_CheckAuthorExists", con, transaction);
-            checkCmd.CommandType = CommandType.StoredProcedure;
-
-            checkCmd.Parameters.AddWithValue("@Name", author.Name); 
-
-            object result = checkCmd.ExecuteScalar();
-             
-            if (result != null)
+            // Check if the author already exists
+            using (SqlCommand checkCmd = new SqlCommand("sp_CheckAuthorExists", con, transaction))
             {
-                return Convert.ToInt32(result); // Author already exists and returns the ID
+                checkCmd.CommandType = CommandType.StoredProcedure;
+                checkCmd.Parameters.AddWithValue("@Name", author.Name);
+
+                object result = checkCmd.ExecuteScalar();
+
+                if (result != null && result != DBNull.Value)
+                {
+                    return Convert.ToInt32(result); // Author already exists, return the ID
+                }
             }
-            else
+
+            // If the author does not exist, insert a new author
+            using (SqlCommand insertCmd = new SqlCommand("sp_AddAuthor", con, transaction))
             {
-                SqlCommand insertCmd = new SqlCommand("sp_AddAuthor", con, transaction);
                 insertCmd.CommandType = CommandType.StoredProcedure;
 
                 insertCmd.Parameters.AddWithValue("@Name", author.Name);
@@ -421,9 +424,19 @@ namespace Backend.DAL
                 insertCmd.Parameters.AddWithValue("@WikiLink", author.WikiLink);
                 insertCmd.Parameters.AddWithValue("@PictureUrl", author.PictureUrl);
 
-                return Convert.ToInt32(insertCmd.ExecuteScalar()); // Return the new Author ID
+                // Create an output parameter to capture the newly inserted AuthorID
+                SqlParameter idParameter = new SqlParameter("@AuthorID", SqlDbType.Int);
+                idParameter.Direction = ParameterDirection.Output;
+                insertCmd.Parameters.Add(idParameter);
+
+                // Execute the insert command
+                insertCmd.ExecuteNonQuery();
+
+                // Return the new Author ID
+                return Convert.ToInt32(idParameter.Value);
             }
         }
+
 
         //
         private void EnsureCategoryExists(SqlConnection con, SqlTransaction transaction, string category)

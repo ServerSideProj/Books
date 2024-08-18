@@ -1,26 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/Users/hilatsivion/Documents/GitHub/Books/Backend/Backend.csproj": {}
+    "C:\\Users\\ranme\\OneDrive\\Desktop\\Books\\Backend\\Backend.csproj": {}
   },
   "projects": {
-    "/Users/hilatsivion/Documents/GitHub/Books/Backend/Backend.csproj": {
+    "C:\\Users\\ranme\\OneDrive\\Desktop\\Books\\Backend\\Backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/hilatsivion/Documents/GitHub/Books/Backend/Backend.csproj",
+        "projectUniqueName": "C:\\Users\\ranme\\OneDrive\\Desktop\\Books\\Backend\\Backend.csproj",
         "projectName": "Backend",
-        "projectPath": "/Users/hilatsivion/Documents/GitHub/Books/Backend/Backend.csproj",
-        "packagesPath": "/Users/hilatsivion/.nuget/packages/",
-        "outputPath": "/Users/hilatsivion/Documents/GitHub/Books/Backend/obj/",
+        "projectPath": "C:\\Users\\ranme\\OneDrive\\Desktop\\Books\\Backend\\Backend.csproj",
+        "packagesPath": "C:\\Users\\ranme\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ranme\\OneDrive\\Desktop\\Books\\Backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/hilatsivion/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\ranme\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "/usr/local/share/dotnet/sdk/7.0.316/Sdks/Microsoft.NET.Sdk.Web/library-packs": {},
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -33,6 +34,11 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -67,7 +73,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.316/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204\\RuntimeIdentifierGraph.json"
         }
       }
     }

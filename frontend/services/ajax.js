@@ -38,10 +38,6 @@ function sendData(url, data, successCallback, errorCallback) {
   });
 }
 
-//
-// add options to add image to server
-//
-
 // Expose functions globally
 window.fetchData = fetchData;
 window.sendData = sendData;

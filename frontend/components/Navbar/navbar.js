@@ -9,6 +9,7 @@ $(document).ready(function () {
     } else {
       generateDesktopNavbar(isLoggedIn);
     }
+    checkForNotification();
   }
 
   // Initial check
@@ -63,7 +64,10 @@ const generateDesktopNavbar = (isLoggedIn) => {
            <a href="/pages/Cart"><img src="../../assets/icons/Shopping cart.svg" alt="Shopping Cart" class="cart-icon icon"></a>
            <a href="/pages/UserProfile/index.html?section=liked"><img src="../../assets/icons/heart.svg" alt="heart" class="heart-icon icon"></a>
           <a href="/pages/bookstore" class="sm-text">Bookstore</a>
+          <div class="container-flex">
           <a href="/pages/notifications" class="sm-text">Notifications</a>
+          <div class="notify-circle"></div>
+          </div>
         </div>
         <div class="logo-container">
           <a href="/pages/home"><img src="../../assets/logo/logo-nav.svg" alt="logo" class="logo-nav"></a>
@@ -256,4 +260,17 @@ const generateMobileNavbar = (isLoggedIn) => {
   $(".btn-x").on("click", () => {
     $(".nav-slide").removeClass("open");
   });
+};
+
+const checkForNotification = () => {
+  fetchData(
+    API_URL +
+      "Transaction/seller-transactions/" +
+      localStorage.getItem("email"),
+    (data) => {
+      if (data.length > 0) $(".notify-circle").addClass("show");
+      else $(".notify-circle").removeClass("show");
+    },
+    onError
+  );
 };

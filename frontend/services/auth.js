@@ -50,7 +50,8 @@ export function logout() {
   localStorage.removeItem("email");
   localStorage.removeItem("profileImageLink");
   localStorage.removeItem("coins");
-  location.reload();
+  localStorage.removeItem("cartItems");
+  window.location.href = "/pages/Home";
 }
 
 /**

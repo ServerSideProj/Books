@@ -586,6 +586,7 @@ const popupText = (text) => {
         </div>`;
 
   $(".bg-dark").empty();
+  $(".bg-dark").addClass("open");
   $(".bg-dark").append(popup);
   $("#popup-text").addClass("open");
 

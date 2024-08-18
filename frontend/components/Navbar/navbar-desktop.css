@@ -65,3 +65,18 @@
 .logo-container:hover {
   transform: scale(1.08);
 }
+
+.notify-circle {
+  width: 6px;
+  height: 6px;
+  position: relative;
+  top: 0;
+  right: -1px;
+  background-color: var(--barbi-pink);
+  border-radius: 8px;
+  display: none;
+}
+
+.notify-circle.show {
+  display: block;
+}

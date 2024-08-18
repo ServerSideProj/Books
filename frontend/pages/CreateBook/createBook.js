@@ -104,11 +104,11 @@ const getAllBookCategories = () => {
         }
       });
 
-      var container = $(".container-categories .category");
+      var container = $(".container-categories");
       container.empty(); // Clear any existing content
 
-      categories.forEach(function (category) {
-        var categoryDiv = $('<div class="category-item"></div>').text(category);
+      categories.forEach((category) => {
+        var categoryDiv = $('<div class="category"></div>').text(category);
 
         // Add an onclick event to each category div
         categoryDiv.on("click", function () {
@@ -120,7 +120,7 @@ const getAllBookCategories = () => {
     },
     error: function () {
       $(".container-categories .category").html(
-        "<p>Failed to load categories</p>",
+        "<p>Failed to load categories</p>"
       );
     },
   });
@@ -216,7 +216,7 @@ const getAuthors = () => {
 // Function to upload a book cover image using jQuery's $.ajax
 const uploadBookCover = (file) => {
   const randomFileName = `${generateRandomFileName()}${getFileExtension(
-    file.name,
+    file.name
   )}`;
 
   // Create a new FormData object

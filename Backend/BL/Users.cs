@@ -1,4 +1,5 @@
 ﻿using Backend.DAL;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
 namespace Backend.BL
@@ -43,11 +44,10 @@ namespace Backend.BL
             dbUser.UpdateUserProfileImage(email, profileImageLink);
         }
 
-        public static List<(string Username, string Email)> GetAllUsernamesAndEmails()
+        public static List<Dictionary<string, string>> GetAllUsernamesAndEmails(string excludeEmail)
         {
-            return dbUser.GetAllUsernamesAndEmails();
+            return dbUser.GetAllUsernamesAndEmails(excludeEmail);
         }
-
 
         public static List<Users> GetAllUsers()
         {

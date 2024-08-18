@@ -11,11 +11,10 @@ namespace Backend.Controllers
     public class UsersController : ControllerBase
     {
 
-        // GET api/users/usernamesAndEmail
         [HttpGet("usernamesAndEmails")]
-        public ActionResult<List<(string Username, string Email)>> GetAllUsernamesAndEmails()
+        public ActionResult<List<Dictionary<string, string>>> GetAllUsernamesAndEmails([FromQuery] string excludeEmail)
         {
-            List<(string Username, string Email)> users = Users.GetAllUsernamesAndEmails();
+            List<Dictionary<string, string>> users = Users.GetAllUsernamesAndEmails(excludeEmail);
             return Ok(users);
         }
 

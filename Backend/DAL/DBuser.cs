@@ -80,29 +80,34 @@ namespace Backend.DAL
             }
         }
 
-        public List<(string Username, string Email)> GetAllUsernamesAndEmails()
+
+        public List<Dictionary<string, string>> GetAllUsernamesAndEmails(string excludeEmail)
         {
             using (SqlConnection con = connect("myProjDB"))
             {
                 SqlCommand cmd = new SqlCommand("sp_getAllUsernamesAndEmails", con);
                 cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@ExcludeEmail", excludeEmail);
 
-                List<(string Username, string Email)> users = new List<(string Username, string Email)>();
+                List<Dictionary<string, string>> users = new List<Dictionary<string, string>>();
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        string username = reader["username"].ToString();
-                        string email = reader["email"].ToString();
-                        users.Add((username, email));
+                        var user = new Dictionary<string, string>
+                {
+                    { "Username", reader["username"].ToString() },
+                    { "Email", reader["email"].ToString() },
+                    { "profileImage", reader["profileImage"].ToString() }
+                };
+                        users.Add(user);
                     }
                 }
 
                 return users;
             }
         }
-
 
         public List<Users> GetAllUsers()
         {

@@ -115,12 +115,3 @@
 input:focus-visible {
   outline: transparent;
 }
-
-.container-users {
-  display: flex;
-  align-items: center;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  background-color: #ffffff;
-  justify-content: space-between;
-}

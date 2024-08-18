@@ -601,7 +601,23 @@ const popupText = (text) => {
 };
 
 const searchForUsers = () => {
-  fetchData(API_URL + "Users/usernamesAndEmails", getUsers, onError);
+  const email = localStorage.getItem("email");
+  fetchData(
+    API_URL + `Users/usernamesAndEmails?excludeEmail=${email}`,
+    (users) => {
+      renderUsers(users);
+
+      // Add search functionality
+      $(".search-container input").on("input", function () {
+        const searchTerm = $(this).val().toLowerCase();
+        const filteredUsers = users.filter((user) =>
+          user.Username.toLowerCase().includes(searchTerm)
+        );
+        renderUsers(filteredUsers);
+      });
+    },
+    onError
+  );
 
   const popup = `
   <div id="popup-users" class="popup-container gap-2">
@@ -625,26 +641,34 @@ const searchForUsers = () => {
   // Remove previous event listeners
   $(".btn-x").off("click");
 
-  // Add event listener to the "btn-x" to close the nav slide
+  // Add event listener to the "btn-x" to close the popup
   $(".btn-x").on("click", () => {
     $(".bg-dark").empty();
     $(".bg-dark").removeClass("open");
   });
-
-  // const usersCards = friendsList.map((friend) => {
-  //   return `
-  //     <div class="container-users">
-  //       <div class="friend-wrapper">
-  //         <img src="${
-  //           friend.profileImage || "../../assets/images/user-profile-image.svg"
-  //         }" alt="profile image" class="friend-profile-img" />
-  //         <p class="friend-name">${friend.username}</p>
-  //       </div>
-  //       <div class="btn xsm-text btn-follow">${type}</div>
-  //     </div>`;
-  // });
 };
 
-const getUsers = (users) => {
-  console.log(users);
+const renderUsers = (users) => {
+  const usersContainer = $(".container-users");
+  usersContainer.empty(); // Clear any existing content
+
+  // Create user cards
+  users.forEach((user) => {
+    const userCard = `
+      <div class="user-wrapper" data-email="${user.Email}">
+        <div class="container-flex center-hor gap-1"><img src="${
+          user.profileImage || "../../assets/images/user-profile-image.svg"
+        }" alt="profile image" class="user-profile-img" />
+        <p class="user-name">${user.Username}</p></div>
+        <img src="../../assets/icons/Arrow right pink.svg"/>
+      </div>`;
+    usersContainer.append(userCard);
+  });
+
+  // Add click event to each user card
+  $(".user-wrapper").on("click", function () {
+    const userEmail = $(this).data("email");
+    sessionStorage.setItem("friendEmail", userEmail);
+    window.location.href = "/pages/otherUserProfile";
+  });
 };

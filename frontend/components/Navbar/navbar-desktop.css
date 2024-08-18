@@ -80,3 +80,47 @@
 .notify-circle.show {
   display: block;
 }
+
+.align-items-start {
+  align-items: flex-start;
+}
+
+.search-container {
+  border-radius: 30px;
+  padding: 9px 20px;
+  box-shadow: inset 2px 2px 5px 0 rgba(153, 131, 176, 0.2),
+    0 4px 4px 0 rgba(153, 131, 176, 0.2);
+  background: var(--bg-fade-pink);
+  display: flex;
+  gap: 0.7rem;
+}
+
+.bg-dark .search-container {
+  width: 100%;
+}
+.popup-container {
+  padding: 4rem;
+  display: flex;
+  background: #f5f1f8;
+}
+
+.search-container input {
+  background-color: transparent;
+  border: transparent;
+  font-family: var(--font-family);
+  height: 100%;
+  width: 100%;
+}
+
+input:focus-visible {
+  outline: transparent;
+}
+
+.container-users {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background-color: #ffffff;
+  justify-content: space-between;
+}

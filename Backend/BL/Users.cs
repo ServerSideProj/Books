@@ -43,10 +43,11 @@ namespace Backend.BL
             dbUser.UpdateUserProfileImage(email, profileImageLink);
         }
 
-        public static List<string> GetAllUsernames()
+        public static List<(string Username, string Email)> GetAllUsernamesAndEmails()
         {
-            return dbUser.GetAllUsernames();
+            return dbUser.GetAllUsernamesAndEmails();
         }
+
 
         public static List<Users> GetAllUsers()
         {

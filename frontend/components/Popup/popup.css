@@ -33,7 +33,8 @@
 #popup-book-sale.open,
 #popup-on-cart.open,
 #popup-payment.open,
-#popup-text.open {
+#popup-text.open,
+#popup-users.open {
   display: flex;
 }
 

@@ -599,3 +599,52 @@ const popupText = (text) => {
     $(".bg-dark").removeClass("open");
   });
 };
+
+const searchForUsers = () => {
+  fetchData(API_URL + "Users/usernamesAndEmails", getUsers, onError);
+
+  const popup = `
+  <div id="popup-users" class="popup-container gap-2">
+       <img src="../../assets/icons/X.svg" class="btn-x" />
+       <div class="container-flex-col gap-03 center width100">
+         <p class="xl-text"> Search for a user
+         </p>
+         <div class="search-container">
+           <input type="text" placeholder="Enter username" />
+           <img src="../../assets/icons/search-icon.svg" alt="search-icon" />
+         </div>
+       </div>
+       <div class="container-users">
+       </div>
+  </div>`;
+
+  $(".bg-dark").addClass("open");
+  $(".bg-dark").append(popup);
+  $("#popup-users").addClass("open");
+
+  // Remove previous event listeners
+  $(".btn-x").off("click");
+
+  // Add event listener to the "btn-x" to close the nav slide
+  $(".btn-x").on("click", () => {
+    $(".bg-dark").empty();
+    $(".bg-dark").removeClass("open");
+  });
+
+  // const usersCards = friendsList.map((friend) => {
+  //   return `
+  //     <div class="container-users">
+  //       <div class="friend-wrapper">
+  //         <img src="${
+  //           friend.profileImage || "../../assets/images/user-profile-image.svg"
+  //         }" alt="profile image" class="friend-profile-img" />
+  //         <p class="friend-name">${friend.username}</p>
+  //       </div>
+  //       <div class="btn xsm-text btn-follow">${type}</div>
+  //     </div>`;
+  // });
+};
+
+const getUsers = (users) => {
+  console.log(users);
+};

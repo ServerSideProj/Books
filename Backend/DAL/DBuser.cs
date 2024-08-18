@@ -80,26 +80,29 @@ namespace Backend.DAL
             }
         }
 
-        public List<string> GetAllUsernames()
+        public List<(string Username, string Email)> GetAllUsernamesAndEmails()
         {
             using (SqlConnection con = connect("myProjDB"))
             {
-                SqlCommand cmd = new SqlCommand("sp_getAllUsernames", con);
+                SqlCommand cmd = new SqlCommand("sp_getAllUsernamesAndEmails", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                List<string> usernames = new List<string>();
+                List<(string Username, string Email)> users = new List<(string Username, string Email)>();
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        usernames.Add(reader["username"].ToString());
+                        string username = reader["username"].ToString();
+                        string email = reader["email"].ToString();
+                        users.Add((username, email));
                     }
                 }
 
-                return usernames;
+                return users;
             }
         }
+
 
         public List<Users> GetAllUsers()
         {

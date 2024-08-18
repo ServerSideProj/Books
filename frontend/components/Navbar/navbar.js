@@ -19,6 +19,7 @@ $(document).ready(function () {
   $(window).resize(function () {
     updateNavbar();
   });
+  $(".search-nav-icon").on("click", searchForUsers);
 
   $(".logout").on("click", logout);
 });
@@ -63,6 +64,7 @@ const generateDesktopNavbar = (isLoggedIn) => {
         <div class="container-full-space">
            <a href="/pages/Cart"><img src="../../assets/icons/Shopping cart.svg" alt="Shopping Cart" class="cart-icon icon"></a>
            <a href="/pages/UserProfile/index.html?section=liked"><img src="../../assets/icons/heart.svg" alt="heart" class="heart-icon icon"></a>
+           <img src="../../assets/icons/Search-pink.svg" alt="search" class="search-nav-icon icon">
           <a href="/pages/bookstore" class="sm-text">Bookstore</a>
           <div class="container-flex">
           <a href="/pages/notifications" class="sm-text">Notifications</a>
@@ -119,12 +121,15 @@ const generateMobileNavbar = (isLoggedIn) => {
         <img src="../../assets/logo/logo-nav.svg" alt="logo" class="logo-nav" />
         </a>
       </div>
-      <div class="hamburger-container">
-        <img
-          src="../../assets/icons/hamburger.svg"
-          alt="hamburger"
-          class="hamburger"
-        />
+      <div class="container-flex align-items-start">
+        <img src="../../assets/icons/Search-pink.svg" alt="search" class="search-nav-icon icon">
+        <div class="hamburger-container">
+          <img
+            src="../../assets/icons/hamburger.svg"
+            alt="hamburger"
+            class="hamburger"
+          />
+        </div>
       </div>
     </div>`;
       const adminNav = `
@@ -163,12 +168,15 @@ const generateMobileNavbar = (isLoggedIn) => {
         <img src="../../assets/logo/logo-nav.svg" alt="logo" class="logo-nav" />
         </a>
       </div>
-      <div class="hamburger-container">
-        <img
-          src="../../assets/icons/hamburger.svg"
-          alt="hamburger"
-          class="hamburger"
-        />
+      <div class="container-flex align-items-start">
+        <img src="../../assets/icons/Search-pink.svg" alt="search" class="search-nav-icon icon">
+        <div class="hamburger-container">
+          <img
+            src="../../assets/icons/hamburger.svg"
+            alt="hamburger"
+            class="hamburger"
+          />
+        </div>
       </div>
     </div>`;
       const navSlideLogged = `<div class="nav-slide">
@@ -212,13 +220,16 @@ const generateMobileNavbar = (isLoggedIn) => {
       <img src="../../assets/logo/logo-nav.svg" alt="logo" class="logo-nav" />
       </a>
     </div>
-    <div class="hamburger-container">
-      <img
-        src="../../assets/icons/hamburger.svg"
-        alt="hamburger"
-        class="hamburger"
-      />
-    </div>
+    <div class="container-flex align-items-start">
+        <img src="../../assets/icons/Search-pink.svg" alt="search" class="search-nav-icon icon">
+        <div class="hamburger-container">
+          <img
+            src="../../assets/icons/hamburger.svg"
+            alt="hamburger"
+            class="hamburger"
+          />
+        </div>
+      </div>
   </div>`;
     const navSlideNotLogged = `<div class="nav-slide">
     <img src="../../assets/icons/X.svg" class="btn-x">
@@ -262,6 +273,7 @@ const generateMobileNavbar = (isLoggedIn) => {
   });
 };
 
+// add a little circle near to the "notification" in the nav in case the user have any notification.
 const checkForNotification = () => {
   fetchData(
     API_URL +

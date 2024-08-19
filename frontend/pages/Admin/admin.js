@@ -1,6 +1,6 @@
 const API_ALL_BOOKS = "Book/get-all-books-admin";
-const API_ALL_USERS = "Users";
-const API_ALL_AUTHORS = "Author/all-authors";
+const API_ALL_USERS = "Users/all-users-admin";
+const API_ALL_AUTHORS = "Author/all-authors-admin";
 
 $(document).ready(function () {
   // Change the inner page on option click
@@ -16,7 +16,7 @@ $(document).ready(function () {
   $(".create-author-btn").on("click", popupCreateAuthor);
   $(".create-user-btn").on("click", popupCreateUser);
 
-  // get amount of books in db
+  // Get amount of books in db
   fetchData(
     API_URL + "Book/total-books-count",
     (res) => {
@@ -42,7 +42,6 @@ $(document).ready(function () {
     onError
   );
 
-  //get amount of users in db
   // Get amount of users in db
   fetchData(
     API_URL + "Users/total-users-count",
@@ -77,6 +76,7 @@ const changeInnerPage = (opt) => {
   }
 };
 
+// create the datatable of books
 const getTableBooks = () => {
   initializeTable("booksTable", API_ALL_BOOKS, [
     { data: "id" },
@@ -104,7 +104,7 @@ const getTableBooks = () => {
     {
       data: null,
       render: function (data, type, row) {
-        return `<div class="btn edit-books-btn" data-id="${row.id}">Edit</div>`;
+        return `<div class="btn edit-books-btn admin-btn-table" data-id="${row.id}">Edit</div>`;
       },
     },
   ]);
@@ -164,23 +164,115 @@ const renderEditableField = (data) => {
   return `<input type="text" value="${data}" disabled class="editable-field">`;
 };
 
+// create the datatable of users
 const getTableUsers = () => {
-  // change api url
   initializeTable("usersTable", API_ALL_USERS, [
     { data: "email" },
     { data: "username" },
-    // { data: "Purcheses amount" },
-    // { data: "Following" },
-    // { data: "Followers" },
+    { data: "purchasedBooksCount" },
+    { data: "coins" },
+    { data: "followingCount" },
+    { data: "followersCount" },
+    {
+      data: null,
+      render: function (data, type, row) {
+        return `<div class=" btn remove-btn admin-btn-table" data-email="${row.email}">Remove</div>`;
+      },
+    },
   ]);
+
+  // Event listener for the Remove button
+  $("#usersTable tbody").on("click", ".remove-btn", function () {
+    const email = $(this).data("email");
+
+    $.ajax({
+      url: API_URL + `Users/${email}`,
+      type: "DELETE",
+      success: function (response) {
+        console.log("User removed successfully:", response);
+        // Reload the table data
+        $("#usersTable").DataTable().ajax.reload();
+      },
+      error: function (xhr, status, error) {
+        console.error("Error removing user:", error);
+      },
+    });
+  });
 };
 
+// create the datatable of authors
 const getTableAuthors = () => {
-  // change api url
   initializeTable("authorsTable", API_ALL_AUTHORS, [
-    { data: "name" },
-    // { data: "nationality" },
+    { data: "id" },
+    {
+      data: "name",
+      render: function (data, type, row, meta) {
+        return `<input type="text" class="edit-name editable-field" value="${
+          data || ""
+        }" disabled>`;
+      },
+    }, // Editable Author Name
+    {
+      data: "pictureUrl",
+      render: function (data, type, row, meta) {
+        const imageUrl = data || "../../assets/images/author-placeholder.png";
+        return `<img src="${imageUrl}" alt="Author Picture" style="width:50px; height:auto;">`;
+      },
+    }, // Displaying the Author's Image with Placeholder if Empty
+    {
+      data: "pictureUrl",
+      render: function (data, type, row, meta) {
+        return `<input type="text" class="edit-url editable-field" value="${
+          data || ""
+        }" disabled>`;
+      },
+    }, // Displaying the Author's Image URL
+    { data: "PurchaseCount" }, // Purchase Count
+    {
+      data: null,
+      render: function (data, type, row) {
+        return `<div class="btn edit-btn-author admin-btn-table" data-id="${row.id}">Edit</div>`;
+      },
+    },
   ]);
+
+  // Event listener for Edit/Done button
+  $("#authorsTable tbody").on("click", ".edit-btn-author", function () {
+    const btn = $(this);
+    const row = btn.closest("tr");
+
+    if (btn.text() === "Edit") {
+      btn.text("Done");
+
+      btn.addClass("done");
+
+      // Enable the editable fields
+      row.find(".editable-field").prop("disabled", false);
+    } else {
+      // Change button text back to "Edit"
+      btn.text("Edit");
+
+      // Get updated values
+      const id = btn.data("id");
+      const name = row.find(".edit-name").val();
+      const pictureUrl = row.find(".edit-url").val();
+
+      // Send the updated data to the server
+      $.ajax({
+        url: API_URL + `Author/update-author-admin/${id}`,
+        type: "PUT",
+        contentType: "application/json",
+        data: JSON.stringify({ name, pictureUrl }),
+        success: function (response) {
+          btn.removeClass("done");
+          row.find(".editable-field").prop("disabled", true);
+        },
+        error: function (xhr, status, error) {
+          console.error("Error updating author:", error);
+        },
+      });
+    }
+  });
 };
 
 // Function to initialize DataTable

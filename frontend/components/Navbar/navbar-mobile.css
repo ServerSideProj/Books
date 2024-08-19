@@ -105,3 +105,16 @@
 .nav-slide .btn-signup-nav {
   padding: 10px 2rem;
 }
+
+@media screen and (max-width: 750px) {
+  .navbar-desktop {
+    padding: 2rem 2rem 1rem 2rem;
+  }
+
+  .navbar-desktop {
+    text-wrap: nowrap;
+  }
+  .container-full-space {
+    gap: 1rem;
+  }
+}

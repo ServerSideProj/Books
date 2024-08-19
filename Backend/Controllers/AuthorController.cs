@@ -1,4 +1,5 @@
-﻿using Backend.BL;
+﻿using System.Text.Json;
+using Backend.BL;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -64,6 +65,55 @@ namespace Backend.Controllers
                 return NotFound(new { Message = "Authors not found." });
             }
         }
+
+        [HttpGet("all-authors-admin")]
+        public IActionResult GetAllAuthorsWithPurchaseCount()
+        {
+            try
+            {
+                var authors = Author.GetAllAuthorsWithPurchaseCount();
+                return Ok(authors);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Error = ex.Message });
+            }
+        }
+
+        [HttpPut("update-author-admin/{id}")]
+        public IActionResult UpdateAuthorAdmin(int id, [FromBody] JsonElement authorJson)
+        {
+            try
+            {
+                // Get the existing author from the database
+                var existingAuthor = Author.GetAuthorById(id);
+
+                if (existingAuthor == null)
+                {
+                    return NotFound(new { Error = "Author not found." });
+                }
+
+                // Update name and pictureUrl fields if they are present in the request
+                if (authorJson.TryGetProperty("name", out JsonElement nameElement))
+                {
+                    existingAuthor.Name = nameElement.GetString();
+                }
+                if (authorJson.TryGetProperty("pictureUrl", out JsonElement pictureUrlElement))
+                {
+                    existingAuthor.PictureUrl = pictureUrlElement.GetString();
+                }
+
+                // Update the author in the database
+                Author.UpdateAuthorAdmin(id, existingAuthor);
+
+                return Ok(new { Message = "Author updated successfully." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Error = ex.Message });
+            }
+        }
+
 
         [HttpPost("update-authors")]
         public IActionResult UpdateAuthors([FromBody] List<Author> authors)

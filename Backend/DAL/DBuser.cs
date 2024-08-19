@@ -357,5 +357,36 @@ namespace Backend.DAL
                 return (int)cmd.ExecuteScalar();
             }
         }
+
+        public List<Dictionary<string, object>> GetAllUsersWithStats()
+        {
+            List<Dictionary<string, object>> users = new List<Dictionary<string, object>>();
+
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                SqlCommand cmd = new SqlCommand("sp_GetAllUsersWithStats", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var user = new Dictionary<string, object>
+                {
+                    { "email", reader["email"].ToString() },
+                    { "username", reader["username"].ToString() },
+                    { "coins", reader["coins"] != DBNull.Value ? (int)reader["coins"] : 0 },
+                    { "purchasedBooksCount", reader["purchasedBooksCount"] != DBNull.Value ? (int)reader["purchasedBooksCount"] : 0 },
+                    { "followingCount", reader["followingCount"] != DBNull.Value ? (int)reader["followingCount"] : 0 },
+                    { "followersCount", reader["followersCount"] != DBNull.Value ? (int)reader["followersCount"] : 0 }
+                };
+                        users.Add(user);
+                    }
+                }
+            }
+
+            return users;
+        }
+
     }
 }

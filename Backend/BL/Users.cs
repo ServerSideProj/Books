@@ -95,5 +95,11 @@ namespace Backend.BL
             return dbUser.GetTotalUsersCount();
         }
 
+        public static List<Dictionary<string, object>> GetAllUsersWithStats()
+        {
+            return dbUser.GetAllUsersWithStats();
+        }
+
+
     }
 }

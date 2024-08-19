@@ -133,5 +133,79 @@ namespace Backend.DAL
             }
         }
 
+        public List<Dictionary<string, object>> GetAllAuthorsWithPurchaseCount()
+        {
+            List<Dictionary<string, object>> authors = new List<Dictionary<string, object>>();
+
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                SqlCommand cmd = new SqlCommand("sp_GetAllAuthorsWithPurchaseCount", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var author = new Dictionary<string, object>
+                {
+                    { "id", reader["id"] },
+                    { "name", reader["name"].ToString() },
+                    { "pictureUrl", reader["pictureUrl"].ToString() },
+                    { "PurchaseCount", reader["PurchaseCount"] != DBNull.Value ? (int)reader["PurchaseCount"] : 0 }
+                };
+                        authors.Add(author);
+                    }
+                }
+            }
+
+            return authors;
+        }
+
+        public void UpdateAuthorAdmin(Author author)
+        {
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                SqlCommand cmd = new SqlCommand("sp_UpdateAuthor", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@Id", author.Id);
+                cmd.Parameters.AddWithValue("@Name", author.Name);
+                cmd.Parameters.AddWithValue("@PictureUrl", author.PictureUrl);
+
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public Author GetAuthorById(int id)
+        {
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                SqlCommand cmd = new SqlCommand("sp_GetAuthorById", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@Id", id);
+
+                Author author = null;
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        author = new Author
+                        {
+                            Id = (int)reader["id"],
+                            Name = reader["name"].ToString(),
+                            Biography = reader["biography"].ToString(),
+                            WikiLink = reader["wikiLink"].ToString(),
+                            PictureUrl = reader["PictureUrl"].ToString()
+                        };
+                    }
+                }
+
+                return author;
+            }
+        }
+
+
     }
 }

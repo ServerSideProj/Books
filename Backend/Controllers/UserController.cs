@@ -32,6 +32,20 @@ namespace Backend.Controllers
             }
         }
 
+        [HttpGet("all-users-admin")]
+        public IActionResult GetAllUsersWithStats()
+        {
+            try
+            {
+                var users = Users.GetAllUsersWithStats();
+                return Ok(users);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Error = ex.Message });
+            }
+        }
+
         // GET api/users
         [HttpGet]
         public ActionResult<List<Users>> GetAllUsers()

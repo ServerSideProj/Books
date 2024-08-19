@@ -95,7 +95,6 @@ const generateDesktopNavbar = (isLoggedIn) => {
       <div class="navbar-desktop">
         <div class="container-full-space">
           <a href="/pages/bookstore" class="sm-text">Bookstore</a>
-          <img src="../../assets/icons/Search-pink.svg" alt="search" class="search-nav-icon icon">
         </div>
         <div class="logo-container">
           <a href="/pages/home"><img src="../../assets/logo/logo-nav.svg" alt="logo" class="logo-nav"></a>

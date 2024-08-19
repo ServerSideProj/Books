@@ -72,5 +72,21 @@ namespace Backend.BL
             return dbAuthor.GetTotalAuthorsCount();
         }
 
+        public static List<Dictionary<string, object>> GetAllAuthorsWithPurchaseCount()
+        {
+            return dbAuthor.GetAllAuthorsWithPurchaseCount();
+        }
+
+        public static void UpdateAuthorAdmin(int id, Author author)
+        {
+            author.Id = id;
+            dbAuthor.UpdateAuthorAdmin(author);
+        }
+
+        public static Author GetAuthorById(int id)
+        {
+            return dbAuthor.GetAuthorById(id);
+        }
+
     }
 }

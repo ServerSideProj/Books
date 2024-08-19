@@ -1,11 +1,15 @@
 var step = 1;
 var selectedCategories = [];
-var imageLink;
+var imageLink = "";
+var allCategories;
 
 $(document).ready(function () {
   // Navigate between inner pages
   $(".btn-insert").click(goPageInsertBook);
   $(".btn-generate").click(goPageGenerateBook);
+  $("#random-disc").click(getDescription);
+  $("#gen-image").click(generateImageFromDescription);
+  $(".ai-file-upload").click(handleFileUploadClick);
 });
 
 const goPageInsertBook = () => {
@@ -55,11 +59,12 @@ const goPageGenerateBook = () => {
   $(".inner-page").removeClass("show");
   $("#generate-book-page").addClass("show");
 
+  getAllBookCategoriesForAi();
   // Handle random category selection
   $(".random-btn").click(selectRandomCategories);
 
   $(`.step-${step}`).addClass("show");
-  $(".next-btn").on("click", nextStep);
+  $(".next-btn").click(nextStep);
 };
 
 // Get all languages for the dropdown
@@ -108,7 +113,7 @@ const getAllBookCategories = () => {
       container.empty(); // Clear any existing content
 
       categories.forEach(function (category) {
-        var categoryDiv = $('<div class="category-item"></div>').text(category);
+        var categoryDiv = $('<div class="category"></div>').text(category);
 
         // Add an onclick event to each category div
         categoryDiv.on("click", function () {
@@ -310,8 +315,210 @@ const selectRandomCategories = () => {
 };
 
 const nextStep = () => {
-  $(`.step-${step}`).removeClass("show");
-  step++;
-  $(`.step-${step}`).addClass("show");
-  if (step === 4) $(".next-btn").hide();
+  if (step === 1 && selectedCategories.length > 0) {
+    console.log(step);
+    $(`.step-${step}`).removeClass("show");
+    step++;
+    $(`.step-${step}`).addClass("show");
+  } else if (step === 2 && $("#input-desc").val() != "") {
+    console.log(step);
+    $(`.step-${step}`).removeClass("show");
+    step++;
+    $(`.step-${step}`).addClass("show");
+  } else if (step === 3 && imageLink != "") {
+    console.log(step);
+    $(`.step-${step}`).removeClass("show");
+    step++;
+    $(`.step-${step}`).addClass("show");
+    $(".next-btn").hide(); // Hide the Next button after the final step
+  }
 };
+
+const getAllBookCategoriesForAi = () => {
+  $.ajax({
+    url: "https://www.googleapis.com/books/v1/volumes?q=subject",
+    method: "GET",
+    success: function (data) {
+      var categories = new Set();
+      data.items.forEach(function (item) {
+        if (item.volumeInfo && item.volumeInfo.categories) {
+          item.volumeInfo.categories.forEach(function (category) {
+            categories.add(category);
+          });
+        }
+      });
+
+      var container = $(".categoryAi");
+      container.empty(); // Clear any existing content
+
+      categories.forEach(function (category) {
+        var categoryDiv = $('<div class="btn category"></div>').text(category);
+
+        // Add an onclick event to each category div
+        categoryDiv.on("click", function () {
+          toggleCategory(category, categoryDiv);
+        });
+
+        container.append(categoryDiv);
+      });
+    },
+    error: function () {
+      $(".categoryAi").html("<p>Failed to load categories</p>");
+    },
+  });
+};
+const getDescription = async () => {
+  const apiUrl =
+    "https://api-inference.huggingface.co/models/openai-community/gpt2-medium";
+  const apiKey = "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"; // Your Hugging Face API key
+
+  // Simplified and focused prompt for generating a clear and useful description
+  const prompt = `Describe the following topics: ${selectedCategories.join(
+    ", ",
+  )}. Explain the main ideas and differences clearly.`;
+  // Set up the request payload
+  const requestBody = {
+    inputs: prompt,
+    options: {
+      wait_for_model: true,
+      max_new_tokens: 500, // Request a longer response (adjust as needed)
+      temperature: 0.7, // Adjust the creativity/randomness of the response
+      top_p: 0.9, // Nucleus sampling
+    },
+  };
+
+  try {
+    const response = await fetch(apiUrl, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestBody),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch description: ${response.statusText}`);
+    }
+
+    const result = await response.json();
+
+    // Assuming the model returns a single text output
+    let description = result[0]?.generated_text || "No description generated.";
+
+    // Remove the part of the prompt from the response
+    description = description.replace(prompt, "").trim();
+
+    // Insert the generated description into the textarea with ID 'input-desc'
+    $("#input-desc").val(description);
+  } catch (error) {
+    console.error("Error generating description:", error);
+    $("#input-desc").val("Error generating description.");
+  }
+};
+
+const generateImageFromDescription = async () => {
+  const apiUrl =
+    "https://api-inference.huggingface.co/models/runwayml/stable-diffusion-v1-5";
+  const apiKey = "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";
+
+  // Prepare the request payload
+  const requestBody = {
+    inputs: $("#input-desc").val(),
+  };
+
+  try {
+    const response = await fetch(apiUrl, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(requestBody),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to generate image: ${response.statusText}`);
+    }
+
+    // Get the image blob from the response
+    const imageBlob = await response.blob();
+
+    // Create a file object from the blob
+    const file = new File([imageBlob], "generated-image.png", {
+      type: "image/png",
+    });
+
+    // Display the image in the img element
+    uploadBookCoverAi(file);
+
+    // Upload the generated image
+  } catch (error) {
+    console.error("Error generating or uploading the image:", error);
+  }
+};
+
+// Function to upload a book cover image using jQuery's $.ajax
+const uploadBookCoverAi = (file) => {
+  const randomFileName = `${generateRandomFileName()}${getFileExtension(
+    file.name,
+  )}`;
+
+  // Create a new FormData object
+  const formData = new FormData();
+  formData.append("file", new File([file], randomFileName)); // Append file with the random name
+
+  // Send the POST request to the server using $.ajax
+  $.ajax({
+    url: API_URL + "Book/UploadBookCover",
+    method: "POST",
+    data: formData,
+    contentType: false,
+    processData: false,
+    success: function (data) {
+      imageLink = IMAGE_URL + data.imageName;
+      document.getElementById("book-cover-img-end").src = imageLink;
+      document.getElementById("book-cover-img-gen").src = imageLink;
+      console.log("Image uploaded successfully:", imageLink);
+    },
+    error: function (error) {
+      console.error(error);
+    },
+  });
+};
+
+const handleFileUploadClick = () => {
+  // Create a temporary input element dynamically
+  const tempInput = document.createElement("input");
+  tempInput.type = "file";
+  tempInput.accept = "image/*";
+  tempInput.style.display = "none"; // Hide the input element
+
+  // Append it to the body (necessary for some browsers)
+  document.body.appendChild(tempInput);
+
+  // Trigger the click event on the temporary input
+  tempInput.click();
+
+  // Handle file selection
+  tempInput.addEventListener("change", (e) => {
+    const file = e.target.files[0]; // Get the selected file
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        $("#book-cover-img").attr("src", event.target.result); // Update the image preview
+      };
+      reader.readAsDataURL(file); // Read the file as a data URL
+
+      // Upload the file
+      uploadBookCoverAi(file);
+    }
+
+    // Remove the temporary input after use
+    document.body.removeChild(tempInput);
+  });
+};
+
+// Attach the function to the click event
+$("#upload-file").click(handleFileUploadClick);

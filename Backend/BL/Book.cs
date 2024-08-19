@@ -174,5 +174,21 @@ namespace Backend.BL
         {
             return dbBook.RemoveFromLikedBooks(bookId, userEmail);
         }
+
+        public static List<Dictionary<string, object>> GetAllBooksWithPurchaseCount()
+        {
+            return dbBook.GetAllBooksWithPurchaseCount();
+        }
+
+        public static void UpdateBookAdmin(int id, string title, string language, bool active)
+        {
+            dbBook.UpdateBookAdmin(id, title, language, active);
+        }
+
+        public static int GetTotalBooksCount()
+        {
+            return dbBook.GetTotalBooksCount();
+        }
+
     }
 }

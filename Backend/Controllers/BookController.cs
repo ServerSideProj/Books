@@ -18,6 +18,20 @@ namespace Backend.Controllers
             return Ok(books);
         }
 
+        [HttpGet("total-books-count")]
+        public IActionResult GetTotalBooksCount()
+        {
+            try
+            {
+                int totalBooks = Book.GetTotalBooksCount();
+                return Ok(new { TotalBooks = totalBooks });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Error = ex.Message });
+            }
+        }
+
         [HttpGet("popular-physical-books")]
         public ActionResult<List<Book>> GetTop5PopularPhysBooks()
         {
@@ -114,6 +128,42 @@ namespace Backend.Controllers
             }
 
             return Ok(likedBooks);
+        }
+
+        [HttpGet("get-all-books-admin")]
+        public ActionResult<List<Dictionary<string, object>>> GetAllBooksAdmin()
+        {
+            try
+            {
+                var books = Book.GetAllBooksWithPurchaseCount();
+                return Ok(books);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Error = ex.Message });
+            }
+        }
+
+        [HttpPost("update-book-admin")]
+        public IActionResult UpdateBook([FromBody] JsonElement updatedBook)
+        {
+            try
+            {
+                // Extract values from JSON request
+                int id = updatedBook.GetProperty("id").GetInt32();
+                string title = updatedBook.GetProperty("title").GetString();
+                string language = updatedBook.GetProperty("language").GetString();
+                bool active = updatedBook.GetProperty("active").GetBoolean();
+
+                // Call the business logic to update the book
+                Book.UpdateBookAdmin(id, title, language, active);
+
+                return Ok(new { Message = "Book updated successfully." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Error = ex.Message });
+            }
         }
 
         [HttpPost("review")]
@@ -214,40 +264,6 @@ namespace Backend.Controllers
             }
         }
 
-        [HttpPost("remove-from-liked-books")]
-        public IActionResult RemoveFromLikedBooks(int bookId, string userEmail)
-        {
-            if (bookId <= 0 || string.IsNullOrEmpty(userEmail))
-            {
-                return BadRequest(new { message = "Invalid request data." });
-            }
-
-            bool success = Book.RemoveFromLikedBooks(bookId, userEmail);
-
-            if (success)
-            {
-                return Ok(new { message = "Book removed from liked books successfully." });
-            }
-            else
-            {
-                return BadRequest(new { message = "Failed to remove book from liked books." });
-            }
-        }
-
-        [HttpDelete("{bookId}")]
-        public IActionResult DeleteBook(int bookId)  
-        {
-            try
-            {
-                Book.DeleteBook(bookId); 
-                return Ok(new { Message = "Book deleted successfully." });
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { Error = ex.Message });
-            }
-        }
-
         [HttpPost("UploadBookCover")]
         public async Task<IActionResult> UploadBookCover([FromForm] IFormFile file)
         {
@@ -334,5 +350,40 @@ namespace Backend.Controllers
             }
         }
 
+        [HttpPost("remove-from-liked-books")]
+        public IActionResult RemoveFromLikedBooks(int bookId, string userEmail)
+        {
+            if (bookId <= 0 || string.IsNullOrEmpty(userEmail))
+            {
+                return BadRequest(new { message = "Invalid request data." });
+            }
+
+            bool success = Book.RemoveFromLikedBooks(bookId, userEmail);
+
+            if (success)
+            {
+                return Ok(new { message = "Book removed from liked books successfully." });
+            }
+            else
+            {
+                return BadRequest(new { message = "Failed to remove book from liked books." });
+            }
+        }
+
+        [HttpDelete("{bookId}")]
+        public IActionResult DeleteBook(int bookId)  
+        {
+            try
+            {
+                Book.DeleteBook(bookId); 
+                return Ok(new { Message = "Book deleted successfully." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Error = ex.Message });
+            }
+        }
+
+        
     }
 }

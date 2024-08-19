@@ -28,12 +28,9 @@ namespace Backend.DAL
                 };
                 cmd.Parameters.Add(outputIdParam);
 
-                cmd.ExecuteNonQuery(); // Execute the command
+                cmd.ExecuteNonQuery(); 
 
-                // Retrieve the output parameter value if needed
                 int authorId = (int)outputIdParam.Value;
-
-                // Optionally, you can return or use the authorId here if needed
             }
         }
 
@@ -122,6 +119,17 @@ namespace Backend.DAL
                 }
 
                 return authors;
+            }
+        }
+
+        public int GetTotalAuthorsCount()
+        {
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                SqlCommand cmd = new SqlCommand("sp_GetTotalAuthorsCount", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                return (int)cmd.ExecuteScalar();
             }
         }
 

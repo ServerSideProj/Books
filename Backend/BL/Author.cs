@@ -67,5 +67,10 @@ namespace Backend.BL
             return dbAuthor.GetAuthorWithBookCount();
         }
 
+        public static int GetTotalAuthorsCount()
+        {
+            return dbAuthor.GetTotalAuthorsCount();
+        }
+
     }
 }

@@ -765,7 +765,63 @@ namespace Backend.DAL
             }
         }
 
+        public List<Dictionary<string, object>> GetAllBooksWithPurchaseCount()
+        {
+            List<Dictionary<string, object>> books = new List<Dictionary<string, object>>();
 
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                SqlCommand cmd = new SqlCommand("sp_GetAllBooksWithPurchaseCount", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var book = new Dictionary<string, object>();
+
+                        for (int i = 0; i < reader.FieldCount; i++)
+                        {
+                            book[reader.GetName(i)] = reader.GetValue(i);
+                        }
+
+                        books.Add(book);
+                    }
+                }
+            }
+            return books;
+        }
+
+        public void UpdateBookAdmin(int id, string title, string language, bool active)
+        {
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                SqlCommand cmd = new SqlCommand("sp_UpdateBookAdmin", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@Id", id);
+                cmd.Parameters.AddWithValue("@Title", title);
+                cmd.Parameters.AddWithValue("@Language", language);
+                cmd.Parameters.AddWithValue("@Active", active);
+
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public int GetTotalBooksCount()
+        {
+            int totalBooks = 0;
+
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                SqlCommand cmd = new SqlCommand("sp_GetTotalBooksCount", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                totalBooks = (int)cmd.ExecuteScalar();
+            }
+
+            return totalBooks;
+        }
 
     }
 }

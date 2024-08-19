@@ -90,6 +90,10 @@ namespace Backend.BL
             dbUser.CreateNewUser(username, email, password, coins);
         }
 
+        public static int GetTotalUsersCount()
+        {
+            return dbUser.GetTotalUsersCount();
+        }
 
     }
 }

@@ -18,6 +18,20 @@ namespace Backend.Controllers
             return Ok(users);
         }
 
+        [HttpGet("total-users-count")]
+        public IActionResult GetTotalUsersCount()
+        {
+            try
+            {
+                int totalUsers = Users.GetTotalUsersCount();
+                return Ok(new { TotalUsers = totalUsers });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Error = ex.Message });
+            }
+        }
+
         // GET api/users
         [HttpGet]
         public ActionResult<List<Users>> GetAllUsers()

@@ -346,5 +346,16 @@ namespace Backend.DAL
                 cmd.ExecuteNonQuery();
             }
         }
+
+        public int GetTotalUsersCount()
+        {
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                SqlCommand cmd = new SqlCommand("sp_GetTotalUsersCount", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                return (int)cmd.ExecuteScalar();
+            }
+        }
     }
 }

@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -139,7 +139,7 @@
         <div class="step step-1">
           <div class="btn-gradient step-number">1</div>
           <p class="big-text text-center">Select relevant categories</p>
-          <div class="container-categories">
+          <div class="container-categories categoryAi">
             <!-- add in js all categories -->
             <!-- <div class="btn category">abcdefg</div> -->
           </div>
@@ -156,6 +156,7 @@
           <p>Or</p>
           <div
             class="btn btn-generate container-flex center-ver center-hor text-center"
+            id="random-disc"
           >
             <img src="../../assets/icons/Sparkles.svg" alt="Sparkles" />
             <p>Generate Answer</p>
@@ -166,7 +167,7 @@
           <p class="big-text text-center">Book’s cover</p>
           <div class="container-flex mobile-flex-col gap-2">
             <img
-              id="book-cover-img"
+              id="book-cover-img-gen"
               src="../../assets/images/none-cover.svg"
               alt="cover book"
             />
@@ -175,9 +176,9 @@
                 class="btn btn-generate container-flex center-ver center-hor text-center"
               >
                 <img src="../../assets/icons/Sparkles.svg" alt="Sparkles" />
-                <p>Generate Answer</p>
+                <p id="gen-image">Generate Answer</p>
               </div>
-              <div id="upload-file" class="btn l-text">
+              <div id="upload-file" class="btn l-text ai-file-upload">
                 <img src="../../assets/icons/Inbox in.svg" alt="upload file" />
                 <p>upload file</p>
               </div>
@@ -188,19 +189,23 @@
           <p class="big-text text-center">Your Book</p>
           <div class="container-flex-col center-hor mobile-flex-col gap-2">
             <img
-              id="book-cover-img"
+              id="book-cover-img-end"
               src="../../assets/images/none-cover.svg"
               alt="cover book"
             />
             <!-- fill this data on js -->
-            <div class="title"></div>
-            <div class="author"></div>
+            <input
+              class="title input-box-sqr l-text"
+              type="text"
+              placeholder="Enter A Title"
+            />
+            <div class="descriptionFinal"></div>
             <div class="categories"></div>
             <div class="btns">
               <div
                 class="btn btn-generate container-flex center-ver center-hor text-center"
               >
-                <p>Make Public</p>
+                <p id="bookIsReady">Make Public</p>
               </div>
               <a href="../userProfile">
                 <div class="btn border-bot-btn">Nah... not this time</div></a

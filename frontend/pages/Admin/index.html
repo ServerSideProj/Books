@@ -29,21 +29,58 @@
     />
     <script src="https://cdn.datatables.net/2.1.3/js/dataTables.js"></script>
     <!-- Styles for this page -->
+    <link rel="stylesheet" href="../../components/Popup/popup.css" />
     <link rel="stylesheet" href="./admin.css" />
     <!-- Scripts for this page-->
+    <script src="../../components/Popup/popup.js"></script>
     <script src="./admin.js"></script>
 
     <title>Admin</title>
   </head>
   <body>
+    <div class="bg-dark"></div>
     <div class="navbar"></div>
     <div class="main">
-      <!-- <div class="header"></div> -->
+      <div class="btns">
+        <a href="/pages/CreateBook/"
+          ><div
+            class="create-book-btn btn btn-create container-flex center-ver center-hor text-center l-text"
+          >
+            Add a new Book
+          </div>
+        </a>
+        <div
+          class="create-author-btn btn btn-create container-flex center-ver center-hor text-center l-text"
+        >
+          Add a new Author
+        </div>
+        <div
+          class="create-user-btn btn btn-create container-flex center-ver center-hor text-center l-text"
+        >
+          Add a new User
+        </div>
+      </div>
+      <div class="total-stats">
+        <div class="stat-box">
+          <p class="md-text">Total books amount</p>
+          <p class="xl-text">100</p>
+        </div>
+        <div class="stat-box">
+          <p class="md-text">Total authors amount</p>
+          <p class="xl-text">100</p>
+        </div>
+        <div class="stat-box">
+          <p class="md-text">Total users amount</p>
+          <p class="xl-text">100</p>
+        </div>
+      </div>
+
       <div class="inner-nav">
         <div id="books" class="opt selected">All Books</div>
         <div id="users" class="opt">All Users</div>
         <div id="authors" class="opt">All Authors</div>
       </div>
+
       <div class="inner-page inner-page-books">
         <table id="booksTable" class="display">
           <thead>

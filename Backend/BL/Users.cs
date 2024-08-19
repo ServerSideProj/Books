@@ -84,5 +84,12 @@ namespace Backend.BL
             Quiz.GetCurrentQuizId();
             return dbUser.GetTop5UserScores(Quiz.CurrentQuizId);
         }
+
+        public static void CreateNewUser(string username, string email, string password, int coins)
+        {
+            dbUser.CreateNewUser(username, email, password, coins);
+        }
+
+
     }
 }

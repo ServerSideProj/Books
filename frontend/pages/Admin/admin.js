@@ -12,6 +12,9 @@ $(document).ready(function () {
   $(".inner-page-books, .inner-page-users, .inner-page-authors").hide();
   $(".inner-page-books").show();
   $("#books").addClass("checked");
+
+  $(".create-author-btn").on("click", popupCreateAuthor);
+  $(".create-user-btn").on("click", popupCreateUser);
 });
 
 // Change the inner page on option click
@@ -35,7 +38,6 @@ const changeInnerPage = (opt) => {
 };
 
 const getTableBooks = () => {
-  // change api url
   initializeTable("booksTable", API_ALL_BOOKS, [
     { data: "id" },
     { data: "title" },
@@ -43,7 +45,14 @@ const getTableBooks = () => {
     { data: "avgRating" },
     { data: "ratingCount" },
     { data: "maturityRating" },
-    { data: "bookType" },
+    {
+      data: "isEbook",
+      render: function (data, type, row) {
+        return data === 1 || data === "1" || data === true || data === "true"
+          ? "eBook"
+          : "Physical";
+      },
+    },
   ]);
 };
 
@@ -75,5 +84,67 @@ const initializeTable = (tableId, ajaxUrl, columns) => {
     },
     columns: columns,
     destroy: true, // reinitialize the table
+  });
+};
+
+// creates new user
+const handleCreateNewUser = (username, email, password, coins) => {
+  coins = parseInt(coins, 10);
+
+  $.ajax({
+    url: API_URL + "Users/createNewUser",
+    type: "POST",
+    contentType: "application/json",
+    data: JSON.stringify({
+      Username: username,
+      Email: email,
+      Password: password,
+      Coins: coins,
+    }),
+    success: function (response) {
+      popupText("The user created succesfully");
+    },
+    error: function (xhr, status, error) {
+      console.error("AJAX Request Failed:", {
+        status: status,
+        error: error,
+        response: xhr.responseText,
+      });
+      if (xhr.responseJSON && xhr.responseJSON.error) {
+        console.error("Server Error:", xhr.responseJSON.error);
+      } else {
+        console.error("An unexpected error occurred.");
+      }
+    },
+  });
+};
+
+// creates new user
+const handleCreateNewAuthor = (name, biography, wikiLink, pictureUrl) => {
+  $.ajax({
+    url: API_URL + "Author",
+    type: "POST",
+    contentType: "application/json",
+    data: JSON.stringify({
+      Name: name,
+      Biography: biography || "",
+      WikiLink: wikiLink || "",
+      PictureUrl: pictureUrl || "",
+    }),
+    success: function (response) {
+      popupText("The user created succesfully");
+    },
+    error: function (xhr, status, error) {
+      console.error("AJAX Request Failed:", {
+        status: status,
+        error: error,
+        response: xhr.responseText,
+      });
+      if (xhr.responseJSON && xhr.responseJSON.error) {
+        console.error("Server Error:", xhr.responseJSON.error);
+      } else {
+        console.error("An unexpected error occurred.");
+      }
+    },
   });
 };

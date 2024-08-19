@@ -331,5 +331,20 @@ namespace Backend.DAL
             return topScores;
         }
 
+        public void CreateNewUser(string username, string email, string password, int coins)
+        {
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                SqlCommand cmd = new SqlCommand("sp_createNewUser", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@Username", username);
+                cmd.Parameters.AddWithValue("@Email", email);
+                cmd.Parameters.AddWithValue("@Password", password);
+                cmd.Parameters.AddWithValue("@Coins", coins);
+
+                cmd.ExecuteNonQuery();
+            }
+        }
     }
 }

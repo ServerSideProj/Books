@@ -14,6 +14,9 @@ namespace Backend.BL
 
         private static readonly DBauthor dbAuthor = new DBauthor();
 
+        public Author()
+        {
+        }
 
         public Author(int id, string name, string biography, string wikiLink, string pictureUrl)
         {

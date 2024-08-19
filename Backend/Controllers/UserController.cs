@@ -174,6 +174,26 @@ namespace Backend.Controllers
             return Ok(new { ImageName = uniqueFileName });
         }
 
+        [HttpPost("createNewUser")]
+        public ActionResult CreateNewUser([FromBody] JsonElement newUser)
+        {
+            try
+            {
+                string username = newUser.GetProperty("Username").GetString();
+                string email = newUser.GetProperty("Email").GetString();
+                string password = newUser.GetProperty("Password").GetString();
+                int coins = newUser.GetProperty("Coins").GetInt32();
+
+                Users.CreateNewUser(username, email, password, coins);
+                return Ok(new { Message = "User created successfully." });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Error = ex.Message });
+            }
+        }
+
+
         // PUT api/users/changePassword
         [HttpPut("changePassword")]
         public ActionResult ChangePassword([FromBody] JsonElement requestData)

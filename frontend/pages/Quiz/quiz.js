@@ -154,7 +154,7 @@ const finishQuiz = () => {
 
 const showLastPageQuiz = (corrects = -1, data = null) => {
   if (corrects === -1) {
-    $("#add-coins").text(data.quiz.score * 3);
+    $("#add-coins").parent().css("display", "none");
     $(".bg-scores .count").text(data.score);
     $("#total-time > span").text(formatTime(data.timeInSeconds));
   } else {

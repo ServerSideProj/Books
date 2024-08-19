@@ -76,7 +76,7 @@ const generateDesktopNavbar = (isLoggedIn) => {
           <a href="/pages/home"><img src="../../assets/logo/logo-nav.svg" alt="logo" class="logo-nav"></a>
         </div>
         <div class="container-full-space right">
-          <p class="sm-text gradient-text">${coins} coins</p>
+          <p class="sm-text gradient-text" id="coins">${coins} coins</p>
           <a href='/pages/userprofile'>
             <div class="container-gap-sm">
               <p class="sm-text username-nav">${username}</p>
@@ -192,7 +192,7 @@ const generateMobileNavbar = (isLoggedIn) => {
           <p class="l-text username-nav">${username}</p>
         </div>
         <div class="icons-container">
-          <p class="sm-text bold md-text">${coins} coins</p>
+          <p class="sm-text bold md-text" id="coins">${coins} coins</p>
           <div class="container-gap-30">
             <a href="/pages/UserProfile/index.html?section=liked"><img src="../../assets/icons/heart.svg" alt="heart" class="heart-icon icon"></a>
             <a href="/pages/Cart"><img

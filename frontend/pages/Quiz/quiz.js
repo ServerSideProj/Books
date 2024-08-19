@@ -13,18 +13,7 @@ $(document).ready(function () {
 
   startButton.on("click", startStopwatch);
   nextQuestionButton.on("click", nextQuestion);
-
-  fetchData(
-    API_URL + "Users/daily-quiz/top-5-users-scores",
-    addTopUsers,
-    errCall
-  );
 });
-
-const addTopUsers = (data) => {
-  console.log(data);
-  topUsers = data;
-};
 
 // Get the quiz questions and answers
 const fetchQuestions = () => {
@@ -33,7 +22,7 @@ const fetchQuestions = () => {
       "Quiz/daily-quiz/" +
       encodeURIComponent(localStorage.getItem("email")),
     displayQuestions,
-    errCall
+    onError
   );
 };
 
@@ -55,10 +44,6 @@ const displayQuestions = (data) => {
   }
 };
 
-const errCall = (error) => {
-  console.error("Error fetching quiz:", error);
-  alert("There was an error fetching your quiz. Please try again later.");
-};
 // Shuffle the answers of each question
 const shuffleArray = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
@@ -102,9 +87,9 @@ const displayQuestion = (index) => {
 
 // Start the timer when the quiz starts
 const startStopwatch = () => {
+  fetchQuestions();
   $(".opening").addClass("none");
   $(".container-questions").removeClass("none");
-  fetchQuestions();
 
   const timeDisplay = $(".time");
   if (interval) {
@@ -168,23 +153,55 @@ const finishQuiz = () => {
 };
 
 const showLastPageQuiz = (corrects = -1, data = null) => {
-  let index = 1;
   if (corrects === -1) {
-    console.log(data);
-
-    $(".add-coins").html(data.quiz.score * 3);
-    $(".bg-scores .count").html(data.score);
-    $("#total-time > span").html(formatTime(data.timeInSeconds));
+    $("#add-coins").text(data.quiz.score * 3);
+    $(".bg-scores .count").text(data.score);
+    $("#total-time > span").text(formatTime(data.timeInSeconds));
   } else {
     // display resualts
-    $(".add-coins").html(corrects * 3);
-    $(".bg-scores .count").html(corrects);
-    $("#total-time > span").html($(".time")[0].outerText);
+    $("#add-coins").text(corrects * 3);
+    $(".bg-scores .count").text(corrects);
+    $("#total-time > span").text($(".time")[0].outerText);
   }
 
   $(".final").removeClass("none");
   $(".container-questions").addClass("none");
+  getTopUsers();
+};
 
+// send resaults of quiz to server
+const sendResultsToServer = (score, time) => {
+  let data = {
+    quizId: quizId,
+    userMail: localStorage.getItem("email"),
+    score: score,
+    timeInSeconds: time,
+    username: localStorage.getItem("authToken"),
+  };
+
+  //update coins
+  let coins = parseInt(localStorage.getItem("coins")) + score * 3;
+  localStorage.setItem("coins", coins);
+  $("#add-coins").text("" + score * 3);
+  $(".navbar-desktop #coins").text(coins + "coins");
+
+  sendData(API_URL + "Quiz/save-score", data, getTopUsers, onError);
+};
+
+const getTopUsers = () => {
+  fetchData(
+    API_URL + "Users/daily-quiz/top-5-users-scores",
+    renderTopUsers,
+    onError
+  );
+};
+
+const renderTopUsers = (data) => {
+  console.log(data);
+  topUsers = data;
+  $("#usernames-lead").empty();
+
+  let index = 1;
   while (index <= topUsers.length) {
     const user = `
         <div class="input-box-sqr flex center-hor gap-1">
@@ -202,24 +219,4 @@ const showLastPageQuiz = (corrects = -1, data = null) => {
     $("#usernames-lead").append(user);
     index++;
   }
-};
-
-// send resaults of quiz to server
-const sendResultsToServer = (score, time) => {
-  let data = {
-    quizId: quizId,
-    userMail: localStorage.getItem("email"),
-    score: score,
-    timeInSeconds: time,
-    username: localStorage.getItem("authToken"),
-  };
-  localStorage.setItem(
-    "coins",
-    parseInt(localStorage.getItem("coins")) + score * 3
-  );
-  sendData(API_URL + "Quiz/save-score", data, end, end);
-};
-
-const end = (data) => {
-  console.log(data);
 };

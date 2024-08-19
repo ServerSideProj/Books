@@ -12,6 +12,7 @@
     />
     <link rel="stylesheet" href="../../styles/style-guide.css" />
     <link rel="stylesheet" href="../../styles/general.css" />
+    <link rel="stylesheet" href="../../components/Popup/popup.css" />
     <link rel="stylesheet" href="../../components/Navbar/navbar-desktop.css" />
     <link rel="stylesheet" href="../../components/Navbar/navbar-mobile.css" />
 
@@ -19,6 +20,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../services/constants.js"></script>
     <script src="../../services/ajax.js"></script>
+    <script src="../../components/Popup/popup.js"></script>
     <script src="../../services/auth.js" type="module"></script>
     <script src="../../components/Navbar/navbar.js" type="module"></script>
 
@@ -86,7 +88,7 @@
             <div id="total-time">Time: <span>00:00</span></div>
           </div>
           <p class="l-text purple-fade">
-            You’ve got <span class="add-coins">1</span> coins
+            You’ve got <span id="add-coins">0</span> coins
           </p>
           <div class="lead-board-container gap-1">
             <p class="big-text">Lead Board</p>

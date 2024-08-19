@@ -1,21 +1,23 @@
 var transactions = [];
 
 $(document).ready(function () {
-  fetchTransactions();
+  fetchTransactions(); // get all transactions
 });
 
+// get all transactions
 function fetchTransactions() {
   fetchData(
     API_URL +
       "Transaction/seller-transactions/" +
       localStorage.getItem("email"),
-    showTransaction,
-    ECB
+    renderTransactions,
+    onError
   );
 }
 
-const showTransaction = (data) => {
-  transactions = data;
+// render all transactions
+const renderTransactions = (transactions) => {
+  $(".container-cart-books").empty();
   transactions.forEach((transaction) => {
     const authorsList = transaction.authors
       .map((author) => author.name)
@@ -41,13 +43,26 @@ const showTransaction = (data) => {
               <div class="offer-coins xl-text purple-text">
                 <span>${transaction.coinsOffer}</span> coins
               </div>
-              <div class="btn btn-purple sm-text" onclick="acceptOffer(${transaction.transactionId}, ${transaction.coinsOffer})">Accept</div>
-              <div class="btn btn-grey-stroke sm-text" onclick="declineOffer(${transaction.transactionId})">Decline</div>
+              <div class="accept-btn btn btn-purple sm-text" data-transaction-id="${transaction.transactionId}" data-transaction-coins="${transaction.coinsOffer}">Accept</div>
+              <div class="decline-btn btn btn-grey-stroke sm-text" data-transaction-id="${transaction.transactionId}">Decline</div>
             </div>
           </div>
         `;
 
     $(".container-cart-books").append(bookHTML);
+  });
+
+  $(".accept-btn").on("click", (e) => {
+    var transactionId = $(e.target).data("transaction-id");
+    var transactionCoins = $(e.target).data("transaction-coins");
+
+    acceptOffer(transactionId, transactionCoins);
+  });
+
+  $(".decline-btn").on("click", (e) => {
+    var transactionId = $(e.target).data("transaction-id");
+
+    declineOffer(transactionId);
   });
 };
 
@@ -56,30 +71,29 @@ const acceptOffer = (transactionId, coins) => {
     "coins",
     parseInt(localStorage.getItem("coins")) + coins
   );
-  console.log(transactionId);
   sendData(
     API_URL + "Transaction/accept/" + transactionId,
-    () => refreshTransactionDiv(transactionId),
-    ECB
+    null, // No data
+    () => {
+      fetchTransactions();
+      // Play the payment sound effect
+      const audio = new Audio("../../assets/sounds/payment.mp3");
+      audio.play();
+      popupText("Congrats for selling your book!");
+    },
+    onError
   );
 };
 
 const declineOffer = (transactionId) => {
   sendData(
     API_URL + "Transaction/decline/" + transactionId,
-    () => refreshTransactionDiv(transactionId),
-    ECB
+    null, // No data
+    () => {
+      fetchTransactions();
+      const audio = new Audio("../../assets/sounds/whoosh-delete.mp3");
+      audio.play();
+    },
+    onError
   );
-};
-
-const refreshTransactionDiv = (transactionId) => {
-  // Remove only the specific transaction div
-  $(`#transaction-${transactionId}`).remove();
-
-  // Optionally, fetch the updated list of transactions
-  fetchTransactions();
-};
-
-const ECB = (error) => {
-  console.log(error);
 };

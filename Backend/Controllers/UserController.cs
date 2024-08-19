@@ -11,12 +11,25 @@ namespace Backend.Controllers
     public class UsersController : ControllerBase
     {
 
-        // GET api/users/usernames
-        [HttpGet("usernames")]
-        public ActionResult<List<string>> GetAllUsernames()
+        [HttpGet("usernamesAndEmails")]
+        public ActionResult<List<Dictionary<string, string>>> GetAllUsernamesAndEmails([FromQuery] string excludeEmail)
         {
-            List<string> usernames = Users.GetAllUsernames();
-            return Ok(usernames);
+            List<Dictionary<string, string>> users = Users.GetAllUsernamesAndEmails(excludeEmail);
+            return Ok(users);
+        }
+
+        [HttpGet("total-users-count")]
+        public IActionResult GetTotalUsersCount()
+        {
+            try
+            {
+                int totalUsers = Users.GetTotalUsersCount();
+                return Ok(new { TotalUsers = totalUsers });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Error = ex.Message });
+            }
         }
 
         // GET api/users
@@ -174,6 +187,26 @@ namespace Backend.Controllers
             // Return status code and the image link
             return Ok(new { ImageName = uniqueFileName });
         }
+
+        [HttpPost("createNewUser")]
+        public ActionResult CreateNewUser([FromBody] JsonElement newUser)
+        {
+            try
+            {
+                string username = newUser.GetProperty("Username").GetString();
+                string email = newUser.GetProperty("Email").GetString();
+                string password = newUser.GetProperty("Password").GetString();
+                int coins = newUser.GetProperty("Coins").GetInt32();
+
+                Users.CreateNewUser(username, email, password, coins);
+                return Ok(new { Message = "User created successfully." });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Error = ex.Message });
+            }
+        }
+
 
         // PUT api/users/changePassword
         [HttpPut("changePassword")]

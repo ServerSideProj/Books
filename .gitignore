@@ -189,3 +189,32 @@ Backend/obj/Debug/net6.0/Backend.AssemblyInfoInputs.cache
 Backend/obj/Debug/net6.0/Backend.assets.cache
 Backend/obj/Debug/net6.0/Backend.csproj.AssemblyReference.cache
 Backend/obj/Debug/net6.0/Backend.csproj.CoreCompileInputs.cache
+
+
+# Ignore build outputs and intermediate files -- hila
+Backend/bin/
+Backend/obj/
+
+# Ignore Visual Studio-related files
+Backend/.vs/
+
+# Ignore specific files from the screenshot
+Backend/bin/Debug/net6.0/Backend.deps.json
+Backend/bin/Debug/net6.0/Backend.dll
+Backend/bin/Debug/net6.0/Backend.pdb
+Backend/bin/Debug/net6.0/Backend.exe
+
+Backend/obj/Backend.csproj.nuget.dgspec.json
+Backend/obj/Debug/net6.0/Backend.GeneratedMSBuildEditorConfig.editorconfig
+Backend/obj/Debug/net6.0/Backend.GeneratedMSBuildEditorConfig.editorconfig
+Backend/obj/Debug/net6.0/Backend.AssemblyInfoInputs.cache
+Backend/obj/Debug/net6.0/Backend.AssemblyInfo.cs
+Backend/obj/Debug/net6.0/Backend.assets.cache
+Backend/obj/Debug/net6.0/Backend.csproj.AssemblyReference.cache
+Backend/obj/Debug/net6.0/apphost.exe
+Backend/obj/Debug/net6.0/Backend.csproj.CoreCompileInputs.cache
+
+# Ignore Visual Studio temporary files
+Backend/.vs/Backend/v17/DocumentLayout.json
+Backend/.vs/Backend/v17/.suo
+Backend/.vs/Backend/DesignTimeBuild/.dtbcache.v2

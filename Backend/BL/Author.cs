@@ -14,6 +14,9 @@ namespace Backend.BL
 
         private static readonly DBauthor dbAuthor = new DBauthor();
 
+        public Author()
+        {
+        }
 
         public Author(int id, string name, string biography, string wikiLink, string pictureUrl)
         {
@@ -62,6 +65,11 @@ namespace Backend.BL
         public static IEnumerable<object> GetAuthorWithBookCount()
         {
             return dbAuthor.GetAuthorWithBookCount();
+        }
+
+        public static int GetTotalAuthorsCount()
+        {
+            return dbAuthor.GetTotalAuthorsCount();
         }
 
     }

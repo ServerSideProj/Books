@@ -23,6 +23,20 @@ namespace Backend.Controllers
             }
         }
 
+        [HttpGet("total-authors-count")]
+        public IActionResult GetTotalAuthorsCount()
+        {
+            try
+            {
+                int totalAuthors = Author.GetTotalAuthorsCount();
+                return Ok(new { TotalAuthors = totalAuthors });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Error = ex.Message });
+            }
+        }
+
         [HttpGet("{id}")]
         public ActionResult<Book> GetAuthorById(int id)
         {

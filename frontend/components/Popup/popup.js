@@ -586,6 +586,7 @@ const popupText = (text) => {
         </div>`;
 
   $(".bg-dark").empty();
+  $(".bg-dark").addClass("open");
   $(".bg-dark").append(popup);
   $("#popup-text").addClass("open");
 
@@ -597,4 +598,269 @@ const popupText = (text) => {
     $(".bg-dark").empty();
     $(".bg-dark").removeClass("open");
   });
+};
+
+// helper function
+const searchForUsers = () => {
+  const email = localStorage.getItem("email");
+  fetchData(
+    API_URL + `Users/usernamesAndEmails?excludeEmail=${email}`,
+    (users) => {
+      renderUsers(users);
+
+      // Add search functionality
+      $(".search-container input").on("input", function () {
+        const searchTerm = $(this).val().toLowerCase();
+        const filteredUsers = users.filter((user) =>
+          user.Username.toLowerCase().includes(searchTerm)
+        );
+        renderUsers(filteredUsers);
+      });
+    },
+    onError
+  );
+
+  const popup = `
+  <div id="popup-users" class="popup-container gap-2">
+       <img src="../../assets/icons/X.svg" class="btn-x" />
+       <div class="container-flex-col gap-03 center width100">
+         <p class="xl-text"> Search for a user
+         </p>
+         <div class="search-container">
+           <input type="text" placeholder="Enter username" />
+           <img src="../../assets/icons/search-icon.svg" alt="search-icon" />
+         </div>
+       </div>
+       <div class="container-users">
+       </div>
+  </div>`;
+
+  $(".bg-dark").addClass("open");
+  $(".bg-dark").append(popup);
+  $("#popup-users").addClass("open");
+
+  // Remove previous event listeners
+  $(".btn-x").off("click");
+
+  // Add event listener to the "btn-x" to close the popup
+  $(".btn-x").on("click", () => {
+    $(".bg-dark").empty();
+    $(".bg-dark").removeClass("open");
+  });
+};
+
+// helper function
+const renderUsers = (users) => {
+  const usersContainer = $(".container-users");
+  usersContainer.empty(); // Clear any existing content
+
+  // Create user cards
+  users.forEach((user) => {
+    const userCard = `
+      <div class="user-wrapper" data-email="${user.Email}">
+        <div class="container-flex center-hor gap-1"><img src="${
+          user.profileImage || "../../assets/images/user-profile-image.svg"
+        }" alt="profile image" class="user-profile-img" />
+        <p class="user-name">${user.Username}</p></div>
+        <img src="../../assets/icons/Arrow right pink.svg"/>
+      </div>`;
+    usersContainer.append(userCard);
+  });
+
+  // Add click event to each user card
+  $(".user-wrapper").on("click", function () {
+    const userEmail = $(this).data("email");
+    sessionStorage.setItem("friendEmail", userEmail);
+    window.location.href = "/pages/otherUserProfile";
+  });
+};
+
+const popupCreateUser = () => {
+  const popup = `
+  <div id="popup-create-user" class="popup-container gap-2">
+      <img src="../../assets/icons/X.svg" class="btn-x" />
+      <p class="xxl-text">Add a New User</p>
+      <div class="container-flex-col center gap-1">
+         <form class="form-login">
+          <input type="text" placeholder="User name" class="input-box-sqr" required/>
+          <input type="email" placeholder="Email" class="input-box-sqr" required/>
+          <input
+            type="password"
+            placeholder="Password"
+            class="input-box-sqr xsm-text" required
+          />
+          <input type="number" placeholder="Coins" class="input-box-sqr" required/>
+          <input
+            id="create-new-user"
+            class="btn btn-gradient btn-signup-nav sm-text"
+            type="submit"
+            value="Create user"
+          />
+        </form>
+      </div>
+    </div>
+  `;
+  $(".bg-dark").append(popup);
+  $(".bg-dark").addClass("open");
+  $("#popup-create-user").addClass("open");
+
+  // Remove previous event listeners
+  $(".btn-x").off("click");
+
+  // Add event listener to the "btn-x" to close the nav slide
+  $(".btn-x").on("click", () => {
+    $(".bg-dark").empty();
+    $(".bg-dark").removeClass("open");
+  });
+
+  $("#create-new-user").on("click", (e) => {
+    e.preventDefault();
+    const username = $('.form-login input[type="text"]').val();
+    const email = $('.form-login input[type="email"]').val();
+    const password = $('.form-login input[type="password"]').eq(0).val();
+    let coins = $('.form-login input[type="number"]').val();
+    if (coins == NaN || coins == "" || coins < 0) coins = 0;
+
+    if (validateUserInputs(username, email, password, coins)) {
+      handleCreateNewUser(username, email, password, coins);
+    } else {
+      console.log("Validation failed.");
+    }
+  });
+};
+
+const popupCreateAuthor = () => {
+  const popup = `
+  <div id="popup-create-user" class="popup-container gap-2">
+      <img src="../../assets/icons/X.svg" class="btn-x" />
+      <p class="xxl-text">Add a New Author</p>
+      <div class="container-flex-col center gap-1">
+         <form class="form-login">
+            <input type="text" name="name" placeholder="Author Name" class="input-box-sqr name" required />
+            <textarea name="biography" placeholder="Biography" class="input-box-sqr" rows="4"></textarea>
+            <input type="text" name="wikiLink" placeholder="Wiki Link" class="input-box-sqr" />
+            <input type="text" name="pictureUrl" placeholder="Picture URL" class="input-box-sqr"/>
+          <input
+            id="create-new-author"
+            class="btn btn-gradient btn-signup-nav sm-text"
+            type="submit"
+            value="Create Author"
+          />
+        </form>
+      </div>
+    </div>
+  `;
+
+  $(".bg-dark").append(popup);
+  $(".bg-dark").addClass("open");
+  $("#popup-create-user").addClass("open");
+
+  // Remove previous event listeners
+  $(".btn-x").off("click");
+
+  // Add event listener to the "btn-x" to close the nav slide
+  $(".btn-x").on("click", () => {
+    $(".bg-dark").empty();
+    $(".bg-dark").removeClass("open");
+  });
+
+  $("#create-new-author").on("click", (e) => {
+    e.preventDefault();
+    const name = $('.form-login input[name="name"]').val();
+    const biography = $('.form-login textarea[name="biography"]').val();
+    const wikiLink = $('.form-login input[name="wikiLink"]').val();
+    const pictureUrl = $('.form-login input[name="pictureUrl"]').val();
+
+    if (validateAuthorInputs(name, biography, wikiLink, pictureUrl)) {
+      handleCreateNewAuthor(name, biography, wikiLink, pictureUrl);
+    } else {
+      console.log("Validation failed.");
+    }
+  });
+};
+
+// helper function for popup create author
+const validateAuthorInputs = (name, wikiLink, pictureUrl) => {
+  let isValid = true;
+
+  // Regex for URL validation
+  const urlRegex = /^(https?:\/\/)?([\w\-]+\.)+[\w\-]+(\/[\w\-]*)*\/?$/;
+  const nameRegex = /^[a-zA-Z\s]+$/; // Only letters and spaces for the name
+  const bioMinLength = 10; // Biography should have at least 10 characters
+
+  // Validate name (must contain only letters and spaces)
+  if (!name || !nameRegex.test(name)) {
+    isValid = false;
+    $('.form-login input[name="name"]').addClass("input-error");
+  }
+
+  // Validate wikiLink (must be a valid URL)
+  if (wikiLink && !urlRegex.test(wikiLink)) {
+    isValid = false;
+    $('.form-login input[name="wikiLink"]').addClass("input-error");
+  }
+
+  // Validate pictureUrl (must be a valid URL)
+  if (pictureUrl && !urlRegex.test(pictureUrl)) {
+    isValid = false;
+    $('.form-login input[name="pictureUrl"]').addClass("input-error");
+  }
+
+  // Remove the error class after a delay
+  setTimeout(() => {
+    $('.form-login input[name="name"]').removeClass("input-error");
+    $('.form-login textarea[name="biography"]').removeClass("input-error");
+    $('.form-login input[name="wikiLink"]').removeClass("input-error");
+    $('.form-login input[name="pictureUrl"]').removeClass("input-error");
+  }, 2000);
+
+  return isValid;
+};
+
+// helper function for popup create user
+const validateUserInputs = (username, email, password, coins) => {
+  let isValid = true;
+
+  // Regex for Email validation
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  // Regex for Username validation (letters, numbers, underscores, and spaces)
+  const usernameRegex = /^[a-zA-Z0-9_ ]+$/;
+  // Password minimum length
+  const passwordMinLength = 3;
+  // Coins should be a positive number
+  const coinsMinValue = 0;
+
+  // Validate username (must contain only letters, numbers, underscores, and spaces)
+  if (!username || !usernameRegex.test(username)) {
+    isValid = false;
+    $('.form-login input[placeholder="User name"]').addClass("input-error");
+  }
+
+  // Validate email (must be a valid email address)
+  if (!email || !emailRegex.test(email)) {
+    isValid = false;
+    $('.form-login input[placeholder="Email"]').addClass("input-error");
+  }
+
+  // Validate password (must be at least a certain length)
+  if (!password || password.length < passwordMinLength) {
+    isValid = false;
+    $('.form-login input[placeholder="Password"]').addClass("input-error");
+  }
+
+  // Validate coins (must be a number greater than or equal to 0)
+  if (isNaN(coins) || coins < coinsMinValue) {
+    isValid = false;
+    $('.form-login input[placeholder="Coins"]').addClass("input-error");
+  }
+
+  // Remove the error class after a delay
+  setTimeout(() => {
+    $('.form-login input[placeholder="User name"]').removeClass("input-error");
+    $('.form-login input[placeholder="Email"]').removeClass("input-error");
+    $('.form-login input[placeholder="Password"]').removeClass("input-error");
+    $('.form-login input[placeholder="Coins"]').removeClass("input-error");
+  }, 2000);
+
+  return isValid;
 };

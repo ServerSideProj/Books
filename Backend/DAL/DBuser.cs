@@ -80,24 +80,32 @@ namespace Backend.DAL
             }
         }
 
-        public List<string> GetAllUsernames()
+
+        public List<Dictionary<string, string>> GetAllUsernamesAndEmails(string excludeEmail)
         {
             using (SqlConnection con = connect("myProjDB"))
             {
-                SqlCommand cmd = new SqlCommand("sp_getAllUsernames", con);
+                SqlCommand cmd = new SqlCommand("sp_getAllUsernamesAndEmails", con);
                 cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@ExcludeEmail", excludeEmail);
 
-                List<string> usernames = new List<string>();
+                List<Dictionary<string, string>> users = new List<Dictionary<string, string>>();
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        usernames.Add(reader["username"].ToString());
+                        var user = new Dictionary<string, string>
+                {
+                    { "Username", reader["username"].ToString() },
+                    { "Email", reader["email"].ToString() },
+                    { "profileImage", reader["profileImage"].ToString() }
+                };
+                        users.Add(user);
                     }
                 }
 
-                return usernames;
+                return users;
             }
         }
 
@@ -323,5 +331,31 @@ namespace Backend.DAL
             return topScores;
         }
 
+        public void CreateNewUser(string username, string email, string password, int coins)
+        {
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                SqlCommand cmd = new SqlCommand("sp_createNewUser", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@Username", username);
+                cmd.Parameters.AddWithValue("@Email", email);
+                cmd.Parameters.AddWithValue("@Password", password);
+                cmd.Parameters.AddWithValue("@Coins", coins);
+
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public int GetTotalUsersCount()
+        {
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                SqlCommand cmd = new SqlCommand("sp_GetTotalUsersCount", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                return (int)cmd.ExecuteScalar();
+            }
+        }
     }
 }

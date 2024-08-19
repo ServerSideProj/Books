@@ -896,26 +896,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ranme\\.nuget\\packages\\": {}
+    "/Users/hilatsivion/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ranme\\OneDrive\\Desktop\\Books\\Backend\\Backend.csproj",
+      "projectUniqueName": "/Users/hilatsivion/Documents/GitHub/Books/Backend/Backend.csproj",
       "projectName": "Backend",
-      "projectPath": "C:\\Users\\ranme\\OneDrive\\Desktop\\Books\\Backend\\Backend.csproj",
-      "packagesPath": "C:\\Users\\ranme\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ranme\\OneDrive\\Desktop\\Books\\Backend\\obj\\",
+      "projectPath": "/Users/hilatsivion/Documents/GitHub/Books/Backend/Backend.csproj",
+      "packagesPath": "/Users/hilatsivion/.nuget/packages/",
+      "outputPath": "/Users/hilatsivion/Documents/GitHub/Books/Backend/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\ranme\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/hilatsivion/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "/usr/local/share/dotnet/sdk/7.0.316/Sdks/Microsoft.NET.Sdk.Web/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -928,11 +927,6 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "true",
-        "auditLevel": "low",
-        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -967,7 +961,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.316/RuntimeIdentifierGraph.json"
       }
     }
   }

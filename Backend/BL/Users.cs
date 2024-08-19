@@ -1,4 +1,5 @@
 ﻿using Backend.DAL;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
 namespace Backend.BL
@@ -43,9 +44,9 @@ namespace Backend.BL
             dbUser.UpdateUserProfileImage(email, profileImageLink);
         }
 
-        public static List<string> GetAllUsernames()
+        public static List<Dictionary<string, string>> GetAllUsernamesAndEmails(string excludeEmail)
         {
-            return dbUser.GetAllUsernames();
+            return dbUser.GetAllUsernamesAndEmails(excludeEmail);
         }
 
         public static List<Users> GetAllUsers()
@@ -83,5 +84,16 @@ namespace Backend.BL
             Quiz.GetCurrentQuizId();
             return dbUser.GetTop5UserScores(Quiz.CurrentQuizId);
         }
+
+        public static void CreateNewUser(string username, string email, string password, int coins)
+        {
+            dbUser.CreateNewUser(username, email, password, coins);
+        }
+
+        public static int GetTotalUsersCount()
+        {
+            return dbUser.GetTotalUsersCount();
+        }
+
     }
 }

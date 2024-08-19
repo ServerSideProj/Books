@@ -9,6 +9,7 @@ $(document).ready(function () {
     } else {
       generateDesktopNavbar(isLoggedIn);
     }
+    checkForNotification();
   }
 
   // Initial check
@@ -18,6 +19,7 @@ $(document).ready(function () {
   $(window).resize(function () {
     updateNavbar();
   });
+  $(".search-nav-icon").on("click", searchForUsers);
 
   $(".logout").on("click", logout);
 });
@@ -31,6 +33,7 @@ const generateDesktopNavbar = (isLoggedIn) => {
       const adminNav = `<div class="navbar-desktop">
     <div class="container-full-space">
       <a href="/pages/bookstore" class="sm-text">Bookstore</a>
+      <img src="../../assets/icons/Search-pink.svg" alt="search" class="search-nav-icon icon">
     </div>
     <div class="logo-container">
       <a href="/pages/home"
@@ -62,8 +65,12 @@ const generateDesktopNavbar = (isLoggedIn) => {
         <div class="container-full-space">
            <a href="/pages/Cart"><img src="../../assets/icons/Shopping cart.svg" alt="Shopping Cart" class="cart-icon icon"></a>
            <a href="/pages/UserProfile/index.html?section=liked"><img src="../../assets/icons/heart.svg" alt="heart" class="heart-icon icon"></a>
+           <img src="../../assets/icons/Search-pink.svg" alt="search" class="search-nav-icon icon">
           <a href="/pages/bookstore" class="sm-text">Bookstore</a>
+          <div class="container-flex">
           <a href="/pages/notifications" class="sm-text">Notifications</a>
+          <div class="notify-circle"></div>
+          </div>
         </div>
         <div class="logo-container">
           <a href="/pages/home"><img src="../../assets/logo/logo-nav.svg" alt="logo" class="logo-nav"></a>
@@ -88,6 +95,7 @@ const generateDesktopNavbar = (isLoggedIn) => {
       <div class="navbar-desktop">
         <div class="container-full-space">
           <a href="/pages/bookstore" class="sm-text">Bookstore</a>
+          <img src="../../assets/icons/Search-pink.svg" alt="search" class="search-nav-icon icon">
         </div>
         <div class="logo-container">
           <a href="/pages/home"><img src="../../assets/logo/logo-nav.svg" alt="logo" class="logo-nav"></a>
@@ -115,18 +123,21 @@ const generateMobileNavbar = (isLoggedIn) => {
         <img src="../../assets/logo/logo-nav.svg" alt="logo" class="logo-nav" />
         </a>
       </div>
-      <div class="hamburger-container">
-        <img
-          src="../../assets/icons/hamburger.svg"
-          alt="hamburger"
-          class="hamburger"
-        />
+      <div class="container-flex align-items-start">
+        <div class="hamburger-container">
+          <img
+            src="../../assets/icons/hamburger.svg"
+            alt="hamburger"
+            class="hamburger"
+          />
+        </div>
       </div>
     </div>`;
       const adminNav = `
       <div class="navbar-desktop">
     <div class="container-full-space">
       <a href="/pages/bookstore" class="sm-text">Bookstore</a>
+      <img src="../../assets/icons/Search-pink.svg" alt="search" class="search-nav-icon icon">
     </div>
     <div class="logo-container">
       <a href="/pages/home"
@@ -159,12 +170,15 @@ const generateMobileNavbar = (isLoggedIn) => {
         <img src="../../assets/logo/logo-nav.svg" alt="logo" class="logo-nav" />
         </a>
       </div>
-      <div class="hamburger-container">
-        <img
-          src="../../assets/icons/hamburger.svg"
-          alt="hamburger"
-          class="hamburger"
-        />
+      <div class="container-flex align-items-start">
+        <img src="../../assets/icons/Search-pink.svg" alt="search" class="search-nav-icon icon">
+        <div class="hamburger-container">
+          <img
+            src="../../assets/icons/hamburger.svg"
+            alt="hamburger"
+            class="hamburger"
+          />
+        </div>
       </div>
     </div>`;
       const navSlideLogged = `<div class="nav-slide">
@@ -208,13 +222,16 @@ const generateMobileNavbar = (isLoggedIn) => {
       <img src="../../assets/logo/logo-nav.svg" alt="logo" class="logo-nav" />
       </a>
     </div>
-    <div class="hamburger-container">
-      <img
-        src="../../assets/icons/hamburger.svg"
-        alt="hamburger"
-        class="hamburger"
-      />
-    </div>
+    <div class="container-flex align-items-start">
+        <img src="../../assets/icons/Search-pink.svg" alt="search" class="search-nav-icon icon">
+        <div class="hamburger-container">
+          <img
+            src="../../assets/icons/hamburger.svg"
+            alt="hamburger"
+            class="hamburger"
+          />
+        </div>
+      </div>
   </div>`;
     const navSlideNotLogged = `<div class="nav-slide">
     <img src="../../assets/icons/X.svg" class="btn-x">
@@ -256,4 +273,18 @@ const generateMobileNavbar = (isLoggedIn) => {
   $(".btn-x").on("click", () => {
     $(".nav-slide").removeClass("open");
   });
+};
+
+// add a little circle near to the "notification" in the nav in case the user have any notification.
+const checkForNotification = () => {
+  fetchData(
+    API_URL +
+      "Transaction/seller-transactions/" +
+      localStorage.getItem("email"),
+    (data) => {
+      if (data.length > 0) $(".notify-circle").addClass("show");
+      else $(".notify-circle").removeClass("show");
+    },
+    onError
+  );
 };

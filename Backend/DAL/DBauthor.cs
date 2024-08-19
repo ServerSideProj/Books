@@ -15,12 +15,22 @@ namespace Backend.DAL
                 SqlCommand cmd = new SqlCommand("sp_AddAuthor", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
+                // Add input parameters
                 cmd.Parameters.AddWithValue("@Name", author.Name);
-                cmd.Parameters.AddWithValue("@Biography", author.Biography);
-                cmd.Parameters.AddWithValue("@WikiLink", author.WikiLink);
-                cmd.Parameters.AddWithValue("@PictureUrl", author.PictureUrl); 
+                cmd.Parameters.AddWithValue("@Biography", string.IsNullOrEmpty(author.Biography) ? DBNull.Value : (object)author.Biography);
+                cmd.Parameters.AddWithValue("@WikiLink", string.IsNullOrEmpty(author.WikiLink) ? DBNull.Value : (object)author.WikiLink);
+                cmd.Parameters.AddWithValue("@PictureUrl", string.IsNullOrEmpty(author.PictureUrl) ? DBNull.Value : (object)author.PictureUrl);
 
-                cmd.ExecuteNonQuery();
+                // Add output parameter
+                SqlParameter outputIdParam = new SqlParameter("@AuthorID", SqlDbType.Int)
+                {
+                    Direction = ParameterDirection.Output
+                };
+                cmd.Parameters.Add(outputIdParam);
+
+                cmd.ExecuteNonQuery(); 
+
+                int authorId = (int)outputIdParam.Value;
             }
         }
 
@@ -109,6 +119,17 @@ namespace Backend.DAL
                 }
 
                 return authors;
+            }
+        }
+
+        public int GetTotalAuthorsCount()
+        {
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                SqlCommand cmd = new SqlCommand("sp_GetTotalAuthorsCount", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                return (int)cmd.ExecuteScalar();
             }
         }
 

@@ -42,17 +42,36 @@
             </p>
           </div>
           <form class="form-login">
-            <input type="text" placeholder="User name" class="input-box-sqr" />
-            <input type="email" placeholder="Email" class="input-box-sqr" />
+            <input
+              type="text"
+              placeholder="User name"
+              class="input-box-sqr"
+              minlength="3"
+              required
+              title="Username must be at least 3 characters long."
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              class="input-box-sqr"
+              pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
+              required
+              title="Please enter a valid email address."
+            />
             <input
               type="password"
               placeholder="Password"
               class="input-box-sqr xsm-text"
+              minlength="3"
+              required
+              title="Password must be at least 3 characters long."
             />
             <input
               type="password"
               placeholder="Confirm Password"
               class="input-box-sqr xsm-text"
+              required
+              title="Passwords do not match."
             />
             <p class="xsm-text purple-fade font-reg">
               Already registered?

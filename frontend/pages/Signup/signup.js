@@ -1,35 +1,41 @@
-import { register } from '../../services/auth.js';
+import { register } from "../../services/auth.js";
 
-$(document).ready(function() {
-    $('.form-login').on('submit', function(event) {
-        event.preventDefault();
+$(document).ready(function () {
+  $(".form-login").on("submit", function (event) {
+    event.preventDefault();
 
-        const username = $('.form-login input[type="text"]').val();
-        const email = $('.form-login input[type="email"]').val();
-        const password = $('.form-login input[type="password"]').eq(0).val();
-        const confirmPassword = $('.form-login input[type="password"]').eq(1).val();
+    const usernameInput = $('.form-login input[type="text"]');
+    const emailInput = $('.form-login input[type="email"]');
+    const passwordInput = $('.form-login input[type="password"]').eq(0);
+    const confirmPasswordInput = $('.form-login input[type="password"]').eq(1);
 
-        // Simple validation for password match
-        if (password !== confirmPassword) {
-            alert("Passwords do not match.");
-            return;
+    const username = usernameInput.val().trim();
+    const email = emailInput.val().trim();
+    const password = passwordInput.val();
+    const confirmPassword = confirmPasswordInput.val();
+
+    // Password match validation
+    if (password != confirmPassword) {
+      confirmPasswordInput[0].setCustomValidity("Passwords do not match.");
+      confirmPasswordInput[0].reportValidity();
+      return;
+    } else {
+      confirmPasswordInput[0].setCustomValidity(""); // Clear any previous errors
+    }
+
+    // If the form is valid, proceed with registration
+    register(username, password, email)
+      .then((success) => {
+        if (success) {
+          console.log("Registration successful");
+          window.location.href = "/pages/Home/";
+        } else {
+          alert("Registration failed.");
         }
-
-        // Call the register function
-        register(username, password, email)
-            .then(success => {
-                if (success) {
-                    console.log('Registration successful');
-                    // Redirect to login or home page
-                    window.location.href = '/pages/Home/';
-                } else {
-                    console.log('Registration failed');
-                    // Optionally, show an error message to the user
-                }
-            })
-            .catch(error => {
-                console.error('Error during registration:', error);
-                // Optionally, show an error message to the user
-            });
-    });
+      })
+      .catch((error) => {
+        console.error("Error during registration:", error);
+        alert("An error occurred during registration. Please try again.");
+      });
+  });
 });

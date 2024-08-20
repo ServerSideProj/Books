@@ -37,7 +37,7 @@
       <div class="hero-game">
         <p class="huge-text nowrap-tx">BookBlender</p>
         <div class="container-flex-col center opening">
-          <p class="xl-text purple-fade">
+          <p class="xl-text purple-fade text-center">
             Pick two books and let AI fuse them into a brand-new tale!
           </p>
         </div>
@@ -61,16 +61,10 @@
               </p>
             </div>
           </div>
-          <div class="custom-select">
-            <select
-              id="language"
-              name="language"
-              class="input-box-sqr dropdown"
-            >
-              <option value="">Loading...</option>
-              <!-- add all the books titles -->
-            </select>
-          </div>
+          <select id="book1" name="book1" class="input-box-sqr dropdown">
+            <option value="">Loading...</option>
+            <!-- add all the books titles -->
+          </select>
         </div>
         <div class="container-flex-col center-hor gap-1">
           <div id="book-2" class="book-card">
@@ -90,7 +84,7 @@
               </p>
             </div>
           </div>
-          <select id="language" name="language" class="input-box-sqr dropdown">
+          <select id="book2" name="book2" class="input-box-sqr dropdown">
             <option value="">Loading...</option>
             <!-- add all the books titles -->
           </select>

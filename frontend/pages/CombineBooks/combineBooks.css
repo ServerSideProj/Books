@@ -91,3 +91,21 @@
   padding: 0.4rem 3rem;
   margin-top: 4rem;
 }
+
+@media screen and (max-width: 768px) {
+  .main {
+    padding: 6rem 1rem 1rem 1rem;
+  }
+
+  .book-card {
+    width: 140px;
+    height: fit-content;
+  }
+  .container-books {
+    gap: 2rem;
+  }
+  .input-box-sqr {
+    font-size: 0.7rem;
+    min-height: 2rem;
+  }
+}

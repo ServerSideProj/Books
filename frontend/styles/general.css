@@ -228,6 +228,16 @@ img {
   display: none;
 }
 
+.star-icon {
+  height: 18px;
+  position: relative;
+  margin: 0px 2px;
+}
+
+.extra-details-card .star-icon {
+  bottom: 1px;
+}
+
 /* Loader styles */
 .bg-loader {
   width: 100vw;

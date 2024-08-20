@@ -3,6 +3,8 @@ var innerPage = "all-books";
 var allUserBooks = [];
 var likedBooks = [];
 
+var userRating = 0;
+
 $(document).ready(function () {
   if (!isLoggedIn) {
     window.location.href = "/pages/NotFound/";
@@ -202,4 +204,71 @@ const isForSaleStatus = (data, response) => {
     allUserBooks[bookIndex].isForSale = data.isForSale;
   }
   renderCurrentPage();
+};
+
+// create the start picking for the review for a purchased book
+const createStarPicker = () => {
+  userRating = 0;
+  const starsContainer = $(".stars");
+  starsContainer.empty();
+
+  // Create 5 clickable stars
+  for (let i = 1; i <= 5; i++) {
+    starsContainer.append(
+      `<img src="../../assets/icons/star-empty.svg" alt="star" class="star-icon" data-value="${i}" />`
+    );
+  }
+
+  // Handle star click event
+  $(".star-icon").on("click", function () {
+    const selectedRating = $(this).data("value");
+    userRating = selectedRating; // Update the user's rating
+
+    // Update the stars display based on the selected rating
+    updateStarPicker(userRating);
+  });
+};
+
+// update the amount of stars
+const updateStarPicker = (rating) => {
+  $(".star-icon").each(function (index) {
+    const starIndex = index + 1;
+    const starImage =
+      starIndex <= rating
+        ? "../../assets/icons/star-full.svg"
+        : "../../assets/icons/star-empty.svg";
+    $(this).attr("src", starImage);
+  });
+};
+
+const handleSendReview = (bookId) => {
+  let email = localStorage.getItem("email");
+  let text = $("#review-text")[0].value;
+
+  const reviewData = {
+    reviewNum: 0, // Not relevant
+    bookId: bookId,
+    reviewText: text,
+    email: email,
+    rating: userRating,
+    username: "", // Not relevant
+    profileImage: "", // Not relevant
+  };
+
+  $.ajax({
+    url: `${API_URL}Book/review`,
+    type: "POST",
+    contentType: "application/json",
+    data: JSON.stringify(reviewData),
+    success: function (response) {
+      alert("Review submitted successfully.");
+    },
+    error: function (error) {
+      if (error.status === 400) {
+        popupText("You have already submitted a review for this book.");
+      } else {
+        alert("An error occurred while submitting your review.");
+      }
+    },
+  });
 };

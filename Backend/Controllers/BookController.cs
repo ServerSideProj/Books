@@ -130,6 +130,21 @@ namespace Backend.Controllers
             return Ok(likedBooks);
         }
 
+        [HttpGet("review/existence")]
+        public ActionResult CheckReviewExistence(int bookId, string email)
+        {
+            try
+            {
+                bool reviewExists = Book.ReviewExists(bookId, email);
+                return Ok(reviewExists);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error.");
+            }
+        }
+
+
         [HttpGet("get-all-books-admin")]
         public ActionResult<List<Dictionary<string, object>>> GetAllBooksAdmin()
         {
@@ -169,8 +184,22 @@ namespace Backend.Controllers
         [HttpPost("review")]
         public ActionResult AddReview([FromBody] Review review)
         {
-            Book.AddReview(review.BookId, review.Email, review.ReviewText, review.Rating); 
-            return Ok("Review added successfully.");
+            try
+            {
+                Book.AddReview(review.BookId, review.Email, review.ReviewText, review.Rating);
+                return Ok("Review added successfully.");
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message == "User has already submitted a review for this book.")
+                {
+                    return BadRequest(ex.Message);
+                }
+                else
+                {
+                    return StatusCode(500, "Internal server error.");
+                }
+            }
         }
 
         [HttpPost("add-books")]

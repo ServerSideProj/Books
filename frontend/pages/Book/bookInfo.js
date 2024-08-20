@@ -121,10 +121,29 @@ const displayBookData = (book) => {
   $("#num-of-rates").text(book.ratingCount);
 
   // Update the stars display
-  const stars =
-    "★".repeat(Math.round(book.avgRating)) +
-    "☆".repeat(5 - Math.round(book.avgRating));
-  $(".stars-container").text(stars);
+  const starsContainer = $(".stars-container");
+  starsContainer.empty(); // Clear any existing stars
+
+  // Loop through 5 star positions
+  for (let i = 1; i <= 5; i++) {
+    let starImage;
+
+    if (i <= Math.floor(book.avgRating)) {
+      // Full star
+      starImage = "../../assets/icons/star-full.svg";
+    } else if (i === Math.ceil(book.avgRating) && book.avgRating % 1 !== 0) {
+      // Half star
+      starImage = "../../assets/icons/star-half.svg";
+    } else {
+      // Empty star
+      starImage = "../../assets/icons/star-empty.svg";
+    }
+
+    // Create the img element and append it to the container
+    starsContainer.append(
+      `<img src="${starImage}" alt="star" class="star-icon" />`
+    );
+  }
 
   // Update the languages
   $("#languages").text(book.language);
@@ -155,7 +174,7 @@ const displayReviews = (reviews) => {
     let profileImage =
       reviews[i].profileImage || "../../assets/images/user-profile-image.svg";
     let username = reviews[i].username || "Anonymous";
-
+    console.log(reviews);
     let reviewCard = `
       <div class="review-card">
               <p class="sm-text text-center font-reg">${reviews[i].reviewText}</p>

@@ -242,13 +242,13 @@ const popupBookInfo = (book) => {
           </div>
         </div>
         ${saleSection}
-        <div class="container-flex-col gap-1 width100">
+        <div class="container-flex-col gap-1 width100 review-container">
           <div class="row-bot-line no-line padding-0">
             <p class="xl-text">Write a review</p>
-            <div class="stars">*****</div>
+            <div class="stars"></div>
           </div>
-          <textarea class="input-box-sqr"></textarea>
-          <div class="btn btn-gradient">Send</div>
+          <textarea id="review-text" class="input-box-sqr"></textarea>
+          <div id="send-review-btn" class="btn btn-gradient">Send</div>
         </div>
       </div>
     </div>
@@ -308,10 +308,12 @@ const popupBookInfo = (book) => {
     });
   });
 
-  // Event handler for the "Fone" toggle bookmark
+  // Event handler for the "Done" toggle bookmark
   $(".switch-btn.done").on("click", function () {
     $(this).toggleClass("checked");
     let finishedReading = $(this).hasClass("checked");
+
+    if (finishedReading) confetti();
 
     // Prepare the data to be sent to the server
     let data = {
@@ -338,6 +340,20 @@ const popupBookInfo = (book) => {
       error: onError,
     });
   });
+  let email = localStorage.getItem("email");
+  fetchData(
+    `${API_URL}Book/review/existence?bookId=${book.id}&email=${email}`,
+    (res) => {
+      if (res === true) {
+        $(".review-container").css("opacity", "40%");
+        $(".review-container").css("pointer-events", "none");
+      }
+    }
+  );
+
+  createStarPicker();
+  // Handle sending the review
+  $("#send-review-btn").on("click", () => handleSendReview(book.id));
 };
 
 // page: other-user-profile

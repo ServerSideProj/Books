@@ -11,6 +11,14 @@ $(document).ready(function () {
     onError
   );
 
+  fetchData(
+    API_URL + "User/username" + encodeURIComponent(userEmail),
+    (res) => {
+      $("#username").text(res.username);
+    },
+    onError
+  );
+
   $(".oval-btn").click(function () {
     // Remove 'selected' class from all buttons
     $(".oval-btn").removeClass("selected");

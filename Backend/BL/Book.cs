@@ -138,6 +138,11 @@ namespace Backend.BL
             dbBook.AddReview(bookId, email, reviewText, rating);
         }
 
+        public static bool ReviewExists(int bookId, string email)
+        {
+            return dbBook.ReviewExists(bookId, email);
+        }
+
         public static void AddBooks(List<Book> books)
         {
             dbBook.AddBooks(books);

@@ -141,7 +141,8 @@
 }
 
 .stars-container {
-  padding: 10px;
+  padding: 0px 10px;
+  display: flex;
 }
 
 .see-more,

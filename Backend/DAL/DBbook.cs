@@ -192,20 +192,55 @@ namespace Backend.DAL
             return books;
         }
 
+
+
         // Add Review for a Book (and Update Book Rating)
         public void AddReview(int bookId, string email, string reviewText, int rating)
         {
             using (SqlConnection con = connect("myProjDB"))
             {
+                // Check if the user has already submitted a review for this book
+                using (SqlCommand checkCmd = new SqlCommand("SELECT COUNT(1) FROM Review WHERE bookId = @BookId AND email = @Email", con))
+                {
+                    checkCmd.Parameters.AddWithValue("@BookId", bookId);
+                    checkCmd.Parameters.AddWithValue("@Email", email);
+
+                    con.Open();
+                    int existingReviewCount = (int)checkCmd.ExecuteScalar();
+                    con.Close();
+
+                    if (existingReviewCount > 0)
+                    {
+                        throw new Exception("User has already submitted a review for this book.");
+                    }
+                }
+
+                // If no review exists, proceed to add the review
                 using (SqlCommand cmd = new SqlCommand("sp_AddReview", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@BookId", bookId); 
+                    cmd.Parameters.AddWithValue("@BookId", bookId);
                     cmd.Parameters.AddWithValue("@Email", email);
                     cmd.Parameters.AddWithValue("@Review", reviewText);
                     cmd.Parameters.AddWithValue("@Rating", rating);
 
+                    con.Open();
                     cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+            }
+        }
+
+        public bool ReviewExists(int bookId, string email)
+        {
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(1) FROM Review WHERE bookId = @BookId AND email = @Email", con))
+                {
+                    cmd.Parameters.AddWithValue("@BookId", bookId);
+                    cmd.Parameters.AddWithValue("@Email", email);
+                    int count = (int)cmd.ExecuteScalar();
+                    return count > 0;
                 }
             }
         }

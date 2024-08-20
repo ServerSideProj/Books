@@ -88,7 +88,7 @@ function generateBookCard_allDetails(book) {
         <div class="container-flex-col gap-0">
           <div class="container-flex gap-03 center-hor">
             <p class="md-text">${book.avgRating}</p>
-            <img src="../../assets/icons/star-empty.svg" alt="star"/>
+            <img class="star-icon" src="../../assets/icons/star-full.svg" alt="star"/>
             <p class="xsm-text grey-text font-reg">(${book.ratingCount})</p>
           </div>
           <p class="sm-text grey-text font-reg">${book.ratingCount} reviews</p>

@@ -102,6 +102,29 @@ namespace Backend.Controllers
             return Ok(topScores);
         }
 
+        [HttpPost("check-friendship-status")]
+        public ActionResult CheckFriendshipStatus([FromBody] JsonElement requestData)
+        {
+            if (!requestData.TryGetProperty("FollowerEmail", out JsonElement followerElement) ||
+                !requestData.TryGetProperty("FollowedAfter", out JsonElement followingElement))
+            {
+                return BadRequest("FollowerEmail or FollowedAfter is missing.");
+            }
+
+            string followerEmail = followerElement.GetString();
+            string followedAfterEmail = followingElement.GetString();
+
+            if (string.IsNullOrEmpty(followerEmail) || string.IsNullOrEmpty(followedAfterEmail))
+            {
+                return BadRequest("FollowerEmail or FollowedAfter cannot be null or empty.");
+            }
+
+            bool isFriend = Users.CheckIfFriends(followerEmail, followedAfterEmail);
+
+            return Ok(new { isFriend });
+        }
+
+
         // POST api/users/register
         [HttpPost("register")]
         public ActionResult<object> Register([FromBody] Users user)
@@ -155,27 +178,26 @@ namespace Backend.Controllers
             }
         }
 
-       
 
-        // POST api/users/addFriend
-        [HttpPost("addFriend")]
+
+        [HttpPost("add-friend")]
         public ActionResult AddFriend([FromBody] JsonElement requestData)
         {
             if (!requestData.TryGetProperty("FollowerEmail", out JsonElement followerElement) ||
-                !requestData.TryGetProperty("FollowingEmail", out JsonElement followingElement))
+                !requestData.TryGetProperty("FollowedAfter", out JsonElement followedAfterElement))
             {
-                return BadRequest("FollowerEmail or FollowingEmail is missing.");
+                return BadRequest("FollowerEmail or FollowedAfter is missing.");
             }
 
             string followerEmail = followerElement.GetString();
-            string followingEmail = followingElement.GetString();
+            string followedAfterEmail = followedAfterElement.GetString();
 
-            if (string.IsNullOrEmpty(followerEmail) || string.IsNullOrEmpty(followingEmail))
+            if (string.IsNullOrEmpty(followerEmail) || string.IsNullOrEmpty(followedAfterEmail))
             {
-                return BadRequest("FollowerEmail or FollowingEmail cannot be null or empty.");
+                return BadRequest("FollowerEmail or FollowedAfter cannot be null or empty.");
             }
 
-            int result = Users.AddFriend(followerEmail, followingEmail);
+            int result = Users.AddFriend(followerEmail, followedAfterEmail);
 
             switch (result)
             {
@@ -189,6 +211,36 @@ namespace Backend.Controllers
                     return StatusCode(500, "An unknown error occurred.");
             }
         }
+
+        [HttpPost("remove-friend")]
+        public ActionResult RemoveFriend([FromBody] JsonElement requestData)
+        {
+            if (!requestData.TryGetProperty("FollowerEmail", out JsonElement followerElement) ||
+                !requestData.TryGetProperty("FollowedAfter", out JsonElement followedAfterElement))
+            {
+                return BadRequest("FollowerEmail or FollowedAfter is missing.");
+            }
+
+            string followerEmail = followerElement.GetString();
+            string followedAfterEmail = followedAfterElement.GetString();
+
+            if (string.IsNullOrEmpty(followerEmail) || string.IsNullOrEmpty(followedAfterEmail))
+            {
+                return BadRequest("FollowerEmail or FollowedAfter cannot be null or empty.");
+            }
+
+            int result = Users.RemoveFriend(followerEmail, followedAfterEmail);
+
+            if (result == 0)
+            {
+                return Ok("Friend removed successfully.");
+            }
+            else
+            {
+                return BadRequest("This follow relationship does not exist.");
+            }
+        }
+
 
         [HttpPost("UploadProfileImage")]
         public async Task<IActionResult> UploadProfileImage([FromForm] IFormFile file, [FromForm] string email)

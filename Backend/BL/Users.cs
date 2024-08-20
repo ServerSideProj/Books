@@ -64,9 +64,19 @@ namespace Backend.BL
             return dbUser.GetUsersFollowing(email);
         }
 
-        public static int AddFriend(string followerEmail, string followingEmail)
+        public static int AddFriend(string followerEmail, string followedAfterEmail)
         {
-            return dbUser.AddFriend(followerEmail, followingEmail);
+            return dbUser.AddFriend(followerEmail, followedAfterEmail);
+        }
+
+        public static int RemoveFriend(string followerEmail, string followedAfterEmail)
+        {
+            return dbUser.RemoveFriend(followerEmail, followedAfterEmail);
+        }
+
+        public static bool CheckIfFriends(string followerEmail, string followedAfterEmail)
+        {
+            return dbUser.CheckIfFriends(followerEmail, followedAfterEmail);
         }
 
         public static int ChangePassword(string email, string oldPassword, string newPassword)

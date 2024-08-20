@@ -1,4 +1,5 @@
 const userEmail = sessionStorage.getItem("friendEmail");
+const ownerEmail = localStorage.getItem("email");
 var userAllBooks = [];
 var filteredBooks = [];
 
@@ -18,6 +19,8 @@ $(document).ready(function () {
     },
     onError
   );
+
+  checkFriendshipStatus();
 
   $(".oval-btn").click(function () {
     // Remove 'selected' class from all buttons
@@ -44,14 +47,48 @@ $(document).ready(function () {
   // add/remove friend
   $(".add-friend").click(function () {
     var currentSrc = $(this).attr("src");
-    // change the add friend to remove friend (and back) on user click.
-    var newSrc =
-      currentSrc === "../../assets/icons/Add user.svg"
-        ? "../../assets/icons/User remove.svg"
-        : "../../assets/icons/Add user.svg";
+    var newSrc;
+    var isAddingFriend;
+
+    // Determine whether the user is adding or removing a friend based on the current icon
+    if (currentSrc === "../../assets/icons/Add user.svg") {
+      newSrc = "../../assets/icons/User remove.svg";
+      isAddingFriend = true; // Adding friend
+    } else {
+      newSrc = "../../assets/icons/Add user.svg";
+      isAddingFriend = false; // Removing friend
+    }
+
+    // Update the icon immediately
     $(this).attr("src", newSrc);
 
-    // server here
+    var url = isAddingFriend
+      ? `${API_URL}Users/add-friend`
+      : `${API_URL}Users/remove-friend`;
+
+    // Prepare the data to send to the server
+    var data = {
+      FollowerEmail: ownerEmail,
+      FollowedAfter: userEmail,
+    };
+
+    // Send the request to add or remove the friend
+    $.ajax({
+      url: url,
+      type: "POST",
+      contentType: "application/json",
+      data: JSON.stringify(data),
+      success: function (response) {
+        isAddingFriend
+          ? popupText("Nice having new friends!")
+          : console.log("Friend removed successfully.");
+      },
+      error: function (error) {
+        console.error("Error updating friend status:", error);
+        // Optionally, revert the icon change if the server request fails
+        $(this).attr("src", currentSrc); // Revert icon back to original
+      },
+    });
   });
 });
 
@@ -85,5 +122,31 @@ const renderBooks = (books) => {
     $bookCard.on("click", () => {
       popupBookSaleOffer(book);
     });
+  });
+};
+
+const checkFriendshipStatus = () => {
+  const data = {
+    FollowerEmail: ownerEmail,
+    FollowedAfter: userEmail,
+  };
+
+  $.ajax({
+    url: `${API_URL}Users/check-friendship-status`,
+    type: "POST",
+    contentType: "application/json",
+    data: JSON.stringify(data),
+    success: function (response) {
+      if (response.isFriend) {
+        // They are friends, so show the "Remove friend" icon
+        $(".add-friend").attr("src", "../../assets/icons/User remove.svg");
+      } else {
+        // They are not friends, so show the "Add friend" icon
+        $(".add-friend").attr("src", "../../assets/icons/Add user.svg");
+      }
+    },
+    error: function (error) {
+      console.error("Error checking friendship status:", error);
+    },
   });
 };

@@ -3,6 +3,8 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Collections.Generic;
 using Backend.BL;
+using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace Backend.DAL
 {
@@ -187,7 +189,7 @@ namespace Backend.DAL
             }
         }
 
-        public int AddFriend(string followerEmail, string followingEmail)
+        public int AddFriend(string followerEmail, string followedAfterEmail)
         {
             using (SqlConnection con = connect("myProjDB"))
             {
@@ -195,7 +197,7 @@ namespace Backend.DAL
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("@FollowerEmail", followerEmail);
-                cmd.Parameters.AddWithValue("@FollowingEmail", followingEmail);
+                cmd.Parameters.AddWithValue("@FollowedAfter", followedAfterEmail);
 
                 SqlParameter returnValue = new SqlParameter();
                 returnValue.Direction = ParameterDirection.ReturnValue;
@@ -206,6 +208,47 @@ namespace Backend.DAL
                 return (int)returnValue.Value;  // Return the result
             }
         }
+
+        public int RemoveFriend(string followerEmail, string followedAfterEmail)
+        {
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                SqlCommand cmd = new SqlCommand("sp_RemoveFriend", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@FollowerEmail", followerEmail);
+                cmd.Parameters.AddWithValue("@FollowedAfter", followedAfterEmail);
+
+                SqlParameter returnValue = new SqlParameter();
+                returnValue.Direction = ParameterDirection.ReturnValue;
+                cmd.Parameters.Add(returnValue);
+
+                cmd.ExecuteNonQuery();
+
+                return (int)returnValue.Value;  // Return the result
+            }
+        }
+
+        public bool CheckIfFriends(string followerEmail, string followedAfterEmail)
+        {
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                SqlCommand cmd = new SqlCommand("sp_CheckIfFriends", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@FollowerEmail", followerEmail);
+                cmd.Parameters.AddWithValue("@FollowedAfterEmail", followedAfterEmail);
+
+                SqlParameter returnValue = new SqlParameter();
+                returnValue.Direction = ParameterDirection.ReturnValue;
+                cmd.Parameters.Add(returnValue);
+
+                cmd.ExecuteNonQuery();
+
+                return (int)returnValue.Value == 1;  // Return true if they are friends
+            }
+        }
+
 
         public int ChangePassword(string email, string oldPassword, string newPassword)
         {

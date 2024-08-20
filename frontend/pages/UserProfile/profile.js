@@ -153,6 +153,8 @@ const saveProfileImage = (file) => {
 
 const firstFetchBooks = (books) => {
   allUserBooks = [...books];
+  // Update the number of books displayed
+  $("#num-books").text(books.length);
   renderCurrentPage();
 };
 

@@ -197,37 +197,34 @@ namespace Backend.DAL
         // Add Review for a Book (and Update Book Rating)
         public void AddReview(int bookId, string email, string reviewText, int rating)
         {
-            using (SqlConnection con = connect("myProjDB"))
+            try
             {
-                // Check if the user has already submitted a review for this book
-                using (SqlCommand checkCmd = new SqlCommand("SELECT COUNT(1) FROM Review WHERE bookId = @BookId AND email = @Email", con))
+                using (SqlConnection con = connect("myProjDB"))
                 {
-                    checkCmd.Parameters.AddWithValue("@BookId", bookId);
-                    checkCmd.Parameters.AddWithValue("@Email", email);
-
-                    con.Open();
-                    int existingReviewCount = (int)checkCmd.ExecuteScalar();
-                    con.Close();
-
-                    if (existingReviewCount > 0)
+                    // Check if the user has already submitted a review for this book
+                    if (ReviewExists(bookId, email))
                     {
                         throw new Exception("User has already submitted a review for this book.");
                     }
-                }
 
-                // If no review exists, proceed to add the review
-                using (SqlCommand cmd = new SqlCommand("sp_AddReview", con))
-                {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@BookId", bookId);
-                    cmd.Parameters.AddWithValue("@Email", email);
-                    cmd.Parameters.AddWithValue("@Review", reviewText);
-                    cmd.Parameters.AddWithValue("@Rating", rating);
+                    // If no review exists, proceed to add the review
+                    using (SqlCommand cmd = new SqlCommand("sp_AddReview", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@BookId", bookId);
+                        cmd.Parameters.AddWithValue("@Email", email);
+                        cmd.Parameters.AddWithValue("@Review", reviewText);
+                        cmd.Parameters.AddWithValue("@Rating", rating);
 
-                    con.Open();
-                    cmd.ExecuteNonQuery();
-                    con.Close();
+                        cmd.ExecuteNonQuery();
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception details
+                Console.WriteLine("Error occurred: " + ex.Message);
+                throw; // re-throw the exception to maintain the 500 error response
             }
         }
 

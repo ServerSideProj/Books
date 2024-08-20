@@ -100,6 +100,9 @@ namespace Backend.BL
             return dbUser.GetAllUsersWithStats();
         }
 
-
+        public static string GetUsernameByEmail(string email)
+        {
+            return dbUser.GetUsernameByEmail(email);
+        }
     }
 }

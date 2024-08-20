@@ -12,7 +12,7 @@ $(document).ready(function () {
   );
 
   fetchData(
-    API_URL + "User/username" + encodeURIComponent(userEmail),
+    API_URL + "Users/username/" + encodeURIComponent(userEmail),
     (res) => {
       $("#username").text(res.username);
     },
@@ -63,7 +63,7 @@ const firstFetchBooks = (books) => {
 
 // render books on the screen
 const renderBooks = (books) => {
-  console.log(books);
+  $("#num-books").text("(" + books.length + ")");
 
   const userBooks = $(".inner-page-books");
   userBooks.empty();

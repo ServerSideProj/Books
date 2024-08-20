@@ -388,5 +388,28 @@ namespace Backend.DAL
             return users;
         }
 
+        public string GetUsernameByEmail(string email)
+        {
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                using (SqlCommand cmd = new SqlCommand("sp_GetUsernameByEmail", con))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Email", email);
+
+                    var result = cmd.ExecuteScalar();
+
+                    if (result != null)
+                    {
+                        return result.ToString();
+                    }
+                    else
+                    {
+                        return null; // Or handle it differently, e.g., throw an exception
+                    }
+                }
+            }
+        }
+
     }
 }

@@ -261,7 +261,7 @@ const handleSendReview = (bookId) => {
     contentType: "application/json",
     data: JSON.stringify(reviewData),
     success: function (response) {
-      alert("Review submitted successfully.");
+      popupText("Your review sent successfully!");
     },
     error: function (error) {
       if (error.status === 400) {

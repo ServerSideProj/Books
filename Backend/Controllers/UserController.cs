@@ -46,6 +46,27 @@ namespace Backend.Controllers
             }
         }
 
+        [HttpGet("username/{email}")]
+        public ActionResult GetUsernameByEmail(string email)
+        {
+            try
+            {
+                string username = Users.GetUsernameByEmail(email);
+
+                if (string.IsNullOrEmpty(username))
+                {
+                    return NotFound("User not found.");
+                }
+
+                return Ok(new { username = username });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error.");
+            }
+        }
+
+
         // GET api/users
         [HttpGet]
         public ActionResult<List<Users>> GetAllUsers()

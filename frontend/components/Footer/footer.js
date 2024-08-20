@@ -3,7 +3,8 @@ $(document).ready(function () {
 });
 
 const generateFooter = () => {
-  const footer = `<img
+  const footer = `
+      <img
         src="../../assets/images/book1-100.svg"
         class="fly-book fly-book1"
         alt=""
@@ -45,6 +46,7 @@ const generateFooter = () => {
             </div>
           </div>
         </div>
+        <a href="../../additions.html"><div class="btn btn-border-bot">click to see additions</div></a>
       </div> `;
   $(".footer").html(footer);
 };

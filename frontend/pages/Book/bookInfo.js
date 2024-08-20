@@ -1,4 +1,3 @@
-// const isLoggedIn = localStorage.getItem("authToken") !== null;
 var bookId;
 $(document).ready(function () {
   // Show the loader initially
@@ -67,7 +66,7 @@ const displayBookData = (book) => {
     }
   });
 
-  // add listener to the like btn
+  // add listener to the add to cart btn
   $("#add-to-cart-btn").on("click", function () {
     if (isLoggedIn) {
       addToCart(bookId);
@@ -138,8 +137,11 @@ const displayBookData = (book) => {
 
   // Update the "See more in Google" link
   $(".see-more").attr("href", book.infoLink);
+
+  handleSpeechDesc();
 };
 
+// show all reviews of user about this book.
 const displayReviews = (reviews) => {
   if (reviews.length === 0) {
     $(".reviews-wrapper").append(
@@ -173,4 +175,42 @@ const displayReviews = (reviews) => {
     allReviewsHtml += reviewCard;
   }
   $(".reviews-wrapper").append(allReviewsHtml);
+};
+
+// handle speech and pause btns of description.
+const handleSpeechDesc = () => {
+  const speakButton = $("#speak-description-btn");
+  const pauseButton = $("#pause-btn");
+
+  // Start speech and show pause button
+  speakButton.on("click", function () {
+    var descriptionText = $("#description").text();
+    responsiveVoice.speak(descriptionText, null, {
+      onstart: function () {
+        pauseButton.show();
+      },
+      onend: function () {
+        pauseButton.hide();
+      },
+    });
+  });
+
+  // Pause speech and hide pause button
+  pauseButton.on("click", function () {
+    responsiveVoice.pause();
+    pauseButton.hide();
+  });
+
+  // Stop speech when page is exited
+  $(window).on("beforeunload", function () {
+    responsiveVoice.cancel();
+  });
+
+  // Hide pause button if there is no active speech
+  $(document).on("visibilitychange", function () {
+    if (document.visibilityState === "hidden") {
+      responsiveVoice.cancel();
+      pauseButton.hide();
+    }
+  });
 };

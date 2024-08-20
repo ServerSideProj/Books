@@ -223,6 +223,29 @@
   font-weight: 600;
 }
 
+.read-btn {
+  border-radius: 2rem;
+  margin-left: 1rem;
+  width: 34px;
+  height: 34px;
+  padding: 8px;
+  position: relative;
+  top: 2px;
+}
+
+.pause-btn {
+  border-radius: 2rem;
+  background-color: #bbb6ba;
+  width: 34px;
+  height: 34px;
+  padding: 3px;
+  margin-left: 1rem;
+  position: relative;
+  top: 2px;
+  border: 2px solid #7f7f7f4b;
+  display: none;
+}
+
 @media screen and (max-width: 768px) {
   .mobile-flex-col {
     flex-direction: column;

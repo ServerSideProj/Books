@@ -79,7 +79,8 @@
 
 .author-image {
   border-radius: 8px;
-  width: 200px;
+  width: 232px;
+  object-fit: cover;
   height: auto;
 }
 
@@ -177,6 +178,7 @@
   background-color: white;
   padding: 1rem;
   border-radius: 8px;
+  max-width: 245px;
 }
 
 .bg-white {
@@ -239,6 +241,15 @@
   gap: 0.3rem;
   display: flex;
   flex-direction: column;
+}
+
+.review-container {
+  padding-top: 1rem;
+}
+
+.limit-text {
+  max-height: 300px;
+  overflow: scroll;
 }
 
 @media screen and (max-width: 760px) {
@@ -310,11 +321,15 @@
   #popup-on-cart,
   #popup-text,
   #popup-users,
-  #popup-create-user {
+  #popup-create-user,
+  #popup-book-sale {
     padding: 4rem 1.5rem;
     width: 100%;
+    max-height: 97%;
   }
-
+  #popup-book-sale {
+    overflow: scroll;
+  }
   #popup-users .search-container {
     max-width: 100%;
   }

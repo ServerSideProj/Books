@@ -232,7 +232,7 @@ const popupBookInfo = (book) => {
           </p>
         </div>
       </div>
-      <div class="container-flex-col center-ver">
+      <div class="container-flex-col center-ver gap-03">
         <div class="row-bot-line">
           <p class="xl-text">Finished reading?</p>
           <div class="switch-btn done" data-book-id=${book.id} data-copy-id=${
@@ -353,7 +353,16 @@ const popupBookInfo = (book) => {
 
   createStarPicker();
   // Handle sending the review
-  $("#send-review-btn").on("click", () => handleSendReview(book.id));
+  $("#send-review-btn").on("click", () => {
+    if ($("#review-text")[0].value == "") {
+      $("#review-text").addClass("wrong");
+      setTimeout(function () {
+        $("#review-text").removeClass("wrong");
+      }, 2000);
+    } else {
+      handleSendReview(book.id);
+    }
+  });
 };
 
 // page: other-user-profile
@@ -486,8 +495,11 @@ const openPopupAuthor = (author) => {
   const popup = `
     <div id="popup-author" class="popup-container container-flex-col gap-1">
         <img src="../../assets/icons/X.svg" class="btn-x" />
-        <div class="container-flex justify-content-space"> 
-        <p class="xxl-text">${author.name}</p>
+        <div class="container-flex justify-content-space gap-1">
+          <div class="container-flex-col gap-03"> 
+            <p class="xxl-text">${author.name}</p>
+            <p class="md-text limit-text">${author.biography}</p>
+          </div>
           <img
             src="${
               author.pictureUrl || "../../assets/images/author-placeholder.png"
@@ -496,7 +508,6 @@ const openPopupAuthor = (author) => {
             class="author-image"
           />
         </div>
-        <p class="md-text">${author.biography}</p>
         <a href="${author.wikiLink}" class="more-info">more-info</a>
       </div>`;
 

@@ -369,6 +369,7 @@ const getAllBookCategoriesForAi = () => {
     },
   });
 };
+
 const getDescription = async () => {
   const apiUrl =
     "https://api-inference.huggingface.co/models/openai-community/gpt2-medium";

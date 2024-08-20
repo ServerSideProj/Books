@@ -54,6 +54,13 @@ $(document).ready(function () {
       },
       onError
     );
+
+    // Fetch following users
+    fetchData(
+      API_URL + "Users/following/" + encodeURIComponent(email),
+      getAllFriends,
+      onError
+    );
   }
 
   // Event handler for price range inputs
@@ -235,14 +242,13 @@ const getAllAuthors = () => {
   });
 };
 
-// Get all friends (follows) from the user data
+// Get all friends (following) from the user data
 const getAllFriends = (friends) => {
-  allFriends = friends;
+  allFriends = [];
+
   if (friends.length > 0) {
     friends.forEach((friend) => {
-      if (!allFriends.includes(friend.username)) {
-        allFriends.push(friend.username);
-      }
+      allFriends.push(friend.username);
     });
   }
 };

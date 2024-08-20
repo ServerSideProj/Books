@@ -1,5 +1,5 @@
 // After the user selects all the filters in the popup, apply them to the books.
-const applyAllFilters = () => {
+const applyAllFilters = async () => {
   let filteredBooks = arrAllBooks.slice();
   console.log(activeFilters);
 
@@ -57,16 +57,12 @@ const applyAllFilters = () => {
     });
   }
 
-  ///
-  //
-  // TODO: add friends to user, add a server call to get all the users books....
-  //
-  ///
   // Apply friend filter if present
   if (activeFilters.friend) {
+    const PurchasedBooks = await fetchBooksPurchasedByFriends();
     filteredBooks = filteredBooks.filter((book) => {
-      return (
-        book.recommendedBy && book.recommendedBy.includes(activeFilters.friend)
+      return PurchasedBooks.some(
+        (PurchasedBook) => PurchasedBook.id === book.id
       );
     });
   }
@@ -134,7 +130,7 @@ const filterBooksByText = (searchText) => {
   applyAllFilters();
 };
 
-const filterRate = function () {
+const filterRate = () => {
   // Remove the selected class from all rate options
   $(".container-options[data-stars] .opt").removeClass("selected");
 
@@ -152,7 +148,7 @@ const filterRate = function () {
   img.attr("src", imgSrc.replace("circle.svg", "circle-checked.svg"));
 };
 
-const filterDate = function () {
+const filterDate = () => {
   $(".container-options[data-date] .opt").removeClass("selected");
   $(".container-options[data-date] .opt img").each(function () {
     $(this).attr(
@@ -167,7 +163,7 @@ const filterDate = function () {
   img.attr("src", imgSrc.replace("circle.svg", "circle-checked.svg"));
 };
 
-const filterType = function () {
+const filterType = () => {
   $(".container-options[data-type] .opt").removeClass("selected");
   $(".container-options[data-type] .opt img").each(function () {
     $(this).attr(
@@ -180,6 +176,23 @@ const filterType = function () {
   const img = $(this).find("img");
   const imgSrc = img.attr("src");
   img.attr("src", imgSrc.replace("circle.svg", "circle-checked.svg"));
+};
+
+// Fetch books recommended by friends
+const fetchBooksPurchasedByFriends = async () => {
+  const email = localStorage.getItem("email");
+  try {
+    const response = await fetch(
+      `${API_URL}Book/user-purchases/${encodeURIComponent(email)}`
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch books purchased by friends.");
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching books purchased by friends:", error);
+    return [];
+  }
 };
 
 const collectFilterData = () => {

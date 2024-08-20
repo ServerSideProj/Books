@@ -1,5 +1,5 @@
 import { logout } from "../../services/auth.js";
-const MOBILE_WIDTH = 768;
+const MOBILE_WIDTH = 810;
 
 $(document).ready(function () {
   function updateNavbar() {
@@ -10,6 +10,7 @@ $(document).ready(function () {
       generateDesktopNavbar(isLoggedIn);
     }
     checkForNotification();
+    attachEventListeners();
   }
 
   // Initial check
@@ -19,10 +20,12 @@ $(document).ready(function () {
   $(window).resize(function () {
     updateNavbar();
   });
-  $(".search-nav-icon").on("click", searchForUsers);
-
-  $(".logout").on("click", logout);
 });
+
+const attachEventListeners = () => {
+  $(".search-nav-icon").on("click", searchForUsers);
+  $(".logout").on("click", logout);
+};
 
 const generateDesktopNavbar = (isLoggedIn) => {
   if (isLoggedIn) {

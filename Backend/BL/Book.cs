@@ -195,5 +195,10 @@ namespace Backend.BL
             return dbBook.GetTotalBooksCount();
         }
 
+        public static List<string> GetAllCategories()
+        {
+            return dbBook.GetAllCategories();
+        }
+
     }
 }

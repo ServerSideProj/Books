@@ -12,6 +12,7 @@
     />
     <link rel="stylesheet" href="../../styles/style-guide.css" />
     <link rel="stylesheet" href="../../styles/general.css" />
+    <link rel="stylesheet" href="../../components/Popup/popup.css" />
     <link rel="stylesheet" href="../../components/Navbar/navbar-desktop.css" />
     <link rel="stylesheet" href="../../components/Navbar/navbar-mobile.css" />
 
@@ -20,17 +21,20 @@
     <script src="../../services/constants.js"></script>
     <script src="../../services/ajax.js"></script>
     <script src="../../services/auth.js" type="module"></script>
+    <script src="../../components/Popup/popup.js"></script>
     <script src="../../components/Navbar/navbar.js" type="module"></script>
 
     <!-- Styles for this page -->
     <link rel="stylesheet" href="./insertBook.css" />
     <link rel="stylesheet" href="./generateBook.css" />
     <!-- Scripts for this page-->
-    <script src="./createBook.js"></script>
+    <script src="./insertBook.js"></script>
+    <script src="./generateBook.js"></script>
 
     <title>Create a Book</title>
   </head>
   <body>
+    <div class="bg-dark"></div>
     <div class="navbar"></div>
     <div class="main">
       <div class="inner-page container-choice show">
@@ -40,10 +44,11 @@
           <div
             class="container-flex gap-2 margin-top-4 xxl-text mobile-flex-col"
           >
-            <div class="btn btn-insert center-ver text-center">
+            <div id="btn-insert" class="btn btn-insert center-ver text-center">
               Upload an existing book
             </div>
             <div
+              id="btn-generate"
               class="btn btn-generate container-flex center-ver center-hor text-center"
             >
               <img src="../../assets/icons/Sparkles.svg" alt="Sparkles" />
@@ -138,7 +143,7 @@
       <div id="generate-book-page" class="inner-page">
         <div class="step step-1">
           <div class="btn-gradient step-number">1</div>
-          <p class="big-text text-center">Select relevant categories</p>
+          <p class="big-text text-center">Select categories for your book</p>
           <div class="container-categories categoryAi">
             <!-- add in js all categories -->
             <!-- <div class="btn category">abcdefg</div> -->
@@ -153,10 +158,11 @@
             class="input-box-sqr l-text black-text"
             id="input-desc"
           ></textarea>
+          <div class="loader-2"></div>
           <p>Or</p>
           <div
             class="btn btn-generate container-flex center-ver center-hor text-center"
-            id="random-disc"
+            id="random-desc"
           >
             <img src="../../assets/icons/Sparkles.svg" alt="Sparkles" />
             <p>Generate Answer</p>
@@ -176,12 +182,13 @@
                 class="btn btn-generate container-flex center-ver center-hor text-center"
               >
                 <img src="../../assets/icons/Sparkles.svg" alt="Sparkles" />
-                <p id="gen-image">Generate Answer</p>
+                <p id="gen-image">Generate Image</p>
               </div>
               <div id="upload-file" class="btn l-text ai-file-upload">
                 <img src="../../assets/icons/Inbox in.svg" alt="upload file" />
                 <p>upload file</p>
               </div>
+              <div class="loader-2"></div>
             </div>
           </div>
         </div>
@@ -203,12 +210,13 @@
             <div class="categories"></div>
             <div class="btns">
               <div
+                id="bookIsReady"
                 class="btn btn-generate container-flex center-ver center-hor text-center"
               >
-                <p id="bookIsReady">Make Public</p>
+                <p>Make Public</p>
               </div>
               <a href="../userProfile">
-                <div class="btn border-bot-btn">Nah... not this time</div></a
+                <div class="btn border-bot-btn">Delete Book</div></a
               >
             </div>
           </div>

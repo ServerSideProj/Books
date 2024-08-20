@@ -48,7 +48,7 @@
 
 #input-desc {
   width: 100%;
-  min-height: 5rem;
+  min-height: 7rem;
   text-wrap: wrap;
   align-items: flex-start;
 }
@@ -65,7 +65,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
 }
 
 .step #book-cover-img {
@@ -84,7 +84,31 @@ textarea:focus-visible {
   width: fit-content;
 }
 
-@media screen and (max-width: 760px) {
+.loader-2 {
+  width: calc(80px / cos(45deg));
+  height: 14px;
+  background: repeating-linear-gradient(-45deg, #fa8fd5 0 15px, #0000 0 20px)
+    left/200% 100%;
+  animation: l3 2s infinite linear;
+  display: none;
+}
+
+#book-cover-img-gen,
+#book-cover-img-end {
+  width: 229px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 4px;
+  height: 328px;
+}
+
+@keyframes l3 {
+  100% {
+    background-position: right;
+  }
+}
+
+@media screen and (max-width: 1000px) {
   .main {
     padding: 4rem 1rem;
   }

@@ -855,5 +855,26 @@ namespace Backend.DAL
             return totalBooks;
         }
 
+        public List<string> GetAllCategories()
+        {
+            List<string> categories = new List<string>();
+
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                SqlCommand cmd = new SqlCommand("sp_GetAllCategories", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        categories.Add(reader["category"].ToString());
+                    }
+                }
+            }
+
+            return categories;
+        }
+
     }
 }

@@ -185,7 +185,7 @@ input:focus-visible {
   color: white;
 }
 
-@media screen and (max-width: 760px) {
+@media screen and (max-width: 1000px) {
   .main {
     padding: 7rem 1rem;
   }

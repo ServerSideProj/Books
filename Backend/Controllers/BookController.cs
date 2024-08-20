@@ -130,6 +130,13 @@ namespace Backend.Controllers
             return Ok(likedBooks);
         }
 
+        [HttpGet("all-categories")]
+        public IActionResult GetAllCategories()
+        {
+            List<string> categories = Book.GetAllCategories();
+            return Ok(categories);
+        }
+
         [HttpGet("review/existence")]
         public ActionResult CheckReviewExistence(int bookId, string email)
         {
@@ -371,7 +378,7 @@ namespace Backend.Controllers
                 // Call the method to add the book(s)
                 Book.AddBooks(books);
 
-                return Ok("Book added successfully.");
+                return Ok(new { message = "Book added successfully." });
             }
             catch (Exception ex)
             {

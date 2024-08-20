@@ -213,6 +213,7 @@
   flex-direction: column;
   overflow: scroll;
   max-height: 20rem;
+  width: 100%;
 }
 
 .user-wrapper {
@@ -221,7 +222,7 @@
   font-weight: 400;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
+  min-width: 300px;
   background-color: #fff;
   padding: 0.4rem 1rem;
   border-radius: 8px;

@@ -19,7 +19,7 @@
   box-shadow: 0 5px 20px 0 rgba(153, 131, 176, 0.2);
   background: var(--white);
   border-radius: 8px;
-  padding: 10px;
+  padding: 12px;
   transition: transform 0.3s ease-in-out;
   gap: 8px;
   display: flex;
@@ -32,11 +32,11 @@
 
 .book-card-img {
   display: flex;
-  padding: 10px;
   border-radius: 8px;
   min-width: 200px;
   height: 319px;
   position: relative;
+  object-fit: cover;
 }
 
 .container-texts-card {

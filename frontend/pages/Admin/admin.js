@@ -90,7 +90,12 @@ const getTableBooks = () => {
     { data: "id" },
     { data: "title", render: renderEditableField },
     { data: "language", render: renderEditableField },
-    { data: "avgRating" },
+    {
+      data: "avgRating",
+      render: (data) => {
+        return data.toFixed(1);
+      },
+    },
     { data: "ratingCount" },
     { data: "PurchaseCount" },
     {

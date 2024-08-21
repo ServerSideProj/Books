@@ -96,6 +96,7 @@
 .oval-btn:has(img) {
   gap: 10px;
   padding-right: 20px;
+  text-wrap: nowrap;
 }
 
 .oval-btn.selected:has(img) > img {

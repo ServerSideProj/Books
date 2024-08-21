@@ -1,5 +1,5 @@
 var arrAllBooks = [];
-let imageLink;
+var imageLink = "";
 var mixCategories;
 var titleMix;
 var mixedDescription;

@@ -80,7 +80,7 @@ const generateDesktopNavbar = (isLoggedIn) => {
         </div>
         <div class="container-full-space right">
           <p class="sm-text gradient-text" id="coins">${coins} coins</p>
-          <a href='/pages/userprofile'>
+          <a href='../userprofile'>
             <div class="container-gap-sm">
               <p class="sm-text username-nav">${username}</p>
               <img src="${profileImageLink}" alt="profile image" class="profile-image-sm">

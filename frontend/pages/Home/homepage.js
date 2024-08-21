@@ -54,7 +54,7 @@ const topEBooksFetchSuccess = (response) => {
 
     // Add click event listener to the book card
     $bookCard.click(() => {
-      const bookUrl = `/pages/Book/index.html?id=${book.id}`;
+      const bookUrl = `../Book/index.html?id=${book.id}`;
       window.location.href = bookUrl;
     });
 
@@ -74,7 +74,7 @@ const topPhysFetchSuccess = (response) => {
 
     // Add click event listener to the book card
     $bookCard.click(() => {
-      const bookUrl = `/pages/Book/index.html?id=${book.id}`;
+      const bookUrl = `../Book/index.html?id=${book.id}`;
       window.location.href = bookUrl;
     });
 

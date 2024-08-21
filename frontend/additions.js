@@ -1,10 +1,13 @@
 $(document).ready(function () {
+  $(".ran-img").attr("src", "./assets/images/ran-photo.png");
+  $(".hila-img").attr("src", "./assets/images/hila-photo.png");
+
   animateRows();
 
   // Check if the current URL ends with "additions.html"
   if (window.location.pathname.endsWith("additions.html")) {
     $(".btn-border-bot").text("Go to Home page");
-    $(".btn-border-bot").parent().attr("href", "/pages/Home/");
+    $(".btn-border-bot").parent().attr("href", "../Home/");
   }
 });
 

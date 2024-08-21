@@ -129,7 +129,7 @@ const renderBooks = (books) => {
 
     // Add click event listener to the book card
     $bookCard.click(() => {
-      const bookUrl = `/pages/Book/index.html?id=${book.id}`;
+      const bookUrl = `../Book/index.html?id=${book.id}`;
 
       // Check if the book is inside the liked books list
       const isLiked = likedBooks.some(

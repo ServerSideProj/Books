@@ -25,7 +25,7 @@ const generateFooter = () => {
             <img
               src="../../assets/images/ran-photo.png"
               alt="ran-meshulam"
-              class="huge-img"
+              class="huge-img ran-img"
             />
             <div class="container-flex-col center gap-0">
               <p class="l-text bold">Ran Meshulam</p>
@@ -37,7 +37,7 @@ const generateFooter = () => {
             <img
               src="../../assets/images/hila-photo.png"
               alt="hila-tsivion"
-              class="huge-img"
+              class="huge-img hila-img"
             />
             <div class="container-flex-col center gap-0">
               <p class="l-text bold">Hila Tsivion</p>

@@ -279,7 +279,7 @@
 
 @media screen and (max-width: 1000px) {
   .main {
-    padding: 5.5rem 0rem;
+    padding: 5.5rem 0rem 0rem 0rem;
   }
 
   .title-hero {
@@ -345,21 +345,29 @@
   .btn-to-all-books {
     width: 5rem;
   }
+  .container-authors {
+    margin-top: 75vh;
+  }
 
   .container-quiz-banner,
   .container-game-banner {
     height: 100vh;
     flex-direction: column-reverse;
-    margin-top: 80vh;
     padding: 2rem 1rem;
     text-align: center;
   }
-  .banner-image {
-    width: 100vw;
+  .container-quiz-banner .banner-image {
+    height: 45vh;
     object-fit: contain;
+    margin-top: -3rem;
   }
 
   .book-card-img {
     min-width: 100%;
+  }
+
+  .justify-content-space {
+    flex-direction: column-reverse;
+    align-items: center;
   }
 }

@@ -83,10 +83,16 @@
     bottom: 1rem;
     right: 0rem;
     width: 70%;
+    pointer-events: none;
+  }
+
+  .btn-border-bot {
+    margin-top: 2rem;
   }
 
   .footer {
     height: 80vh;
+    box-shadow: inset 1px 11px 15px -6px rgb(153 131 176 / 39%);
   }
 
   .logo-footer {

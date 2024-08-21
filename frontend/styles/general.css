@@ -39,6 +39,11 @@ a:hover,
   /* cursor: url("../assets/icons/mouse-pointer.svg"), auto; */
 }
 
+::selection {
+  background: var(--barbi-pink);
+  color: white;
+}
+
 .text-center {
   text-align: center;
 }

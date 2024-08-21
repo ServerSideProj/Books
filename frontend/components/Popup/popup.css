@@ -47,6 +47,7 @@
 
 #popup-users {
   padding: 4rem 6rem;
+  background-color: var(--white);
 }
 
 #popup-login .btn {

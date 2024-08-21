@@ -3,6 +3,14 @@ const API_ALL_USERS = "Users/all-users-admin";
 const API_ALL_AUTHORS = "Author/all-authors-admin";
 
 $(document).ready(function () {
+  if (
+    localStorage.getItem("email") === null ||
+    localStorage.getItem("email") !== "admin@gmail.com"
+  ) {
+    // Redirect to the NotFound page
+    window.location.href = "/pages/NotFound";
+  }
+
   // Change the inner page on option click
   $(".opt").on("click", (e) => changeInnerPage(e.target));
 

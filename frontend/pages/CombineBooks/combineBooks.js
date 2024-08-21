@@ -311,7 +311,7 @@ function hideLoader() {
 }
 
 const showResaults = () => {
-  $(".container-resault").show();
+  $(".container-resault").css("display", "flex");
   $("#book-title-new").text(titleMix);
   $(".new-descr").text(mixedDescription);
   $("#book-3 img").attr("src", imageLink);

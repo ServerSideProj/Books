@@ -1,7 +1,10 @@
 const isLoggedIn = localStorage.getItem("authToken") !== null;
+const email = localStorage.getItem("email");
 var innerPage = "all-books";
 var allUserBooks = [];
 var likedBooks = [];
+var arrFollowingList = [];
+var arrFollowersList = [];
 
 var userRating = 0;
 
@@ -12,12 +15,14 @@ $(document).ready(function () {
   }
 
   // Fetch the user's purchased books first
-  const email = localStorage.getItem("email");
   fetchData(
     API_URL + "Book/user-purchases/" + encodeURIComponent(email),
     firstFetchBooks,
     onError
   );
+
+  getFollowingList();
+  getFollowersList();
 
   // Check for the 'section' query parameter in the URL
   const urlParams = new URLSearchParams(window.location.search);
@@ -62,36 +67,40 @@ $(document).ready(function () {
   // Determine the API endpoint based on the type
 
   $(".followers-wrapper").on("click", () => {
-    const url = `${API_URL}Users/followers/${encodeURIComponent(email)}`;
-    $.ajax({
-      url: url,
-      type: "GET",
-      dataType: "json",
-      success: function (response) {
-        popupFriends(response, "followers");
-      },
-      error: function (error) {
-        console.error(`Error fetching ${type}:`, error);
-        // Optionally handle the error by showing an error message in the popup
-      },
-    });
+    popupFriends(arrFollowersList, "followers");
   });
   $(".following-wrapper").on("click", () => {
-    const url = `${API_URL}Users/following/${encodeURIComponent(email)}`;
-    $.ajax({
-      url: url,
-      type: "GET",
-      dataType: "json",
-      success: function (response) {
-        popupFriends(response, "following");
-      },
-      error: function (error) {
-        console.error(`Error fetching ${type}:`, error);
-        // Optionally handle the error by showing an error message in the popup
-      },
-    });
+    popupFriends(arrFollowingList, "following");
   });
 });
+
+// fetch all following freinds list
+const getFollowingList = () => {
+  const url = `${API_URL}Users/following/${encodeURIComponent(email)}`;
+  fetchData(
+    url,
+    (res) => {
+      console.log(res);
+      arrFollowingList = res;
+      $("#following").text(res.length);
+    },
+    onError
+  );
+};
+
+// fetch all following freinds list
+const getFollowersList = () => {
+  const url = `${API_URL}Users/followers/${encodeURIComponent(email)}`;
+  fetchData(
+    url,
+    (res) => {
+      console.log(res);
+      arrFollowersList = res;
+      $("#followers").text(res.length);
+    },
+    onError
+  );
+};
 
 // Change the inner page on option click
 const changeInnerPage = (opt) => {

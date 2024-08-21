@@ -113,8 +113,8 @@
   width: 100%;
   display: flex;
   align-items: center;
-  padding: 4rem 4rem 4rem 16rem;
-  background-color: #a8a8a8;
+  padding: 4rem 4rem 4rem 12rem;
+  background-color: var(--purple);
 }
 
 #to-quiz {
@@ -135,8 +135,9 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  padding: 14rem 0;
-  height: 70vh;
+  margin-top: 30vh;
+  padding: 10rem 0;
+  height: fit-content;
 }
 
 .line {
@@ -169,6 +170,35 @@
 
 .title-authors {
   margin: 2rem auto;
+}
+
+.top-margin-2 {
+  margin-top: 2rem;
+}
+
+.gradient-background {
+  background: linear-gradient(
+    250deg,
+    #7f21c7,
+    #f530fe,
+    #2423ff,
+    #ac2dd8,
+    #dbabed
+  );
+  background-size: 300% 300%;
+  animation: gradient-animation 15s ease infinite;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 @keyframes slideRight {
@@ -293,11 +323,13 @@
     width: 5rem;
   }
 
-  .container-quiz-banner {
+  .container-quiz-banner,
+  .container-game-banner {
     height: 100vh;
     flex-direction: column-reverse;
     margin-top: 80vh;
-    padding: 2rem 0;
+    padding: 2rem 1rem;
+    text-align: center;
   }
   .banner-image {
     width: 100vw;

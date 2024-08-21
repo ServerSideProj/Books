@@ -4,6 +4,7 @@
   position: relative;
   background-color: var(--bg-fade-pink);
   padding-top: 3rem;
+  box-shadow: inset 1px 11px 15px 7px rgb(153 131 176 / 39%);
 }
 
 .container-strokes {

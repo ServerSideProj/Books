@@ -28,7 +28,7 @@ $(document).ready(function () {
       .then((success) => {
         if (success) {
           console.log("Registration successful");
-          window.location.href = "/pages/Home/";
+          window.location.href = "../Home/";
         } else {
           // Set custom validity on the email field if the registration fails
           emailInput[0].setCustomValidity("Email already in the database.");

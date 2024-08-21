@@ -35,7 +35,7 @@ $(document).ready(function () {
       .then((response) => {
         if (response) {
           console.log("Login successful:", response);
-          window.location.href = "/pages/Home";
+          window.location.href = "../Home";
         } else {
           popupText("Login failed. Please check your email and password.");
         }

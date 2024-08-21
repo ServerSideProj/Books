@@ -266,7 +266,7 @@ const postToServer = (data) => {
       audio.play();
       popupText("The book created successfully!📖");
       setTimeout(function () {
-        window.location.href = "/pages/home";
+        window.location.href = "../home";
       }, 3000);
     },
     error: function (error) {

@@ -8,7 +8,7 @@ $(document).ready(function () {
     localStorage.getItem("email") !== "admin@gmail.com"
   ) {
     // Redirect to the NotFound page
-    window.location.href = "/pages/NotFound";
+    window.location.href = "../NotFound";
   }
 
   // Change the inner page on option click

@@ -51,7 +51,7 @@ export function logout() {
   localStorage.removeItem("profileImageLink");
   localStorage.removeItem("coins");
   localStorage.removeItem("cartItems");
-  window.location.href = "/pages/Home";
+  window.location.href = "../Home";
 }
 
 /**

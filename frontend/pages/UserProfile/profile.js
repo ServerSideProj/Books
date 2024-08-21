@@ -10,7 +10,7 @@ var userRating = 0;
 
 $(document).ready(function () {
   if (!isLoggedIn) {
-    window.location.href = "/pages/NotFound/";
+    window.location.href = "../NotFound/";
     return;
   }
 

@@ -11,7 +11,7 @@ $(document).ready(function () {
   if (bookId) {
     fetchBookData(bookId);
   } else {
-    window.location.href = "/pages/NotFound/";
+    window.location.href = "../NotFound/";
   }
 });
 

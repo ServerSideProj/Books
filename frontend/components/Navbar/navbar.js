@@ -35,11 +35,11 @@ const generateDesktopNavbar = (isLoggedIn) => {
     if (username === "admin") {
       const adminNav = `<div class="navbar-desktop">
     <div class="container-full-space">
-      <a href="/pages/bookstore" class="sm-text">Bookstore</a>
+      <a href="../bookstore" class="sm-text">Bookstore</a>
       <img src="../../assets/icons/Search-pink.svg" alt="search" class="search-nav-icon icon">
     </div>
     <div class="logo-container">
-      <a href="/pages/home"
+      <a href="../home"
         ><img
           src="../../assets/logo/logo-nav.svg"
           alt="logo"
@@ -47,7 +47,7 @@ const generateDesktopNavbar = (isLoggedIn) => {
       /></a>
     </div>
     <div class="container-full-space right">
-      <a href="/pages/Admin"><p class="sm-text">Admin Page</p></a>
+      <a href="../Admin"><p class="sm-text">Admin Page</p></a>
       <p class="sm-text">|</p>
       <a> <p class="sm-text logout">Log out</p></a>
     </div>
@@ -66,17 +66,17 @@ const generateDesktopNavbar = (isLoggedIn) => {
       const loggedInNav = `
       <div class="navbar-desktop">
         <div class="container-full-space">
-           <a href="/pages/Cart"><img src="../../assets/icons/Shopping cart.svg" alt="Shopping Cart" class="cart-icon icon"></a>
-           <a href="/pages/UserProfile/index.html?section=liked"><img src="../../assets/icons/heart.svg" alt="heart" class="heart-icon icon"></a>
+           <a href="../Cart"><img src="../../assets/icons/Shopping cart.svg" alt="Shopping Cart" class="cart-icon icon"></a>
+           <a href="../UserProfile/index.html?section=liked"><img src="../../assets/icons/heart.svg" alt="heart" class="heart-icon icon"></a>
            <img src="../../assets/icons/Search-pink.svg" alt="search" class="search-nav-icon icon">
-          <a href="/pages/bookstore" class="sm-text">Bookstore</a>
+          <a href="../bookstore" class="sm-text">Bookstore</a>
           <div class="container-flex">
-          <a href="/pages/notifications" class="sm-text">Notifications</a>
+          <a href="../notifications" class="sm-text">Notifications</a>
           <div class="notify-circle"></div>
           </div>
         </div>
         <div class="logo-container">
-          <a href="/pages/home"><img src="../../assets/logo/logo-nav.svg" alt="logo" class="logo-nav"></a>
+          <a href="../home"><img src="../../assets/logo/logo-nav.svg" alt="logo" class="logo-nav"></a>
         </div>
         <div class="container-full-space right">
           <p class="sm-text gradient-text" id="coins">${coins} coins</p>
@@ -97,14 +97,14 @@ const generateDesktopNavbar = (isLoggedIn) => {
     const loggedOutNav = `
       <div class="navbar-desktop">
         <div class="container-full-space">
-          <a href="/pages/bookstore" class="sm-text">Bookstore</a>
+          <a href="../bookstore" class="sm-text">Bookstore</a>
         </div>
         <div class="logo-container">
-          <a href="/pages/home"><img src="../../assets/logo/logo-nav.svg" alt="logo" class="logo-nav"></a>
+          <a href="../home"><img src="../../assets/logo/logo-nav.svg" alt="logo" class="logo-nav"></a>
         </div>
         <div class="container-full-space right">
-          <a href="/pages/login" class="sm-text">Login</a>
-          <a href="/pages/signup" class="btn btn-gradient btn-signup-nav sm-text">Sign up</a>
+          <a href="../login" class="sm-text">Login</a>
+          <a href="../signup" class="btn btn-gradient btn-signup-nav sm-text">Sign up</a>
         </div>
       </div>
     `;
@@ -121,7 +121,7 @@ const generateMobileNavbar = (isLoggedIn) => {
     if (username === "admin") {
       const nav = `<div class="nav-mobile">
       <div class="logo-container">
-      <a href="/pages/home">
+      <a href="../home">
         <img src="../../assets/logo/logo-nav.svg" alt="logo" class="logo-nav" />
         </a>
       </div>
@@ -138,11 +138,11 @@ const generateMobileNavbar = (isLoggedIn) => {
       const adminNav = `
       <div class="navbar-desktop">
     <div class="container-full-space">
-      <a href="/pages/bookstore" class="sm-text">Bookstore</a>
+      <a href="../bookstore" class="sm-text">Bookstore</a>
       <img src="../../assets/icons/Search-pink.svg" alt="search" class="search-nav-icon icon">
     </div>
     <div class="logo-container">
-      <a href="/pages/home"
+      <a href="../home"
         ><img
           src="../../assets/logo/logo-nav.svg"
           alt="logo"
@@ -150,7 +150,7 @@ const generateMobileNavbar = (isLoggedIn) => {
       /></a>
     </div>
     <div class="container-full-space right">
-      <a href="/pages/Admin"><p class="sm-text">Admin Page</p></a>
+      <a href="../Admin"><p class="sm-text">Admin Page</p></a>
       <p class="sm-text">|</p>
       <a> <p class="sm-text logout">Log out</p></a>
     </div>
@@ -168,7 +168,7 @@ const generateMobileNavbar = (isLoggedIn) => {
 
       const nav = `<div class="nav-mobile">
       <div class="logo-container">
-      <a href="/pages/home">
+      <a href="../home">
         <img src="../../assets/logo/logo-nav.svg" alt="logo" class="logo-nav" />
         </a>
       </div>
@@ -197,8 +197,8 @@ const generateMobileNavbar = (isLoggedIn) => {
         <div class="icons-container">
           <p class="sm-text bold md-text" id="coins">${coins} coins</p>
           <div class="container-gap-30">
-            <a href="/pages/UserProfile/index.html?section=liked"><img src="../../assets/icons/heart.svg" alt="heart" class="heart-icon icon"></a>
-            <a href="/pages/Cart"><img
+            <a href="../UserProfile/index.html?section=liked"><img src="../../assets/icons/heart.svg" alt="heart" class="heart-icon icon"></a>
+            <a href="../Cart"><img
               src="../../assets/icons/Shopping cart.svg"
               alt="Shopping Cart"
               class="cart-icon icon"
@@ -206,10 +206,10 @@ const generateMobileNavbar = (isLoggedIn) => {
           </div>
         </div>
         <div class="container-nav-texts">
-          <a href="/pages/home" class="xl-text">Home</a>
-          <a href="/pages/bookstore" class="xl-text">Bookstore</a>
-          <a href="/pages/notifications" class="xl-text">Notifications</a>
-          <a href="/pages/profile" class="xl-text">Profile</a>
+          <a href="../home" class="xl-text">Home</a>
+          <a href="../bookstore" class="xl-text">Bookstore</a>
+          <a href="../notifications" class="xl-text">Notifications</a>
+          <a href="../profile" class="xl-text">Profile</a>
         </div>
       </div>
       <p class="logout md-text">Log out</p>
@@ -220,7 +220,7 @@ const generateMobileNavbar = (isLoggedIn) => {
   } else {
     const nav = `<div class="nav-mobile">
     <div class="logo-container">
-    <a href="/pages/home">
+    <a href="../home">
       <img src="../../assets/logo/logo-nav.svg" alt="logo" class="logo-nav" />
       </a>
     </div>
@@ -247,15 +247,15 @@ const generateMobileNavbar = (isLoggedIn) => {
             <p class="l-text username-nav">Not registered</p>
           </div>
           <div class="container-nav-texts">
-            <a href="/pages/home" class="xl-text">Home</a>
-            <a href="/pages/bookstore" class="xl-text">Bookstore</a>
+            <a href="../home" class="xl-text">Home</a>
+            <a href="../bookstore" class="xl-text">Bookstore</a>
           </div>
         </div>
         <div class="container-flex-col center">
-          <a href="/pages/signup" class="btn btn-gradient btn-signup-nav md-text"
+          <a href="../signup" class="btn btn-gradient btn-signup-nav md-text"
             >Sign up</a
           >
-          <a href="/pages/login" class="sm-text">Login</a>
+          <a href="../login" class="sm-text">Login</a>
         </div>
       </div>`;
 

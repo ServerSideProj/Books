@@ -7,11 +7,11 @@ const popupLogin = () => {
           <p class="xxl-text">You're not connected</p>
           <div class="container-flex-col center gap-1">
             <a
-              href="/pages/signup"
+              href="../signup"
               class="btn btn-gradient btn-signup-nav md-text"
               >Sign up</a
             >
-            <a href="/pages/login" class="sm-text">Login</a>
+            <a href="../login" class="sm-text">Login</a>
           </div>
         </div>`;
 
@@ -571,7 +571,7 @@ const popupAlreadyOnCart = () => {
           <img src="../../assets/icons/X.svg" class="btn-x" />
           <p class="xxl-text">This book is already in your cart</p>
           <div class="container-flex-col center gap-1">
-            <a href="/pages/Cart" class="sm-text">Go to cart</a>
+            <a href="../Cart" class="sm-text">Go to cart</a>
           </div>
         </div>`;
 
@@ -596,7 +596,7 @@ const popupAlreadyPurchased = () => {
           <img src="../../assets/icons/X.svg" class="btn-x" />
           <p class="xxl-text text-center">This book is already purchased by you!</p>
           <div class="container-flex-col center gap-1">
-            <a href="/pages/UserProfile" class="sm-text">See all purchased books</a>
+            <a href="../UserProfile" class="sm-text">See all purchased books</a>
           </div>
         </div>`;
 
@@ -622,7 +622,7 @@ const popupPayment = () => {
       <img src="../../assets/icons/X.svg" class="btn-x" />
       <p class="xxl-text">Added succesfully to your list 📚</p>
       <div class="container-flex-col center gap-1">
-        <a href="/pages/userProfile" class="sm-text">See all of my books</a>
+        <a href="../userProfile" class="sm-text">See all of my books</a>
       </div>
     </div>
   `;
@@ -738,7 +738,7 @@ const renderUsers = (users) => {
   $(".user-wrapper").on("click", function () {
     const userEmail = $(this).data("email");
     sessionStorage.setItem("friendEmail", userEmail);
-    window.location.href = "/pages/otherUserProfile";
+    window.location.href = "../otherUserProfile";
   });
 };
 

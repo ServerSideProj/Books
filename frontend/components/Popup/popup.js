@@ -30,6 +30,7 @@ const popupLogin = () => {
 };
 
 const popupFriends = (friendsList, type) => {
+  let text = type === "followers" ? "follower" : "following";
   const friendCards = friendsList
     .map((friend) => {
       let profileImage;
@@ -43,7 +44,7 @@ const popupFriends = (friendsList, type) => {
           <img src="${profileImage}" alt="profile image" class="friend-profile-img" />
           <p class="friend-name">${friend.username}</p>
         </div>
-        <div class="btn xsm-text btn-follow">${type}</div>
+        <div class="btn xsm-text btn-follow">${text}</div>
       </div>`;
     })
     .join(""); // Join all friend cards into a single string
@@ -108,7 +109,7 @@ const popupFriends = (friendsList, type) => {
             <img src="${profileImage}" alt="profile image" class="friend-profile-img" />
             <p class="friend-name">${friend.username}</p>
           </div>
-          <div class="btn xsm-text btn-follow">${type}</div>
+          <div class="btn xsm-text btn-follow">${text}</div>
         </div>`;
       })
       .join(""); // Join all friend cards into a single string

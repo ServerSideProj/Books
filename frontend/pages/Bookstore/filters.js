@@ -130,7 +130,7 @@ const filterBooksByText = (searchText) => {
   applyAllFilters();
 };
 
-const filterRate = () => {
+const filterRate = (e) => {
   // Remove the selected class from all rate options
   $(".container-options[data-stars] .opt").removeClass("selected");
 
@@ -139,16 +139,15 @@ const filterRate = () => {
     return $(this).attr("src").replace("circle-checked.svg", "circle.svg");
   });
 
-  // Add the selected class to the clicked option
-  $(this).addClass("selected");
+  $(e.currentTarget).addClass("selected");
 
   // Toggle image source between default and selected
-  const img = $(this).find("img");
+  const img = $(e.currentTarget).find("img");
   const imgSrc = img.attr("src");
   img.attr("src", imgSrc.replace("circle.svg", "circle-checked.svg"));
 };
 
-const filterDate = () => {
+const filterDate = (e) => {
   $(".container-options[data-date] .opt").removeClass("selected");
   $(".container-options[data-date] .opt img").each(function () {
     $(this).attr(
@@ -157,13 +156,13 @@ const filterDate = () => {
     );
   });
 
-  $(this).addClass("selected");
-  const img = $(this).find("img");
+  $(e.currentTarget).addClass("selected");
+  const img = $(e.currentTarget).find("img");
   const imgSrc = img.attr("src");
   img.attr("src", imgSrc.replace("circle.svg", "circle-checked.svg"));
 };
 
-const filterType = () => {
+const filterType = (e) => {
   $(".container-options[data-type] .opt").removeClass("selected");
   $(".container-options[data-type] .opt img").each(function () {
     $(this).attr(
@@ -172,8 +171,8 @@ const filterType = () => {
     );
   });
 
-  $(this).addClass("selected");
-  const img = $(this).find("img");
+  e.currentTarget.classList.add("selected");
+  const img = $(e.currentTarget).find("img");
   const imgSrc = img.attr("src");
   img.attr("src", imgSrc.replace("circle.svg", "circle-checked.svg"));
 };

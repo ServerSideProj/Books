@@ -5,6 +5,10 @@
 /* top filters styles */
 /* ------------------ */
 
+.opt > * {
+  pointer-events: none;
+}
+
 .filters {
   gap: 1rem;
 }

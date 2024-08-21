@@ -92,9 +92,13 @@ $(document).ready(function () {
 
 // Function to check if both fetch operations are complete
 const checkAndInitializeBooks = () => {
-  if (allBooksFetched && likedBooksFetched) {
-    // Once both are fetched, initialize the page
-    initializePage(arrAllBooks, likedBooks);
+  if (isLoggedIn) {
+    if (allBooksFetched && likedBooksFetched) {
+      // Once both are fetched, initialize the page
+      initializePage(arrAllBooks, likedBooks);
+    }
+  } else if (allBooksFetched) {
+    initializePage(arrAllBooks, []);
   }
 };
 
@@ -364,9 +368,15 @@ const initializePopupFilters = () => {
   $(".container-options .opt").off("click");
 
   // Event handlers for selecting options
-  $(".container-options[data-stars] .opt").on("click", filterRate);
-  $(".container-options[data-date] .opt").on("click", filterDate);
-  $(".container-options[data-type] .opt").on("click", filterType);
+  $(".container-options[data-stars] .opt").on("click", (e) => {
+    filterRate(e);
+  });
+  $(".container-options[data-date] .opt").on("click", (e) => {
+    filterDate(e);
+  });
+  $(".container-options[data-type] .opt").on("click", (e) => {
+    filterType(e);
+  });
 
   // Event handler for the Select button
   $(".select-btn").on("click", function () {

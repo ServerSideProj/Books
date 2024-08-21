@@ -5,9 +5,30 @@ const topPhysBooksUrl = "Book/popular-physical-books"; // URL to fetch the top 5
 const allAuthorsUrl = "Author/all-authors";
 
 $(document).ready(function () {
+  // Check if this is the first visit
+  if (!sessionStorage.getItem("firstVisit")) {
+    // This is the first visit, show the loader and play the animation
+    sessionStorage.setItem("firstVisit", "true");
+
+    setTimeout(function () {
+      const $loader = $(".opening");
+      const $mainContent = $(".main");
+
+      $loader.addClass("slide-up");
+
+      setTimeout(function () {
+        $loader.hide();
+        $mainContent.show();
+      }, 1000);
+    }, 2000);
+  } else {
+    // This is not the first visit, skip the loader
+    $(".opening").hide();
+    $(".main").show();
+  }
+
   getTopPhysical();
   getTopEBooks();
-
   getAuthors();
 });
 

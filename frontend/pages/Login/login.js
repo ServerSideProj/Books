@@ -4,25 +4,49 @@ $(document).ready(function () {
   $(".form-login").on("submit", function (event) {
     event.preventDefault();
 
-    const email = $('.form-login input[type="email"]').val();
-    const password = $('.form-login input[type="password"]').val();
+    const emailInput = $('.form-login input[type="email"]');
+    const passwordInput = $('.form-login input[type="password"]');
 
-    if (!validateEmail(email) || !validatePassword(password)) {
-      wrongData();
-      return; // Stop the login process if validation fails
+    const email = emailInput.val().trim();
+    const password = passwordInput.val().trim();
+
+    // Email validation
+    if (!validateEmail(email)) {
+      emailInput[0].setCustomValidity("Please enter a valid email address.");
+      emailInput[0].reportValidity();
+      return;
+    } else {
+      emailInput[0].setCustomValidity(""); // Clear any previous errors
     }
 
+    // Password validation
+    if (!validatePassword(password)) {
+      passwordInput[0].setCustomValidity(
+        "Password must be at least 3 characters long."
+      );
+      passwordInput[0].reportValidity();
+      return;
+    } else {
+      passwordInput[0].setCustomValidity(""); // Clear any previous errors
+    }
+
+    // Attempt to login
     login(email, password)
       .then((response) => {
         if (response) {
           console.log("Login successful:", response);
           window.location.href = "/pages/Home";
         } else {
-          wrongData();
+          // If login fails, set custom validity on the email field
+          emailInput[0].setCustomValidity(
+            "Login failed. Please check your email and password."
+          );
+          emailInput[0].reportValidity();
         }
       })
       .catch((error) => {
         console.error("Error during login:", error);
+        alert("An error occurred during login. Please try again.");
       });
   });
 });
@@ -36,22 +60,4 @@ const validateEmail = (email) => {
 // Password validation function
 const validatePassword = (password) => {
   return password.length >= 3;
-};
-
-// Add red to input to show that the data is not correct
-const wrongData = () => {
-  $(".input-box-sqr").each(function () {
-    if (!validateEmail($(this).val()) && $(this).attr("type") === "email") {
-      $(this).addClass("wrong");
-    } else if (
-      $(this).attr("type") === "password" &&
-      !validatePassword($(this).val())
-    ) {
-      $(this).addClass("wrong");
-    }
-  });
-
-  setTimeout(function () {
-    $(".input-box-sqr").removeClass("wrong");
-  }, 2000);
 };

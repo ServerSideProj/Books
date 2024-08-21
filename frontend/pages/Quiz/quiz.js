@@ -87,20 +87,24 @@ const displayQuestion = (index) => {
 
 // Start the timer when the quiz starts
 const startStopwatch = () => {
-  fetchQuestions();
-  $(".opening").addClass("none");
-  $(".container-questions").removeClass("none");
+  if (localStorage.getItem("authToken") !== null) {
+    fetchQuestions();
+    $(".opening").addClass("none");
+    $(".container-questions").removeClass("none");
 
-  const timeDisplay = $(".time");
-  if (interval) {
-    clearInterval(interval);
-  }
-  seconds = 0;
-  timeDisplay.text(formatTime(seconds));
-  interval = setInterval(() => {
-    seconds++;
+    const timeDisplay = $(".time");
+    if (interval) {
+      clearInterval(interval);
+    }
+    seconds = 0;
     timeDisplay.text(formatTime(seconds));
-  }, 1000);
+    interval = setInterval(() => {
+      seconds++;
+      timeDisplay.text(formatTime(seconds));
+    }, 1000);
+  } else {
+    popupLogin();
+  }
 };
 
 // Format the timer to 00:00

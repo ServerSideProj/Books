@@ -15,7 +15,7 @@ $(document).ready(function () {
     const confirmPassword = confirmPasswordInput.val();
 
     // Password match validation
-    if (password != confirmPassword) {
+    if (password !== confirmPassword) {
       confirmPasswordInput[0].setCustomValidity("Passwords do not match.");
       confirmPasswordInput[0].reportValidity();
       return;
@@ -30,12 +30,16 @@ $(document).ready(function () {
           console.log("Registration successful");
           window.location.href = "/pages/Home/";
         } else {
-          alert("Registration failed.");
+          // Set custom validity on the email field if the registration fails
+          emailInput[0].setCustomValidity("Email already in the database.");
+          emailInput[0].reportValidity();
         }
       })
       .catch((error) => {
         console.error("Error during registration:", error);
-        alert("An error occurred during registration. Please try again.");
+        // Set custom validity on the email field if there's an error during registration
+        emailInput[0].setCustomValidity("Email already registered.");
+        emailInput[0].reportValidity();
       });
   });
 });

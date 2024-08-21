@@ -21,8 +21,24 @@
     <script src="./components/Popup/popup.js"></script>
     <script src="./components/Navbar/navbar.js" type="module"></script>
     <script src="./components/Footer/footer.js"></script>
+    <script src="additions.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
 
     <style>
+      .fredoka {
+        font-family: "Fredoka", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 500;
+        font-style: normal;
+        font-variation-settings: "wdth" 100;
+      }
+
       table {
         width: 100%;
         border-collapse: collapse;
@@ -30,28 +46,51 @@
       td {
         padding: 10px;
         vertical-align: top;
+        font-weight: 400;
+        line-height: 30px;
       }
-      .number {
-        width: 50px;
-      }
+
       .title {
-        font-weight: bold;
+        font-weight: 500;
       }
 
       .main {
         direction: rtl;
         min-height: 100vh;
-        padding: 2rem 11rem 5rem 11rem;
+        padding: 4rem 11rem 5rem 11rem;
         display: flex;
         justify-content: center;
         flex-direction: column;
         gap: 1rem;
-        font-family: var(--font-family);
+        font-family: "fredoka";
+        display: flex;
       }
 
       .back-home {
         width: fit-content;
         align-self: center;
+        margin-bottom: 2rem;
+      }
+
+      .step-number {
+        width: 36px;
+        height: 36px;
+        text-align: center;
+        display: flex;
+        font-size: 1rem;
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 8px;
+        position: relative;
+        top: 9px;
+      }
+
+      .space {
+        height: 0.1rem;
+      }
+      .inner-space {
+        height: 0.5rem;
       }
     </style>
 
@@ -59,82 +98,182 @@
   </head>
   <body>
     <div class="main">
-      <a href="/pages/Home/"
-        ><div class="btn btn-gradient back-home">
-          Back to our AWESOME website
-        </div></a
+      <a class="back-home" href="/pages/Home/"
+        ><div class="btn btn-gradient">Back to our AWESOME website</div></a
       >
-
+      <p class="big-text">רשימת אקסטרות לאתר מעבר לדרישות:</p>
       <table>
         <tr>
-          <td class="number">1.</td>
-          <td class="title">עיצוב מקצועי אסתטי ואחיד לכל האתר</td>
+          <td class="step-number btn-gradient">1</td>
+          <td class="title">עיצוב והתממשקות</td>
           <td>
-            הקפדה על עיצוב מודרני, אינטואיטיבי ואחיד לכל האתר, הכולל צבעים
-            תואמים, טיפוגרפיה ברורה, ואסתטיקה מקצועית שמשלבת UX טוב וכוללת
-            אנימציות.
+            <div>
+              עיצוב מקצועי, אסתטי ואחיד לכל האתר בדגש על UX ברור ופשוט, המשלב
+              אנימציות, אנימציות גלילה ואינטראקציה של המשתמש עם הממשק.
+            </div>
+            <div class="inner-space"></div>
+            <div>
+              עדכון האלמנטים במסך לפי מצב החיבור של המשתמש למערכת בצורה סגורה
+              היטב (נאב-בר מתעדכן, פופאפים המתריאים על פעולות שאי אפשר לבצע ללא
+              חיבור משתמש, ועוד).
+            </div>
           </td>
         </tr>
+        <td>
+          <div class="space"></div>
+        </td>
         <tr>
-          <td class="number">2.</td>
+          <td class="step-number btn-gradient">2</td>
           <td class="title">עמוד האדמין</td>
           <td>
-            אפשרויות ניהול מתקדמות הכוללות הוספה ומחיקה של משתמשים, הוספה ועריכה
-            של סופרים, הוספה ועריכה של ספרים וזמינותם בחנות הספרים. בנוסף, הצגת
-            מידע סטטיסטי על כמות המשתמשים, הסופרים והספרים, ותרשימים על
-            סטטיסטיקות קניות משתמשים.
+            <div>
+              אפשרויות הוספה ומחיקה של משתמשים, הוספה ועריכה של סופרים, הוספה
+              ועריכה של ספרים וזמינותם בחנות קניית הספרים (Bookstore).
+            </div>
+            <div class="inner-space"></div>
+            <div>מידע אודות כמות כוללת של משתמשים, סופרים וספרים.</div>
+            <div class="inner-space"></div>
+            <div>תרשימים וגרפים של סטטיסטיקות מקניות הספרים של המשתמשים.</div>
           </td>
         </tr>
+        <td>
+          <div class="space"></div>
+        </td>
         <tr>
-          <td class="number">3.</td>
+          <td class="step-number btn-gradient">3</td>
+          <td class="title">
+            הוספת ספרים למערכת - יצירה של ספר עם AI או הכנסה של ספר קיים
+          </td>
+          <td>
+            <div>
+              ניתן ליצור ספר חדש למערכת בשתי דרכים. האחד: להכניס מידע על ספר
+              קיים שיש לך בבית, להעלות תמונה ולמלא את כל הפרטים. ובדרך שנייה:
+              בעזרת AI בוחרים קטגוריות של ספר מתוך הקטגוריות הקיימות במערכת,
+              מג׳נרטים תיאור של הספר וניתן גם לערוך אותו ידנית, ולבסוף מוסיפים
+              תמונת כריכה שניתן גם כן לג׳נרט בעזרת AIף ומיסיפים שם לספר. לבסוף
+              ניתן להחליט אם מפרסמים את הספר לציבור או שמה מבטלים את הספר במיגה
+              ולא יצא לרצונכם.
+            </div>
+          </td>
+        </tr>
+        <td>
+          <div class="space"></div>
+        </td>
+        <tr>
+          <td class="step-number btn-gradient">4</td>
           <td class="title">עמוד חנות ספרים</td>
           <td>
-            פילטרים מתקדמים, הכוללים חיפוש לפי מילות מפתח, סופרים ומשתמשים שאני
-            עוקב אחריהם, כמו גם פילטור לפי מחיר, חדשנות וקטגוריות שונות.
+            פילטרים נרחבים, כולל פילטרים לפי מילים, סופרים, ומשתמשים שאני במעקב
+            אחריהם, טווח מחירים, מהספרים הישנים לחדשים ולהיפך, מהספרים הזולים
+            ליקרים וכו׳.
           </td>
         </tr>
+        <td>
+          <div class="space"></div>
+        </td>
         <tr>
-          <td class="number">4.</td>
-          <td class="title">משחק BooksBlender</td>
+          <td class="step-number btn-gradient">5</td>
+          <td class="title">משחק כיפי בשילוב AI</td>
           <td>
-            משחק המבוסס על AI המשלב ספרים שונים לכדי יצירת ספר חדש, כולל יצירת
-            כריכה ותיאור חדש לספר המשותף.
+            יצרנו משחק שקראנו לו "BooksBlender" המשלב 2 ספרים מחנות הספרים בעזרת
+            AI ויוצר סיפורים חדשים ותמונת כריכה חדשה.
           </td>
         </tr>
+        <td>
+          <div class="space"></div>
+        </td>
         <tr>
-          <td class="number">5.</td>
-          <td class="title">חידון יומי</td>
+          <td class="step-number btn-gradient">6</td>
+          <td class="title">חידון יומי עם טבלת מובילים מתעדכנת</td>
           <td>
-            חידון שנוצר אוטומטית עם לוח מובילים שמבוסס על דיוק וזמן תגובה.
-            המשתמשים מקבלים ניקוד בהתאם לביצועיהם בחידון.
+            חידון יומי שנוצר באופן אוטומטי, עם לוח מובילים שמבוסס על המשתמשים
+            שעונים על הכי הרבה שאלות נכונות ובזמן הקצר ביותר, המתעדכן בסיום כל
+            תוצאה חדשה של משתמש. לאחר משחק אחד ליום, לא ניתן לשחק שוב עבור אותו
+            המשתמש!
           </td>
         </tr>
+        <td>
+          <div class="space"></div>
+        </td>
         <tr>
-          <td class="number">6.</td>
-          <td class="title">הקראה אוטומטית של טקסטים בעמודי המידע</td>
+          <td class="step-number btn-gradient">7</td>
+          <td class="title">הקראה אוטומטית בשילוב AI</td>
           <td>
-            הוספנו יכולת להקראה אוטומטית של הטקסטים בעמודי המידע בעזרת AI, עם
+            הוספת הקראה אוטומטית בעזרת AI של כל טקסט בעמוד המידע על הספר, עם
             תמיכה בכל השפות.
           </td>
         </tr>
+        <td>
+          <div class="space"></div>
+        </td>
         <tr>
-          <td class="number">7.</td>
-          <td class="title">מערכת מטבעות לקניות ספרים</td>
+          <td class="step-number btn-gradient">8</td>
+          <td class="title">ספרים למכירה לפי רצון המשתמש</td>
           <td>
-            פיתחנו מערכת שבה משתמשים יכולים לאסוף מטבעות ולהשתמש בהם לרכישת
-            ספרים ממשתמשים אחרים. המערכת כוללת בקשות קנייה, עמידה בתנאים מוגדרים
-            מראש, ושימוש במטבעות שהמשתמשים צברו.
+            המשתמש יכול לצפות בספרים שהוא קנה ולסמן האם הוא סיים לקרוא אותם והאם
+            הוא רוצה למכור אותם (עבור ספרים פיזיים בלבד). לא כל ספר יוכל להימכר,
+            רק ספר שהמשתמש רוצה למכור!
           </td>
         </tr>
+        <td>
+          <div class="space"></div>
+        </td>
         <tr>
-          <td class="number">8.</td>
-          <td class="title">עמוד "נמצא לא"</td>
+          <td class="step-number btn-gradient">9</td>
+          <td class="title">מעקב אחר משתמשים אחרים</td>
           <td>
-            הוספנו עמוד התראה למשתמשים שניסו לגשת לכתובות URL שאינן קיימות או
-            שאינם מורשים להיכנס אליהן.
+            <div>כל משתמש יוכל לעקוב אחרי משתמשים אחרים.</div>
+            <div>
+              בעמוד הפרופיל של כל משתמש, הוא יוכל לראות את רשימת כל המשתמשים
+              האחרים שהוא עוקב אחריהם ואלו שעוקבים אחריו (בדומה לכל רשת חברתית).
+            </div>
+            <div>
+              בכל עמוד פרופיל של משתמש אחד ניתן להוסיף או להסיר את החברות,
+              וכמובן שהמשתמש יקבל פופאפ שיודיע לו על ביצוע הפעולה.
+            </div>
+          </td>
+        </tr>
+        <td>
+          <div class="space"></div>
+        </td>
+        <tr>
+          <td class="step-number btn-gradient">10</td>
+          <td class="title">הוספת ביקורות והצגתן</td>
+          <td>
+            כל משתמש יוכל לתת ביקורת לספר שהוא קנה (רק ביקורת אחת לכל ספר,
+            שהמשתמשים לא יעשו שטויות), ואת הביקורות ניתן לראות בעמוד המידע של כל
+            ספר גם מעמוד חנות הספרים.
+          </td>
+        </tr>
+        <td>
+          <div class="space"></div>
+        </td>
+        <tr>
+          <td class="step-number btn-gradient">11</td>
+          <td class="title">מטבעות Story-coins לקנייה ספרים חוזרת</td>
+          <td>
+            כל משתמש מקבל מטבעות על הצלחה בחידון היומי (קבלת מטבעות על פי כמות
+            התשובות הנכונות * 3), ועם המטבעות הללו ניתן לבצע קנייה של ספר ממשתמש
+            אחר שהוצע למכירה. ניתן לשלוח עד 2 בקשות עבור כל ספר, ולא ניתן לבקש
+            בקשה עם מספר מטבעות נמוך ממה שיש למשתמש ברגע נתון. אם המשתמש מבקש
+            מספר ספרים ומציע עליהם סכום מצטבר של מטבעות שגדולות מהסכום שיש לו -
+            ברגע שהמשתמש האחר אישר את הבקשה הראשונה - כל שאר הבקשות מתעדכנות,
+            ומוסרות במידה ואין מספיק מטבעות.
+          </td>
+        </tr>
+        <td>
+          <div class="space"></div>
+        </td>
+        <tr>
+          <td class="step-number btn-gradient">12</td>
+          <td class="title">עמוד לא נמצא</td>
+          <td>
+            העברה לעמוד NotFound במידה ומכניסים url שאסור להגיע אליו (למשל
+            אדמין, כאשר זה לא האדמין) או עמוד שלא קיים.
           </td>
         </tr>
       </table>
     </div>
+    <div class="footer"></div>
   </body>
 </html>

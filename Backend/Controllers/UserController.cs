@@ -47,18 +47,18 @@ namespace Backend.Controllers
         }
 
         [HttpGet("username/{email}")]
-        public ActionResult GetUsernameByEmail(string email)
+        public ActionResult GetUsernameAndProfileImageByEmail(string email)
         {
             try
             {
-                string username = Users.GetUsernameByEmail(email);
+                var user = Users.GetUsernameAndProfileImageByEmail(email);
 
-                if (string.IsNullOrEmpty(username))
+                if (user.Username == null)
                 {
                     return NotFound("User not found.");
                 }
 
-                return Ok(new { username = username });
+                return Ok(new { username = user.Username, profileImageLink = user.ProfileImageLink });
             }
             catch (Exception ex)
             {

@@ -84,7 +84,6 @@ namespace Backend.BL
             return dbUser.ChangePassword(email, oldPassword, newPassword);
         }
 
-
         public static List<UserScore> GetTop5UserScores()
         {
             Quiz.GetCurrentQuizId();
@@ -106,10 +105,11 @@ namespace Backend.BL
             return dbUser.GetAllUsersWithStats();
         }
 
-        public static string GetUsernameByEmail(string email)
+        public static (string Username, string ProfileImageLink) GetUsernameAndProfileImageByEmail(string email)
         {
-            return dbUser.GetUsernameByEmail(email);
+            return dbUser.GetUsernameAndProfileImageByEmail(email);
         }
+
 
         public static void MakeUserActive(string email)
         {

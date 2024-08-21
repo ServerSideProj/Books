@@ -16,6 +16,7 @@ $(document).ready(function () {
     API_URL + "Users/username/" + encodeURIComponent(userEmail),
     (res) => {
       $("#username").text(res.username);
+      $(".user-photo").attr("src", IMAGE_URL + res.profileImageLink);
     },
     onError
   );

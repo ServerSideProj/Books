@@ -420,28 +420,33 @@ namespace Backend.DAL
             return users;
         }
 
-        public string GetUsernameByEmail(string email)
+        public (string Username, string ProfileImageLink) GetUsernameAndProfileImageByEmail(string email)
         {
             using (SqlConnection con = connect("myProjDB"))
             {
-                using (SqlCommand cmd = new SqlCommand("sp_GetUsernameByEmail", con))
+                using (SqlCommand cmd = new SqlCommand("sp_GetUsernameAndProfileImageByEmail", con))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@Email", email);
 
-                    var result = cmd.ExecuteScalar();
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            string username = reader["username"].ToString();
+                            string profileImageLink = reader["profileImage"] != DBNull.Value
+                                                      ? reader["profileImage"].ToString()
+                                                      : null;
 
-                    if (result != null)
-                    {
-                        return result.ToString();
-                    }
-                    else
-                    {
-                        return null; // Or handle it differently, throw an exception
+                            return (username, profileImageLink);
+                        }
+                        else
+                        {
+                            return (null, null); // Return null tuple if no user is found
+                        }
                     }
                 }
             }
-
         }
 
         public List<object> GetAllUsersWithActiveProp()

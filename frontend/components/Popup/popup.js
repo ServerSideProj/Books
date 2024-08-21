@@ -36,8 +36,7 @@ const popupFriends = (friendsList, type) => {
     .map((friend) => {
       let profileImage;
       if (friend.profileImageLink)
-        profileImage =
-          API_URL.slice(0, -4) + "Images/" + friend.profileImageLink;
+        profileImage = IMAGE_URL + friend.profileImageLink;
       else profileImage = "../../assets/images/user-profile-image.svg";
 
       return `
@@ -688,8 +687,7 @@ const renderUsers = (users) => {
   // Create user cards
   users.forEach((user) => {
     let profileImage;
-    if (user.profileImage)
-      profileImage = API_URL.slice(0, -4) + "Images/" + user.profileImage;
+    if (user.profileImage) profileImage = IMAGE_URL + user.profileImage;
     else profileImage = "../../assets/images/user-profile-image.svg";
 
     const userCard = `

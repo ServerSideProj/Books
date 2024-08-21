@@ -173,7 +173,7 @@ const displayReviews = (reviews) => {
 
   for (let i = 0; i < reviews.length; i++) {
     let profileImage = reviews[i].profileImage
-      ? API_URL.slice(0, -4) + "Images/" + reviews[i].profileImage
+      ? IMAGE_URL + reviews[i].profileImage
       : "../../assets/images/user-profile-image.svg";
 
     let username = reviews[i].username || "Anonymous";

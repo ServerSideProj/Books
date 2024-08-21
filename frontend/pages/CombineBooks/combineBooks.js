@@ -242,7 +242,7 @@ const uploadBookCoverAi = (file) => {
 };
 
 const gotAllBooks = (books) => {
-  arrAllBooks = books;
+  arrAllBooks = books.filter((book) => book.language === "en");
 
   // Populate the select options
   populateBookOptions("#book1");

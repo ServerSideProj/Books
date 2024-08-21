@@ -15,6 +15,14 @@
   flex-direction: column;
 }
 
+.container-categories {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
 .book-card {
   box-shadow: 0 5px 20px 0 rgba(153, 131, 176, 0.2);
   background: var(--white);

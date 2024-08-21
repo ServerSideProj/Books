@@ -252,7 +252,6 @@ namespace Backend.Controllers
 
             string path = Path.Combine(Directory.GetCurrentDirectory(), "UploadedFiles");
 
-            // Ensure the directory exists
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
@@ -331,20 +330,74 @@ namespace Backend.Controllers
             }
         }
 
-        [HttpDelete("{email}")]
-        public IActionResult DeleteUser(string email)
+
+        [HttpGet("GetAllUsersWithActiveProp")]
+        public ActionResult<List<object>> GetAllUsersWithActiveProp()
         {
             try
             {
-                Users.DeleteUser(email);
-                return Ok(new { Message = "User deleted successfully." });
+                var usersWithActiveProp = Users.GetAllUsersWithActiveProp();
+                return Ok(usersWithActiveProp);
             }
             catch (Exception ex)
             {
                 return StatusCode(500, new { Error = ex.Message });
             }
-
         }
-       
+
+        [HttpPut("MakeUserActive")]
+        public IActionResult MakeUserActive([FromBody] JsonElement requestData)
+        {
+            if (!requestData.TryGetProperty("Email", out JsonElement emailElement))
+            {
+                return BadRequest("Email is missing.");
+            }
+
+            string email = emailElement.GetString();
+
+            if (string.IsNullOrEmpty(email))
+            {
+                return BadRequest("Email cannot be null or empty.");
+            }
+
+            try
+            {
+                Users.MakeUserActive(email);
+                return Ok(new { Message = "User activated successfully." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Error = ex.Message });
+            }
+        }
+
+        [HttpPut("MakeUserInactive")]
+        public IActionResult MakeUserInactive([FromBody] JsonElement requestData)
+        {
+            if (!requestData.TryGetProperty("Email", out JsonElement emailElement))
+            {
+                return BadRequest("Email is missing.");
+            }
+
+            string email = emailElement.GetString();
+
+            if (string.IsNullOrEmpty(email))
+            {
+                return BadRequest("Email cannot be null or empty.");
+            }
+
+            try
+            {
+                Users.MakeUserInactive(email);
+                return Ok(new { Message = "User deactivated successfully." });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Error = ex.Message });
+            }
+        }
+
+
+
     }
 }

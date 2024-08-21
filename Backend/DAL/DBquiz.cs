@@ -202,7 +202,7 @@ namespace Backend.DAL
                         {
                             return new Quiz(
                                 quizId: quizId,
-                                questions: questionsList.ToArray()  // Convert list to array
+                                questions: questionsList.ToArray()  
                             );
                         }
                     }

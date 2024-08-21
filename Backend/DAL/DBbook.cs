@@ -222,9 +222,8 @@ namespace Backend.DAL
             }
             catch (Exception ex)
             {
-                // Log the exception details
                 Console.WriteLine("Error occurred: " + ex.Message);
-                throw; // re-throw the exception to maintain the 500 error response
+                throw; 
             }
         }
 
@@ -442,7 +441,7 @@ namespace Backend.DAL
 
                 if (result != null && result != DBNull.Value)
                 {
-                    return Convert.ToInt32(result); // Author already exists, return the ID
+                    return Convert.ToInt32(result);
                 }
             }
 
@@ -461,7 +460,6 @@ namespace Backend.DAL
                 idParameter.Direction = ParameterDirection.Output;
                 insertCmd.Parameters.Add(idParameter);
 
-                // Execute the insert command
                 insertCmd.ExecuteNonQuery();
 
                 // Return the new Author ID
@@ -470,7 +468,7 @@ namespace Backend.DAL
         }
 
 
-        //
+        
         private void EnsureCategoryExists(SqlConnection con, SqlTransaction transaction, string category)
         {
             SqlCommand checkCmd = new SqlCommand("sp_CheckCategoryExists", con, transaction);
@@ -490,7 +488,7 @@ namespace Backend.DAL
             }
         }
 
-        //
+        
         public int AddEbookCopy(BookCopy ebookCopy)
         {
             using (SqlConnection con = connect("myProjDB"))
@@ -507,7 +505,7 @@ namespace Backend.DAL
         }
 
 
-        //
+        
         public int AddPhysBookCopy(BookCopy physBookCopy)
         {
             using (SqlConnection con = connect("myProjDB"))
@@ -523,7 +521,7 @@ namespace Backend.DAL
             }
         }
 
-        //
+        
         public List<Book> GetAllBooks()
         {
             using (SqlConnection con = connect("myProjDB"))
@@ -545,7 +543,7 @@ namespace Backend.DAL
             }
         }
 
-        //
+        
         private Book MapBook(SqlDataReader reader)
         {
             return new Book(
@@ -649,7 +647,7 @@ namespace Backend.DAL
             return physBookCopies;
         }
 
-        //
+        
         public void DeleteBook(int bookId)
         {
             using (SqlConnection con = connect("myProjDB"))
@@ -663,7 +661,7 @@ namespace Backend.DAL
             }
         }
 
-        //
+        
         public List<Book> GetAllActiveBooks()
         {
             List<Book> books = new List<Book>();

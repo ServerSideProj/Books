@@ -124,7 +124,7 @@ namespace Backend.Controllers
 
             if (likedBooks == null || !likedBooks.Any())
             {
-                return Ok(new List<Book>()); // Return an empty array if no liked books are found
+                return Ok(new List<Book>()); 
             }
 
             return Ok(likedBooks);
@@ -186,13 +186,11 @@ namespace Backend.Controllers
         {
             try
             {
-                // Extract values from JSON request
                 int id = updatedBook.GetProperty("id").GetInt32();
                 string title = updatedBook.GetProperty("title").GetString();
                 string language = updatedBook.GetProperty("language").GetString();
                 bool active = updatedBook.GetProperty("active").GetBoolean();
 
-                // Call the business logic to update the book
                 Book.UpdateBookAdmin(id, title, language, active);
 
                 return Ok(new { Message = "Book updated successfully." });
@@ -325,7 +323,6 @@ namespace Backend.Controllers
 
             string path = Path.Combine(Directory.GetCurrentDirectory(), "UploadedFiles");
 
-            // Ensure the directory exists
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
@@ -387,10 +384,9 @@ namespace Backend.Controllers
                     imageLink
                 );
 
-                // Create a list of books to pass to AddBooks
+
                 List<Book> books = new List<Book> { newBook };
 
-                // Call the method to add the book(s)
                 Book.AddBooks(books);
 
                 return Ok(new { message = "Book added successfully." });

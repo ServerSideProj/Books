@@ -115,7 +115,7 @@ namespace Backend.DAL
         {
             using (SqlConnection con = connect("myProjDB"))
             {
-                SqlCommand cmd = new SqlCommand("sp_GetAllUsers", con);
+                SqlCommand cmd = new SqlCommand("sp_GetActiveUsers", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 List<Users> users = new List<Users>();
@@ -301,18 +301,6 @@ namespace Backend.DAL
             }
         }
 
-        public void DeleteUser(string email)
-        {
-            using (SqlConnection con = connect("myProjDB"))
-            {
-                SqlCommand cmd = new SqlCommand("sp_DeleteUser", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-
-                cmd.Parameters.AddWithValue("@Email", email);
-
-                cmd.ExecuteNonQuery();
-            }
-        }
 
         public void UpdateUserCoins(string userEmail, decimal coinsAmount)
         {
@@ -415,14 +403,15 @@ namespace Backend.DAL
                     while (reader.Read())
                     {
                         var user = new Dictionary<string, object>
-                {
-                    { "email", reader["email"].ToString() },
-                    { "username", reader["username"].ToString() },
-                    { "coins", reader["coins"] != DBNull.Value ? (int)reader["coins"] : 0 },
-                    { "purchasedBooksCount", reader["purchasedBooksCount"] != DBNull.Value ? (int)reader["purchasedBooksCount"] : 0 },
-                    { "followingCount", reader["followingCount"] != DBNull.Value ? (int)reader["followingCount"] : 0 },
-                    { "followersCount", reader["followersCount"] != DBNull.Value ? (int)reader["followersCount"] : 0 }
-                };
+                        {
+                            { "email", reader["email"].ToString() },
+                            { "username", reader["username"].ToString() },
+                            { "coins", reader["coins"] != DBNull.Value ? (int)reader["coins"] : 0 },
+                            { "purchasedBooksCount", reader["purchasedBooksCount"] != DBNull.Value ? (int)reader["purchasedBooksCount"] : 0 },
+                            { "followingCount", reader["followingCount"] != DBNull.Value ? (int)reader["followingCount"] : 0 },
+                            { "followersCount", reader["followersCount"] != DBNull.Value ? (int)reader["followersCount"] : 0 },
+                            { "isActive", reader["isActive"] != DBNull.Value ? (bool)reader["isActive"] : false }
+                        };
                         users.Add(user);
                     }
                 }
@@ -448,8 +437,82 @@ namespace Backend.DAL
                     }
                     else
                     {
-                        return null; // Or handle it differently, e.g., throw an exception
+                        return null; // Or handle it differently, throw an exception
                     }
+                }
+            }
+
+        }
+
+        public List<object> GetAllUsersWithActiveProp()
+        {
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                SqlCommand cmd = new SqlCommand("sp_GetAllUsers", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                List<object> users = new List<object>();
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        var userWithActiveProp = new
+                        {
+                            Email = reader["email"].ToString(),
+                            Username = reader["username"].ToString(),
+                            Password = "",  
+                            ProfileImageLink = reader["profileImage"].ToString(),
+                            Coins = Convert.ToInt32(reader["coins"]),
+                            IsActive = Convert.ToBoolean(reader["isActive"])  
+                        };
+
+                        users.Add(userWithActiveProp);
+                    }
+                }
+
+                return users;
+            }
+        }
+
+        public void MakeUserInactive(string email)
+        {
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                SqlCommand cmd = new SqlCommand("sp_MakeUserInactive", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add(new SqlParameter("@Email", email));
+
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                    Console.WriteLine($"User with email {email} has been made inactive.");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("An error occurred: " + ex.Message);
+                }
+            }
+        }
+
+        public void MakeUserActive(string email)
+        {
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                SqlCommand cmd = new SqlCommand("sp_MakeUserActive", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.Add(new SqlParameter("@Email", email));
+
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                    Console.WriteLine($"User with email {email} has been made active.");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("An error occurred: " + ex.Message);
                 }
             }
         }

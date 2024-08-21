@@ -84,10 +84,6 @@ namespace Backend.BL
             return dbUser.ChangePassword(email, oldPassword, newPassword);
         }
 
-        public static void DeleteUser(string email)
-        {
-            dbUser.DeleteUser(email);
-        }
 
         public static List<UserScore> GetTop5UserScores()
         {
@@ -114,5 +110,23 @@ namespace Backend.BL
         {
             return dbUser.GetUsernameByEmail(email);
         }
+
+        public static void MakeUserActive(string email)
+        {
+            dbUser.MakeUserActive(email);
+        }
+
+        public static void MakeUserInactive(string email)
+        {
+            dbUser.MakeUserInactive(email);
+        }
+
+        public static List<object> GetAllUsersWithActiveProp()
+        {
+            return dbUser.GetAllUsersWithActiveProp();
+        }
+
+
+
     }
 }

@@ -73,7 +73,7 @@ namespace Backend.BL
             Subtitle = "";
             Categories = categories;
             Authors = authors;
-            Price = 0.0m;
+            Price = 5.0m;
             Active = true;
             ImageLink = imageLink;
             PreviewLink = "N/A";

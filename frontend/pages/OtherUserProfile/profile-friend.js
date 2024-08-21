@@ -16,7 +16,10 @@ $(document).ready(function () {
     API_URL + "Users/username/" + encodeURIComponent(userEmail),
     (res) => {
       $("#username").text(res.username);
-      $(".user-photo").attr("src", IMAGE_URL + res.profileImageLink);
+      let profileImage;
+      if (res.profileImageLink) profileImage = IMAGE_URL + res.profileImageLink;
+      else profileImage = "../../assets/images/user-profile-image.svg";
+      $(".user-photo").attr("src", profileImage);
     },
     onError
   );

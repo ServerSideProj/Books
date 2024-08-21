@@ -32,8 +32,10 @@
     <link rel="stylesheet" href="../../components/Popup/popup.css" />
     <link rel="stylesheet" href="./admin.css" />
     <!-- Scripts for this page-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../../components/Popup/popup.js"></script>
     <script src="./admin.js"></script>
+    <script src="./charts.js"></script>
 
     <title>Admin</title>
   </head>
@@ -41,37 +43,43 @@
     <div class="bg-dark"></div>
     <div class="navbar"></div>
     <div class="main">
-      <div class="btns">
-        <a href="/pages/CreateBook/"
-          ><div
-            class="create-book-btn btn btn-create container-flex center-ver center-hor text-center l-text"
+      <div class="container-flex-col gap-03 center-hor width100">
+        <p class="big-text">Actions</p>
+        <div class="btns">
+          <a href="/pages/CreateBook/"
+            ><div
+              class="create-book-btn btn btn-create container-flex center-ver center-hor text-center l-text"
+            >
+              Add a new Book
+            </div>
+          </a>
+          <div
+            class="create-author-btn btn btn-create container-flex center-ver center-hor text-center l-text"
           >
-            Add a new Book
+            Add a new Author
           </div>
-        </a>
-        <div
-          class="create-author-btn btn btn-create container-flex center-ver center-hor text-center l-text"
-        >
-          Add a new Author
-        </div>
-        <div
-          class="create-user-btn btn btn-create container-flex center-ver center-hor text-center l-text"
-        >
-          Add a new User
+          <div
+            class="create-user-btn btn btn-create container-flex center-ver center-hor text-center l-text"
+          >
+            Add a new User
+          </div>
         </div>
       </div>
-      <div class="total-stats">
-        <div class="stat-box">
-          <p class="md-text">Total books amount</p>
-          <p class="xl-text" id="total-books">0</p>
-        </div>
-        <div class="stat-box">
-          <p class="md-text">Total authors amount</p>
-          <p class="xl-text" id="total-authors">0</p>
-        </div>
-        <div class="stat-box">
-          <p class="md-text">Total users amount</p>
-          <p class="xl-text" id="total-users">0</p>
+      <div class="container-flex-col gap-1 center-hor width100">
+        <p class="big-text">Total Stats</p>
+        <div class="total-stats">
+          <div class="stat-box">
+            <p class="md-text">Total books amount</p>
+            <p class="xl-text" id="total-books">0</p>
+          </div>
+          <div class="stat-box">
+            <p class="md-text">Total authors amount</p>
+            <p class="xl-text" id="total-authors">0</p>
+          </div>
+          <div class="stat-box">
+            <p class="md-text">Total users amount</p>
+            <p class="xl-text" id="total-users">0</p>
+          </div>
         </div>
       </div>
 
@@ -126,6 +134,24 @@
             </tr>
           </thead>
         </table>
+      </div>
+      <p class="big-text">Charts</p>
+
+      <div class="charts-wrapper">
+        <div class="chart-container">
+          <p class="text-center xl-text">
+            Purchased Books: eBooks vs Physical Books
+          </p>
+          <canvas id="booksChart_bookType"></canvas>
+        </div>
+        <div class="chart-container">
+          <p class="text-center xl-text">Books Purchased by Price</p>
+          <canvas id="booksChart_price"></canvas>
+        </div>
+        <div class="chart-container">
+          <p class="text-center xl-text">Books Purchased by Category</p>
+          <canvas id="booksChart_category"></canvas>
+        </div>
       </div>
     </div>
   </body>

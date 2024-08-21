@@ -118,6 +118,8 @@
   gap: 1rem;
   justify-content: center;
   padding-top: 1rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(153, 131, 176, 0.292);
 }
 
 .total-stats {
@@ -126,14 +128,14 @@
   align-items: center;
   gap: 1rem;
   justify-content: center;
-  /* border-bottom: 1px solid rgba(153, 131, 176, 0.292); */
-  padding: 2rem 0;
+  padding-bottom: 2rem;
   text-align: center;
 }
 
 .total-stats p {
   text-wrap: nowrap;
 }
+
 .stat-box {
   box-shadow: 0 4px 7px 0 #b588e26b;
   background: #fefcff;
@@ -145,6 +147,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+}
+
+.charts-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-around;
+  flex-direction: column;
+  gap: 5rem;
+}
+
+.chart-container {
+  height: 400px;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
 }
 

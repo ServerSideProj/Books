@@ -876,5 +876,35 @@ namespace Backend.DAL
             return categories;
         }
 
+        public List<dynamic> GetAllUsersPurchases()
+        {
+            List<dynamic> purchases = new List<dynamic>();
+
+            using (SqlConnection con = connect("myProjDB"))
+            {
+                SqlCommand cmd = new SqlCommand("sp_GetAllUsersPurchases", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    var purchase = new
+                    {
+                        UserEmail = reader["UserEmail"].ToString(),
+                        BookId = Convert.ToInt32(reader["BookId"]),
+                        BookTitle = reader["BookTitle"].ToString(),
+                        IsEbook = Convert.ToBoolean(reader["IsEbook"]),
+                        BookPrice = Convert.ToDecimal(reader["BookPrice"]),
+                        Categories = reader["Categories"].ToString() 
+                    };
+
+                    purchases.Add(purchase);
+                }
+            }
+
+            return purchases;
+        }
+
+
     }
 }

@@ -84,4 +84,10 @@ public class BookCopy : Book
         return dbBook.UpdateSaleStatus(copyId, userEmail, isEbook, isForSale);
     }
 
+    public static List<dynamic> GetAllUsersPurchases()
+    {
+        DBbook dbBook = new DBbook();
+        return dbBook.GetAllUsersPurchases();
+    }
+
 }

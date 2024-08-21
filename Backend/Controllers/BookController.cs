@@ -166,6 +166,21 @@ namespace Backend.Controllers
             }
         }
 
+        [HttpGet("get-all-users-purchases")]
+        public ActionResult<List<dynamic>> GetAllUsersPurchases()
+        {
+            try
+            {
+                var purchases = BookCopy.GetAllUsersPurchases();
+                return Ok(purchases);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+
         [HttpPost("update-book-admin")]
         public IActionResult UpdateBook([FromBody] JsonElement updatedBook)
         {

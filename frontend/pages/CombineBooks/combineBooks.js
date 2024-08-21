@@ -130,12 +130,12 @@ function findBookById(id, booksArray) {
 
 async function generateNewDescription(categories, combinedDescription) {
   const apiUrl =
-    "https://api-inference.huggingface.co/models/openai-community/gpt2-medium";
+    "https://api-inference.huggingface.co/models/openai-community/gpt2";
   const apiKey = "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"; // Replace with your actual API key
 
-  const prompt = `Describe the following topics: ${categories.join(
+  const prompt = `In a tale woven around the themes of ${categories.join(
     ", "
-  )}. ${combinedDescription}`;
+  )}, ${combinedDescription}. What unfolds next is a journey through these intertwined elements, revealing...`;
 
   const requestBody = {
     inputs: prompt,
@@ -173,7 +173,7 @@ async function generateNewDescription(categories, combinedDescription) {
 
 async function generateImageFromDescription(description) {
   const apiUrl =
-    "https://api-inference.huggingface.co/models/runwayml/stable-diffusion-v1-5";
+    "https://api-inference.huggingface.co/models/ZB-Tech/Text-to-Image";
   const apiKey = "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"; // Replace with your actual API key
 
   const requestBody = {

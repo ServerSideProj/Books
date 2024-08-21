@@ -51,20 +51,22 @@ const nextStep = () => {
 
 const getDescription = async () => {
   const apiUrl =
-    "https://api-inference.huggingface.co/models/openai-community/gpt2-medium";
+    "https://api-inference.huggingface.co/models/openai-community/gpt2";
   const apiKey = "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";
 
   // prompt for creating description
-  const prompt = `Describe the following topics: ${selectedCategories.join(
-    ", "
-  )}. Explain the main ideas and differences clearly.`;
+  const prompt = `In a world defined by ${selectedCategories.join(
+    " and "
+  )}, life was anything but ordinary. The story unfolds as the protagonist navigates through the challenges and mysteries that ${
+    selectedCategories.length > 1 ? "these forces" : "this force"
+  } brought into their life, with each step leading to...`;
 
   // Set up the request payload
   const requestBody = {
     inputs: prompt,
     options: {
       wait_for_model: true,
-      max_new_tokens: 500, // Request a longer response (adjust as needed)
+      max_new_tokens: 700, // Request a longer response (adjust as needed)
       temperature: 0.7, // Adjust the creativity/randomness of the response
       top_p: 0.9, // Nucleus sampling
     },
@@ -108,7 +110,7 @@ const getDescription = async () => {
 // generate image from text description
 const generateImageFromDescription = async () => {
   const apiUrl =
-    "https://api-inference.huggingface.co/models/runwayml/stable-diffusion-v1-5";
+    "https://api-inference.huggingface.co/models/ZB-Tech/Text-to-Image";
   const apiKey = "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";
 
   // Prepare the request payload

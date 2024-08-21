@@ -71,6 +71,7 @@ const acceptOffer = (transactionId, coins) => {
     "coins",
     parseInt(localStorage.getItem("coins")) + coins
   );
+  $("#coins").html(localStorage.getItem("coins") + " coins");
   sendData(
     API_URL + "Transaction/accept/" + transactionId,
     null, // No data

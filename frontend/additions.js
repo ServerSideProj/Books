@@ -1,6 +1,7 @@
 $(document).ready(function () {
   $(".ran-img").attr("src", "./assets/images/ran-photo.png");
   $(".hila-img").attr("src", "./assets/images/hila-photo.png");
+  $(".logo-footer").attr("src", "./assets/logo/logo-nav.svg");
 
   animateRows();
 

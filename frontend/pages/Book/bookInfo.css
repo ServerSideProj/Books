@@ -30,6 +30,7 @@
     rgb(153, 46, 228) 65.49999713897705%,
     rgb(14, 11, 17) 100%
   );
+  text-wrap: nowrap;
 }
 
 .wrapper-flex-end {

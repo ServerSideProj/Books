@@ -161,6 +161,7 @@ const displayBookData = (book) => {
 };
 
 // show all reviews of user about this book.
+// show all reviews of user about this book.
 const displayReviews = (reviews) => {
   if (reviews.length === 0) {
     $(".reviews-wrapper").append(
@@ -171,32 +172,53 @@ const displayReviews = (reviews) => {
   let allReviewsHtml = "";
 
   for (let i = 0; i < reviews.length; i++) {
-    let profileImage;
-    if (reviews[i].profileImage)
-      profileImage = API_URL.slice(0, -4) + "Images/" + reviews[i].profileImage;
-    else profileImage = "../../assets/images/user-profile-image.svg";
+    let profileImage = reviews[i].profileImage
+      ? API_URL.slice(0, -4) + "Images/" + reviews[i].profileImage
+      : "../../assets/images/user-profile-image.svg";
 
     let username = reviews[i].username || "Anonymous";
 
-    console.log(reviews);
+    // Generate stars based on rating
+    let starsHTML = "";
+    for (let j = 1; j <= 5; j++) {
+      let starImage;
+
+      if (j <= Math.floor(reviews[i].rating)) {
+        // Full star
+        starImage = "../../assets/icons/star-full.svg";
+      } else if (
+        j === Math.ceil(reviews[i].rating) &&
+        reviews[i].rating % 1 !== 0
+      ) {
+        // Half star
+        starImage = "../../assets/icons/star-half.svg";
+      } else {
+        // Empty star
+        starImage = "../../assets/icons/star-empty.svg";
+      }
+
+      starsHTML += `<img src="${starImage}" alt="star" class="star-icon" />`;
+    }
+
     let reviewCard = `
       <div class="review-card">
-              <p class="sm-text text-center font-reg">${reviews[i].reviewText}</p>
-              <div class="stars-container">
-                Rating: <span>${reviews[i].rating}</span>
-              </div>
-              <div class="container-flex-col gap-03 center-hor">
-                <img
-                  src="${profileImage}"
-                  alt="user-profile-image"
-                  class="user-image"
-                />
-                <p class="username">${username}</p>
-              </div>
-            </div>
-      `;
+        <p class="sm-text text-center font-reg">${reviews[i].reviewText}</p>
+        <div class="stars-container-review">
+          ${starsHTML} <!-- Insert the stars here -->
+        </div>
+        <div class="container-flex-col gap-03 center-hor">
+          <img
+            src="${profileImage}"
+            alt="user-profile-image"
+            class="user-image"
+          />
+          <p class="username">${username}</p>
+        </div>
+      </div>
+    `;
     allReviewsHtml += reviewCard;
   }
+
   $(".reviews-wrapper").append(allReviewsHtml);
 };
 

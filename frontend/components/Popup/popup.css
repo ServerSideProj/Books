@@ -103,7 +103,6 @@
   height: fit-content;
   margin-bottom: 10px;
   max-height: 9rem;
-  overflow-y: scroll;
 }
 
 .wrapper-title-filter {

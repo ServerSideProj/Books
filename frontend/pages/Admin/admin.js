@@ -181,35 +181,73 @@ const renderEditableField = (data) => {
 const getTableUsers = () => {
   initializeTable("usersTable", API_ALL_USERS, [
     { data: "email" },
-    { data: "username" },
+    { data: "username", render: renderEditableField }, // Editable username field
     { data: "purchasedBooksCount" },
     { data: "coins" },
     { data: "followingCount" },
     { data: "followersCount" },
     {
+      data: "isActive",
+      render: function (data, type, row) {
+        return `<input type="checkbox" disabled class="user-active-checkbox" data-email="${
+          row.email
+        }" ${data === true || data === 1 || data === "1" ? "checked" : ""}>`;
+      },
+    },
+    {
       data: null,
       render: function (data, type, row) {
-        return `<div class=" btn remove-btn admin-btn-table" data-email="${row.email}">Remove</div>`;
+        return `<div class="btn edit-users-btn admin-btn-table" data-email="${row.email}">Edit</div>`;
       },
     },
   ]);
 
-  // Event listener for the Remove button
-  $("#usersTable tbody").on("click", ".remove-btn", function () {
-    const email = $(this).data("email");
+  // Use delegated event handling for the Edit/Done functionality
+  $("#usersTable tbody").on("click", ".edit-users-btn", function () {
+    const btn = $(this);
+    const row = btn.closest("tr");
 
-    $.ajax({
-      url: API_URL + `Users/${email}`,
-      type: "DELETE",
-      success: function (response) {
-        console.log("User removed successfully:", response);
-        // Reload the table data
-        $("#usersTable").DataTable().ajax.reload();
-      },
-      error: function (xhr, status, error) {
-        console.error("Error removing user:", error);
-      },
-    });
+    if (btn.text() === "Edit") {
+      btn.text("Done");
+
+      // Enable the editable fields
+      row.find(".editable-field").prop("disabled", false);
+
+      // Make the checkbox clickable (if needed)
+      row.find("input[type='checkbox']").prop("disabled", false);
+    } else {
+      btn.text("Edit");
+
+      // Disable the fields again
+      row.find(".editable-field").prop("disabled", true);
+      row.find("input[type='checkbox']").prop("disabled", true);
+
+      // Collect updated data
+      const email = row.find(".edit-users-btn").data("email");
+      const isActive = row.find("input[type='checkbox']").is(":checked");
+
+      // Determine the appropriate API endpoint based on the checkbox status
+      const url = isActive
+        ? API_URL + "Users/MakeUserActive"
+        : API_URL + "Users/MakeUserInactive";
+
+      // Send the request to update the user's active status
+      $.ajax({
+        url: url,
+        type: "PUT",
+        contentType: "application/json",
+        data: JSON.stringify({ Email: email }), // Send the email in the request body
+        success: function (response) {
+          console.log("User status updated successfully:", response);
+          // Optionally reload the table data
+          btn.removeClass("done");
+          $("#usersTable").DataTable().ajax.reload();
+        },
+        error: function (xhr, status, error) {
+          console.error("Error updating user status:", error);
+        },
+      });
+    }
   });
 };
 

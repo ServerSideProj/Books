@@ -46,6 +46,22 @@ namespace Backend.Controllers
             }
         }
 
+
+        [HttpGet("GetAllUsersWithActiveProp")]
+        public ActionResult<List<object>> GetAllUsersWithActiveProp()
+        {
+            try
+            {
+                var usersWithActiveProp = Users.GetAllUsersWithActiveProp();
+                return Ok(usersWithActiveProp);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Error = ex.Message });
+            }
+        }
+
+
         [HttpGet("username/{email}")]
         public ActionResult GetUsernameAndProfileImageByEmail(string email)
         {
@@ -330,20 +346,6 @@ namespace Backend.Controllers
             }
         }
 
-
-        [HttpGet("GetAllUsersWithActiveProp")]
-        public ActionResult<List<object>> GetAllUsersWithActiveProp()
-        {
-            try
-            {
-                var usersWithActiveProp = Users.GetAllUsersWithActiveProp();
-                return Ok(usersWithActiveProp);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, new { Error = ex.Message });
-            }
-        }
 
         [HttpPut("MakeUserActive")]
         public IActionResult MakeUserActive([FromBody] JsonElement requestData)

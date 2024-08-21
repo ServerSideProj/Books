@@ -7,7 +7,7 @@ $(document).ready(function () {
   // Check if the current URL ends with "additions.html"
   if (window.location.pathname.endsWith("additions.html")) {
     $(".btn-border-bot").text("Go to Home page");
-    $(".btn-border-bot").parent().attr("href", "../Home/");
+    $(".btn-border-bot").parent().attr("href", "./pages/Home/");
   }
 });
 
@@ -15,12 +15,11 @@ function animateRows() {
   // Select all the rows in the table
   const rows = $("tr");
 
-  // Loop through each row
   rows.each(function (index) {
     $(this).css({
-      opacity: "0", // Start with the row hidden
-      position: "relative", // Needed for the sliding effect
-      top: "20px", // Start with the row slightly below its final position
+      opacity: "0",
+      position: "relative",
+      top: "20px",
     });
 
     // Apply a delay and animate the row

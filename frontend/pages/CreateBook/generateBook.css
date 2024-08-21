@@ -84,15 +84,6 @@ textarea:focus-visible {
   width: fit-content;
 }
 
-.loader-2 {
-  width: calc(80px / cos(45deg));
-  height: 14px;
-  background: repeating-linear-gradient(-45deg, #fa8fd5 0 15px, #0000 0 20px)
-    left/200% 100%;
-  animation: l3 2s infinite linear;
-  display: none;
-}
-
 #book-cover-img-gen,
 #book-cover-img-end {
   width: 229px;
@@ -100,6 +91,15 @@ textarea:focus-visible {
   object-fit: cover;
   border-radius: 4px;
   height: 328px;
+}
+
+.loader-2 {
+  width: calc(80px / cos(45deg));
+  height: 14px;
+  background: repeating-linear-gradient(-45deg, #fa8fd5 0 15px, #0000 0 20px)
+    left/200% 100%;
+  animation: l3 2s infinite linear;
+  display: none;
 }
 
 @keyframes l3 {

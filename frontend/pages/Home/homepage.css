@@ -275,6 +275,10 @@
     padding-right: 1rem;
     scroll-snap-type: x mandatory;
   }
+
+  .center-on-mobile {
+    align-items: center;
+  }
 }
 
 @media screen and (max-width: 1000px) {

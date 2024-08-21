@@ -212,7 +212,7 @@
   gap: 0.5rem;
   display: flex;
   flex-direction: column;
-  overflow: scroll;
+  overflow: auto;
   max-height: 20rem;
   width: 100%;
 }
@@ -253,7 +253,7 @@
 
 .limit-text {
   max-height: 300px;
-  overflow: scroll;
+  overflow: auto;
 }
 
 @media screen and (max-width: 760px) {
@@ -332,7 +332,7 @@
     max-height: 97%;
   }
   #popup-book-sale {
-    overflow: scroll;
+    overflow: auto;
   }
   #popup-users .search-container {
     max-width: 100%;

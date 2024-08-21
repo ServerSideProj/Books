@@ -1,8 +1,8 @@
 var arrAllBooks = [];
 var imageLink = "";
 var mixCategories;
-var titleMix;
-var mixedDescription;
+var titleMix = "";
+var mixedDescription = "";
 
 $(document).ready(function () {
   $("#btn-mix").on("click", mixBooks);
@@ -31,17 +31,14 @@ const mixBooks = async () => {
     // Check if both selected books are the same
     popupText("You need to choose two different books.");
   } else {
-    // Proceed with mixing the books
     const book1Data = findBookById(book1Id, arrAllBooks);
     const book2Data = findBookById(book2Id, arrAllBooks);
 
     if (book1Data && book2Data) {
-      console.log("Mixing books:", book1Data, book2Data);
-
       // Combine Categories Randomly
       const allCategories = [...book1Data.categories, ...book2Data.categories];
       const uniqueCategories = [...new Set(allCategories)];
-      const mixCategories = uniqueCategories.sort(() => 0.5 - Math.random());
+      mixCategories = uniqueCategories.sort(() => 0.5 - Math.random());
 
       // Combine Descriptions
       const combinedDescription = `${book1Data.description} ${book2Data.description}`;
@@ -52,26 +49,17 @@ const mixBooks = async () => {
         combinedDescription
       );
 
-      const titleMix = combineTitlesIntelligently(
-        book1Data.title,
-        book2Data.title
-      );
+      titleMix = combineTitlesIntelligently(book1Data.title, book2Data.title);
 
       // Generate New Cover Image
       await generateImageFromDescription(mixedDescription);
-
-      $(".container-resault").html(`
-        <div class="result-title">${titleMix}</div>
-        <div class="result-description">${mixedDescription}</div>
-        <div class="result-categories">${mixCategories.join(", ")}</div>
-        <div class="result-image"><img src="${imageLink}" alt="Generated Cover Image" /></div>
-      `);
     } else {
       console.error("One or both of the books were not found.");
     }
   }
 };
 
+// mix the 2 titles by significant words
 function combineTitlesIntelligently(title1, title2) {
   // Split the titles into words
   const words1 = title1.split(" ");
@@ -100,6 +88,7 @@ function combineTitlesIntelligently(title1, title2) {
   return cleanUpTitle(combinedTitle);
 }
 
+// helper func - check if a word is significant
 function isSignificantWord(word) {
   // Define a list of insignificant words like articles or conjunctions
   const insignificantWords = [
@@ -117,6 +106,7 @@ function isSignificantWord(word) {
   return !insignificantWords.includes(word.toLowerCase());
 }
 
+// helper func - remove duplicate words in title
 function cleanUpTitle(title) {
   // Remove any duplicate words or unnecessary spaces
   const words = title.split(" ");
@@ -124,14 +114,16 @@ function cleanUpTitle(title) {
   return uniqueWords.join(" ").trim();
 }
 
+// helper func - finds the chosen book in the array of books
 function findBookById(id, booksArray) {
   return booksArray.find((book) => book.id === parseInt(id));
 }
 
+// generate new description from the 2 descriptions - with ai
 async function generateNewDescription(categories, combinedDescription) {
   const apiUrl =
     "https://api-inference.huggingface.co/models/openai-community/gpt2";
-  const apiKey = "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"; // Replace with your actual API key
+  const apiKey = "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";
 
   const prompt = `In a tale woven around the themes of ${categories.join(
     ", "
@@ -148,6 +140,8 @@ async function generateNewDescription(categories, combinedDescription) {
   };
 
   try {
+    showLoader(); // Show the loader
+
     const response = await fetch(apiUrl, {
       method: "POST",
       headers: {
@@ -168,19 +162,23 @@ async function generateNewDescription(categories, combinedDescription) {
   } catch (error) {
     console.error("Error generating description:", error);
     return "Error generating description.";
+  } finally {
+    hideLoader(); // Hide the loader after the request completes
   }
 }
 
+// generate new image from the ew description - with ai
 async function generateImageFromDescription(description) {
   const apiUrl =
     "https://api-inference.huggingface.co/models/ZB-Tech/Text-to-Image";
-  const apiKey = "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"; // Replace with your actual API key
+  const apiKey = "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";
 
   const requestBody = {
     inputs: description,
   };
 
   try {
+    showLoader();
     const response = await fetch(apiUrl, {
       method: "POST",
       headers: {
@@ -205,36 +203,41 @@ async function generateImageFromDescription(description) {
       type: "image/png",
     });
 
-    // Assuming you have a function to handle the upload
-    uploadBookCoverAi(file);
+    await uploadBookCoverAi(file); // Wait for the image to be uploaded
+    showResaults(); // Now that the image is uploaded, show the results
   } catch (error) {
     console.error("Error generating or uploading the image:", error);
     alert("There was an issue generating the image. Please try again later.");
+  } finally {
+    hideLoader();
   }
 }
 
+// upload to server the new book cover
 const uploadBookCoverAi = (file) => {
-  const randomFileName = `${generateRandomFileName()}${getFileExtension(
-    file.name
-  )}`;
-  // Create a new FormData object
-  const formData = new FormData();
-  formData.append("file", new File([file], randomFileName)); // Append file with the random name
+  return new Promise((resolve, reject) => {
+    const randomFileName = `${generateRandomFileName()}${getFileExtension(
+      file.name
+    )}`;
+    const formData = new FormData();
+    formData.append("file", new File([file], randomFileName));
 
-  // Send the POST request to the server using $.ajax
-  $.ajax({
-    url: API_URL + "Book/UploadBookCover",
-    method: "POST",
-    data: formData,
-    contentType: false,
-    processData: false,
-    success: function (data) {
-      imageLink = IMAGE_URL + data.imageName;
-      console.log("Image uploaded successfully:", imageLink);
-    },
-    error: function (error) {
-      console.error(error);
-    },
+    $.ajax({
+      url: API_URL + "Book/UploadBookCover",
+      method: "POST",
+      data: formData,
+      contentType: false,
+      processData: false,
+      success: function (data) {
+        imageLink = IMAGE_URL + data.imageName;
+        console.log("Image uploaded successfully:", imageLink);
+        resolve(imageLink); // Resolve the promise with the image link
+      },
+      error: function (error) {
+        console.error(error);
+        reject(error); // Reject the promise if there's an error
+      },
+    });
   });
 };
 
@@ -283,7 +286,7 @@ const updateBookCard = (cardSelector, bookId) => {
   }
 };
 
-// Utility function to generate a random filename
+// helper function - generate a random filename
 const generateRandomFileName = () => {
   return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
     const r = (Math.random() * 16) | 0,
@@ -292,7 +295,28 @@ const generateRandomFileName = () => {
   });
 };
 
-// Utility function to get the file extension
+// helper function - get the file extension
 const getFileExtension = (filename) => {
   return filename.substring(filename.lastIndexOf("."));
+};
+
+// Function to show the loader
+function showLoader() {
+  $(".loader-2").css("visibility", "visible");
+}
+
+// Function to hide the loader
+function hideLoader() {
+  $(".loader-2").css("visibility", "hidden");
+}
+
+const showResaults = () => {
+  $(".container-resault").show();
+  $("#book-title-new").text(titleMix);
+  $(".new-descr").text(mixedDescription);
+  $("#book-3 img").attr("src", imageLink);
+  mixCategories.forEach((category) => {
+    var categoryDiv = $('<div class="btn category"></div>').text(category);
+    $(".container-categories").append(categoryDiv);
+  });
 };

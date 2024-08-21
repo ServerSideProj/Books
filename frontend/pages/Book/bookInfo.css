@@ -191,7 +191,7 @@
   width: 100vw;
   height: fit-content;
   flex-wrap: nowrap;
-  overflow: scroll;
+  overflow: auto;
   padding-bottom: 2rem;
   gap: 1rem;
   padding-right: 4rem;

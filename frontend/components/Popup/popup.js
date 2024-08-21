@@ -34,12 +34,16 @@ const popupLogin = () => {
 const popupFriends = (friendsList, type) => {
   const friendCards = friendsList
     .map((friend) => {
+      let profileImage;
+      if (friend.profileImageLink)
+        profileImage =
+          API_URL.slice(0, -4) + "Images/" + friend.profileImageLink;
+      else profileImage = "../../assets/images/user-profile-image.svg";
+
       return `
       <div class="container-friend">
         <div class="friend-wrapper">
-          <img src="${
-            friend.profileImage || "../../assets/images/user-profile-image.svg"
-          }" alt="profile image" class="friend-profile-img" />
+          <img src="${profileImage}" alt="profile image" class="friend-profile-img" />
           <p class="friend-name">${friend.username}</p>
         </div>
         <div class="btn xsm-text btn-follow">${type}</div>

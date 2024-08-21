@@ -171,10 +171,13 @@ const displayReviews = (reviews) => {
   let allReviewsHtml = "";
 
   for (let i = 0; i < reviews.length; i++) {
-    let profileImage =
-      API_URL.slice(0, -4) + "Images/" + reviews[i].profileImage ||
-      "../../assets/images/user-profile-image.svg";
+    let profileImage;
+    if (reviews[i].profileImage)
+      profileImage = API_URL.slice(0, -4) + "Images/" + reviews[i].profileImage;
+    else profileImage = "../../assets/images/user-profile-image.svg";
+
     let username = reviews[i].username || "Anonymous";
+
     console.log(reviews);
     let reviewCard = `
       <div class="review-card">

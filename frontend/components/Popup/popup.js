@@ -683,11 +683,14 @@ const renderUsers = (users) => {
 
   // Create user cards
   users.forEach((user) => {
+    let profileImage;
+    if (user.profileImage)
+      profileImage = API_URL.slice(0, -4) + "Images/" + user.profileImage;
+    else profileImage = "../../assets/images/user-profile-image.svg";
+
     const userCard = `
       <div class="user-wrapper" data-email="${user.Email}">
-        <div class="container-flex center-hor gap-1"><img src="${
-          user.profileImage || "../../assets/images/user-profile-image.svg"
-        }" alt="profile image" class="user-profile-img" />
+        <div class="container-flex center-hor gap-1"><img src="${profileImage}" alt="profile image" class="user-profile-img" />
         <p class="user-name">${user.Username}</p></div>
         <img src="../../assets/icons/Arrow right pink.svg"/>
       </div>`;

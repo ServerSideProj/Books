@@ -37,11 +37,7 @@ $(document).ready(function () {
           console.log("Login successful:", response);
           window.location.href = "/pages/Home";
         } else {
-          // If login fails, set custom validity on the email field
-          emailInput[0].setCustomValidity(
-            "Login failed. Please check your email and password."
-          );
-          emailInput[0].reportValidity();
+          popupText("Login failed. Please check your email and password.");
         }
       })
       .catch((error) => {

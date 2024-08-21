@@ -50,6 +50,10 @@
   background-color: var(--white);
 }
 
+#popup-friends {
+  min-height: 25rem;
+}
+
 #popup-login .btn {
   padding: 0.7rem 3rem;
 }

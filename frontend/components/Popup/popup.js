@@ -29,8 +29,6 @@ const popupLogin = () => {
   });
 };
 
-// page: user-profile, other-user-frofile
-// type can be: following (Following) | followers (remove)
 const popupFriends = (friendsList, type) => {
   const friendCards = friendsList
     .map((friend) => {
@@ -49,6 +47,7 @@ const popupFriends = (friendsList, type) => {
       </div>`;
     })
     .join(""); // Join all friend cards into a single string
+
   const popup = `
    <div id="popup-friends" class="popup-container gap-2">
         <img src="../../assets/icons/X.svg" class="btn-x" />
@@ -81,6 +80,41 @@ const popupFriends = (friendsList, type) => {
     $(".bg-dark").empty();
     $(".bg-dark").removeClass("open");
   });
+
+  // Correct the assignment of the array based on the type
+  const arr =
+    type === "following" ? [...arrFollowingList] : [...arrFollowersList];
+
+  // Add search functionality
+  $(".search-container input").on("input", function () {
+    const searchTerm = $(this).val().toLowerCase();
+    const filteredArr = arr.filter((user) =>
+      user.username.toLowerCase().includes(searchTerm)
+    );
+    renderUsers(filteredArr); // Call the function to render the filtered users
+  });
+
+  // Implement the renderUsers function to update the DOM
+  function renderUsers(filteredUsers) {
+    const filteredFriendCards = filteredUsers
+      .map((friend) => {
+        let profileImage = friend.profileImageLink
+          ? IMAGE_URL + friend.profileImageLink
+          : "../../assets/images/user-profile-image.svg";
+
+        return `
+        <div class="container-friend">
+          <div class="friend-wrapper">
+            <img src="${profileImage}" alt="profile image" class="friend-profile-img" />
+            <p class="friend-name">${friend.username}</p>
+          </div>
+          <div class="btn xsm-text btn-follow">${type}</div>
+        </div>`;
+      })
+      .join(""); // Join all friend cards into a single string
+
+    $(".container-users-friends").html(filteredFriendCards);
+  }
 };
 
 // page: bookstore

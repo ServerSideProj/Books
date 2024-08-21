@@ -161,7 +161,6 @@ const displayBookData = (book) => {
 };
 
 // show all reviews of user about this book.
-// show all reviews of user about this book.
 const displayReviews = (reviews) => {
   if (reviews.length === 0) {
     $(".reviews-wrapper").append(

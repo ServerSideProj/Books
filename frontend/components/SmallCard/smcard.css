@@ -2,7 +2,7 @@
   background-color: var(--white);
   border-radius: 16px;
   box-shadow: 0 4px 14px -1px rgba(115, 77, 196, 0.2);
-  width: fit-content;
+  width: 320px;
   padding: 1rem;
   display: flex;
   align-items: center;
